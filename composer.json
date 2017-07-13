@@ -10,7 +10,8 @@
         "jeroennoten/laravel-adminlte": "v1.19.2",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
-        "laravelcollective/html": "5.4.x-dev"
+        "laravelcollective/html": "5.4.x-dev",
+        "unisharp/laravel-filemanager": "^1.8"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

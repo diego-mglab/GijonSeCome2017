@@ -126,6 +126,11 @@ return [
             'url'         => '/eunomia/usuarios',
             'icon'        => 'user',
         ],
+        [
+            'text'        => 'Contenidos',
+            'url'         => '/eunomia/contents',
+            'icon'        => 'user',
+        ],
         'ACCOUNT SETTINGS',
         [
             'text' => 'Profile',

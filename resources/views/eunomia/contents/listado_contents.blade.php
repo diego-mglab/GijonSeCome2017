@@ -3,13 +3,13 @@
 @section('content_header')
     <h1>
         Listado
-        <small>Usuarios</small>
+        <small>Contenido</small>
     </h1>
-    <h2>{{ link_to_route('usuarios.create', 'Nuevo', null, array('class' => 'btn btn-block btn-success btn-xs')) }}</h2>
+    <h2>{{ link_to_route('contents.create', 'Nuevo', null, array('class' => 'btn btn-block btn-success btn-xs')) }}</h2>
 
     <ol class="breadcrumb">
         <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Usuarios</li>
+        <li class="active">Contenidos</li>
     </ol>
 @stop
 
@@ -26,21 +26,24 @@
 
                         <thead>
                         <tr>
-                            <th>Nombre</th>
-                            <th>Email</th>
+                            <th>Título</th>
+                            <th>Subtítulo</th>
+                            <th>Tipo</th>
+                            <th>Visible</th>
                             <th>Acciones</th>
                         </tr>
                         </thead>
                         <tbody>
 
-                        @foreach ($users as $user)
+                        @foreach ($contents as $content)
 
                             <tr>
-                                <td>{{$user->name}}</td>
-                                <td>{{$user->email}}
-                                </td>
-                                <td>{{ link_to_route('usuarios.edit', 'Editar', $user, array('class' => 'btn btn btn-warning btn-xs')) }}
-                                    {{ Form::open(array('method'=> 'DELETE', 'route' => array('usuarios.destroy', $user->id),'style'=>'display:inline')) }}
+                                <td>{{$content->titulo}}</td>
+                                <td>{{$content->subtitulo}}</td>
+                                <td>{{$content->tipo}}</td>
+                                <td>{{$content->visible}}</td>
+                                <td>{{ link_to_route('contents.edit', 'Editar', $content, array('class' => 'btn btn btn-warning btn-xs')) }}
+                                    {{ Form::open(array('method'=> 'DELETE', 'route' => array('contents.destroy', $content->id),'style'=>'display:inline')) }}
                                     {{ Form::submit('Eliminar', array('class' => 'btn btn btn-danger btn-xs')) }}
                                     {{ Form::close() }}
 
