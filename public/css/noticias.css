@@ -1,0 +1,465 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* Smartphones (portrait and landscape) ----------- */
+
+/* etiquetas estandar que no cambian entre versiones */
+
+#migadepan{
+	background-color:#009E9B;
+	height: 30px;
+	display: block;
+	clear:both;
+	padding-left: 15px;	
+	margin-top:12px;
+}
+#migadepan ul{
+	font-size: 0.75rem;
+	color:#fff;
+	padding: 0.3em 15px 0.3em ;
+}
+#migadepan li{
+	font-size: 0.75rem;
+	color:#fff;
+	float: left;
+	margin-left: 0.2em;
+	margin-right: 0.2em;
+	text-transform: uppercase;
+}
+#migadepan li a:link{
+	font-size: 0.75rem;
+	color:#fff;
+	float: left;
+}
+#migadepan li a:visited{
+	font-size: 0.75rem;
+	color:#fff;
+	float: left;
+}
+#migadepan li a:hover{
+	font-size: 0.75rem;
+	color:#fff;
+	float: left;
+}
+.mordiscodet{
+	position:absolute;
+	right:30px;
+	top:29px;
+	z-index: 99999;
+}
+
+#todaslasnoticias{
+display: block;
+clear: both;
+
+}
+
+#todaslasnoticias img{
+ padding:0;
+}
+.row .row-eq-height {
+display:block;
+}
+.destacadados{
+background-color: #CDCDCC;
+}
+.sindestacar .col-lg-4:nth-child(odd) {
+    	background-color:#80CFCD;
+		padding-bottom: 30px;
+}
+
+.sindestacar .col-lg-4:nth-child(even) {
+ background-color: #CDCDCC;
+ 		padding-bottom: 30px;
+}
+/*zona mordisquitos*/
+.destacadauna{
+padding-bottom:30px;
+}
+.destacadados{
+padding-bottom:30px;
+}
+.destacadauna .mordisquitos{
+		position: absolute;
+		z-index: 9999;
+		left:auto;
+		right: 15px;
+		bottom: -1px;
+		top:auto;
+}
+.destacadados .mordisquitos{
+		position: absolute;
+		z-index: 9999;
+		left:auto;
+		right: 15px;
+		bottom: -1px;
+		top:auto;
+}
+
+article{ padding: 1rem 1rem 0 1rem;}
+.destacadauna p{
+color:#000;
+font-size: 1rem;
+line-height: 1rem;
+}
+h1{font-size: 1.5rem;
+line-height: 1.5rem;}
+h3{
+color:#19A8A5;
+font-size:0.75rem;
+line-height: 0.75rem;
+padding: 0;
+}
+
+hgroup h2{
+padding: 0;
+font-size: 1.2rem;
+line-height: 1.2rem;
+font-weight: 400;
+}
+time{
+font-size: 0.75rem;
+}
+
+.black{
+	color: #000;
+	padding: 15px;
+}
+.black{
+	color: #000;
+	padding:0px 15px 0 15px;
+}
+h1.black{padding-top: 15px;}
+.black a:link{color:#fff;}
+.black a:visited{color:#fff;}
+.black a:hover{color:#fff;}
+
+.white{
+	color:#fff;
+	padding:0px 15px 0 15px;
+}
+h1.white{padding-top: 15px;}
+.white a:link{color:#fff;}
+.white a:visited{color:#fff;}
+.white a:hover{color:#fff;}
+
+
+.mordisquitos{
+position:absolute;
+top:auto;
+bottom: -1px;
+left:15px;
+right: auto;
+}
+/*tablet*/
+
+@media only screen and (min-width: 768px){
+
+
+#migadepan{
+	background-color:#009E9B;
+	height: 30px;
+	display: block;
+	clear:both;
+	padding-left: 60px;	
+}
+#migadepan ul{
+	font-size: 0.75rem;
+	color:#fff;
+	padding: 0.3em 15px 0.3em ;
+}
+#migadepan li{
+	font-size: 0.75rem;
+	color:#fff;
+	float: left;
+	margin-left: 0.2em;
+	margin-right: 0.2em;
+	text-transform: uppercase;
+}
+#migadepan li a:link{
+	font-size: 0.75rem;
+	color:#fff;
+	float: left;
+}
+#migadepan li a:visited{
+	font-size: 0.75rem;
+	color:#fff;
+	float: left;
+}
+#migadepan li a:hover{
+	font-size: 0.75rem;
+	color:#fff;
+	float: left;
+}
+.row .row-eq-height {
+display:block;}
+.sindestacar .col-lg-4:nth-child(odd) {
+		padding-bottom: 0px;
+}
+
+.sindestacar .col-lg-4:nth-child(even) {
+ padding-bottom: 0px;
+}
+
+.destacadauna{
+padding-bottom:0px;
+}
+.destacadados{
+padding-bottom:0px;
+}
+.mordisquitos{
+position:absolute;
+top:auto;
+bottom: 15px;
+left:-1px;
+right: auto;
+}
+.vira .col-lg-4:nth-child(odd) {
+float:left;
+}
+.vira .col-lg-4:nth-child(even) {
+float:right;
+}
+.vira .col-lg-4 img:nth-child(1n+1){
+float: right;
+}
+.vira.inversa {float:left;}
+
+}
+/*laptop*/
+@media only screen and (min-width: 992px) {
+
+#migadepan{
+	background-color:#009E9B;
+	height: 30px;
+	display: block;
+	clear:both;
+	padding-left: 30px;
+}
+#migadepan ul{
+	font-size: 0.75rem;
+	color:#fff;
+	padding: 0.3em 15px 0.3em ;
+}
+#migadepan li{
+	font-size: 0.75rem;
+	color:#fff;
+	float: left;
+	margin-left: 0.2em;
+	margin-right: 0.2em;
+	text-transform: uppercase;
+}
+#migadepan li a:link{
+	font-size: 0.75rem;
+	color:#fff;
+	float: left;
+}
+#migadepan li a:visited{
+	font-size: 0.75rem;
+	color:#fff;
+	float: left;
+}
+#migadepan li a:hover{
+	font-size: 0.75rem;
+	color:#fff;
+	float: left;
+}
+.vira.inversa {float:right;}
+
+.vira .col-lg-4:nth-child(odd) {
+float:left;
+}
+.vira .col-lg-4:nth-child(even) {
+float:right;
+}
+.vira .col-lg-4 img:nth-child(1n+1){
+float: right;
+}
+.row .row-eq-height {display:flex;}
+
+.destacadauna .mordisquitos{
+		position: absolute;
+		z-index: 9999;
+		left:auto;
+		right: -1px;
+		bottom: 15px;
+		top:auto;
+}
+.destacadados .mordisquitos{
+		position: absolute;
+		z-index: 9999;
+		left:auto;
+		right: -1px;
+		bottom: 15px;
+		top:auto;
+}
+
+article{ padding: 1rem 1rem 0 1rem;}
+.destacadauna p{
+color:#000;
+font-size: 0.8rem;
+line-height: 0.8rem;
+}
+.destacadados p{
+color:#000;
+font-size: 0.8rem;
+line-height: 0.8rem;
+}
+h1{font-size: 1.25rem;
+line-height: 1.25rem;}
+h3{
+color:#19A8A5;
+font-size:0.75rem;
+line-height: 0.75rem;
+padding: 0;
+}
+
+hgroup h2{
+padding: 0;
+font-size: 1rem;
+line-height: 1rem;
+font-weight: 400;
+}
+time{
+font-size: 0.75rem;
+}
+
+.black{
+	color: #000;
+	padding:0px 15px 0 15px;
+}
+h1.black{padding-top: 15px;}
+.black a:link{color:#fff;}
+.black a:visited{color:#fff;}
+.black a:hover{color:#fff;}
+
+.white{
+	color:#fff;
+	padding:0px 15px 0 15px;
+}
+h1.white{padding-top: 15px;}
+.white a:link{color:#fff;}
+.white a:visited{color:#fff;}
+.white a:hover{color:#fff;}
+
+
+.mordisquitos{
+position:absolute;
+top:auto;
+bottom: 15px;
+left:-1px;
+right: auto;
+}
+.vira .col-lg-4:nth-child(odd) {
+float:left;
+}
+.vira .col-lg-4:nth-child(even) {
+float:right;
+}
+}
+/*pc*/
+
+@media only screen and (min-width : 1200px){
+#migadepan{
+	background-color:#009E9B;
+	height: 30px;
+	display: block;
+	clear:both;
+	padding-left:15px;
+}
+#migadepan ul{
+	font-size: 0.75rem;
+	color:#fff;
+	padding: 0.3em 15px 0em ;
+}
+#migadepan li{
+	font-size: 0.75rem;
+	color:#fff;
+	float: left;
+	margin-left: 0.2em;
+	margin-right: 0.2em;
+	text-transform: uppercase;
+}
+#migadepan li a:link{
+	font-size: 0.75rem;
+	color:#fff;
+	float: left;
+}
+#migadepan li a:visited{
+	font-size: 0.75rem;
+	color:#fff;
+	float: left;
+}
+#migadepan li a:hover{
+	font-size: 0.75rem;
+	color:#fff;
+	float: left;
+}
+
+.destacadauna .mordisquitos{
+		position: absolute;
+		z-index: 9999;
+		left:auto;
+		right: -1px;
+		bottom: 15px;
+		top:auto;
+}
+.destacadados .mordisquitos{
+		position: absolute;
+		z-index: 9999;
+		left:auto;
+		right: -1px;
+		bottom: 15px;
+		top:auto;
+}
+
+article{ padding: 1rem 1rem 0 1rem;}
+.destacadauna p{
+color:#000;
+font-size: 1rem;
+line-height: 1.2rem;
+}
+.destacadados p{
+color:#000;
+font-size: 1rem;
+line-height: 1.2rem;
+}
+h1{font-size: 1.5rem;
+line-height: 1.6rem;}
+h3{
+color:#19A8A5;
+font-size:0.75rem;
+line-height: 1.2rem;
+padding: 0;
+}
+
+hgroup h2{
+padding: 0;
+font-size: 1rem;
+line-height: 1.2rem;
+font-weight: 400;
+text-transform: lowercase;
+}
+time{
+font-size: 0.75rem;
+line-height: 1.9rem;
+}
+
+.black{
+	color: #000;
+	padding: 15px;
+}
+.white{	color:#fff;	padding: 15px;}
+.white a:link{color:#fff;}
+.white a:visited{color:#fff;}
+.white a:hover{color:#fff;}
+
+
+.mordisquitos{
+position:absolute;
+top:auto;
+bottom: 15px;
+left:-1px;
+right: auto;
+}	
+}

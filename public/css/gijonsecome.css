@@ -1,0 +1,1440 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* Smartphones (portrait and landscape) ----------- */
+
+/* etiquetas estandar que no cambian entre versiones */
+
+body{
+	background-color:#d9f0f0;
+	font-size: 16px;
+	font-family: 'Source Sans Pro', sans-serif;
+}
+
+.vira{
+	float:right;}
+
+h1{
+	font-family: 'Cormorant Garamond', serif;
+	padding: 0;
+	font-weight: 400;
+}
+h2 {
+	font-family: 'Source Sans Pro', sans-serif;	
+	padding: 0;
+	font-weight: 300;
+}	
+h3{
+	font-family: 'Source Sans Pro', sans-serif;	
+	padding: 0
+
+}
+p{	font-family: 'Source Sans Pro', sans-serif;	
+	padding: 0}
+
+h1 a:link{color:#333332}
+h1 a:visited{color:#333332}
+h1 a:hover{color:#1D1D1B}
+
+.talleres h1 a:link{color:#fff;}
+.talleres h1 a:visited{color:#fff;}
+.talleres h1 a:hover{color:#fff;}
+
+.talleres h2 {color:#333332;}
+
+.programa h2 {color:#fff;}
+
+.newspaper h2{color:#fff;}
+
+.llegar h2{color:#fff;}
+
+.alojamiento h1 a:link{color:#333332;}
+.alojamiento h1 a:visited{color:#333332;}
+.alojamiento h1 a:hover{color:#333332;}
+.alojamiento h2{color:#009E9B;}
+
+.chefs{	background-color: #BFE7E6;}
+footer .footer{
+	background-color:#7E7E7A;
+	padding: 1em;
+	display: block;
+		background-image:url(../images/graficos/huerto_pie_xs.png);
+	background-repeat: no-repeat;
+	background-position: top right;
+	
+}
+.hidden-header{max-height: 115px}
+.fin{
+	display:block;
+	clear: both;
+	float: none;
+	background-color: #383832;
+	text-align: center;
+	max-height: 1.875em;
+	color: #CDCDCC;
+	font-weight: 400;
+	font-size: 0.875rem;
+	vertical-align:middle;
+	padding-top: 0.1em;
+	padding-bottom: 0.2em;
+}
+
+
+
+.idiomas li{margin:4px;}
+
+.igualate{
+  display: block;
+}
+.row .row-eq-height{
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display:  flex;
+	}
+article{
+padding: 1.875rem 1.875rem 3.75rem 1.875rem;
+word-break:normal;
+	word-wrap:normal;
+}
+hgroup{padding:0;
+}
+/* fin etiquetas estandar que no cambian entre versiones */
+
+	h1{
+	font-size: 1.375rem;
+	line-height: 1.375rem;
+
+	}
+	h2{
+	font-size: 1rem;
+	line-height: 1rem;
+	}
+hgroup h2{
+padding-top:0.4em;
+}	
+
+/*.entrecorrecta{
+	height: 167px;
+	float: right;
+	} mirar pa que sirve si no borrar*/
+
+.gijonsecome{
+	background-image:url(../images/graficos/verduras_cab_SM_XS.png);
+	background-repeat: no-repeat;
+	background-position: left bottom;
+	background-color:#80CFCD;
+	height: 101px;
+}
+.navbar {
+    margin-bottom: 0;
+    border: none;
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    -o-border-radius: 0;
+    max-height: 125px;
+}
+	.navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand{
+		padding:0;
+	}
+	.logo{
+	max-width:100%;
+	position: absolute;
+	top:0.2em;
+	left: 1em;
+	z-index: 1000;
+}
+
+
+/* decoración frutas zona variable*/
+
+.varianteprimera.col-xs-12{
+	background-image:none;
+	background-position:bottom right;
+	background-repeat: no-repeat;
+	background-color:#fff;
+}
+		
+img .varianteprimera{
+width:100%;
+}
+.variantesegunda.col-xs-12{
+	background-image:none;
+	background-position: bottom right;
+	background-color: #DDDDDD;
+	background-repeat: no-repeat;	
+}
+
+
+.variantetercera.col-xs-12{
+	background-image:none;
+	background-position: bottom right;
+	background-repeat: no-repeat;
+	background-color: #B2E2E1;
+}
+.variantecuarta.col-xs-12{
+	background-image:none;
+	background-position: bottom right;
+	background-repeat: no-repeat;
+	background-color: #E8E8E8;
+}
+.variantequinta.col-xs-12{
+	background-image:none;
+	background-position: bottom right;
+	background-repeat: no-repeat;
+	background-color: #40b6b4;
+}
+.variantetercera h2{
+color:#009E9B;
+}
+.variantequinta h2{
+color:#fff;
+}
+
+.varianteprimera .mordisquitos{
+		position: absolute;
+		z-index: 9999;
+		left:15px;
+		bottom: 0px;
+	}
+.variantesegunda .mordisquitos{
+		position: absolute;
+		z-index: 99999;
+		right:15px;
+		bottom: 0px;
+	}
+.variantetercera .mordisquitos{
+		position: absolute;
+		z-index: 99999;
+		left:15px;
+		bottom: 0px;
+
+	}
+.variantecuarta .mordisquitos{
+		position: absolute;
+		z-index: 99999;
+		right:15px;
+		bottom: 0px;
+}	
+
+.variantequinta .mordisquitos{
+		position: absolute;
+		z-index: 99999;
+		left:15px;
+		bottom: 0px;
+}
+
+
+
+
+/* no se que es ya lo miro luego*/
+
+.talleres {
+	background-image:none;
+	background-position: bottom right;
+	background-color: #40B6B4;
+	background-repeat: no-repeat;
+
+}
+.programa{
+	background-image:url(../images/graficos/verduras/f_verd_XS.png);
+	background-position: bottom left;
+	background-color: #BBBBBB;
+	background-repeat: no-repeat;
+
+}
+.newspaper{
+	background-image:url(../images/graficos/verduras/g_verd_XS.png);
+	background-position: bottom left;
+	background-color: #80CFCD;
+	background-repeat: no-repeat;
+
+}
+.llegar{
+	background-image:url(../images/graficos/verduras/h_verd_XS.png);
+	background-position: bottom right;
+	background-color: #9C9B99;
+	background-repeat: no-repeat;
+}
+.alojamiento{
+	background-image:url(../images/graficos/verduras/i_verd_XS.png);
+	background-position: bottom right;
+	background-color: #80CFCD;
+	background-repeat: no-repeat;
+
+}
+.chefs .col-xs-12{
+	background-image:none;
+	background-position: bottom right;
+	background-color: #BFE7E6;
+	background-repeat: no-repeat;
+}
+.chefs.row-eq-height{
+display:block;
+}
+
+.talleres .mordisquitos{
+		position: absolute;
+		z-index: 99999;
+		right:15px;
+		bottom: 0px;
+
+	}
+.programa .mordisquitos{
+		position: absolute;
+		z-index: 99999;
+		right:15px;
+		bottom: 0px;
+	}
+
+.newspaper .mordisquitos{
+		position: absolute;
+		z-index: 99999;
+		left:15px;
+		bottom: 0px;
+	}
+	.llegar h2{
+		margin-top:-1px;
+	}
+.correccion{
+	float:right;
+	padding: 0;
+	margin: 0;
+	}
+	
+	
+/* zona el festival*/
+
+
+#elfestival .row-eq-height{
+  display: -webkit-box;
+  display: -webkit-block;
+  display: -ms-block;
+  display: block;
+	}
+.alojamiento{
+		min-height:83px;
+	}	
+
+/* zona chefs*/
+
+
+#chefs h1{
+	padding: 1.875rem 1.875rem 3.7rem;
+	}
+.imagenchef{
+	padding: 15px;
+	float:left;
+	}
+.nombrechef{
+	background-color:rgba(0, 0, 0, 0.75);
+	position: relative;
+    top: -34px;
+}
+.chefs h4{
+	font-family: 'Source Sans Pro', sans-serif;
+	color:#fff;
+	font-size:0.875em;
+	text-align:center;
+	font-weight: 300;
+}
+
+/*zona patrocinadores*/
+#patrocinadores{
+	padding-top:15px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+
+#patrocinadores h4{
+		color:#8E8E8D;
+		text-transform: uppercase;
+		font-size: 0.625rem;		
+	}
+
+#patrocinadores .classic-title span {
+    border-bottom-color: #BFE7E6;
+    padding-bottom: 0.7rem;
+}
+	
+
+/*------------------------------------------*/
+/*			 Footer Styles
+/*------------------------------------------*/
+
+footer label{
+	width:100%;
+}
+
+footer input{
+	width: 50%;
+	clear: both;
+	}
+footer input[type="submit"]{
+	width:50%;
+	font-size:0.625em;
+	text-transform: uppercase;
+	font-weight: 400;
+	}
+	
+.mapaweb{
+	padding-top: 30px;
+	}
+	
+footer ul{
+	margin:0;
+	padding: 0;
+	}
+footer ul li{
+	color:#333332;
+	text-align: left;
+	text-transform: uppercase;
+	font-weight: 400;
+	font-size: 0.625rem;
+	padding: 0;
+	line-height: 1.5rem;
+	margin: 0;
+	}
+footer ul li{
+	margin-left: 15px;
+}
+
+footer ul li ul li{
+	margin-left: 15px;
+}
+.social-widget ul.social-icons li {
+    margin-right: 4px;
+    margin-bottom: 4px;
+	margin-left: 0;
+	}	
+footer a:{color:#fff;}
+	
+footer a:visited{color:#fff}	
+	footer a:hover{color:#fff;
+	}	
+
+footer .social-widget{
+		text-align: center;
+	}
+footer .dropdown li a, .sup-dropdown li a {
+   color: #fff;
+   
+}
+footer .contacta{
+		text-align:left;
+
+	}
+footer h4{
+		font-size:0.625rem;
+		line-height:0.625rem;
+		text-transform: uppercase;
+		font-weight: 600;
+	}
+footer p{
+		color:#383832;
+		font-size:0.625rem;
+		line-height:0.625rem;		
+	}
+footer label{
+		font-size:0.625rem;
+		line-height:0.625rem;
+	}
+footer .footer-widget{
+		margin:0;
+		margin-top:30px;
+	}
+footer .social-widget{
+		text-align: left;
+	}	
+footer .social-widget ul.social-icons li a i{
+    font-size:1em;
+   	 width: 20px;
+    height: 20px;
+    color: #fff;
+    line-height: 20px;
+    text-align: center;
+    display: block;
+
+	}
+
+/* sm segun bootstrap--- */
+
+
+
+@media only screen and (min-width: 768px) {
+
+
+/* tablet----------- */
+	h1{
+	font-size: 1.15rem;
+	line-height: 1.15rem;
+	}
+	h2{
+	font-size: 0.8125rem;
+	line-height: 0.8125rem;
+
+
+	}
+	.vira{
+	float:right;}
+	.talleres .vira{
+		float:left;
+	}
+
+.entrecorrecta{
+		height: 167px;
+	float: right;
+	}
+#container{
+    max-width:768px;
+    margin: 0 auto;
+}
+header{
+	max-width:768px;
+	margin: auto;
+}
+.logo{
+    max-width: 100%;
+    position: absolute;
+    top: 0.2em;
+    left: 2rem;
+    z-index: 1000;
+}
+.navbar-default .navbar-nav{
+    padding-left: 2.8rem !important;
+
+}
+
+
+/* decoración frutas*/
+
+.varianteprimera.col-xs-12{
+	background-image:url(../images/graficos/verduras/a_verd.png);
+	background-position:bottom right;
+	background-repeat: no-repeat;
+	background-color:#fff;
+}
+		
+
+.variantesegunda.col-xs-12{
+	background-image:url(../images/graficos/verduras/b_verd.png);
+	background-position: bottom right;
+	background-repeat: no-repeat;	
+	background-color: #dddddd;	
+}
+
+
+.variantetercera.col-xs-12{
+	background-image:url(../images/graficos/verduras/c_verd.png);
+	background-position: bottom right;
+	background-repeat: no-repeat;
+	background-color: #b2e2e1;
+}
+.variantecuarta.col-xs-12{
+	background-image:none;
+	background-position: bottom right;
+	background-repeat: no-repeat;
+	background-color: #E8E8E8;
+}
+.variantequinta.col-xs-12{
+	background-image:url(../images/graficos/verduras/e_verd.png);
+	background-position: bottom right;
+	background-repeat: no-repeat;
+	background-color: #59C0BE;
+}
+
+.talleres {
+	background-image:url(../images/graficos/verduras/f_verd_LG_MD_SM.png);
+	background-position: bottom right;
+	background-color: #40B6B4;
+	background-repeat: no-repeat;
+
+}
+
+.newspaper{
+	background-image:url(../images/graficos/verduras/g_verd_LG_MD_SM.png);
+	background-position: bottom left;
+	background-color: #80CFCD;
+	background-repeat: no-repeat;
+
+}
+.llegar{
+	background-image:url(../images/graficos/verduras/h_verd_LG_MD_SM.png);
+	background-position: bottom right;
+	background-color: #9C9B99;
+	background-repeat: no-repeat;
+}
+.alojamiento{
+	background-image:url(../images/graficos/verduras/i_verd_LG_MD_SM.png);
+	background-position: bottom right;
+	background-color: #80CFCD;
+	background-repeat: no-repeat;
+
+}
+.chefs .col-lg-2{
+	background-image:url(../images/graficos/verduras/j_verd.png);
+	background-position: bottom right;
+	background-color: #BFE7E6;
+	background-repeat: no-repeat;
+
+}
+
+.varianteprimera .mordisquitos{
+		position: absolute;
+		z-index: 9999;
+		left:auto;
+		right:-1px;
+		bottom: 15px;
+	}
+.variantesegunda .mordisquitos{
+		position: absolute;
+		z-index: 99999;
+		left: 15px;
+		right:15px;
+		bottom: -1px;
+	}
+.variantetercera .mordisquitos{
+		position: absolute;
+		z-index: 99999;
+		right:0;
+		left:15px;
+		bottom:-1px;
+		top:auto;
+	}
+.variantecuarta .mordisquitos{
+		position: absolute;
+		z-index: 99999;
+		right:0;
+		left:15px;
+		bottom:-1px;
+		top:auto;
+	}
+.variantequinta .mordisquitos{
+		position: absolute;
+		z-index: 99999;
+		right:0;
+		left:15px;
+		bottom:-1px;
+		top:auto;
+	}		
+
+.talleres .mordisquitos{
+		position: absolute;
+		z-index: 99999;
+		right:0;
+		left:-1px;
+		bottom:15px;
+
+	}
+.programa .mordisquitos{
+		position: absolute;
+		z-index: 99999;
+		right:auto;
+		left:-1px;
+		bottom:15px;
+	}
+.newspaper .mordisquitos{
+		position: absolute;
+		z-index: 99999;
+		right:0;
+		left:-1px;
+		bottom:15px;
+	}		
+.virapro{
+		float:rigth;
+	}
+
+	.llegar h2{
+		margin-top:-1px;
+	}
+
+	
+	
+/* zona el festival*/
+
+
+
+#elfestival .row-eq-height{
+  display: -webkit-box;
+  display: -webkit-block;
+  display: -ms-block;
+  display: block;
+	}
+.alojamiento{
+		min-height:99px;
+	}	
+
+/* zona chefs*/
+
+
+#chefs h1{
+	padding: 1.875rem 1.875rem 3.7rem;
+	}
+.imagenchef{
+	padding: 15px;
+	float:left;
+	}
+.nombrechef{
+	background-color:rgba(0, 0, 0, 0.75);
+	position: relative;
+    top: -34px;
+}
+.chefs h4{
+	font-family: 'Source Sans Pro', sans-serif;
+	color:#fff;
+	font-size: 0.875em;
+	text-align: center;
+	font-weight: 300;
+	
+}
+
+.touch-carousel .owl-controls .owl-buttons {
+    position: absolute;
+    top: 100px;
+    left: -147%;
+}
+
+/*zona patrocinadores*/
+#patrocinadores{
+	padding-top:15px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+
+#patrocinadores h4{
+		color:#8E8E8D;
+		text-transform: uppercase;
+		font-size: 0.625rem;		
+	}
+#patrocinadores .classic-title span {
+    border-bottom-color: #BFE7E6;
+    padding-bottom: 0.7rem;
+}
+	
+
+/*------------------------------------------*/
+/*			 Footer Styles
+/*------------------------------------------*/
+
+
+footer input{
+	width: 90%;
+	}
+footer input[type="submit"]{
+	width:50%;
+	font-size:0.625em;
+	text-transform: uppercase;
+	font-weight: 400;
+	}
+	
+.mapaweb{
+	padding-top: 30px;
+	}
+footer .footer{
+	background-image: url(../images/graficos/huerto_pie_SMpng.png);
+	background-repeat: no-repeat;
+	background-position: top right;
+}	
+footer ul{
+	margin:0;
+	padding: 0;
+	}
+footer ul li{
+	color:#333332;
+	text-align: left;
+	text-transform: uppercase;
+	font-weight: 400;
+	font-size: 0.625rem;
+	padding: 0;
+	line-height: 1.5rem;
+	margin: 0;
+	}
+footer ul li{
+	margin-left: 15px;
+}	
+footer ul li ul li{
+	margin-left: 15px;
+}
+.social-widget ul.social-icons li {
+    margin-right: 4px;
+    margin-bottom: 4px;
+	margin-left: 0;
+	}	
+footer a:{color:#fff;}
+		
+footer a:visited{color:#fff}	
+	footer a:hover{color:#fff;
+	}	
+
+footer .social-widget{
+		text-align: center;
+	}
+footer .dropdown li a, .sup-dropdown li a {
+   color: #fff;
+   
+}
+footer .contacta{
+		text-align:left;
+
+	}
+footer h4{
+		font-size:0.625rem;
+		line-height:0.625rem;
+		text-transform: uppercase;
+		font-weight: 600;
+	}
+footer p{
+		color:#383832;
+		font-size:0.625rem;
+		line-height:0.625rem;		
+	}
+footer label{
+		font-size:0.625rem;
+		line-height:0.625rem;
+	}
+footer .footer-widget{
+		margin:0;
+		margin-top:30px;
+	}
+footer .social-widget{
+		text-align: left;
+	}	
+footer .social-widget ul.social-icons li a i{
+    font-size:1em;
+   	 width: 20px;
+    height: 20px;
+    color: #fff;
+    line-height: 20px;
+    text-align: center;
+    display: block;
+
+	}
+	
+}
+
+
+/* md segun bootstrap--- */
+
+@media only screen and (min-width: 992px) {
+.dedosendos{
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+		display: flex;
+}
+.gijonsecome{
+	background-image:url(../images/graficos/verduras_cab_MD.png);
+	background-repeat: no-repeat;
+	background-position: left bottom;
+	background-color:#80CFCD;
+	height: 115px;
+
+}
+	.navbar-default .navbar-nav{
+    padding-left: 2.8rem !important;
+
+}
+article{
+padding: 1.5625rem 0.8rem 3rem 0.8rem ;
+}
+
+/* Desktops and laptops ----------- */
+	h1{
+	font-size: 1.5625rem;
+	line-height:1.5625rem;
+	}
+	h2{
+	font-size: 1em;
+	line-height: 1rem;
+
+	}
+	.vira{
+	float:right;}
+	.talleres .vira{
+		float:right;
+	}	
+	
+	
+.hidden-header{max-height: 147px}
+.entrecorrecta{
+		height: 167px;
+	}
+#container{
+    max-width:992px;
+    margin: 0 auto;
+}
+header{
+	max-width:992px;
+	margin: auto;
+}
+
+	.navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand{
+		padding:0;
+	}
+	.logo{
+    max-width: 100%;
+    position: relative;
+    top: 0.5em;
+    left: 0.8rem;
+    z-index: 1000;
+    width: 375px;
+}
+	.navbar-right {
+    float: none!important;
+    margin-right: -15px;
+}
+
+
+/* decoración frutas*/
+
+.varianteprimera.col-xs-12{
+	background-image:url(../images/graficos/verduras/a_verd.png);
+	background-position:bottom right;
+	background-repeat: no-repeat;
+	background-color:#fff;
+}
+		
+
+.variantesegunda.col-xs-12{
+	background-image:url(../images/graficos/verduras/b_verd.png);
+	background-position: bottom right;
+	background-color: #DDDDDD;
+	background-repeat: no-repeat;	
+}
+
+
+.variantetercera.col-xs-12{
+	background-image:url(../images/graficos/verduras/c_verd.png);
+	background-position: bottom right;
+	background-repeat: no-repeat;
+	background-color: #B2E2E1;
+}
+.variantecuarta.col-xs-12{
+	background-image:none;
+	background-position: bottom right;
+	background-repeat: no-repeat;
+	background-color: #E8E8E8;
+}
+.variantequinta.col-xs-12{
+	background-image:url(../images/graficos/verduras/e_verd.png);
+	background-position: bottom right;
+	background-repeat: no-repeat;
+	background-color: #59C0BE;
+}
+
+.talleres {
+	background-image:url( ../images/graficos/verduras/e_verd.png);
+	background-position: bottom right;
+	background-color: #40B6B4;
+	background-repeat: no-repeat;
+
+}
+.programa{
+	background-image:url(../images/graficos/verduras/f_verd_LG_MD_SM.png);
+	background-position: bottom left;
+	background-color: #BBBBBB;
+	background-repeat: no-repeat;
+
+}
+.newspaper{
+	background-image:url(../images/graficos/verduras/g_verd_LG_MD_SM.png);
+	background-position: bottom left;
+	background-color: #80CFCD;
+	background-repeat: no-repeat;
+
+}
+.llegar{
+	background-image:url(../images/graficos/verduras/h_verd_LG_MD_SM.png);
+	background-position: bottom right;
+	background-color: #9C9B99;
+	background-repeat: no-repeat;
+}
+.alojamiento{
+	background-image:url(../images/graficos/verduras/i_verd_LG_MD_SM.png);
+	background-position: bottom right;
+	background-color: #99D8D7;
+	background-repeat: no-repeat;
+
+}
+.chefs .col-lg-2{
+	background-image:url(../images/graficos/verduras/j_verd.png);
+	background-position: bottom right;
+	background-color: #BFE7E6;
+	background-repeat: no-repeat;
+	min-height: 220px;
+
+}
+
+.varianteprimera .mordisquitos{
+		position: absolute;
+		z-index: 9999;
+		left:auto;
+		right:-1px;
+		bottom: 15px;
+	}
+.variantesegunda .mordisquitos{
+		position: absolute;
+		z-index: 99999;
+		left: 15px;
+		right:15px;
+		bottom: -1px;
+	}
+.variantetercera .mordisquitos{
+		position: absolute;
+		z-index: 99999;
+		right:0;
+		left:15px;
+		bottom:-1px;
+		top:auto;
+	}
+.variantecuarta .mordisquitos{
+		position: absolute;
+		z-index: 99999;
+		right:0;
+		left:15px;
+		bottom:-1px;
+		top:auto;
+	}
+.variantequinta .mordisquitos{
+		position: absolute;
+		z-index: 99999;
+		right:0;
+		left:15px;
+		bottom:-1px;
+		top:auto;
+	}		
+
+.talleres .mordisquitos{
+		position: absolute;
+		z-index: 99999;
+		right:0;
+		left:-1px;
+		bottom:15px;
+
+	}
+.programa .mordisquitos{
+		position: absolute;
+		z-index: 99999;
+		right:auto;
+		left:-1px;
+		bottom:15px;
+	}
+.newspaper .mordisquitos{
+		position: absolute;
+		z-index: 99999;
+		right:0;
+		left:0;
+		bottom:15px;
+	}		
+	
+	
+/* zona el festival*/
+
+
+#elfestival .row-eq-height{
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+		display: flex;	}
+/* zona chefs*/
+#elfestival  article{
+	word-break:normal;
+	word-wrap:normal;
+	padding-bottom: 20px;}
+	.alojamiento{
+		min-height:165px;
+	}
+	
+.touch-carousel .owl-controls .owl-buttons {
+	position: absolute;
+	top: 158px;/*coco 50px*/
+	left: -128%;/*coco -150px;*/
+}	
+#chefs h1{
+	padding: 1rem;
+	}
+.imagenchef{
+	padding: 15px;
+	float:left;
+	}
+.nombrechef{
+	background-color:rgba(0, 0, 0, 0.75);
+	position: relative;
+    top: -34px;
+}
+.chefs h4{
+	font-family: 'Source Sans Pro', sans-serif;
+	color:#fff;
+	font-size: 0.875em;
+	text-align: center;
+	font-weight: 300;
+	
+}
+
+
+/*zona patrocinadores*/
+#patrocinadores{
+	padding-top:15px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+
+#patrocinadores h4{
+		color:#8E8E8D;
+		text-transform: uppercase;
+		font-size: 0.625rem;		
+	}
+#patrocinadores .classic-title span {
+    border-bottom-color: #BFE7E6;
+    padding-bottom: 0.89rem;
+}
+	
+
+/*------------------------------------------*/
+/*			 Footer Styles
+/*------------------------------------------*/
+
+
+footer input{
+	width: 90%;
+	}
+footer input[type="submit"]{
+	width:50%;
+	font-size:0.625em;
+	text-transform: uppercase;
+	font-weight: 400;
+	}
+	
+.mapaweb{
+	padding-top: 30px;
+	}
+footer .footer{
+	background-image: url(../images/graficos/huerto_pie_MD.png);
+	background-repeat: no-repeat;
+	background-position: top right;
+}	
+footer ul{
+	margin:0;
+	padding: 0;
+	}
+footer ul li{
+	color:#333332;
+	text-align: left;
+	text-transform: uppercase;
+	font-weight: 400;
+	font-size: 0.625rem;
+	padding: 0;
+	line-height: 1.5rem;
+	margin: 0;
+	}
+footer ul li{
+	margin-left: 15px;
+}	
+footer ul li ul li{
+	margin-left: 15px;
+}
+.social-widget ul.social-icons li {
+    margin-right: 4px;
+    margin-bottom: 4px;
+	margin-left: 0;
+	}	
+footer a:{color:#fff;}
+		
+footer a:visited{color:#fff}	
+	footer a:hover{color:#fff;
+	}	
+
+footer .social-widget{
+		text-align: center;
+	}
+footer .dropdown li a, .sup-dropdown li a {
+   color: #fff;
+   
+}
+footer .contacta{
+		text-align:left;
+
+	}
+footer h4{
+		font-size:0.625rem;
+		line-height:0.625rem;
+		text-transform: uppercase;
+		font-weight: 600;
+	}
+footer p{
+		color:#383832;
+		font-size:0.625rem;
+		line-height:0.625rem;		
+	}
+footer label{
+		font-size:0.625rem;
+		line-height:0.625rem;
+	}
+footer .footer-widget{
+		margin:0;
+		margin-top:30px;
+	}
+footer .social-widget{
+		text-align: left;
+	}	
+footer .social-widget ul.social-icons li a i{
+    font-size:1em;
+   	 width: 20px;
+    height: 20px;
+    color: #fff;
+    line-height: 20px;
+    text-align: center;
+    display: block;
+
+	}
+	
+}
+
+
+
+/* LG segun bootstrap--- */
+@media only screen and (min-width : 1200px) {
+.varianteprimera{margin-top:12px}
+.variantesegunda{margin-top:12px;}
+/* Desktops grandes ----------- */
+	h1{
+	font-size: 1.875rem;
+	line-height: 1.875rem;
+	}
+	h2{
+	font-size: 1rem;
+	line-height: 1rem;
+	}
+hgroup h2{padding-top: 1.375rem}	
+
+#elfestival h1{font-size:1.5em;}
+#chefs h1{font-size:1.5em;
+padding:1.875rem 1.875rem 3.75rem 1.875rem; }
+
+.gijonsecome{
+	background-image:url(../images/graficos/verduras_cab_LG.png);
+	background-repeat: no-repeat;
+	background-position: left bottom;
+	background-color:#80CFCD;
+	height: 125px;
+
+}
+.logo{
+padding: 0;
+position:relative;
+left:4.5rem;
+}
+.vira{
+	float:right;}
+.vira .virados{float: right}
+
+.entrecorrecta {
+    height: 200px;
+    float: right;
+}
+
+#container{
+    max-width:1200px;
+    margin: auto;
+
+}
+	
+header{
+	max-width:1200px;
+	margin: auto;
+}
+	.navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand{
+		padding:0;
+	}
+	.navbar-default .navbar-nav{
+    padding-left: 2.8rem !important;
+
+
+}
+.navbar-default .navbar-nav {
+    margin-right: 10px!important;
+    position: relative;
+    top: 1rem;
+    left: 9.5rem;
+}	
+
+
+element.style ::before {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+	element.style ::after {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+
+.correccion{
+	float:right;
+	padding: 0;
+	margin: 0;
+	}
+article{
+padding: 1.875rem 1.875rem 3.75rem 1.875rem;
+word-break:normal;
+	word-wrap:normal;
+}
+/* zona el festival*/
+
+
+.alojamiento{
+		min-height:200px;
+	}	
+/* zona chefs*/
+.touch-carousel .owl-controls .owl-buttons {
+	position: absolute;
+	top: 158px;/*coco 50px*/
+	left: -128%;/*coco -150px;*/
+}
+
+.imagenchef{
+	padding: 15px;
+	float:left;
+	}
+.nombrechef{
+	background-color:rgba(0, 0, 0, 0.75);
+	position: relative;
+    top: -34px;
+}
+.chefs h4{
+	font-family: 'Source Sans Pro', sans-serif;
+	color:#fff;
+	font-size: 0.875em;
+	text-align: center;
+	font-weight: 300;
+	
+}
+
+
+/*zona patrocinadores*/
+#patrocinadores{
+padding: 1.874rem;
+}
+
+
+#patrocinadores h4{
+		color:#8E8E8D;
+		text-transform: uppercase;
+		font-size: 0.625rem;		
+	}
+#patrocinadores .classic-title span {
+    border-bottom-color: #BFE7E6;
+    padding-bottom: 0.875rem;
+}
+	
+
+/*------------------------------------------*/
+/*			 Footer Styles
+/*------------------------------------------*/
+
+
+footer input{
+	width: 90%;
+	}
+footer input[type="submit"]{
+	width:50%;
+	font-size:0.625em;
+	text-transform: uppercase;
+	font-weight: 400;
+	}
+	
+.mapaweb{
+	padding-top: 30px;
+	}
+footer.footer{
+	background-image:url(../images/graficos/huerto_pie_LG.png);
+	background-repeat: no-repeat;
+	background-position: bottom right;
+}
+.col-lg-12.footer{
+padding: 1.875rem;
+}
+footer ul{
+	margin:0;
+	padding: 0;
+	}
+footer ul li{
+	color:#333332;
+	text-align: left;
+	text-transform: uppercase;
+	font-weight: 400;
+	font-size: 0.625rem;
+	padding: 0;
+	line-height: 1.5rem;
+	margin: 0;
+	}
+footer ul li{
+	margin-left: 15px;
+}	
+footer ul li ul li{
+	margin-left: 15px;
+}
+.social-widget ul.social-icons li {
+    margin-right: 4px;
+    margin-bottom: 4px;
+	margin-left: 0;
+	}	
+footer a:{color:#fff;}
+		
+footer a:visited{color:#fff}	
+	footer a:hover{color:#fff;
+	}	
+
+footer .social-widget{
+		text-align: center;
+	}
+footer .dropdown li a, .sup-dropdown li a {
+   color: #fff;
+   
+}
+footer .contacta{
+		text-align:left;
+
+	}
+footer h4{
+		font-size:0.625rem;
+		line-height:0.625rem;
+		text-transform: uppercase;
+		font-weight: 600;
+	}
+footer p{
+		color:#383832;
+		font-size:0.625rem;
+		line-height:0.625rem;		
+	}
+footer label{
+		font-size:0.625rem;
+		line-height:0.625rem;
+	}
+footer .footer-widget{
+		margin:0;
+		margin-top:30px;
+	}
+footer .social-widget{
+		text-align: left;
+	}	
+footer .social-widget ul.social-icons li a i{
+    font-size:1em;
+   	 width: 20px;
+    height: 20px;
+    color: #fff;
+    line-height: 20px;
+    text-align: center;
+    display: block;
+
+	}
+	
+}
+iframe{
+margin-bottom: 50px;
+}
+form{ margin-right: 2rem;}

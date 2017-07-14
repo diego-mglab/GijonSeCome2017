@@ -18,6 +18,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/test', 'HomeController@index')->name('test');
+
 
 Route::group(['prefix' => 'eunomia' , 'middleware' => 'auth' ], function () {
 
