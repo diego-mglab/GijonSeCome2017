@@ -38,7 +38,10 @@ class ContentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if ($request->visible==1)
+            $this->validate($request, [
+                'titulo' => 'required'
+            ]);
     }
 
     /**

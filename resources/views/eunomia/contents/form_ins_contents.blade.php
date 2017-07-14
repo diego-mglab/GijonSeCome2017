@@ -29,7 +29,7 @@
 
             <!-- /.box-header -->
                 <!-- form start -->
-                {!! Form::open(['route' => 'contents.store','files' => true]) !!}
+                {!! Form::open(['route' => 'contents.store','files' => true, 'name' => 'form_contents']) !!}
 
 
 
@@ -129,6 +129,7 @@
 @section('css')
 
     <link rel="stylesheet" href="{{asset('vendor/adminlte/plugins/iCheck/flat/green.css')}}">
+    <link href="{{asset('css/smoke.min.css')}}" rel="stylesheet">
 
 @stop
 
@@ -152,5 +153,13 @@
             checkboxClass: 'icheckbox_flat-green'
         });
     </script>
-
+    <script src="{{asset('js/smoke.min.js')}}"></script>
+    <script src="{{asset('js/es.smoke.min.js')}}"></script>
+    <script language="JavaScript" type="text/javascript">
+        if ($('#visible').is(':checked')) {
+            if ($('forms.form_contents').smkValidate()) {
+                // Code here
+            }
+        }
+    </script>
 @stop
