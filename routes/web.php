@@ -8,13 +8,18 @@
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
-| tararii
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+
+//Rutas para web
+
+Route::get('/', 'WebController@index')->name('index');
+
+//Rutas para gestor de contenidos
 
 Auth::routes();
 
@@ -27,5 +32,3 @@ Route::group(['prefix' => 'eunomia' , 'middleware' => 'auth' ], function () {
     Route::resource('/contents', 'ContentController');
 
 });
-
-Route::get('/home', 'ContentController@index')->name('prueba');
