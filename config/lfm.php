@@ -12,14 +12,14 @@ return [
     'use_package_routes'    => true,
 
     // For laravel 5.1, please set to ['auth']
-    'middlewares'           => ['web','auth'],
+    'middlewares'           => ['web'],
 
     // Add prefix for routes
     'prefix'           => 'laravel-filemanager',
 
     // Allow multi_user mode or not.
     // If true, laravel-filemanager create private folders for each signed-in user.
-    'allow_multi_user'      => true,
+    'allow_multi_user'      => false,
 
     // The database field to identify a user.
     // When set to 'id', the private folder will be named as the user id.
@@ -32,7 +32,7 @@ return [
 
     'images_dir'            => 'public/photos/',
     'images_url'            => '/photos/',
-    'images_startup_view'   => 'list',
+    'images_startup_view'   => 'grid',
 
     'files_dir'             => 'public/files/',
     'files_url'             => '/files/',

@@ -10,10 +10,16 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Rutas para web
+
+Route::get('/', 'WebController@index')->name('index');
+
+
+//Rutas para gestor de contenidos
 
 Auth::routes();
 
@@ -21,12 +27,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['prefix' => 'eunomia' , 'middleware' => 'auth' ], function () {
 
+    Route::resource('/idiomas', 'IdiomaController');
+
     Route::resource('/usuarios', 'UserController');
 
     Route::resource('/contents', 'ContentController');
 
 });
-
-Route::get('/home', 'ContentController@index')->name('prueba');
-
-// comentario

@@ -122,6 +122,11 @@ return [
             'label_color' => 'success',
         ],
         [
+            'text'        => 'Idiomas',
+            'url'         => '/eunomia/idiomas',
+            'icon'        => 'user',
+        ],
+        [
             'text'        => 'Usuarios',
             'url'         => '/eunomia/usuarios',
             'icon'        => 'user',

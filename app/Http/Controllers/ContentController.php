@@ -40,6 +40,7 @@ class ContentController extends Controller
     {
         if ($request->visible==1)
             $this->validate($request, [
+                'tipo_contenido' => 'required',
                 'titulo' => 'required'
             ]);
     }
