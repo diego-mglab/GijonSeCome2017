@@ -27,3 +27,5 @@ Route::group(['prefix' => 'eunomia' , 'middleware' => 'auth' ], function () {
     Route::resource('/contents', 'ContentController');
 
 });
+
+Route::get('/home', 'ContentController@index')->name('prueba');
