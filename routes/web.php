@@ -28,5 +28,3 @@ Route::group(['prefix' => 'eunomia' , 'middleware' => 'auth' ], function () {
 });
 
 Route::get('/home', 'ContentController@index')->name('prueba');
-
-// comentario
