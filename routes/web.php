@@ -23,4 +23,6 @@ Route::group(['prefix' => 'eunomia' , 'middleware' => 'auth' ], function () {
 
     Route::resource('/usuarios', 'UserController');
 
+    Route::resource('/contents', 'ContentController');
+
 });

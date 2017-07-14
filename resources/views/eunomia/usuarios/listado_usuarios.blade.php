@@ -81,20 +81,5 @@
     <script src="{{asset("vendor/adminlte/plugins/datatables/jquery.dataTables.min.js")}}"> </script>
     <script src="{{asset("vendor/adminlte/plugins/datatables/dataTables.bootstrap.min.js")}}"> </script>
 
-    <script>
-        $(function () {
-            $('#list').DataTable({
-                "paging": true,
-                "lengthChange": true,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "stateSave": true,
-                "responsive": true,
-
-
-
-            });
-        });
-    </script>
+    <script src="{{asset("js/scripts.js")}}"></script>
 @stop
