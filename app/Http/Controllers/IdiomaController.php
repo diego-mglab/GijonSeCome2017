@@ -8,6 +8,7 @@ use Storage;
 use File;
 use Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class IdiomaController extends Controller
 {
@@ -64,9 +65,11 @@ class IdiomaController extends Controller
         $idioma->codigo = $request->codigo;
         if ($request->principal == 1) {
             $this->eliminarPrincipal();
-            $idioma->principal = 'Si';
+            $idioma->principal = 1;
+            $idioma->activado = 1;
         } else {
-            $idioma->principal='No';
+            $idioma->principal = 0;
+            $idioma->activado = $request->activado;
         }
 
         $idioma->save();
@@ -106,10 +109,43 @@ class IdiomaController extends Controller
      * @param  \App\Idioma  $idioma
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Idioma $idioma)
+    public function update(Request $request, $id)
     {
-        //
+        $idioma = Idioma::findOrFail($id);
+        $imagenactual = $idioma->imagen;
+
+        if ($request->hasFile('imagen')) {
+
+            File::delete('images/idiomas/' . $imagenactual);
+            $imagen = $request->file('imagen');
+
+            $filename = time() . '.' . $imagen->getClientOriginalExtension();
+
+
+            Image::make($imagen)->fit(21, 14, function ($constraint) {
+                $constraint->upsize();
+            })->save('images/idiomas/' . $filename);
+
+            $idioma->imagen = $filename;
+        }
+
+        $idioma->idioma = $request->idioma;
+        $idioma->codigo = $request->codigo;
+
+        if ($request->principal == 1) {
+            $this->eliminarPrincipal();
+            $idioma->principal = 1;
+            $idioma->activado = 1;
+        } else {
+            $idioma->principal = 0;
+            $idioma->activado = $request->activado;
+        }
+
+        $idioma->save();
+        return redirect('eunomia/idiomas');
+
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -125,6 +161,6 @@ class IdiomaController extends Controller
 
     private function eliminarPrincipal()
     {
-        $num = DB::update("update idiomas set principal='No'");
+        $num = DB::update("update idiomas set principal = 0");
     }
 }

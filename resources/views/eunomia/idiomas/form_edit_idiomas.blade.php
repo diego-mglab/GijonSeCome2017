@@ -53,10 +53,16 @@
                     <div class="form-group">
 
                         {{Form::label('principal', 'Idioma principal')}}
-                        {{Form::checkbox('principal', '1', false,['class' => 'flat-green'])}}
+                        {{Form::checkbox('principal', '1', $idioma->principal,['class' => 'flat-green'])}}
 
                     </div>
 
+                    <div class="form-group">
+
+                        {{Form::label('activado', 'Activado')}}
+                        {{Form::checkbox('activado', '1', $idioma->activado,['class' => 'flat-green'])}}
+
+                    </div>
 
                 </div>
                 <!-- /.box-body -->

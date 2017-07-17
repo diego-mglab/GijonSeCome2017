@@ -34,81 +34,125 @@
 
 
                 <div class="box-body">
+
+                    <div class="contenedor_iconos_menu_formulario">
+                        <div class="icono_menu_formulario">
+                            <a onclick="muestraOcultaCampos('pagina');" title="Página"><i class="fa fa-file-text fa-5x" aria-hidden="true"></i></a>
+                        </div>
+                        <div class="icono_menu_formulario">
+                            <a onclick="muestraOcultaCampos('noticia');" title="Noticia"><i class="fa fa-newspaper-o fa-5x" aria-hidden="true"></i></a>
+                        </div>
+                        <h2 id="titulo_tipo_contenido" class="icono_menu_formulario titulo_tipo_contenido">
+                            Noticia
+                        </h2>
+                    </div>
+
+                    <div class="form-group">
+
+                        {{Form::hidden('tipo_contenido','noticia',['id' => 'tipo_contenido'])}}
+
+                    </div>
+
+                    <div class="form-group" id="contenedor_lugar">
+
+                        {{Form::label('lugar', 'Lugar')}}
+                        {{Form::text('lugar', null, ['class' => 'form-control' ,'placeholder' => 'Lugar'])}}
+
+                    </div>
+
+                    <div class="form-group" id="contenedor_fecha">
+                        {{Form::label('fecha', 'Fecha')}}
+
+                        <div class="input-group date">
+
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+
+                            {{Form::text('fecha', null, ['class' => 'form-control pull-right datepicker' , 'id' => 'fecha',])}}
+
+                        </div>
+
+                    </div>
+
                     <!-- Custom tabs (Charts with tabs)-->
                     <div class="nav-tabs-custom">
                         <!-- Tabs within a box -->
                         <ul class="nav nav-tabs pull-right">
-                            <li><a href="#ingles" data-toggle="tab">Inglés</a></li>
-                            <li class="active"><a href="#espanol" data-toggle="tab">Español</a></li>
+                            @foreach($idiomas as $idioma)
+                                <li
+                                        @if($idioma->principal==1)
+                                            class="active"
+                                        @endif
+                                ><a href="#{{$idioma->codigo}}" data-toggle="tab">{{$idioma->idioma}}</a></li>
+                            @endforeach
                         </ul>
                         <div class="tab-content no-padding">
 
-                            <div class="chart tab-pane active" id="espanol" style="position: relative;">
+                            @foreach($idiomas as $idioma)
+                                <div class="chart tab-pane
+                                        @if($idioma->principal == 1)
+                                            active
+                                        @endif
+                                        " id="{{$idioma->codigo}}" style="position: relative;">
 
-                                <!-- /.nav-tabs-custom -->
+                                    <!-- /.nav-tabs-custom -->
+
+                                    <div class="form-group">
+
+                                        {{Form::label('titulo', 'Título')}}
+                                        {{Form::text('titulo[]', null, ['class' => 'form-control' ,'placeholder' => 'Título'])}}
+
+                                    </div>
 
 
-                                <div class="form-group">
+                                    <div class="form-group" id="contenedor_subtitulo_{{$idioma->codigo}}">
 
-                                    {{Form::label('tipo_contenido', 'Tipo de contenido')}}
-                                    {{Form::select('tipo_contenido', $tiposContenido, null, ['class' => 'form-control' ,'placeholder' => 'Seleccione un tipo de contenido'])}}
+                                        {{Form::label('subtitulo', 'Subtítulo')}}
+                                        {{Form::text('subtitulo[]', null, ['class' => 'form-control' ,'placeholder' => 'Subtítulo'])}}
 
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        {{Form::label('contenido', 'Contenido')}}
+                                        {{Form::textarea('contenido[]', null, ['class' => 'form-control'])}}
+
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        {{Form::label('metatitulo', 'Meta título')}}
+                                        {{Form::text('metatitulo[]', null, ['class' => 'form-control' ,'placeholder' => 'Meta título'])}}
+
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        {{Form::label('metadescripcion', 'Meta descripción')}}
+                                        {{Form::text('metadescripcion[]', null, ['class' => 'form-control' ,'placeholder' => 'Meta descripción'])}}
+
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        {{Form::label('visible', 'Visible/Oculto')}}
+                                        {{Form::checkbox('visible[]', '1', true,['class' => 'flat-green'])}}
+
+                                    </div>
                                 </div>
-
-                                <div class="form-group">
-
-                                    {{Form::label('titulo', 'Título')}}
-                                    {{Form::text('titulo', null, ['class' => 'form-control' ,'placeholder' => 'Título'])}}
-
-                                </div>
-
-
-                                <div class="form-group">
-
-                                    {{Form::label('subtitulo', 'Subtítulo')}}
-                                    {{Form::text('subtitulo', null, ['class' => 'form-control' ,'placeholder' => 'Subtítulo'])}}
-
-                                </div>
-
-                                <div class="form-group">
-
-                                    {{Form::label('contenido', 'Contenido')}}
-                                    {{Form::textarea('contenido', null, ['class' => 'form-control'])}}
-
-                                </div>
-
-                                <div class="form-group">
-
-                                    {{Form::label('imagen', 'Imagen')}}
-                                    {{Form::file('imagen', null, ['class' => 'form-control'])}}
-                                </div>
-
-                                <div class="form-group">
-
-                                    {{Form::label('metatitulo', 'Meta título')}}
-                                    {{Form::text('metatitulo', null, ['class' => 'form-control' ,'placeholder' => 'Meta título'])}}
-
-                                </div>
-
-                                <div class="form-group">
-
-                                    {{Form::label('metadescripcion', 'Meta descripción')}}
-                                    {{Form::text('metadescripcion', null, ['class' => 'form-control' ,'placeholder' => 'Meta descripción'])}}
-
-                                </div>
-
-                                <div class="form-group">
-
-                                    {{Form::label('visible', 'Visible/Oculto')}}
-                                    {{Form::checkbox('visible', '1', true,['class' => 'flat-green'])}}
-
-                                </div>
-                            </div>
-
-                            <div class="chart tab-pane" id="ingles" style="position: relative;"></div>
+                            @endforeach
 
                         </div>
                     </div>
+
+                    <div class="form-group" id="contenedor_imagen">
+
+                        {{Form::label('imagen', 'Imagen')}}
+                        {{Form::file('imagen', null, ['class' => 'form-control'])}}
+                    </div>
+
+
                 </div>
                 <!-- /.box-body -->
 
@@ -128,12 +172,21 @@
 
 @section('css')
 
+    <!-- General -->
+    <link rel="stylesheet" href="{{asset('vendor/adminlte/css/general.css')}}">
+
+    <!-- iCheck -->
     <link rel="stylesheet" href="{{asset('vendor/adminlte/plugins/iCheck/flat/green.css')}}">
+
+    <!-- Bootstrap Datepicker Sandbox -->
+    <link rel="stylesheet" href="{{asset('datePicker/css/bootstrap-datepicker3.css')}}">
+    <link rel="stylesheet" href="{{asset('datePicker/css/bootstrap-datepicker.standalone.css')}}">
 
 @stop
 
 @section('js')
 
+    <!-- TinyMCE -->
     <script src="{{asset('vendor/adminlte/plugins/tinymce/tinymce.min.js')}}"></script>
     <script>
         var editor_config = {
@@ -169,7 +222,10 @@
             }
         };
 
-        tinymce.init(editor_config);    </script>
+        tinymce.init(editor_config);
+    </script>
+
+    <!-- iCheck -->
     <script src="{{asset('vendor/adminlte/plugins/iCheck/icheck.min.js')}}"></script>
     <script>
         //Green color scheme for iCheck
@@ -177,4 +233,43 @@
             checkboxClass: 'icheckbox_flat-green'
         });
     </script>
+
+    <!-- Bootstrap Datepicker Sandbox -->
+    <script src="{{asset('datePicker/js/bootstrap-datepicker.js')}}"></script>
+    <!-- Languaje -->
+    <script src="{{asset('datePicker/locales/bootstrap-datepicker.es.min.js')}}"></script>
+    <script language="JavaScript">
+        $('.datepicker').datepicker({
+            format: "dd/mm/yyyy",
+            language: "es",
+            autoclose: true
+        });
+    </script>
+
+    <!-- Tipo Contenido -->
+    <script language="JavaScript">
+        function muestraOcultaCampos(tipo_contenido){
+            switch (tipo_contenido){
+                case 'pagina':
+                    $('#contenedor_lugar').hide();
+                    $('#contenedor_fecha').hide();
+                    @foreach($idiomas as $idioma)
+                            $('#contenedor_subtitulo_{{$idioma->codigo}}').hide();
+                    @endforeach
+                    titulo = "Página";
+                    break;
+                case 'noticia':
+                    $('#contenedor_lugar').show();
+                    $('#contenedor_fecha').show();
+                    @foreach($idiomas as $idioma)
+                            $('#contenedor_subtitulo_{{$idioma->codigo}}').show();
+                    @endforeach
+                    titulo = "Noticia";
+                    break;
+            }
+            $('#tipo_contenido').val(tipo_contenido);
+            $('#titulo_tipo_contenido').html(titulo);
+        }
+    </script>
+
 @stop

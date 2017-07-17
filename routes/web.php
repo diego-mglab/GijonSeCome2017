@@ -19,7 +19,7 @@
 Route::get('/', 'WebController@index')->name('index');
 
 
-//Rutas para gestor de contenidos
+//Rutas para gestor de contenido
 
 Auth::routes();
 

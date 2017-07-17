@@ -30,6 +30,7 @@
                             <th>Código</th>
                             <th>Icono</th>
                             <th>Idioma principal</th>
+                            <th>Activado</th>
                             <th>Acciones</th>
                         </tr>
                         </thead>
@@ -45,9 +46,10 @@
                                         <img src="/images/idiomas/{{$idioma->imagen}}" alt="{{$idioma->idioma}}">
                                     @endif
                                 </td>
-                                <td>{{$idioma->principal}}</td>
+                                <td>{{$idioma->principal==1?'Si':'No'}}</td>
+                                <td>{{$idioma->activado==1?'Si':'No'}}</td>
                                 <td>{{ link_to_route('idiomas.edit', 'Editar', $idioma, array('class' => 'btn btn btn-warning btn-xs')) }}
-                                    {{ Form::open(array('method'=> 'DELETE', 'route' => array('usuarios.destroy', $idioma->id),'style'=>'display:inline')) }}
+                                    {{ Form::open(array('method'=> 'DELETE', 'route' => array('idiomas.destroy', $idioma->id),'style'=>'display:inline')) }}
                                     {{ Form::submit('Eliminar', array('class' => 'btn btn btn-danger btn-xs')) }}
                                     {{ Form::close() }}
 

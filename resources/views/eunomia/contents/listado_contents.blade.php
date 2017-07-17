@@ -35,22 +35,35 @@
                         </thead>
                         <tbody>
 
-                        @foreach ($contents as $content)
-
                             <tr>
-                                <td>{{$content->titulo}}</td>
-                                <td>{{$content->subtitulo}}</td>
-                                <td>{{$content->tipo}}</td>
-                                <td>{{$content->visible}}</td>
-                                <td>{{ link_to_route('contents.edit', 'Editar', $content, array('class' => 'btn btn btn-warning btn-xs')) }}
-                                    {{ Form::open(array('method'=> 'DELETE', 'route' => array('contents.destroy', $content->id),'style'=>'display:inline')) }}
+                                <td>{{$contents_principal[0]->titulo}}</td>
+                                <td>{{$contents_principal[0]->subtitulo}}</td>
+                                <td>{{$contents_principal[0]->tipo_contenido}}</td>
+                                <td>{{$contents_principal[0]->visible==1?'Si':'No'}}</td>
+                                <td>{{ link_to_route('contents.edit', 'Editar', $contents[0]->id, array('class' => 'btn btn btn-warning btn-xs')) }}
+                                    {{ Form::open(array('method'=> 'DELETE', 'route' => array('contents.destroy', $contents_principal[0]->id),'style'=>'display:inline')) }}
                                     {{ Form::submit('Eliminar', array('class' => 'btn btn btn-danger btn-xs')) }}
                                     {{ Form::close() }}
 
                                 </td>
                             </tr>
+                            <tr>
+                                <td colspan="5">
+                                    <table class="table">
 
-                        @endforeach
+                                        @foreach ($contents as $content)
+                                            <tr>
+                                                <td>{{$content->titulo}}</td>
+                                                <td>{{$content->subtitulo}}</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        @endforeach
+
+                                    </table>
+                                </td>
+                            </tr>
 
 
 

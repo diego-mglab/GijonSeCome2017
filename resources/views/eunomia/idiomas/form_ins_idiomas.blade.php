@@ -64,6 +64,13 @@
 
                     </div>
 
+                    <div class="form-group">
+
+                        {{Form::label('activado', 'Activado')}}
+                        {{Form::checkbox('activado', '1', false,['class' => 'flat-green'])}}
+
+                    </div>
+
                 </div>
                 <!-- /.box-body -->
 

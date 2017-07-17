@@ -1,0 +1,15 @@
+.contenedor_iconos_menu_formulario {
+    float: left;
+    width: 100%;
+    margin: 1em 0;
+}
+
+.icono_menu_formulario {
+    float: left;
+    margin: 0 .5em;
+    cursor: pointer;
+}
+
+.titulo_tipo_contenido {
+    padding-top: .5em;
+}
