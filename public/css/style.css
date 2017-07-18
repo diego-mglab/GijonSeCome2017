@@ -455,11 +455,17 @@ header {
 }
 
 .top-bar .contact-details li a {
-	font-size: 0.625rem;
+	font-size: 0.875rem;
 	display: block;
 	line-height: 32px;
 }
-
+@media only screen and (min-width: 992px) {
+.top-bar .contact-details li a {
+	font-size: 0.75rem;
+	display: block;
+	line-height: 32px;
+}
+}
 ul.social-list {
     float: right;
 }
@@ -521,13 +527,14 @@ ul.social-list li a.skype:hover {
 }
 
 ul.social-list li a i {
-    font-size: 0.625rem;
+    font-size: 0.875rem;
     width: 20px;
     height: 20px;
     color: #C3C3C2;
     line-height: 20px;
     text-align: center;
     display: block;
+	margin: 5px;
 }
 
 ul.social-list li:last-child a i {
@@ -593,9 +600,9 @@ ul.social-list li:last-child a i {
 }
 
 .navbar-default .navbar-nav > li > a {
-	color: #FFF;
+	color: #000;
     display: block;
-    font-size: 14px;
+    font-size: 16px;
     padding: 31px 15px 31px 15px;
     overflow: hidden;
     transition: all 0.3s ease-in-out;
@@ -603,6 +610,18 @@ ul.social-list li:last-child a i {
     -webkit-transition: all 0.3s ease-in-out;
     -o-transition: all 0.3s ease-in-out;
     font-weight: 400;
+}
+@media only screen and (min-width : 992px){
+.navbar-default .navbar-nav > li > a{
+    padding: 33px 12px 33px 12px;
+	font-size: 0.75rem;
+}}
+@media only screen and (min-width : 1200px){
+.navbar-default .navbar-nav > li > a{
+    font-size: 16px;
+    padding: 31px 15px 31px 15px;
+}
+
 }
 
 .navbar-default .navbar-nav > li > a.active, .navbar-default .navbar-nav > li:hover > a {
@@ -2828,7 +2847,7 @@ ul.icons-list li i {
 
 .classic-title {
 	margin-bottom: 16px;
-	padding-bottom: 9px;
+	padding-bottom: 12px;
 	border-bottom: 1px solid #eee;
     font-weight: 300;
 }
@@ -4102,11 +4121,11 @@ footer p {
 }
 
 footer a {
-	color: #fff;/*coco 666*/
+	color: #333332;/*coco 666*/
 }
 
 footer a:hover {
-	color: #fff;
+	color: #333332;
 	text-decoration: underline;/*coco 666*/
 }
 
