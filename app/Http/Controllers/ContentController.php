@@ -10,6 +10,7 @@ use App\TipoContenido;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Str;
 
 class ContentController extends Controller
 {
@@ -24,7 +25,7 @@ class ContentController extends Controller
             ->join('textos_idiomas','contents.id','=','textos_idiomas.contenido_id')
             ->join('idiomas','textos_idiomas.idioma_id','idiomas.id')
             ->select('contents.id','tipo_contenido','titulo','subtitulo','contenido','metadescripcion','metatitulo','visible','principal','idioma','idiomas.imagen')
-            ->orderBy('contents.id','ASC')->orderBy('principal','DESC')->get();
+            ->orderBy('textos_idiomas.id','ASC')->orderBy('principal','DESC')->get();
         return view('eunomia.contents.listado_contents', compact('contents_principal','contents'));
     }
 
@@ -107,6 +108,7 @@ class ContentController extends Controller
                     $textosIdioma->contenido = $request->contenido[$cont];
                     $textosIdioma->metadescripcion = $request->metadescripcion[$cont];
                     $textosIdioma->metatitulo = $request->metatitulo[$cont];
+                    $textosIdioma->slug = Str::Slug($request->titulo);
 
                     $textosIdioma->save();
                 }
@@ -142,7 +144,7 @@ class ContentController extends Controller
         $textos = DB::table('contents')
             ->join('textos_idiomas','contents.id','=','textos_idiomas.contenido_id')
             ->join('idiomas','textos_idiomas.idioma_id','idiomas.id')
-            ->select('contents.id as content_id','tipo_contenido','titulo','subtitulo','contenido','metadescripcion','metatitulo','visible','principal','idioma','idiomas.imagen')
+            ->select('contents.id as content_id','tipo_contenido','titulo','subtitulo','contenido','metadescripcion','metatitulo','visible','principal','idioma','idiomas.imagen','codigo')
             ->where('contents.id',$id)
             ->orderBy('principal','DESC')->get();
         $content = Content::findOrFail($id);
@@ -158,7 +160,83 @@ class ContentController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $idiomas = Idioma::where('activado','1')->orderByDesc('principal')->get();
+
+        foreach ($idiomas as $idioma) {
+            if ($idioma->principal == 1)
+                $this->validate($request, [
+                    'titulo' => 'required'
+                ]);
+        }
+
         $content = Content::findOrFail($id);
+
+        $imagenactual = $content->imagen;
+
+        if($request->hasFile('imagen')){
+
+            File::delete('images/contenido/l/'.$imagenactual);
+            File::delete('images/contenido/m/'.$imagenactual);
+            File::delete('images/contenido/s/'.$imagenactual);
+
+            $imagen = $request->file('imagen');
+
+            $filename = time() . '.' . $imagen->getClientOriginalExtension();
+
+
+            Image::make($imagen)->fit(970, null, function ($constraint) {
+                $constraint->upsize();
+            })->save('images/contenido/l/'.$filename );
+
+            Image::make($imagen)->fit(768, null, function ($constraint) {
+                $constraint->upsize();
+            })->save('images/contenido/m/'.$filename );
+
+            Image::make($imagen)->fit(300, 300, function ($constraint) {
+                $constraint->upsize();
+            })->save('images/contenido/s/'.$filename );
+
+            // Image::make($imagen)->resize(1440,null, function ($constraint) {
+            //     $constraint->aspectRatio();
+            // })->save('images/contenido/m/'.$filename , 95 );
+
+            $content->imagen = $filename;
+
+        }
+
+        $content->lugar = $request->lugar;
+        $date = Carbon::createFromFormat('d/m/Y',$request->fecha);
+        $content->fecha = $date;
+
+        if ($content->save()) {
+            $cont=count($idiomas) - 1;
+
+            foreach($idiomas as $idioma) {
+                $textosIdioma = TextosIdioma::where('contenido_id',$id)
+                    ->where('idioma_id',$idioma->id)->first();
+                if (count($textosIdioma) == 0) {
+                    $textosIdioma = new TextosIdioma();
+                }
+                if ($request->titulo[$cont] != '') {
+                    $textosIdioma->idioma_id = $idioma->id;
+                    $textosIdioma->contenido_id = $id;
+                    $textosIdioma->tipo_contenido_id = 1; // 1 - Contenido, 2 - Agenda, 3 - Ponente, 4 - Portada
+                    $textosIdioma->titulo = $request->titulo[$cont];
+                    $textosIdioma->subtitulo = $request->subtitulo[$cont];
+                    $textosIdioma->contenido = $request->contenido[$cont];
+                    $textosIdioma->metadescripcion = $request->metadescripcion[$cont];
+                    $textosIdioma->metatitulo = $request->metatitulo[$cont];
+                    $textosIdioma->slug = Str::Slug($request->titulo[$cont]);
+
+                    $textosIdioma->save();
+                }
+                $cont--;
+            }
+
+        }
+
+        return redirect('eunomia/contents');
+
     }
 
     /**

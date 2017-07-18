@@ -36,26 +36,26 @@
                         <tbody>
 
                             @foreach ($contents as $content)
+                                <tr>
                                 @if ($content->principal == 1)
-                                    <tr>
-                                        <td><button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus-square verde" aria-hidden="true"></i></button><img src="/images/idiomas/{{$content->imagen}}" alt="{{$content->idioma}}"><span class="bloque_fila_tabla">{{$content->titulo}}</span></td>
-                                        <td>{{$content->subtitulo}}</td>
-                                        <td>{{$content->tipo_contenido}}</td>
-                                        <td>{{$content->visible==1?'Si':'No'}}</td>
-                                        <td>{{ link_to_route('contents.edit', 'Editar', $content->id, array('class' => 'btn btn btn-warning btn-xs')) }}
-                                            {{ Form::open(array('method'=> 'DELETE', 'route' => array('contents.destroy', $content->id),'style'=>'display:inline')) }}
-                                            {{ Form::submit('Eliminar', array('class' => 'btn btn btn-danger btn-xs')) }}
-                                            {{ Form::close() }}
+                                    <td><button type="button" class="btn btn-box-tool"><i class="fa fa-plus-square verde" aria-hidden="true"></i></button><img src="/images/idiomas/{{$content->imagen}}" alt="{{$content->idioma}}"><span class="bloque_fila_tabla">{{$content->titulo}}</span></td>
+                                    <td>{{$content->subtitulo}}</td>
+                                    <td>{{$content->tipo_contenido}}</td>
+                                    <td>{{$content->visible==1?'Si':'No'}}</td>
+                                    <td>{{ link_to_route('contents.edit', 'Editar', $content->id, array('class' => 'btn btn btn-warning btn-xs')) }}
+                                        {{ Form::open(array('method'=> 'DELETE', 'route' => array('contents.destroy', $content->id),'style'=>'display:inline')) }}
+                                        {{ Form::submit('Eliminar', array('class' => 'btn btn btn-danger btn-xs')) }}
+                                        {{ Form::close() }}
 
-                                        </td>
-                                    </tr>
+                                    </td>
                                 @else
-                                    <tr>
-                                        <td><span class="segunda_fila"><img src="/images/idiomas/{{$content->imagen}}" alt="{{$content->idioma}}"></span><span class="bloque_fila_tabla">{{$content->titulo}}</span></td>
-                                        <td>{{$content->subtitulo}}</td>
-                                        <td colspan="3"></td>
-                                    </tr>
+                                    <td><span class="segunda_fila"><img src="/images/idiomas/{{$content->imagen}}" alt="{{$content->idioma}}"></span><span class="bloque_fila_tabla">{{$content->titulo}}</span></td>
+                                    <td>{{$content->subtitulo}}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 @endif
+                                </tr>
                             @endforeach
 
                         </tbody>
