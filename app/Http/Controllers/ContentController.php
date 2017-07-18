@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Content;
 use App\Idioma;
+use Image;
 use App\TextosIdioma;
 use App\TipoContenido;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class ContentController extends Controller
 {
@@ -18,17 +20,11 @@ class ContentController extends Controller
      */
     public function index()
     {
-        $contents_principal = DB::table('contents')
-            ->join('textos_idiomas','contents.id','=','textos_idiomas.contenido_id')
-            ->join('idiomas','textos_idiomas.idioma_id','idiomas.id')
-            ->select('contents.id','tipo_contenido','titulo','subtitulo','contenido','metadescripcion','metatitulo','visible')
-            ->where('idiomas.principal','1')->get();
-
         $contents = DB::table('contents')
             ->join('textos_idiomas','contents.id','=','textos_idiomas.contenido_id')
             ->join('idiomas','textos_idiomas.idioma_id','idiomas.id')
-            ->select('contents.id','tipo_contenido','titulo','subtitulo','contenido','metadescripcion','metatitulo','visible')
-            ->where('idiomas.principal','0')->get();
+            ->select('contents.id','tipo_contenido','titulo','subtitulo','contenido','metadescripcion','metatitulo','visible','principal','idioma','idiomas.imagen')
+            ->orderBy('contents.id','ASC')->orderBy('principal','DESC')->get();
         return view('eunomia.contents.listado_contents', compact('contents_principal','contents'));
     }
 
@@ -52,7 +48,7 @@ class ContentController extends Controller
      */
     public function store(Request $request)
     {
-        $idiomas = Idioma::where('activado','1')->orderByDesc('idioma')->get();
+        $idiomas = Idioma::where('activado','1')->orderBy('principal')->get();
 
         foreach ($idiomas as $idioma) {
             if ($idioma->principal == 1)
@@ -90,8 +86,9 @@ class ContentController extends Controller
 
         }
 
-        $content->lugar;
-        $content->fecha;
+        $content->lugar = $request->lugar;
+        $date = Carbon::createFromFormat('d/m/Y',$request->fecha);
+        $content->fecha = $date;
         $content->tipo_contenido = $request->tipo_contenido;
 
         if ($content->save()) {
@@ -139,9 +136,17 @@ class ContentController extends Controller
      * @param  \App\Content  $content
      * @return \Illuminate\Http\Response
      */
-    public function edit(Content $content)
+    public function edit($id)
     {
-        //
+        $idiomas = Idioma::where('activado','1')->orderBy('principal')->get();
+        $textos = DB::table('contents')
+            ->join('textos_idiomas','contents.id','=','textos_idiomas.contenido_id')
+            ->join('idiomas','textos_idiomas.idioma_id','idiomas.id')
+            ->select('contents.id as content_id','tipo_contenido','titulo','subtitulo','contenido','metadescripcion','metatitulo','visible','principal','idioma','idiomas.imagen')
+            ->where('contents.id',$id)
+            ->orderBy('principal','DESC')->get();
+        $content = Content::findOrFail($id);
+        return view('eunomia.contents.form_edit_contents',compact('idiomas','content','textos'));
     }
 
     /**
@@ -151,9 +156,9 @@ class ContentController extends Controller
      * @param  \App\Content  $content
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Content $content)
+    public function update(Request $request, $id)
     {
-        //
+        $content = Content::findOrFail($id);
     }
 
     /**

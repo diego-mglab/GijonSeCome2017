@@ -35,38 +35,28 @@
                         </thead>
                         <tbody>
 
-                            <tr>
-                                <td>{{$contents_principal[0]->titulo}}</td>
-                                <td>{{$contents_principal[0]->subtitulo}}</td>
-                                <td>{{$contents_principal[0]->tipo_contenido}}</td>
-                                <td>{{$contents_principal[0]->visible==1?'Si':'No'}}</td>
-                                <td>{{ link_to_route('contents.edit', 'Editar', $contents[0]->id, array('class' => 'btn btn btn-warning btn-xs')) }}
-                                    {{ Form::open(array('method'=> 'DELETE', 'route' => array('contents.destroy', $contents_principal[0]->id),'style'=>'display:inline')) }}
-                                    {{ Form::submit('Eliminar', array('class' => 'btn btn btn-danger btn-xs')) }}
-                                    {{ Form::close() }}
+                            @foreach ($contents as $content)
+                                @if ($content->principal == 1)
+                                    <tr>
+                                        <td><button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus-square verde" aria-hidden="true"></i></button><img src="/images/idiomas/{{$content->imagen}}" alt="{{$content->idioma}}"><span class="bloque_fila_tabla">{{$content->titulo}}</span></td>
+                                        <td>{{$content->subtitulo}}</td>
+                                        <td>{{$content->tipo_contenido}}</td>
+                                        <td>{{$content->visible==1?'Si':'No'}}</td>
+                                        <td>{{ link_to_route('contents.edit', 'Editar', $content->id, array('class' => 'btn btn btn-warning btn-xs')) }}
+                                            {{ Form::open(array('method'=> 'DELETE', 'route' => array('contents.destroy', $content->id),'style'=>'display:inline')) }}
+                                            {{ Form::submit('Eliminar', array('class' => 'btn btn btn-danger btn-xs')) }}
+                                            {{ Form::close() }}
 
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="5">
-                                    <table class="table">
-
-                                        @foreach ($contents as $content)
-                                            <tr>
-                                                <td>{{$content->titulo}}</td>
-                                                <td>{{$content->subtitulo}}</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                        @endforeach
-
-                                    </table>
-                                </td>
-                            </tr>
-
-
-
+                                        </td>
+                                    </tr>
+                                @else
+                                    <tr>
+                                        <td><span class="segunda_fila"><img src="/images/idiomas/{{$content->imagen}}" alt="{{$content->idioma}}"></span><span class="bloque_fila_tabla">{{$content->titulo}}</span></td>
+                                        <td>{{$content->subtitulo}}</td>
+                                        <td colspan="3"></td>
+                                    </tr>
+                                @endif
+                            @endforeach
 
                         </tbody>
 
@@ -83,6 +73,9 @@
 @endsection
 
 @section('css')
+    <!-- General -->
+    <link rel="stylesheet" href="{{asset('vendor/adminlte/css/general.css')}}">
+
     <!-- DataTables -->
     <link rel="stylesheet" href="{{asset("vendor/adminlte/plugins/datatables/dataTables.bootstrap.css")}}">
 

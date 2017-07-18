@@ -13,3 +13,15 @@
 .titulo_tipo_contenido {
     padding-top: .5em;
 }
+
+.segunda_fila {
+    padding-left: 22px;
+}
+
+.verde {
+    color: #00A65A;
+}
+
+.bloque_fila_tabla {
+    padding-left:10px;
+}
