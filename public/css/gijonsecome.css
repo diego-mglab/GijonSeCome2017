@@ -58,7 +58,7 @@ footer .footer{
 	background-color:#7E7E7A;
 	padding: 1em;
 	display: block;
-		background-image:url(../images/graficos/huerto_pie_xs.png);
+	background-image:url(../images/graficos/huerto_pie_xs.png);
 	background-repeat: no-repeat;
 	background-position: top right;
 	
@@ -78,9 +78,6 @@ footer .footer{
 	padding-top: 0.1em;
 	padding-bottom: 0.2em;
 }
-
-
-
 .idiomas li{margin:4px;}
 
 .igualate{
@@ -114,10 +111,6 @@ hgroup h2{
 padding-top:0.4em;
 }	
 
-/*.entrecorrecta{
-	height: 167px;
-	float: right;
-	} mirar pa que sirve si no borrar*/
 
 .gijonsecome{
 	background-image:url(../images/graficos/verduras_cab_SM_XS.png);
@@ -388,11 +381,11 @@ footer ul{
 	padding: 0;
 	}
 footer ul li{
-	color:#333332;
+	color:#fff;
 	text-align: left;
 	text-transform: uppercase;
 	font-weight: 400;
-	font-size: 0.625rem;
+	font-size: 0.875rem;
 	padding: 0;
 	line-height: 1.5rem;
 	margin: 0;
@@ -409,54 +402,63 @@ footer ul li ul li{
     margin-bottom: 4px;
 	margin-left: 0;
 	}	
-footer a:{color:#fff;}
-	
-footer a:visited{color:#fff}	
-	footer a:hover{color:#fff;
-	}	
+footer a:{color:#333332;}
+footer a:visited{color:#333332}	
+footer a:hover{color:#333332;}	
 
-footer .social-widget{
-		text-align: center;
-	}
-footer .dropdown li a, .sup-dropdown li a {
+
+footer  .dropdown li a, .sup-dropdown li a {
    color: #fff;
    
 }
-footer .contacta{
+footer p a:link  {
 		text-align:left;
+		color: #fff;
+
+	}
+footer p a:visited  {
+		text-align:left;
+		color: #fff;
+
+	}
+footer p a:hover  {
+		text-align:left;
+		color: #fff;
 
 	}
 footer h4{
-		font-size:0.625rem;
-		line-height:0.625rem;
+		font-size:0.875rem;
+		line-height:0.875rem;
 		text-transform: uppercase;
 		font-weight: 600;
 	}
 footer p{
 		color:#383832;
-		font-size:0.625rem;
-		line-height:0.625rem;		
+		font-size:0.875rem;
+		line-height:0.875rem;		
 	}
 footer label{
-		font-size:0.625rem;
-		line-height:0.625rem;
+		font-size:0.875rem;
+		line-height:0.875rem;
 	}
 footer .footer-widget{
 		margin:0;
 		margin-top:30px;
-	}
-footer .social-widget{
 		text-align: left;
-	}	
+	}
+	
 footer .social-widget ul.social-icons li a i{
     font-size:1em;
-   	 width: 20px;
+   	width: 20px;
     height: 20px;
     color: #fff;
     line-height: 20px;
     text-align: center;
     display: block;
 
+	}
+footer .mail-subscribe-widget{
+	margin-top:150px;
 	}
 
 /* sm segun bootstrap--- */
@@ -474,8 +476,6 @@ footer .social-widget ul.social-icons li a i{
 	h2{
 	font-size: 0.8125rem;
 	line-height: 0.8125rem;
-
-
 	}
 	.vira{
 	float:right;}
@@ -743,7 +743,6 @@ footer ul{
 	padding: 0;
 	}
 footer ul li{
-	color:#333332;
 	text-align: left;
 	text-transform: uppercase;
 	font-weight: 400;
@@ -763,45 +762,28 @@ footer ul li ul li{
     margin-bottom: 4px;
 	margin-left: 0;
 	}	
-footer a:{color:#fff;}
-		
-footer a:visited{color:#fff}	
-	footer a:hover{color:#fff;
-	}	
 
-footer .social-widget{
-		text-align: center;
-	}
-footer .dropdown li a, .sup-dropdown li a {
-   color: #fff;
-   
-}
-footer .contacta{
-		text-align:left;
 
-	}
 footer h4{
-		font-size:0.625rem;
-		line-height:0.625rem;
+		font-size:0.875rem;
+		line-height:0.875rem;
 		text-transform: uppercase;
 		font-weight: 600;
 	}
 footer p{
 		color:#383832;
-		font-size:0.625rem;
-		line-height:0.625rem;		
+		font-size:0.875rem;
+		line-height:0.875rem;		
 	}
 footer label{
-		font-size:0.625rem;
-		line-height:0.625rem;
+		font-size:0.875rem;
+		line-height:0.875rem;
 	}
 footer .footer-widget{
 		margin:0;
 		margin-top:30px;
 	}
-footer .social-widget{
-		text-align: left;
-	}	
+
 footer .social-widget ul.social-icons li a i{
     font-size:1em;
    	 width: 20px;
@@ -1086,7 +1068,7 @@ header{
 #patrocinadores h4{
 		color:#8E8E8D;
 		text-transform: uppercase;
-		font-size: 0.625rem;		
+		font-size: 0.6875rem;		
 	}
 #patrocinadores .classic-title span {
     border-bottom-color: #BFE7E6;
@@ -1122,7 +1104,6 @@ footer ul{
 	padding: 0;
 	}
 footer ul li{
-	color:#333332;
 	text-align: left;
 	text-transform: uppercase;
 	font-weight: 400;
@@ -1142,45 +1123,28 @@ footer ul li ul li{
     margin-bottom: 4px;
 	margin-left: 0;
 	}	
-footer a:{color:#fff;}
-		
-footer a:visited{color:#fff}	
-	footer a:hover{color:#fff;
-	}	
 
-footer .social-widget{
-		text-align: center;
-	}
-footer .dropdown li a, .sup-dropdown li a {
-   color: #fff;
-   
-}
-footer .contacta{
-		text-align:left;
 
-	}
 footer h4{
-		font-size:0.625rem;
-		line-height:0.625rem;
+		font-size:0.875rem;
+		line-height:0.875rem;
 		text-transform: uppercase;
 		font-weight: 600;
 	}
 footer p{
 		color:#383832;
-		font-size:0.625rem;
-		line-height:0.625rem;		
+		font-size:0.875rem;
+		line-height:0.875rem;		
 	}
 footer label{
-		font-size:0.625rem;
-		line-height:0.625rem;
+		font-size:0.875rem;
+		line-height:0.875rem;
 	}
 footer .footer-widget{
 		margin:0;
 		margin-top:30px;
 	}
-footer .social-widget{
-		text-align: left;
-	}	
+
 footer .social-widget ul.social-icons li a i{
     font-size:1em;
    	 width: 20px;
@@ -1324,7 +1288,7 @@ padding: 1.874rem;
 #patrocinadores h4{
 		color:#8E8E8D;
 		text-transform: uppercase;
-		font-size: 0.625rem;		
+		font-size: 0.875rem;		
 	}
 #patrocinadores .classic-title span {
     border-bottom-color: #BFE7E6;
@@ -1363,11 +1327,10 @@ footer ul{
 	padding: 0;
 	}
 footer ul li{
-	color:#333332;
 	text-align: left;
 	text-transform: uppercase;
 	font-weight: 400;
-	font-size: 0.625rem;
+	font-size: 0.875rem;
 	padding: 0;
 	line-height: 1.5rem;
 	margin: 0;
@@ -1383,45 +1346,29 @@ footer ul li ul li{
     margin-bottom: 4px;
 	margin-left: 0;
 	}	
-footer a:{color:#fff;}
-		
-footer a:visited{color:#fff}	
-	footer a:hover{color:#fff;
-	}	
 
-footer .social-widget{
-		text-align: center;
-	}
-footer .dropdown li a, .sup-dropdown li a {
-   color: #fff;
-   
-}
-footer .contacta{
-		text-align:left;
 
-	}
+
 footer h4{
-		font-size:0.625rem;
-		line-height:0.625rem;
+		font-size:0.875rem;
+		line-height:0.875rem;
 		text-transform: uppercase;
 		font-weight: 600;
 	}
 footer p{
 		color:#383832;
-		font-size:0.625rem;
-		line-height:0.625rem;		
+		font-size:0.875rem;
+		line-height:0.875rem;		
 	}
 footer label{
-		font-size:0.625rem;
-		line-height:0.625rem;
+		font-size:0.875rem;
+		line-height:0.875rem;
 	}
 footer .footer-widget{
 		margin:0;
 		margin-top:30px;
 	}
-footer .social-widget{
-		text-align: left;
-	}	
+
 footer .social-widget ul.social-icons li a i{
     font-size:1em;
    	 width: 20px;
