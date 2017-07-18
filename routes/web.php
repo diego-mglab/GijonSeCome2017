@@ -16,7 +16,7 @@
 
 //Rutas para web
 
-Route::get('/', 'WebController@index')->name('index');
+Route::get('/', 'WebController@index')->name('home_web');
 
 
 //Rutas para gestor de contenido
