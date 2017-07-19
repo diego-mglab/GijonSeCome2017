@@ -34,22 +34,26 @@
                         </tr>
                         </thead>
                         <tbody>
-                            @foreach ($contents as $content)
-                                @if ($content->principal == 1)
-                                    <tr>
-                                        <td>{{$content->titulo}}</td>
-                                        <td>{{$content->subtitulo}}</td>
-                                        <td>{{$content->tipo_contenido}}</td>
-                                        <td>{{$content->visible==1?'Si':'No'}}</td>
-                                        <td>{{ link_to_route('contents.edit', 'Editar', $content->id, array('class' => 'btn btn btn-warning btn-xs')) }}
-                                            {{ Form::open(array('method'=> 'DELETE', 'route' => array('contents.destroy', $content->id),'style'=>'display:inline')) }}
-                                            {{ Form::submit('Eliminar', array('class' => 'btn btn btn-danger btn-xs')) }}
-                                            {{ Form::close() }}
+                        <?php
+                        $cont = 0;
+                        $tabla_abierta = false;
+                        ?>
+                        @foreach ($contents as $content)
+                            @if ($content->principal == 1)
+                                <tr>
+                                    <td>{{$content->titulo}}</td>
+                                    <td>{{$content->subtitulo}}</td>
+                                    <td>{{$content->tipo_contenido}}</td>
+                                    <td>{{$content->visible==1?'Si':'No'}}</td>
+                                    <td>{{ link_to_route('contents.edit', 'Editar', $content->id, array('class' => 'btn btn btn-warning btn-xs')) }}
+                                        {{ Form::open(array('method'=> 'DELETE', 'route' => array('contents.destroy', $content->id),'style'=>'display:inline')) }}
+                                        {{ Form::submit('Eliminar', array('class' => 'btn btn btn-danger btn-xs')) }}
+                                        {{ Form::close() }}
 
-                                        </td>
-                                    </tr>
-                                @endif
-                            @endforeach
+                                    </td>
+                                </tr>
+                            @endif
+                        @endforeach
 
                         </tbody>
 

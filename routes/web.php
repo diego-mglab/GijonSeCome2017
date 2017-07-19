@@ -27,10 +27,14 @@ Route::group(['prefix' => 'eunomia' , 'middleware' => 'auth' ], function () {
 
     Route::get('/', 'HomeController@index')->name('home');
 
+    Route::get('/home', 'HomeController@index')->name('home');
+
     Route::resource('/idiomas', 'IdiomaController');
 
     Route::resource('/usuarios', 'UserController');
 
     Route::resource('/contents', 'ContentController');
+
+    Route::resource('/zonas', 'ZonaController');
 
 });

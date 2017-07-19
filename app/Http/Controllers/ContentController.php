@@ -25,7 +25,8 @@ class ContentController extends Controller
             ->join('textos_idiomas','contents.id','=','textos_idiomas.contenido_id')
             ->join('idiomas','textos_idiomas.idioma_id','idiomas.id')
             ->select('contents.id','tipo_contenido','titulo','subtitulo','contenido','metadescripcion','metatitulo','visible','principal','idioma','idiomas.imagen')
-            ->orderBy('textos_idiomas.id','ASC')->orderBy('principal','DESC')->get();
+            ->where('principal','1')
+            ->orderBy('textos_idiomas.titulo','ASC')->get();
         return view('eunomia.contents.listado_contents', compact('contents_principal','contents'));
     }
 
@@ -94,25 +95,28 @@ class ContentController extends Controller
 
         if ($content->save()) {
             $lastId = $content->id;
-            $cont=0;
 
-            foreach($idiomas as $idioma) {
+            for($i=0;$i<count($request->idioma_id);$i++) {
 
-                if ($request->titulo[$cont] != '') {
+                if ($request->titulo[$i] != '') {
                     $textosIdioma = new TextosIdioma();
-                    $textosIdioma->idioma_id = $idioma->id;
+                    $textosIdioma->idioma_id = $request->idioma_id[$i];
                     $textosIdioma->contenido_id = $lastId;
                     $textosIdioma->tipo_contenido_id = 1; // 1 - Contenido, 2 - Agenda, 3 - Ponente, 4 - Portada
-                    $textosIdioma->titulo = $request->titulo[$cont];
-                    $textosIdioma->subtitulo = $request->subtitulo[$cont];
-                    $textosIdioma->contenido = $request->contenido[$cont];
-                    $textosIdioma->metadescripcion = $request->metadescripcion[$cont];
-                    $textosIdioma->metatitulo = $request->metatitulo[$cont];
-                    $textosIdioma->slug = Str::Slug($request->titulo);
+                    $textosIdioma->titulo = $request->titulo[$i];
+                    $textosIdioma->subtitulo = $request->subtitulo[$i];
+                    $textosIdioma->contenido = $request->contenido[$i];
+                    $textosIdioma->metadescripcion = $request->metadescripcion[$i];
+                    $textosIdioma->metatitulo = $request->metatitulo[$i];
+                    $textosIdioma->slug = Str::Slug($request->titulo[$i]);
+                    $textosIdioma->visible = 0;
+                    foreach($request->visible as $visible) {
+                        if ($visible == $request->idioma_id[$i])
+                            $textosIdioma->visible = 1;
+                    }
 
                     $textosIdioma->save();
                 }
-                $cont++;
             }
 
         }
@@ -144,7 +148,7 @@ class ContentController extends Controller
         $textos = DB::table('contents')
             ->join('textos_idiomas','contents.id','=','textos_idiomas.contenido_id')
             ->join('idiomas','textos_idiomas.idioma_id','idiomas.id')
-            ->select('contents.id as content_id','tipo_contenido','titulo','subtitulo','contenido','metadescripcion','metatitulo','visible','principal','idioma','idiomas.imagen','codigo')
+            ->select('contents.id as content_id','tipo_contenido','titulo','subtitulo','contenido','metadescripcion','metatitulo','visible','principal','idioma','idiomas.imagen','codigo','textos_idiomas.idioma_id')
             ->where('contents.id',$id)
             ->orderBy('principal','DESC')->get();
         $content = Content::findOrFail($id);
@@ -209,28 +213,32 @@ class ContentController extends Controller
         $content->fecha = $date;
 
         if ($content->save()) {
-            $cont=count($idiomas) - 1;
 
-            foreach($idiomas as $idioma) {
+            //dd($request->visible);
+            for($i=0;$i<count($request->idioma_id);$i++) {
                 $textosIdioma = TextosIdioma::where('contenido_id',$id)
-                    ->where('idioma_id',$idioma->id)->first();
+                    ->where('idioma_id',$request->idioma_id[$i])->first();
                 if (count($textosIdioma) == 0) {
                     $textosIdioma = new TextosIdioma();
                 }
-                if ($request->titulo[$cont] != '') {
-                    $textosIdioma->idioma_id = $idioma->id;
+                if ($request->titulo[$i] != '') {
+                    $textosIdioma->idioma_id = $request->idioma_id[$i];
                     $textosIdioma->contenido_id = $id;
                     $textosIdioma->tipo_contenido_id = 1; // 1 - Contenido, 2 - Agenda, 3 - Ponente, 4 - Portada
-                    $textosIdioma->titulo = $request->titulo[$cont];
-                    $textosIdioma->subtitulo = $request->subtitulo[$cont];
-                    $textosIdioma->contenido = $request->contenido[$cont];
-                    $textosIdioma->metadescripcion = $request->metadescripcion[$cont];
-                    $textosIdioma->metatitulo = $request->metatitulo[$cont];
-                    $textosIdioma->slug = Str::Slug($request->titulo[$cont]);
+                    $textosIdioma->titulo = $request->titulo[$i];
+                    $textosIdioma->subtitulo = $request->subtitulo[$i];
+                    $textosIdioma->contenido = $request->contenido[$i];
+                    $textosIdioma->metadescripcion = $request->metadescripcion[$i];
+                    $textosIdioma->metatitulo = $request->metatitulo[$i];
+                    $textosIdioma->slug = Str::Slug($request->titulo[$i]);
+                    $textosIdioma->visible = 0;
+                    foreach($request->visible as $visible) {
+                        if ($visible == $request->idioma_id[$i])
+                            $textosIdioma->visible = 1;
+                    }
 
                     $textosIdioma->save();
                 }
-                $cont--;
             }
 
         }

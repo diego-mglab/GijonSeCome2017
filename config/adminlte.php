@@ -124,7 +124,7 @@ return [
         [
             'text'        => 'Idiomas',
             'url'         => '/eunomia/idiomas',
-            'icon'        => 'user',
+            'icon'        => 'language',
         ],
         [
             'text'        => 'Usuarios',
@@ -134,7 +134,12 @@ return [
         [
             'text'        => 'Contenidos',
             'url'         => '/eunomia/contents',
-            'icon'        => 'user',
+            'icon'        => 'newspaper-o',
+        ],
+        [
+            'text'        => 'Zonas',
+            'url'         => '/eunomia/zonas',
+            'icon'        => 'map-o',
         ],
         'ACCOUNT SETTINGS',
         [

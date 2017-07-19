@@ -3,13 +3,13 @@
 @section('content_header')
     <h1>
         Listado
-        <small>Contenido</small>
+        <small>Zonas</small>
     </h1>
-    <h2>{{ link_to_route('contents.create', 'Nuevo', null, array('class' => 'btn btn-block btn-success btn-xs')) }}</h2>
+    <h2>{{ link_to_route('zonas.create', 'Nuevo', null, array('class' => 'btn btn-block btn-success btn-xs')) }}</h2>
 
     <ol class="breadcrumb">
         <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Contenidos</li>
+        <li class="active">Zonas</li>
     </ol>
 @stop
 
@@ -26,30 +26,24 @@
 
                         <thead>
                         <tr>
-                            <th>Título</th>
-                            <th>Subtítulo</th>
-                            <th>Tipo</th>
-                            <th>Visible</th>
+                            <th>Nombre</th>
+                            <th>Color</th>
                             <th>Acciones</th>
                         </tr>
                         </thead>
                         <tbody>
-                            @foreach ($contents as $content)
-                                @if ($content->principal == 1)
-                                    <tr>
-                                        <td>{{$content->titulo}}</td>
-                                        <td>{{$content->subtitulo}}</td>
-                                        <td>{{$content->tipo_contenido}}</td>
-                                        <td>{{$content->visible==1?'Si':'No'}}</td>
-                                        <td>{{ link_to_route('contents.edit', 'Editar', $content->id, array('class' => 'btn btn btn-warning btn-xs')) }}
-                                            {{ Form::open(array('method'=> 'DELETE', 'route' => array('contents.destroy', $content->id),'style'=>'display:inline')) }}
-                                            {{ Form::submit('Eliminar', array('class' => 'btn btn btn-danger btn-xs')) }}
-                                            {{ Form::close() }}
+                        @foreach ($zonas as $zona)
+                            <tr>
+                                <td>{{$zona->nombre}}</td>
+                                <td>{{$zona->color}}</td>
+                                <td>{{ link_to_route('zonas.edit', 'Editar', $content->id, array('class' => 'btn btn btn-warning btn-xs')) }}
+                                    {{ Form::open(array('method'=> 'DELETE', 'route' => array('zonas.destroy', $content->id),'style'=>'display:inline')) }}
+                                    {{ Form::submit('Eliminar', array('class' => 'btn btn btn-danger btn-xs')) }}
+                                    {{ Form::close() }}
 
-                                        </td>
-                                    </tr>
-                                @endif
-                            @endforeach
+                                </td>
+                            </tr>
+                        @endforeach
 
                         </tbody>
 

@@ -90,6 +90,7 @@
                         <div class="tab-content no-padding">
 
                             @foreach($idiomas as $idioma)
+                                {{Form::hidden('idioma_id[]',$idioma->id,['id' => 'idioma_id'])}}
                                 <div class="chart tab-pane
                                         @if($idioma->principal == 1)
                                             active
@@ -137,7 +138,7 @@
                                     <div class="form-group">
 
                                         {{Form::label('visible', 'Visible/Oculto')}}
-                                        {{Form::checkbox('visible[]', '1', true,['class' => 'flat-green'])}}
+                                        {{Form::checkbox('visible[]', $idioma->id, true,['class' => 'flat-green'])}}
 
                                     </div>
                                 </div>

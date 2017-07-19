@@ -85,18 +85,30 @@
                         <div class="tab-content no-padding">
 
                             <?php
-                                $nregs=count($textos);
                                 $contador = $nidiomas-1;
                             ?>
                             @foreach($idiomas as $idioma)
                                 <?php
-                                    $titulo = $contador<$nregs?$textos[$contador]->titulo:null;
-                                    $subtitulo = $contador<$nregs?$textos[$contador]->subtitulo:null;
-                                    $contenido = $contador<$nregs?$textos[$contador]->contenido:null;
-                                    $metatitulo = $contador<$nregs?$textos[$contador]->metatitulo:null;
-                                    $metadescripcion = $contador<$nregs?$textos[$contador]->metadescripcion:null;
-                                    $visible = $contador<$nregs?$textos[$contador]->visible:null;
+                                    $titulo = null;
+                                    $subtitulo = null;
+                                    $contenido = null;
+                                    $metatitulo = null;
+                                    $metadescripcion = null;
+                                    $visible = false;
                                 ?>
+                                @foreach($textos as $texto)
+                                    <?php
+                                        if ($texto->idioma_id == $idioma->id) {
+                                            $titulo = $texto->titulo;
+                                            $subtitulo = $texto->subtitulo;
+                                            $contenido = $texto->contenido;
+                                            $metatitulo = $texto->metatitulo;
+                                            $metadescripcion = $texto->metadescripcion;
+                                            $visible = $texto->visible;
+                                        }
+                                    ?>
+                                @endforeach
+                                {{Form::hidden('idioma_id[]',$idioma->id)}}
                                 <div class="chart tab-pane
                                         @if($idioma->principal == 1)
                                             active
@@ -146,7 +158,7 @@
                                     <div class="form-group">
 
                                         {{Form::label('visible', 'Visible/Oculto')}}
-                                        {{Form::checkbox('visible[]', '1', $visible,['class' => 'flat-green'])}}
+                                        {{Form::checkbox('visible[]', $idioma->id, $visible,['class' => 'flat-green'])}}
 
                                     </div>
                                     @if (!$idioma->principal)
@@ -168,8 +180,10 @@
 
                         {{Form::label('imagen', 'Imagen')}}
                         {{Form::file('imagen', null, ['class' => 'form-control'])}}
-                        <div class="label_imagen_editar"><strong>Imagen actual:</strong></div>
-                        <div class="contenedor_imagen_editar"><img src="/images/contenido/s/{{$content->imagen or 'sinimagen.png'}}" alt="" class="img-responsive" ></div>
+                        @if ($content->imagen != '')
+                            <div class="label_imagen_editar"><strong>Imagen actual:</strong></div>
+                            <div class="contenedor_imagen_editar"><img src="/images/contenido/s/{{$content->imagen or 'sinimagen.png'}}" alt="" class="img-responsive" ></div>
+                        @endif
                     </div>
 
 
