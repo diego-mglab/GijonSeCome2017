@@ -29,7 +29,7 @@
 
             <!-- /.box-header -->
                 <!-- form start -->
-                {!! Form::open(['route' => 'zonas.store','files' => true]) !!}
+                    {{ Form::model($zona, ['route' => ['zonas.update', $zona],'method' => 'PATCH','files' => true ])}}
 
 
 
@@ -46,7 +46,7 @@
 
                     <div class="form-group">
 
-                        {{Form::label('color', 'Color')}}
+                        {{Form::label('color', 'Color')}}<span style="background:{{$zona->color}}; width:50px;height: 20px;float: right;"></span>
                         {{Form::text('color', null, ['class' => 'form-control colorpicker' ,'placeholder' => 'Color'])}}
 
                     </div>

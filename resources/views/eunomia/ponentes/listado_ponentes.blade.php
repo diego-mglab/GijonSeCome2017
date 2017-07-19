@@ -3,13 +3,13 @@
 @section('content_header')
     <h1>
         Listado
-        <small>Zonas</small>
+        <small>Ponentes</small>
     </h1>
-    <h2>{{ link_to_route('zonas.create', 'Nuevo', null, array('class' => 'btn btn-block btn-success btn-xs')) }}</h2>
+    <h2>{{ link_to_route('ponentes.create', 'Nuevo', null, array('class' => 'btn btn-block btn-success btn-xs')) }}</h2>
 
     <ol class="breadcrumb">
         <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Zonas</li>
+        <li class="active">Ponentes</li>
     </ol>
 @stop
 
@@ -26,23 +26,29 @@
 
                         <thead>
                         <tr>
+                            <th>Orden</th>
                             <th>Nombre</th>
-                            <th>Color</th>
+                            <th>Restaurante</th>
+                            <th>Visible</th>
                             <th>Acciones</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach ($zonas as $zona)
-                            <tr>
-                                <td>{{$zona->nombre}}</td>
-                                <td><span style="background:{{$zona->color}}; width:50px;height: 20px;float: left;"></span></td>
-                                <td>{{ link_to_route('zonas.edit', 'Editar', $zona->id, array('class' => 'btn btn btn-warning btn-xs')) }}
-                                    {{ Form::open(array('method'=> 'DELETE', 'route' => array('zonas.destroy', $zona->id),'style'=>'display:inline')) }}
-                                    {{ Form::submit('Eliminar', array('class' => 'btn btn btn-danger btn-xs')) }}
-                                    {{ Form::close() }}
+                        @foreach ($ponentes as $ponente)
+                            @if ($ponente->principal == 1)
+                                <tr>
+                                    <td>{{$ponente->orden}}</td>
+                                    <td>{{$ponente->titulo}}{{--Nombre del ponente --}}</td>
+                                    <td>{{$ponente->subtitulo}}{{--Restaurante del ponente --}}</td>
+                                    <td>{{$ponente->visible==1?'Si':'No'}}</td>
+                                    <td>{{ link_to_route('ponentes.edit', 'Editar', $ponente->id, array('class' => 'btn btn btn-warning btn-xs')) }}
+                                        {{ Form::open(array('method'=> 'DELETE', 'route' => array('ponentes.destroy', $ponente->id),'style'=>'display:inline')) }}
+                                        {{ Form::submit('Eliminar', array('class' => 'btn btn btn-danger btn-xs')) }}
+                                        {{ Form::close() }}
 
-                                </td>
-                            </tr>
+                                    </td>
+                                </tr>
+                            @endif
                         @endforeach
 
                         </tbody>

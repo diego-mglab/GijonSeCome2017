@@ -141,6 +141,11 @@ return [
             'url'         => '/eunomia/zonas',
             'icon'        => 'map-o',
         ],
+        [
+            'text'        => 'Ponentes',
+            'url'         => '/eunomia/ponentes',
+            'icon'        => 'users',
+        ],
         'ACCOUNT SETTINGS',
         [
             'text' => 'Profile',

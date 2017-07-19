@@ -27,7 +27,7 @@ class ContentController extends Controller
             ->select('contents.id','tipo_contenido','titulo','subtitulo','contenido','metadescripcion','metatitulo','visible','principal','idioma','idiomas.imagen')
             ->where('principal','1')
             ->orderBy('textos_idiomas.titulo','ASC')->get();
-        return view('eunomia.contents.listado_contents', compact('contents_principal','contents'));
+        return view('eunomia.contents.listado_contents', compact('contents'));
     }
 
     /**
@@ -68,13 +68,13 @@ class ContentController extends Controller
             $filename = time() . '.' . $imagen->getClientOriginalExtension();
 
 
-            Image::make($imagen)->fit(970, null, function ($constraint) {
-                $constraint->upsize();
-            })->save('images/contenido/l/'.$filename );
+            Image::make($imagen)->resize(970, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save('images/contenido/l/'.$filename, 95 );
 
-            Image::make($imagen)->fit(768, null, function ($constraint) {
-                $constraint->upsize();
-            })->save('images/contenido/m/'.$filename );
+            Image::make($imagen)->resize(768, null, function ($constraint) {
+                $constraint->aspectRadio();
+            })->save('images/contenido/m/'.$filename, 95 );
 
             Image::make($imagen)->fit(300, 300, function ($constraint) {
                 $constraint->upsize();
@@ -89,8 +89,10 @@ class ContentController extends Controller
         }
 
         $content->lugar = $request->lugar;
-        $date = Carbon::createFromFormat('d/m/Y',$request->fecha);
-        $content->fecha = $date;
+        $fecha_noticia = Carbon::createFromFormat('d/m/Y',$request->fecha);
+        $content->fecha = $fecha_noticia;
+        $fecha_publicacion = Carbon::createFromFormat('d/m/Y',$request->fecha_publicacion);
+        $content->fecha_publicacion = $fecha_publicacion;
         $content->tipo_contenido = $request->tipo_contenido;
 
         if ($content->save()) {
@@ -188,13 +190,13 @@ class ContentController extends Controller
             $filename = time() . '.' . $imagen->getClientOriginalExtension();
 
 
-            Image::make($imagen)->fit(970, null, function ($constraint) {
-                $constraint->upsize();
-            })->save('images/contenido/l/'.$filename );
+            Image::make($imagen)->resize(970, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save('images/contenido/l/'.$filename, 95 );
 
-            Image::make($imagen)->fit(768, null, function ($constraint) {
-                $constraint->upsize();
-            })->save('images/contenido/m/'.$filename );
+            Image::make($imagen)->resize(768, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save('images/contenido/m/'.$filename, 95 );
 
             Image::make($imagen)->fit(300, 300, function ($constraint) {
                 $constraint->upsize();
@@ -209,8 +211,10 @@ class ContentController extends Controller
         }
 
         $content->lugar = $request->lugar;
-        $date = Carbon::createFromFormat('d/m/Y',$request->fecha);
-        $content->fecha = $date;
+        $fecha_noticia = Carbon::createFromFormat('d/m/Y',$request->fecha);
+        $content->fecha = $fecha_noticia;
+        $fecha_publicacion = Carbon::createFromFormat('d/m/Y',$request->fecha_publicacion);
+        $content->fecha_publicacion = $fecha_publicacion;
 
         if ($content->save()) {
 

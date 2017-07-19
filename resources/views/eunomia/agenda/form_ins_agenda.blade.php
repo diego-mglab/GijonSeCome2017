@@ -2,12 +2,12 @@
 
 @section('content_header')
     <h1>
-        Editar
-        <small>Contenido</small>
+        Insertar
+        <small>Evento</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Contenidos</li>
+        <li class="active">Agenda</li>
     </ol>
 @stop
 
@@ -29,73 +29,38 @@
 
             <!-- /.box-header -->
                 <!-- form start -->
-                    {{ Form::model($content, ['route' => ['contents.update', $content],'method' => 'PATCH','files' => true ])}}
+                {!! Form::open(['route' => 'agenda.store','files' => true, 'name' => 'form_agenda']) !!}
 
 
 
                 <div class="box-body">
 
-                    <div class="contenedor_iconos_menu_formulario">
-                        <h2 id="titulo_tipo_contenido" class="icono_menu_formulario titulo_tipo_contenido">
-                            {{ucwords($content->tipo_contenido)}}
-                        </h2>
+                    <div class="form-group" id="contenedor_fecha">
+                        {{Form::label('fecha', 'Fecha Noticia')}}
+
+                        <div class="input-group date">
+
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+
+                            {{Form::text('fecha', null, ['class' => 'form-control pull-right datepicker' , 'id' => 'fecha',])}}
+
+                        </div>
+
                     </div>
 
-                    @if ($content->tipo_contenido == 'noticia')
-                        <?php
-                            //Convertimos las fechas que nos llegan en formato dd/mm/yyyy
-                            $fecha = $fecha_publicacion = '';
-                            if ($content->fecha != '') {
-                                $time= strtotime($content->fecha);
-                                $fecha = date('d/m/Y',$time);
-                            }
-                            if ($content->fecha_publicacion != '') {
-                                $time= strtotime($content->fecha_publicacion);
-                                $fecha_publicacion = date('d/m/Y',$time);
-                            }
-                        ?>
-                        <div class="form-group" id="contenedor_lugar">
+                    <div class="form-group" id="contenedor_lugar">
 
-                            {{Form::label('lugar', 'Lugar')}}
-                            {{Form::text('lugar', null, ['class' => 'form-control' ,'placeholder' => 'Lugar'])}}
+                        {{Form::label('hora', 'Hora')}}
+                        {{Form::text('hora', null, ['class' => 'form-control' ,'placeholder' => 'Hora'])}}
 
-                        </div>
-
-                        <div class="form-group" id="contenedor_fecha">
-                            {{Form::label('fecha', 'Fecha')}}
-
-                            <div class="input-group date">
-
-                                <div class="input-group-addon">
-                                    <i class="fa fa-calendar"></i>
-                                </div>
-
-                                {{Form::text('fecha', $fecha, ['class' => 'form-control pull-right datepicker' , 'id' => 'fecha',])}}
-
-                            </div>
-                        </div>
-
-                        <div class="form-group" id="contenedor_fecha">
-                            {{Form::label('fecha_publicacion', 'Fecha Publicación')}}
-
-                            <div class="input-group date">
-
-                                <div class="input-group-addon">
-                                    <i class="fa fa-calendar"></i>
-                                </div>
-
-                                {{Form::text('fecha_publicacion', $fecha_publicacion, ['class' => 'form-control pull-right datepicker' , 'id' => 'fecha_publicacion',])}}
-
-                            </div>
-
-                        </div>
-                    @endif
+                    </div>
 
                     <!-- Custom tabs (Charts with tabs)-->
                     <div class="nav-tabs-custom">
                         <!-- Tabs within a box -->
                         <ul class="nav nav-tabs pull-right">
-                            <?php $nidiomas = count($idiomas); ?>
                             @foreach($idiomas as $idioma)
                                 <li
                                         @if($idioma->principal==1)
@@ -106,34 +71,11 @@
                         </ul>
                         <div class="tab-content no-padding">
 
-                            <?php
-                                $contador = $nidiomas-1;
-                            ?>
                             @foreach($idiomas as $idioma)
-                                <?php
-                                    $titulo = null;
-                                    $subtitulo = null;
-                                    $contenido = null;
-                                    $metatitulo = null;
-                                    $metadescripcion = null;
-                                    $visible = false;
-                                ?>
-                                @foreach($textos as $texto)
-                                    <?php
-                                        if ($texto->idioma_id == $idioma->id) {
-                                            $titulo = $texto->titulo;
-                                            $subtitulo = $texto->subtitulo;
-                                            $contenido = $texto->contenido;
-                                            $metatitulo = $texto->metatitulo;
-                                            $metadescripcion = $texto->metadescripcion;
-                                            $visible = $texto->visible;
-                                        }
-                                    ?>
-                                @endforeach
-                                {{Form::hidden('idioma_id[]',$idioma->id)}}
+                                {{Form::hidden('idioma_id[]',$idioma->id,['id' => 'idioma_id'])}}
                                 <div class="chart tab-pane
                                         @if($idioma->principal == 1)
-                                            active
+                                        active
                                         @endif
                                         " id="{{$idioma->codigo}}" style="position: relative;">
 
@@ -142,57 +84,46 @@
                                     <div class="form-group">
 
                                         {{Form::label('titulo', 'Título')}}
-                                        {{Form::text('titulo[]', $titulo, ['class' => 'form-control' ,'placeholder' => 'Título'])}}
+                                        {{Form::text('titulo[]', null, ['class' => 'form-control' ,'placeholder' => 'Título'])}}
 
                                     </div>
 
 
-                                    @if ($content->tipo_contenido == 'noticia')
-                                        <div class="form-group" id="contenedor_subtitulo">
+                                    <div class="form-group" id="contenedor_subtitulo_{{$idioma->codigo}}">
 
-                                            {{Form::label('subtitulo', 'Subtítulo')}}
-                                            {{Form::text('subtitulo[]', $subtitulo, ['class' => 'form-control' ,'placeholder' => 'Subtítulo'])}}
+                                        {{Form::label('subtitulo', 'Subtítulo')}}
+                                        {{Form::text('subtitulo[]', null, ['class' => 'form-control' ,'placeholder' => 'Subtítulo'])}}
 
-                                        </div>
-                                    @endif
+                                    </div>
 
                                     <div class="form-group">
 
                                         {{Form::label('contenido', 'Contenido')}}
-                                        {{Form::textarea('contenido[]', $contenido, ['class' => 'form-control'])}}
+                                        {{Form::textarea('contenido[]', null, ['class' => 'form-control'])}}
 
                                     </div>
 
                                     <div class="form-group">
 
                                         {{Form::label('metatitulo', 'Meta título')}}
-                                        {{Form::text('metatitulo[]', $metatitulo, ['class' => 'form-control' ,'placeholder' => 'Meta título'])}}
+                                        {{Form::text('metatitulo[]', null, ['class' => 'form-control' ,'placeholder' => 'Meta título'])}}
 
                                     </div>
 
                                     <div class="form-group">
 
                                         {{Form::label('metadescripcion', 'Meta descripción')}}
-                                        {{Form::text('metadescripcion[]', $metadescripcion, ['class' => 'form-control' ,'placeholder' => 'Meta descripción'])}}
+                                        {{Form::text('metadescripcion[]', null, ['class' => 'form-control' ,'placeholder' => 'Meta descripción'])}}
 
                                     </div>
 
                                     <div class="form-group">
 
                                         {{Form::label('visible', 'Visible/Oculto')}}
-                                        {{Form::checkbox('visible[]', $idioma->id, $visible,['class' => 'flat-green'])}}
+                                        {{Form::checkbox('visible[]', $idioma->id, true,['class' => 'flat-green'])}}
 
                                     </div>
-                                    @if (!$idioma->principal)
-                                        <div class="form-group">
-
-                                            {{Form::label('elimina_texto_idioma', 'Eliminar idioma')}}
-                                            {{Form::checkbox('elimina_texto_idioma[]', '1', false,['class' => 'flat-green'])}}
-
-                                        </div>
-                                    @endif
                                 </div>
-                                <?php $contador-- ?>
                             @endforeach
 
                         </div>
@@ -202,10 +133,6 @@
 
                         {{Form::label('imagen', 'Imagen')}}
                         {{Form::file('imagen', null, ['class' => 'form-control'])}}
-                        @if ($content->imagen != '')
-                            <div class="label_imagen_editar"><strong>Imagen actual:</strong></div>
-                            <div class="contenedor_imagen_editar"><img src="/images/contenido/s/{{$content->imagen or 'sinimagen.png'}}" alt="" class="img-responsive" ></div>
-                        @endif
                     </div>
 
 
@@ -213,7 +140,7 @@
                 <!-- /.box-body -->
 
                 <div class="box-footer">
-                    <button type="submit" class="btn btn-default">Editar</button>
+                    <button type="submit" class="btn btn-default">Insertar</button>
                 </div>
 
                 {!! Form::close() !!}

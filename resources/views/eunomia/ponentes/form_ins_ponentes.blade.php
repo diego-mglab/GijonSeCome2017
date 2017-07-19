@@ -3,11 +3,11 @@
 @section('content_header')
     <h1>
         Insertar
-        <small>Contenido</small>
+        <small>Ponente</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Contenidos</li>
+        <li class="active">Ponentes</li>
     </ol>
 @stop
 
@@ -29,66 +29,11 @@
 
             <!-- /.box-header -->
                 <!-- form start -->
-                {!! Form::open(['route' => 'contents.store','files' => true, 'name' => 'form_contents']) !!}
+                {!! Form::open(['route' => 'ponentes.store','files' => true, 'name' => 'form_ponentes']) !!}
 
 
 
                 <div class="box-body">
-
-                    <div class="contenedor_iconos_menu_formulario">
-                        <div class="icono_menu_formulario">
-                            <a onclick="muestraOcultaCampos('pagina');" title="Página"><i class="fa fa-file-text fa-5x" aria-hidden="true"></i></a>
-                        </div>
-                        <div class="icono_menu_formulario">
-                            <a onclick="muestraOcultaCampos('noticia');" title="Noticia"><i class="fa fa-newspaper-o fa-5x" aria-hidden="true"></i></a>
-                        </div>
-                        <h2 id="titulo_tipo_contenido" class="icono_menu_formulario titulo_tipo_contenido">
-                            Noticia
-                        </h2>
-                    </div>
-
-                    <div class="form-group">
-
-                        {{Form::hidden('tipo_contenido','noticia',['id' => 'tipo_contenido'])}}
-
-                    </div>
-
-                    <div class="form-group" id="contenedor_lugar">
-
-                        {{Form::label('lugar', 'Lugar')}}
-                        {{Form::text('lugar', null, ['class' => 'form-control' ,'placeholder' => 'Lugar'])}}
-
-                    </div>
-
-                    <div class="form-group" id="contenedor_fecha">
-                        {{Form::label('fecha', 'Fecha Noticia')}}
-
-                        <div class="input-group date">
-
-                            <div class="input-group-addon">
-                                <i class="fa fa-calendar"></i>
-                            </div>
-
-                            {{Form::text('fecha', null, ['class' => 'form-control pull-right datepicker' , 'id' => 'fecha',])}}
-
-                        </div>
-
-                    </div>
-
-                    <div class="form-group" id="contenedor_fecha">
-                        {{Form::label('fecha_publicacion', 'Fecha Publicación')}}
-
-                        <div class="input-group date">
-
-                            <div class="input-group-addon">
-                                <i class="fa fa-calendar"></i>
-                            </div>
-
-                            {{Form::text('fecha_publicacion', null, ['class' => 'form-control pull-right datepicker' , 'id' => 'fecha_publicacion',])}}
-
-                        </div>
-
-                    </div>
 
                     <!-- Custom tabs (Charts with tabs)-->
                     <div class="nav-tabs-custom">
@@ -97,7 +42,7 @@
                             @foreach($idiomas as $idioma)
                                 <li
                                         @if($idioma->principal==1)
-                                            class="active"
+                                        class="active"
                                         @endif
                                 ><a href="#{{$idioma->codigo}}" data-toggle="tab">{{$idioma->idioma}}</a></li>
                             @endforeach
@@ -108,30 +53,30 @@
                                 {{Form::hidden('idioma_id[]',$idioma->id,['id' => 'idioma_id'])}}
                                 <div class="chart tab-pane
                                         @if($idioma->principal == 1)
-                                            active
-                                        @endif
+                                        active
+@endif
                                         " id="{{$idioma->codigo}}" style="position: relative;">
 
                                     <!-- /.nav-tabs-custom -->
 
                                     <div class="form-group">
 
-                                        {{Form::label('titulo', 'Título')}}
-                                        {{Form::text('titulo[]', null, ['class' => 'form-control' ,'placeholder' => 'Título'])}}
+                                        {{Form::label('titulo', 'Nombre')}}
+                                        {{Form::text('titulo[]', null, ['class' => 'form-control' ,'placeholder' => 'Nombre'])}}
 
                                     </div>
 
 
                                     <div class="form-group" id="contenedor_subtitulo_{{$idioma->codigo}}">
 
-                                        {{Form::label('subtitulo', 'Subtítulo')}}
-                                        {{Form::text('subtitulo[]', null, ['class' => 'form-control' ,'placeholder' => 'Subtítulo'])}}
+                                        {{Form::label('subtitulo', 'Restaurante')}}
+                                        {{Form::text('subtitulo[]', null, ['class' => 'form-control' ,'placeholder' => 'Restaurante'])}}
 
                                     </div>
 
                                     <div class="form-group">
 
-                                        {{Form::label('contenido', 'Contenido')}}
+                                        {{Form::label('contenido', 'Ficha')}}
                                         {{Form::textarea('contenido[]', null, ['class' => 'form-control'])}}
 
                                     </div>
@@ -168,6 +113,12 @@
                         {{Form::file('imagen', null, ['class' => 'form-control'])}}
                     </div>
 
+                    <div class="form-group" id="contenedor_imagenslide">
+
+                        {{Form::label('imagenslide', 'Imagen para slide')}}
+                        {{Form::file('imagenslide', null, ['class' => 'form-control'])}}
+                    </div>
+
 
                 </div>
                 <!-- /.box-body -->
@@ -193,10 +144,6 @@
 
     <!-- iCheck -->
     <link rel="stylesheet" href="{{asset('vendor/adminlte/plugins/iCheck/flat/green.css')}}">
-
-    <!-- Bootstrap Datepicker Sandbox -->
-    <link rel="stylesheet" href="{{asset('datePicker/css/bootstrap-datepicker3.css')}}">
-    <link rel="stylesheet" href="{{asset('datePicker/css/bootstrap-datepicker.standalone.css')}}">
 
 @stop
 
@@ -249,43 +196,4 @@
             checkboxClass: 'icheckbox_flat-green'
         });
     </script>
-
-    <!-- Bootstrap Datepicker Sandbox -->
-    <script src="{{asset('datePicker/js/bootstrap-datepicker.js')}}"></script>
-    <!-- Languaje -->
-    <script src="{{asset('datePicker/locales/bootstrap-datepicker.es.min.js')}}"></script>
-    <script language="JavaScript">
-        $('.datepicker').datepicker({
-            format: "dd/mm/yyyy",
-            language: "es",
-            autoclose: true
-        });
-    </script>
-
-    <!-- Tipo Contenido -->
-    <script language="JavaScript">
-        function muestraOcultaCampos(tipo_contenido){
-            switch (tipo_contenido){
-                case 'pagina':
-                    $('#contenedor_lugar').hide();
-                    $('#contenedor_fecha').hide();
-                    @foreach($idiomas as $idioma)
-                            $('#contenedor_subtitulo_{{$idioma->codigo}}').hide();
-                    @endforeach
-                    titulo = "Página";
-                    break;
-                case 'noticia':
-                    $('#contenedor_lugar').show();
-                    $('#contenedor_fecha').show();
-                    @foreach($idiomas as $idioma)
-                            $('#contenedor_subtitulo_{{$idioma->codigo}}').show();
-                    @endforeach
-                    titulo = "Noticia";
-                    break;
-            }
-            $('#tipo_contenido').val(tipo_contenido);
-            $('#titulo_tipo_contenido').html(titulo);
-        }
-    </script>
-
 @stop

@@ -43,4 +43,6 @@ Route::group(['prefix' => 'eunomia' , 'middleware' => 'auth' ], function () {
 
     Route::resource('/zonas', 'ZonaController');
 
+    Route::resource('/ponentes', 'PonenteController');
+
 });

@@ -14,7 +14,14 @@ class AgendaController extends Controller
      */
     public function index()
     {
-        //
+        $eventos = DB::table('agenda')
+            ->join('textos_idiomas','agenda.id','=','textos_idiomas.contenido_id')
+            ->join('idiomas','textos_idiomas.idioma_id','idiomas.id')
+            ->join('zonas','agenda.zona_id','zonas.id')
+            ->select('contents.id','tipo_contenido','titulo','subtitulo','contenido','metadescripcion','metatitulo','visible','principal','idioma','idiomas.imagen','zonas.nombre')
+            ->where('principal','1')
+            ->orderBy('textos_idiomas.titulo','ASC')->get();
+        return view('eunomia.agenda.listado_agenda', compact('eventos'));
     }
 
     /**

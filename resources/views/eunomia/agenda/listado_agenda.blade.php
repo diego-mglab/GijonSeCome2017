@@ -28,8 +28,8 @@
                         <tr>
                             <th>Título</th>
                             <th>Subtítulo</th>
-                            <th>Tipo</th>
-                            <th>Visible</th>
+                            <th>Fecha/Hora</th>
+                            <th>Zona</th>
                             <th>Acciones</th>
                         </tr>
                         </thead>

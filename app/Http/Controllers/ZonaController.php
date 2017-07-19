@@ -36,7 +36,20 @@ class ZonaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'nombre' => 'required',
+            'color' => 'required'
+        ]);
+
+        $zona = new Zona();
+
+        //Inserción de campos
+        $zona->nombre = $request->nombre;
+        $zona->color = $request->color;
+
+        $zona->save();
+
+        return redirect('eunomia/zonas');
     }
 
     /**
@@ -56,9 +69,10 @@ class ZonaController extends Controller
      * @param  \App\Zona  $zona
      * @return \Illuminate\Http\Response
      */
-    public function edit(Zona $zona)
+    public function edit($id)
     {
-        //
+        $zona = Zona::findOrFail($id);
+        return view('eunomia.zonas.form_edit_zonas',compact('zona'));
     }
 
     /**
@@ -68,9 +82,16 @@ class ZonaController extends Controller
      * @param  \App\Zona  $zona
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Zona $zona)
+    public function update(Request $request, $id)
     {
-        //
+        $zona = Zona::findOrFail($id);
+
+        $zona->nombre = $request->nombre;
+        $zona->color = $request->color;
+
+
+        $zona->save();
+        return redirect('eunomia/zonas');
     }
 
     /**
