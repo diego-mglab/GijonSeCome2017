@@ -946,9 +946,10 @@ header{
 	background-position: bottom right;
 	background-color: #BFE7E6;
 	background-repeat: no-repeat;
-	min-height: 220px;
+	min-height: 229px;
 
 }
+
 
 .varianteprimera .mordisquitos{
 		position: absolute;
@@ -1163,11 +1164,14 @@ footer .social-widget ul.social-icons li a i{
 /* LG segun bootstrap--- */
 @media only screen and (min-width : 1200px) {
 .varianteprimera{margin-top:12px}
+.varianteprimera h1{
+font-size:1.875rem;
+}
 .variantesegunda{margin-top:12px;}
 /* Desktops grandes ----------- */
 	h1{
-	font-size: 1.875rem;
-	line-height: 1.875rem;
+	font-size: 1.5rem;
+	line-height: 1.5rem;
 	}
 	h2{
 	font-size: 1rem;
@@ -1385,3 +1389,6 @@ iframe{
 margin-bottom: 50px;
 }
 form{ margin-right: 2rem;}
+#zonavariable{
+margin-top: 5px;
+}

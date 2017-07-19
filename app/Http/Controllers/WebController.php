@@ -12,4 +12,40 @@ class WebController extends Controller
         return view('web.home
         ');
     }
+
+    public function ponentes()
+    {
+        return view('web.ponentes
+        ');
+    }
+
+    public function agenda()
+    {
+        return view('web.agenda
+        ');
+    }
+
+    public function contacto()
+    {
+        return view('web.contacto
+        ');
+    }
+
+    public function noticias()
+    {
+        return view('web.noticias
+        ');
+    }
+
+    public function detallenoticias()
+    {
+        return view('web.detallenoticias
+        ');
+    }
+
+    public function detalleponentes()
+    {
+        return view('web.detalleponentes
+        ');
+    }
 }

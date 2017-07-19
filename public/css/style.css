@@ -620,12 +620,13 @@ ul.social-list li:last-child a i {
 .navbar-default .navbar-nav > li > a{
     font-size: 16px;
     padding: 31px 15px 31px 15px;
+	text-transform: uppercase;
 }
 
 }
 
 .navbar-default .navbar-nav > li > a.active, .navbar-default .navbar-nav > li:hover > a {
-	border-bottom: 2px solid;
+	border-bottom:none; /*coco*/
 }
 
 .navbar-default .navbar-nav > li > a i {
@@ -656,8 +657,8 @@ ul.social-list li:last-child a i {
 
 .navbar-default .navbar-nav .dropdown {
     position: absolute;
-    left: 0;
-    top: 100%;
+    left: 10%;
+    top: 70%;/*coco*/
     width: 180px;
 	background-color: #fff;
     visibility: hidden;
@@ -690,11 +691,11 @@ ul.social-list li:last-child a i {
 .dropdown li a, .sup-dropdown li a {
     display: block;
     color: #666;
-    font-size: 13px;
+    font-size: 16px;
     font-family: 'Source Sans Pro', sans-serif;
     padding: 11px 16px;
     text-decoration: none;
-    text-transform: capitalize;
+    text-transform: none;
     transition: padding 0.2s ease-in-out;
     -moz-transition: padding 0.2s ease-in-out;
     -webkit-transition: padding 0.2s ease-in-out;
