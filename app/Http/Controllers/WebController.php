@@ -37,9 +37,9 @@ class WebController extends Controller
         ');
     }
 
-    public function detallenoticias()
+    public function detalle()
     {
-        return view('web.detallenoticias
+        return view('web.detalle
         ');
     }
 

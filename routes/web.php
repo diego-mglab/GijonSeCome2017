@@ -21,7 +21,7 @@ Route::get('/ponentes', 'WebController@ponentes')->name('ponentes_web');
 Route::get('/agenda', 'WebController@agenda')->name('agenda_web');
 Route::get('/contacto', 'WebController@contacto')->name('contacto_web');
 Route::get('/noticias', 'WebController@noticias')->name('noticias_web');
-Route::get('/detallenoticias', 'WebController@detallenoticias')->name('detalle_noticias_web');
+Route::get('/detalle', 'WebController@detalle')->name('detalle_web');
 Route::get('/detalleponentes', 'WebController@detalleponentes')->name('detalle_ponentes_web');
 
 
