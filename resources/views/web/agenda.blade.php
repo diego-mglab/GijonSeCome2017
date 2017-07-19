@@ -3,8 +3,7 @@
 @section('contenido')
 
 
-@include('web.includes.ArticulosPortada')
-@include('web.includes.SlidePonentes')
+
 
 
 @endsection
