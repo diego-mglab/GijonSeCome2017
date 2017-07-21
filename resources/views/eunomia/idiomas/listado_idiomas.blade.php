@@ -49,7 +49,7 @@
                                 <td>{{$idioma->principal==1?'Si':'No'}}</td>
                                 <td>{{$idioma->activado==1?'Si':'No'}}</td>
                                 <td>{{ link_to_route('idiomas.edit', 'Editar', $idioma, array('class' => 'btn btn btn-warning btn-xs')) }}
-                                    {{ Form::open(array('method'=> 'DELETE', 'route' => array('idiomas.destroy', $idioma->id),'style'=>'display:inline')) }}
+                                    {{ Form::open(array('method'=> 'DELETE', 'route' => array('idiomas.destroy', $idioma->id),'style'=>'display:inline','class'=>'form_eliminar')) }}
                                     {{ Form::submit('Eliminar', array('class' => 'btn btn btn-danger btn-xs')) }}
                                     {{ Form::close() }}
 
@@ -76,6 +76,8 @@
     <!-- DataTables -->
     <link rel="stylesheet" href="{{asset("vendor/adminlte/plugins/datatables/dataTables.bootstrap.css")}}">
 
+    <!-- Bootstrap Dialog -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.9/css/bootstrap-dialog.min.css" rel="stylesheet" type="text/css" />
 @stop
 
 @section('js')
@@ -83,9 +85,28 @@
     <!-- page script -->
 
     <!-- DataTables -->
-
     <script src="{{asset("vendor/adminlte/plugins/datatables/jquery.dataTables.min.js")}}"> </script>
     <script src="{{asset("vendor/adminlte/plugins/datatables/dataTables.bootstrap.min.js")}}"> </script>
 
+    <!-- General -->
     <script src="{{asset("js/scripts.js")}}"></script>
+
+    <!-- Bootstrap Dialog -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.9/js/bootstrap-dialog.min.js"></script>
+
+    <script language="JavaScript">
+        $('.btn-danger').click(function(e){
+            e.preventDefault();
+            boton = this;
+
+            BootstrapDialog.confirm(
+                '¿Está seguro que desea eliminar el registro?', function(result) {
+
+                    if (result) {
+                        $(boton).parent().submit();
+                    }
+
+                });
+        });
+    </script>
 @stop

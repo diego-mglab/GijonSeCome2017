@@ -99,7 +99,7 @@
                                         @if($idioma->principal==1)
                                             class="active"
                                         @endif
-                                ><a href="#{{$idioma->codigo}}" data-toggle="tab">{{$idioma->idioma}}</a></li>
+                                ><a href="#{{$idioma->codigo}}" data-toggle="tab"><img src="/images/idiomas/{{$idioma->imagen}}" alt="{{$idioma->idioma}}">&nbsp;{{$idioma->idioma}}</a></li>
                             @endforeach
                         </ul>
                         <div class="tab-content no-padding">

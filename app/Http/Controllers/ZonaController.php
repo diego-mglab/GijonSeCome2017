@@ -100,8 +100,11 @@ class ZonaController extends Controller
      * @param  \App\Zona  $zona
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Zona $zona)
+    public function destroy($id)
     {
-        //
+        $zona = Zona::findOrFail($id);
+        $zona->delete();
+
+        return redirect('eunomia/zonas');
     }
 }

@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Str;
+use File;
+
 
 class ContentController extends Controller
 {
@@ -26,6 +28,7 @@ class ContentController extends Controller
             ->join('idiomas','textos_idiomas.idioma_id','idiomas.id')
             ->select('contents.id','tipo_contenido','titulo','subtitulo','contenido','metadescripcion','metatitulo','visible','principal','idioma','idiomas.imagen')
             ->where('principal','1')
+            ->where('tipo_contenido_id','1') // 1 - Contenido, 2 - Agenda, 3 - Ponente, 4 - Portada
             ->orderBy('textos_idiomas.titulo','ASC')->get();
         return view('eunomia.contents.listado_contents', compact('contents'));
     }
@@ -67,22 +70,31 @@ class ContentController extends Controller
 
             $filename = time() . '.' . $imagen->getClientOriginalExtension();
 
+            $dirl = 'images/contenido/l/';
+            if (!File::exists($dirl)){
+                File::makeDirectory($dirl);
+            }
+
+            $dirm = 'images/contenido/m/';
+            if (!File::exists($dirm)){
+                File::makeDirectory($dirm);
+            }
+            $dirs = 'images/contenido/s/';
+            if (!File::exists($dirs)){
+                File::makeDirectory($dirs);
+            }
 
             Image::make($imagen)->resize(970, null, function ($constraint) {
                 $constraint->aspectRatio();
-            })->save('images/contenido/l/'.$filename, 95 );
+            })->save($dirl.$filename, 95 );
 
             Image::make($imagen)->resize(768, null, function ($constraint) {
-                $constraint->aspectRadio();
-            })->save('images/contenido/m/'.$filename, 95 );
+                $constraint->aspectRatio();
+            })->save($dirm.$filename, 95 );
 
             Image::make($imagen)->fit(300, 300, function ($constraint) {
                 $constraint->upsize();
-            })->save('images/contenido/s/'.$filename );
-
-            // Image::make($imagen)->resize(1440,null, function ($constraint) {
-            //     $constraint->aspectRatio();
-            // })->save('images/contenido/m/'.$filename , 95 );
+            })->save($dirs.$filename );
 
             $content->imagen = $filename;
 
@@ -151,6 +163,7 @@ class ContentController extends Controller
             ->join('textos_idiomas','contents.id','=','textos_idiomas.contenido_id')
             ->join('idiomas','textos_idiomas.idioma_id','idiomas.id')
             ->select('contents.id as content_id','tipo_contenido','titulo','subtitulo','contenido','metadescripcion','metatitulo','visible','principal','idioma','idiomas.imagen','codigo','textos_idiomas.idioma_id')
+            ->where('tipo_contenido_id','1') // 1 - Contenido, 2 - Agenda, 3 - Ponente, 4 - Portada
             ->where('contents.id',$id)
             ->orderBy('principal','DESC')->get();
         $content = Content::findOrFail($id);
@@ -189,22 +202,31 @@ class ContentController extends Controller
 
             $filename = time() . '.' . $imagen->getClientOriginalExtension();
 
+            $dirl = 'images/contenido/l/';
+            if (!File::exists($dirl)){
+                File::makeDirectory($dirl);
+            }
+
+            $dirm = 'images/contenido/m/';
+            if (!File::exists($dirm)){
+                File::makeDirectory($dirm);
+            }
+            $dirs = 'images/contenido/s/';
+            if (!File::exists($dirs)){
+                File::makeDirectory($dirs);
+            }
 
             Image::make($imagen)->resize(970, null, function ($constraint) {
                 $constraint->aspectRatio();
-            })->save('images/contenido/l/'.$filename, 95 );
+            })->save($dirl.$filename, 95 );
 
             Image::make($imagen)->resize(768, null, function ($constraint) {
                 $constraint->aspectRatio();
-            })->save('images/contenido/m/'.$filename, 95 );
+            })->save($dirm.$filename, 95 );
 
             Image::make($imagen)->fit(300, 300, function ($constraint) {
                 $constraint->upsize();
-            })->save('images/contenido/s/'.$filename );
-
-            // Image::make($imagen)->resize(1440,null, function ($constraint) {
-            //     $constraint->aspectRatio();
-            // })->save('images/contenido/m/'.$filename , 95 );
+            })->save($dirs.$filename );
 
             $content->imagen = $filename;
 
@@ -221,6 +243,7 @@ class ContentController extends Controller
             //dd($request->visible);
             for($i=0;$i<count($request->idioma_id);$i++) {
                 $textosIdioma = TextosIdioma::where('contenido_id',$id)
+                    ->where('tipo_contenido_id','1') // 1 - Contenido, 2 - Agenda, 3 - Ponente, 4 - Portada
                     ->where('idioma_id',$request->idioma_id[$i])->first();
                 if (count($textosIdioma) == 0) {
                     $textosIdioma = new TextosIdioma();
@@ -257,8 +280,20 @@ class ContentController extends Controller
      * @param  \App\Content  $content
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Content $content)
+    public function destroy($id)
     {
-        //
+        //Eliminamos los textos en los idiomas
+        $textosIdioma = TextosIdioma::where('contenido_id',$id)
+            ->where('tipo_contenido_id','1'); // 1 - Contenido, 2 - Agenda, 3 - Ponente, 4 - Portada
+        $textosIdioma->delete();
+        $content = Content::findOrfail($id);
+        //Eliminamos las imagenes en los diferentes tamaños
+        $imagenactual = $content->imagen;
+        File::delete('images/contenido/l/'.$imagenactual);
+        File::delete('images/contenido/m/'.$imagenactual);
+        File::delete('images/contenido/s/'.$imagenactual);
+        //Eliminamos la entrada del contenido
+        $content->delete();
+        return redirect('eunomia/contents');
     }
 }

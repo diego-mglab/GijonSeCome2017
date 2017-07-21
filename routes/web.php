@@ -45,4 +45,8 @@ Route::group(['prefix' => 'eunomia' , 'middleware' => 'auth' ], function () {
 
     Route::resource('/ponentes', 'PonenteController');
 
+    Route::resource('/agenda', 'AgendaController');
+
+    Route::resource('/portada', 'PortadaController');
+
 });

@@ -69,23 +69,23 @@ class PonenteController extends Controller
             $filename = time() . '.' . $imagen->getClientOriginalExtension();
 
 
-            $dir = 'images/chefs/l/';
-            if (!File::exists($dir)){
-                File::makeDirectory($dir);
+            $dirl = 'images/chefs/l/';
+            if (!File::exists($dirl)){
+                File::makeDirectory($dirl);
             }
 
-            $dir = 'images/chefs/m/';
-            if (!File::exists($dir)){
-                File::makeDirectory($dir);
+            $dirm = 'images/chefs/m/';
+            if (!File::exists($dirm)){
+                File::makeDirectory($dirm);
             }
 
             Image::make($imagen)->resize(768, null, function ($constraint) {
                 $constraint->aspectRatio();
-            })->save('images/chefs/l/'.$filename, 95 );
+            })->save($dirl.$filename, 95 );
 
             Image::make($imagen)->fit(480, 480, function ($constraint) {
                 $constraint->upsize();
-            })->save('images/chefs/m/'.$filename );
+            })->save($dirm.$filename );
 
             $ponente->imagen = $filename;
 
@@ -97,15 +97,15 @@ class PonenteController extends Controller
 
             $filename = time() . '.' . $imagen->getClientOriginalExtension();
 
-            $dir = 'images/chefs/s/';
-            if (!File::exists($dir)){
-                File::makeDirectory($dir);
+            $dirs = 'images/chefs/s/';
+            if (!File::exists($dirs)){
+                File::makeDirectory($dirs);
             }
 
 
             Image::make($imagen)->fit(220, 150, function ($constraint) {
                 $constraint->upsize();
-            })->save('images/chefs/s/'.$filename );
+            })->save($dirs.$filename );
 
             $ponente->imagenslide = $filename;
 
@@ -159,10 +159,18 @@ class PonenteController extends Controller
      * @param  \App\Ponente  $ponente
      * @return \Illuminate\Http\Response
      */
-    public function edit(Ponente $ponente)
+    public function edit($id)
     {
-        //
-    }
+        $idiomas = Idioma::where('activado','1')->orderBy('principal')->get();
+        $textos = DB::table('ponentes')
+            ->join('textos_idiomas','ponentes.id','=','textos_idiomas.contenido_id')
+            ->join('idiomas','textos_idiomas.idioma_id','idiomas.id')
+            ->select('ponentes.id as ponente_id','titulo','subtitulo','contenido','metadescripcion','metatitulo','visible','principal','idioma','idiomas.imagen','codigo','textos_idiomas.idioma_id')
+            ->where('tipo_contenido_id','3') // 1 - Contenido, 2 - Agenda, 3 - Ponente, 4 - Portada
+            ->where('ponentes.id',$id)
+            ->orderBy('principal','DESC')->get();
+        $ponente = Ponente::findOrFail($id);
+        return view('eunomia.ponentes.form_edit_ponentes',compact('idiomas','ponente','textos'));    }
 
     /**
      * Update the specified resource in storage.
@@ -171,9 +179,109 @@ class PonenteController extends Controller
      * @param  \App\Ponente  $ponente
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Ponente $ponente)
+    public function update(Request $request, $id)
     {
-        //
+        $idiomas = Idioma::where('activado','1')->orderByDesc('principal')->get();
+
+        foreach ($idiomas as $idioma) {
+            if ($idioma->principal == 1)
+                $this->validate($request, [
+                    'titulo' => 'required'
+                ]);
+        }
+
+        $ponente = Ponente::findOrFail($id);
+
+        $imagenactual = $ponente->imagen;
+
+        if($request->hasFile('imagen')){
+
+            $dirl = 'images/chefs/l/';
+            if (!File::exists($dirl)){
+                File::makeDirectory($dirl);
+            }
+
+            $dirm = 'images/chefs/m/';
+            if (!File::exists($dirm)){
+                File::makeDirectory($dirm);
+            }
+
+            File::delete($dirl.$imagenactual);
+            File::delete($dirm.$imagenactual);
+
+            $imagen = $request->file('imagen');
+
+            $filename = time() . '.' . $imagen->getClientOriginalExtension();
+
+
+            Image::make($imagen)->resize(970, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($dirl.$filename, 95 );
+
+            Image::make($imagen)->resize(768, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($dirm.$filename, 95 );
+
+            $ponente->imagen = $filename;
+
+        }
+
+        if($request->hasFile('imagenslide')){
+
+            $imagen = $request->file('imagenslide');
+
+            $filename = time() . '.' . $imagen->getClientOriginalExtension();
+
+            $dirs = 'images/chefs/s/';
+            if (!File::exists($dirs)){
+                File::makeDirectory($dirs);
+            }
+
+
+            Image::make($imagen)->fit(220, 150, function ($constraint) {
+                $constraint->upsize();
+            })->save($dirs.$filename );
+
+            $ponente->imagenslide = $filename;
+
+        }
+
+        if ($ponente->save()) {
+            //dd($request->visible);
+            for($i=0;$i<count($request->idioma_id);$i++) {
+                $textosIdioma = TextosIdioma::where('contenido_id',$id)
+                    ->where('tipo_contenido_id','3') // 1 - Contenido, 2 - Agenda, 3 - Ponente, 4 - Portada
+                    ->where('idioma_id',$request->idioma_id[$i])->first();
+                if (count($textosIdioma) == 0) {
+                    $textosIdioma = new TextosIdioma();
+                }
+                if ($request->titulo[$i] != '') {
+                    $textosIdioma->idioma_id = $request->idioma_id[$i];
+                    $textosIdioma->contenido_id = $id;
+                    $textosIdioma->tipo_contenido_id = 3; // 1 - Contenido, 2 - Agenda, 3 - Ponente, 4 - Portada
+                    $textosIdioma->titulo = $request->titulo[$i];
+                    $textosIdioma->subtitulo = $request->subtitulo[$i];
+                    $textosIdioma->contenido = $request->contenido[$i];
+                    $textosIdioma->metadescripcion = $request->metadescripcion[$i];
+                    $textosIdioma->metatitulo = $request->metatitulo[$i];
+                    $textosIdioma->slug = Str::Slug($request->titulo[$i]);
+                    $textosIdioma->visible = 0;
+                    if (isset($request->visible)) {
+                        foreach ($request->visible as $visible) {
+                            if ($visible == $request->idioma_id[$i])
+                                $textosIdioma->visible = 1;
+                        }
+                    }
+                    //dd($textosIdioma);
+
+
+                    $textosIdioma->save();
+                }
+            }
+
+        }
+
+        return redirect('eunomia/ponentes');
     }
 
     /**
@@ -182,8 +290,17 @@ class PonenteController extends Controller
      * @param  \App\Ponente  $ponente
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Ponente $ponente)
+    public function destroy($id)
     {
-        //
+        $textosIdioma = TextosIdioma::where('contenido_id',$id)
+            ->where('tipo_contenido_id','3'); // 1 - Contenido, 2 - Agenda, 3 - Ponente, 4 - Portada
+        $textosIdioma->delete();
+        $ponente = Ponente::findOrfail($id);
+        $imagenactual = $ponente->imagen;
+        File::delete('images/contenido/l/'.$imagenactual);
+        File::delete('images/contenido/m/'.$imagenactual);
+        File::delete('images/contenido/s/'.$imagenactual);
+        $ponente->delete();
+        return redirect('eunomia/ponentes');
     }
 }

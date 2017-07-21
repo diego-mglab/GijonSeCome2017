@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 2',
+    'title' => 'GijónSeCome',
 
     'title_prefix' => '',
 
@@ -30,7 +30,7 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
+    'logo' => '<b>Gijón</b>SeCome',
 
     'logo_mini' => '<b>A</b>LT',
 
@@ -115,11 +115,9 @@ return [
             'can'  => 'manage-blog',
         ],
         [
-            'text'        => 'Pages',
-            'url'         => 'admin/pages',
+            'text'        => 'Portada',
+            'url'         => '/eunomia/portada',
             'icon'        => 'file',
-            'label'       => 4,
-            'label_color' => 'success',
         ],
         [
             'text'        => 'Idiomas',
@@ -145,6 +143,11 @@ return [
             'text'        => 'Ponentes',
             'url'         => '/eunomia/ponentes',
             'icon'        => 'users',
+        ],
+        [
+            'text'        => 'Agenda',
+            'url'         => '/eunomia/agenda',
+            'icon'        => 'calendar-check-o',
         ],
         'ACCOUNT SETTINGS',
         [

@@ -44,13 +44,13 @@
                                         @if($idioma->principal==1)
                                         class="active"
                                         @endif
-                                ><a href="#{{$idioma->codigo}}" data-toggle="tab">{{$idioma->idioma}}</a></li>
+                                ><a href="#{{$idioma->codigo}}" data-toggle="tab"><img src="/images/idiomas/{{$idioma->imagen}}" alt="{{$idioma->idioma}}">&nbsp;{{$idioma->idioma}}</a></li>
                             @endforeach
                         </ul>
                         <div class="tab-content no-padding">
 
                             @foreach($idiomas as $idioma)
-                                {{Form::hidden('idioma_id[]',$idioma->id,['id' => 'idioma_id'])}}
+                                {{Form::hidden('idioma_id[]',$idioma->id,['id' => 'idioma_id_'.$idioma->codigo])}}
                                 <div class="chart tab-pane
                                         @if($idioma->principal == 1)
                                         active

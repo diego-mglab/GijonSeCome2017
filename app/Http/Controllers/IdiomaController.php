@@ -153,9 +153,13 @@ class IdiomaController extends Controller
      * @param  \App\Idioma  $idioma
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Idioma $idioma)
+    public function destroy($id)
     {
-        //
+        $idioma = Idioma::findOrFail($id);
+        $imagenactual = $idioma->imagen;
+        File::delete('images/idiomas/'.$imagenactual);
+        $idioma->delete();
+        return redirect('eunomia/idiomas');
     }
 
 

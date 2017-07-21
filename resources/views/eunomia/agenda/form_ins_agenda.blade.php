@@ -36,7 +36,7 @@
                 <div class="box-body">
 
                     <div class="form-group" id="contenedor_fecha">
-                        {{Form::label('fecha', 'Fecha Noticia')}}
+                        {{Form::label('fecha', 'Fecha Evento')}}
 
                         <div class="input-group date">
 
@@ -44,7 +44,7 @@
                                 <i class="fa fa-calendar"></i>
                             </div>
 
-                            {{Form::text('fecha', null, ['class' => 'form-control pull-right datepicker' , 'id' => 'fecha',])}}
+                            {{Form::text('fecha', null, ['class' => 'form-control pull-right datepicker' , 'id' => 'fecha' ,'placeholder' => 'Fecha'])}}
 
                         </div>
 
@@ -52,8 +52,22 @@
 
                     <div class="form-group" id="contenedor_lugar">
 
-                        {{Form::label('hora', 'Hora')}}
+                        {{Form::label('hora', 'Hora Evento')}}
                         {{Form::text('hora', null, ['class' => 'form-control' ,'placeholder' => 'Hora'])}}
+
+                    </div>
+
+                    <div class="form-group">
+
+                        {{Form::label('zona_id', 'Zona')}}
+                        {{Form::select('zona_id', $zonas, null, ['class' => 'form-control', 'placeholder'=>'selecciona una zona'])}}
+
+                    </div>
+
+                    <div class="form-group">
+
+                        {{Form::label('ponentes', 'Ponentes')}}
+                        {{Form::select('ponentes[]', $ponentes, null, ['class' => 'form-control select2', 'data-placeholder'=>'selecciona uno o varios ponentes', 'multiple'=>'multiple'])}}
 
                     </div>
 
@@ -66,7 +80,7 @@
                                         @if($idioma->principal==1)
                                         class="active"
                                         @endif
-                                ><a href="#{{$idioma->codigo}}" data-toggle="tab">{{$idioma->idioma}}</a></li>
+                                ><a href="#{{$idioma->codigo}}" data-toggle="tab"><img src="/images/idiomas/{{$idioma->imagen}}" alt="{{$idioma->idioma}}">&nbsp;{{$idioma->idioma}}</a></li>
                             @endforeach
                         </ul>
                         <div class="tab-content no-padding">
@@ -129,13 +143,6 @@
                         </div>
                     </div>
 
-                    <div class="form-group" id="contenedor_imagen">
-
-                        {{Form::label('imagen', 'Imagen')}}
-                        {{Form::file('imagen', null, ['class' => 'form-control'])}}
-                    </div>
-
-
                 </div>
                 <!-- /.box-body -->
 
@@ -164,6 +171,9 @@
     <!-- Bootstrap Datepicker Sandbox -->
     <link rel="stylesheet" href="{{asset('datePicker/css/bootstrap-datepicker3.css')}}">
     <link rel="stylesheet" href="{{asset('datePicker/css/bootstrap-datepicker.standalone.css')}}">
+
+    <!-- JQuery Timepicker -->
+    <link rel="stylesheet" href="{{asset('css/jquery.timepicker.css')}}">
 
 @stop
 
@@ -225,7 +235,9 @@
         $('.datepicker').datepicker({
             format: "dd/mm/yyyy",
             language: "es",
-            autoclose: true
+            autoclose: true,
+            startDate: '02/12/2017',
+            endDate: '04/12/2017'
         });
     </script>
 
@@ -253,6 +265,25 @@
             $('#tipo_contenido').val(tipo_contenido);
             $('#titulo_tipo_contenido').html(titulo);
         }
+    </script>
+
+    <!-- JQuery Timepicker -->
+    <script src="{{asset('js/jquery.timepicker.min.js')}}"></script>
+    <script language="JavaScript">
+        $('#hora').timepicker({
+            timeFormat: 'H:i',
+            minTime: '08:00',
+            maxTime: '23:30'
+        });
+    </script>
+
+    <!-- Select2 -->
+    <script src="{{asset('vendor/adminlte/plugins/select2/select2.full.min.js')}}"></script>
+    <script language="JavaScript">
+        $(function () {
+            //Initialize Select2 Elements
+            $(".select2").select2();
+        });
     </script>
 
 @stop
