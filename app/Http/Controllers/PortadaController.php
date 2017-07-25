@@ -277,16 +277,19 @@ class PortadaController extends Controller
         $portada = Portada::findOrfail($id);
         //Eliminamos las imagenes en los diferentes tamaños
         $imagenactual = $portada->imagen;
-        File::delete('images/contenido/l/'.$imagenactual);
-        File::delete('images/contenido/m/'.$imagenactual);
-        File::delete('images/contenido/s/'.$imagenactual);
+        File::delete('images/portada/l/'.$imagenactual);
+        File::delete('images/portada/m/'.$imagenactual);
+        File::delete('images/portada/s/'.$imagenactual);
         //Eliminamos la entrada del contenido
         $portada->delete();
         return redirect('eunomia/portada');
     }
 
-    public function UpdateRowOrder()
+    public function UpdateRowOrder($id1,$oldPosition1,$id2,$oldPosition2)
     {
-        //
+        Portada::where('id',$id1)
+            ->update(['orden' => $oldPosition2]);
+        Portada::where('id',$id2)
+            ->update(['orden' => $oldPosition1]);
     }
 }

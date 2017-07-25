@@ -36,8 +36,8 @@
                         <tbody>
                         @foreach ($portada as $elemento)
                             @if ($elemento->principal == 1)
-                                <tr>
-                                    <td>{{$elemento->orden}}</td>
+                                <tr id="{{$elemento->id}}">
+                                    <td>{{$elemento->orden}} {{$elemento->id}}</td>
                                     <td>{{$elemento->titulo}}</td>
                                     <td>{{$elemento->subtitulo}}</td>
                                     <td>{{$elemento->visible==1?'Si':'No'}}</td>
@@ -101,11 +101,17 @@
                     url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
                 }
             });
-            table.on('row-reordered',function(){
+            table.on('row-reordered',function( e, diff, changes ){
+                //alert($(diff[i].node).attr('id')+' '+diff[i].oldPosition + ' '+diff[i].newPosition);
                 $.ajax({
-                    //method: "POST",
-                    //url: "some.php",
-                    //data: { name: "John", location: "Boston" }
+                    url: "{{asset('asset/ajax/reordenaTabla.php')}}",
+                    type: "POST",
+                    data: diff,
+                    success: function(html){
+                        alert(html);
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) { console.log(errorThrown); console.log(textStatus);
+                    }
                 });
             });
         });
