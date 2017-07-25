@@ -149,6 +149,11 @@ return [
             'url'         => '/eunomia/agenda',
             'icon'        => 'calendar-check-o',
         ],
+        [
+            'text'        => 'Galerías',
+            'url'         => '/eunomia/galerias',
+            'icon'        => 'image',
+        ],
         'ACCOUNT SETTINGS',
         [
             'text' => 'Profile',

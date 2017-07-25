@@ -33,3 +33,7 @@
 .label_imagen_editar {
     margin-top: 1em;
 }
+
+.ordena {
+    cursor:move;
+}

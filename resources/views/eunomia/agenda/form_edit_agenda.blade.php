@@ -269,32 +269,6 @@
         });
     </script>
 
-    <!-- Tipo Contenido -->
-    <script language="JavaScript">
-        function muestraOcultaCampos(tipo_contenido){
-            switch (tipo_contenido){
-                case 'pagina':
-                    $('#contenedor_lugar').hide();
-                    $('#contenedor_fecha').hide();
-                    @foreach($idiomas as $idioma)
-                    $('#contenedor_subtitulo_{{$idioma->codigo}}').hide();
-                    @endforeach
-                        titulo = "Página";
-                    break;
-                case 'noticia':
-                    $('#contenedor_lugar').show();
-                    $('#contenedor_fecha').show();
-                    @foreach($idiomas as $idioma)
-                    $('#contenedor_subtitulo_{{$idioma->codigo}}').show();
-                    @endforeach
-                        titulo = "Noticia";
-                    break;
-            }
-            $('#tipo_contenido').val(tipo_contenido);
-            $('#titulo_tipo_contenido').html(titulo);
-        }
-    </script>
-
     <!-- JQuery Timepicker -->
     <script src="{{asset('js/jquery.timepicker.min.js')}}"></script>
     <script language="JavaScript">

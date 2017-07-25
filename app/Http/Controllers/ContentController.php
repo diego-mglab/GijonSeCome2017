@@ -16,6 +16,8 @@ use File;
 
 class ContentController extends Controller
 {
+    protected $tipo_contenido = 1; // 1 - Contenido, 2 - Agenda, 3 - Ponente, 4 - Portada, 5 - Galería
+
     /**
      * Display a listing of the resource.
      *
@@ -28,7 +30,7 @@ class ContentController extends Controller
             ->join('idiomas','textos_idiomas.idioma_id','idiomas.id')
             ->select('contents.id','tipo_contenido','titulo','subtitulo','contenido','metadescripcion','metatitulo','visible','principal','idioma','idiomas.imagen')
             ->where('principal','1')
-            ->where('tipo_contenido_id','1') // 1 - Contenido, 2 - Agenda, 3 - Ponente, 4 - Portada
+            ->where('tipo_contenido_id',$this->tipo_contenido)
             ->orderBy('textos_idiomas.titulo','ASC')->get();
         return view('eunomia.contents.listado_contents', compact('contents'));
     }
@@ -116,7 +118,7 @@ class ContentController extends Controller
                     $textosIdioma = new TextosIdioma();
                     $textosIdioma->idioma_id = $request->idioma_id[$i];
                     $textosIdioma->contenido_id = $lastId;
-                    $textosIdioma->tipo_contenido_id = 1; // 1 - Contenido, 2 - Agenda, 3 - Ponente, 4 - Portada
+                    $textosIdioma->tipo_contenido_id = $this->tipo_contenido;
                     $textosIdioma->titulo = $request->titulo[$i];
                     $textosIdioma->subtitulo = $request->subtitulo[$i];
                     $textosIdioma->contenido = $request->contenido[$i];
@@ -163,7 +165,7 @@ class ContentController extends Controller
             ->join('textos_idiomas','contents.id','=','textos_idiomas.contenido_id')
             ->join('idiomas','textos_idiomas.idioma_id','idiomas.id')
             ->select('contents.id as content_id','tipo_contenido','titulo','subtitulo','contenido','metadescripcion','metatitulo','visible','principal','idioma','idiomas.imagen','codigo','textos_idiomas.idioma_id')
-            ->where('tipo_contenido_id','1') // 1 - Contenido, 2 - Agenda, 3 - Ponente, 4 - Portada
+            ->where('tipo_contenido_id',$this->tipo_contenido)
             ->where('contents.id',$id)
             ->orderBy('principal','DESC')->get();
         $content = Content::findOrFail($id);
@@ -243,7 +245,7 @@ class ContentController extends Controller
             //dd($request->visible);
             for($i=0;$i<count($request->idioma_id);$i++) {
                 $textosIdioma = TextosIdioma::where('contenido_id',$id)
-                    ->where('tipo_contenido_id','1') // 1 - Contenido, 2 - Agenda, 3 - Ponente, 4 - Portada
+                    ->where('tipo_contenido_id',$this->tipo_contenido)
                     ->where('idioma_id',$request->idioma_id[$i])->first();
                 if (count($textosIdioma) == 0) {
                     $textosIdioma = new TextosIdioma();
@@ -251,7 +253,7 @@ class ContentController extends Controller
                 if ($request->titulo[$i] != '') {
                     $textosIdioma->idioma_id = $request->idioma_id[$i];
                     $textosIdioma->contenido_id = $id;
-                    $textosIdioma->tipo_contenido_id = 1; // 1 - Contenido, 2 - Agenda, 3 - Ponente, 4 - Portada
+                    $textosIdioma->tipo_contenido_id = $this->tipo_contenido;
                     $textosIdioma->titulo = $request->titulo[$i];
                     $textosIdioma->subtitulo = $request->subtitulo[$i];
                     $textosIdioma->contenido = $request->contenido[$i];
@@ -284,7 +286,7 @@ class ContentController extends Controller
     {
         //Eliminamos los textos en los idiomas
         $textosIdioma = TextosIdioma::where('contenido_id',$id)
-            ->where('tipo_contenido_id','1'); // 1 - Contenido, 2 - Agenda, 3 - Ponente, 4 - Portada
+            ->where('tipo_contenido_id',$this->tipo_contenido);
         $textosIdioma->delete();
         $content = Content::findOrfail($id);
         //Eliminamos las imagenes en los diferentes tamaños

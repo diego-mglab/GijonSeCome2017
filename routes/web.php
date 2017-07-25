@@ -49,4 +49,6 @@ Route::group(['prefix' => 'eunomia' , 'middleware' => 'auth' ], function () {
 
     Route::resource('/portada', 'PortadaController');
 
+    Route::resource('/galerias', 'GaleriaController');
+
 });

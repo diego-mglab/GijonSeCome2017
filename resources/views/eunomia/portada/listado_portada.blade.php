@@ -37,7 +37,7 @@
                         @foreach ($portada as $elemento)
                             @if ($elemento->principal == 1)
                                 <tr id="{{$elemento->id}}">
-                                    <td>{{$elemento->orden}} {{$elemento->id}}</td>
+                                    <td class="ordena">{{$elemento->orden}}</td>
                                     <td>{{$elemento->titulo}}</td>
                                     <td>{{$elemento->subtitulo}}</td>
                                     <td>{{$elemento->visible==1?'Si':'No'}}</td>
@@ -102,13 +102,35 @@
                 }
             });
             table.on('row-reordered',function( e, diff, changes ){
+                var nregs=diff.length;
+                var datos = [];
+
+                if (nregs>1) {
+                    // Si el número de registros movidos es mayor que 2 quiere decir que hemos subido el registro mas de una posición, con lo cual
+                    // tenemos que ver en qué direcciñon lo hemos movido para pasar los datos de la primera o la última fila.
+                    if (diff[nregs-1].newPosition > diff[nregs-1].oldPosition+1) { // Hemos bajado el registro
+                        datos = {
+                            id : $(diff[nregs-1].node).attr('id'),
+                            oldPosition : diff[nregs-1].oldPosition+1,
+                            newPosition : diff[nregs-1].newPosition+1,
+                            tabla : "portada" // Tabla a ordenar
+                        }
+                    } else { // Hemos subido el registro
+                        datos = {
+                            id : $(diff[0].node).attr('id'),
+                            oldPosition : diff[0].oldPosition+1,
+                            newPosition : diff[0].newPosition+1,
+                            tabla : "portada"
+                        }
+                    }
+                }
                 //alert($(diff[i].node).attr('id')+' '+diff[i].oldPosition + ' '+diff[i].newPosition);
                 $.ajax({
                     url: "{{asset('asset/ajax/reordenaTabla.php')}}",
                     type: "POST",
-                    data: diff,
+                    data: datos,
                     success: function(html){
-                        alert(html);
+                        //alert(html);
                     },
                     error: function(jqXHR, textStatus, errorThrown) { console.log(errorThrown); console.log(textStatus);
                     }

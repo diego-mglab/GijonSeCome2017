@@ -2,12 +2,12 @@
 
 @section('content_header')
     <h1>
-        Insertar
-        <small>Evento</small>
+        Editar
+        <small>Galería</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Agenda</li>
+        <li class="active">Galerías</li>
     </ol>
 @stop
 
@@ -29,47 +29,11 @@
 
             <!-- /.box-header -->
                 <!-- form start -->
-                {!! Form::open(['route' => 'agenda.store','files' => true, 'name' => 'form_agenda']) !!}
+                    {{ Form::model($galeria, ['route' => ['galerias.update', $galeria],'method' => 'PATCH','files' => true ])}}
 
 
 
                 <div class="box-body">
-
-                    <div class="form-group" id="contenedor_fecha">
-                        {{Form::label('fecha', 'Fecha Evento')}}
-
-                        <div class="input-group date">
-
-                            <div class="input-group-addon">
-                                <i class="fa fa-calendar"></i>
-                            </div>
-
-                            {{Form::text('fecha', null, ['class' => 'form-control pull-right datepicker' , 'id' => 'fecha' ,'placeholder' => 'Fecha'])}}
-
-                        </div>
-
-                    </div>
-
-                    <div class="form-group" id="contenedor_lugar">
-
-                        {{Form::label('hora', 'Hora Evento')}}
-                        {{Form::text('hora', null, ['class' => 'form-control' ,'placeholder' => 'Hora'])}}
-
-                    </div>
-
-                    <div class="form-group">
-
-                        {{Form::label('zona_id', 'Zona')}}
-                        {{Form::select('zona_id', $zonas, null, ['class' => 'form-control', 'placeholder'=>'selecciona una zona'])}}
-
-                    </div>
-
-                    <div class="form-group">
-
-                        {{Form::label('ponentes', 'Ponentes')}}
-                        {{Form::select('ponentes[]', $ponentes, null, ['class' => 'form-control select2', 'data-placeholder'=>'selecciona uno o varios ponentes', 'multiple'=>'multiple'])}}
-
-                    </div>
 
                     <!-- Custom tabs (Charts with tabs)-->
                     <div class="nav-tabs-custom">
@@ -86,11 +50,29 @@
                         <div class="tab-content no-padding">
 
                             @foreach($idiomas as $idioma)
-                                {{Form::hidden('idioma_id[]',$idioma->id,['id' => 'idioma_id'])}}
+                                <?php
+                                $titulo = null;
+                                $subtitulo = null;
+                                $metatitulo = null;
+                                $metadescripcion = null;
+                                $visible = false;
+                                ?>
+                                @foreach($textos as $texto)
+                                    <?php
+                                    if ($texto->idioma_id == $idioma->id) {
+                                        $titulo = $texto->titulo;
+                                        $subtitulo = $texto->subtitulo;
+                                        $metatitulo = $texto->metatitulo;
+                                        $metadescripcion = $texto->metadescripcion;
+                                        $visible = $texto->visible;
+                                    }
+                                    ?>
+                                @endforeach
+                                {{Form::hidden('idioma_id[]',$idioma->id)}}
                                 <div class="chart tab-pane
                                         @if($idioma->principal == 1)
                                         active
-                                        @endif
+@endif
                                         " id="{{$idioma->codigo}}" style="position: relative;">
 
                                     <!-- /.nav-tabs-custom -->
@@ -98,7 +80,7 @@
                                     <div class="form-group">
 
                                         {{Form::label('titulo', 'Título')}}
-                                        {{Form::text('titulo[]', null, ['class' => 'form-control' ,'placeholder' => 'Título'])}}
+                                        {{Form::text('titulo[]', $titulo, ['class' => 'form-control' ,'placeholder' => 'Título'])}}
 
                                     </div>
 
@@ -106,35 +88,28 @@
                                     <div class="form-group" id="contenedor_subtitulo_{{$idioma->codigo}}">
 
                                         {{Form::label('subtitulo', 'Subtítulo')}}
-                                        {{Form::text('subtitulo[]', null, ['class' => 'form-control' ,'placeholder' => 'Subtítulo'])}}
-
-                                    </div>
-
-                                    <div class="form-group">
-
-                                        {{Form::label('contenido', 'Contenido')}}
-                                        {{Form::textarea('contenido[]', null, ['class' => 'form-control'])}}
+                                        {{Form::text('subtitulo[]', $subtitulo, ['class' => 'form-control' ,'placeholder' => 'Subtítulo'])}}
 
                                     </div>
 
                                     <div class="form-group">
 
                                         {{Form::label('metatitulo', 'Meta título')}}
-                                        {{Form::text('metatitulo[]', null, ['class' => 'form-control' ,'placeholder' => 'Meta título'])}}
+                                        {{Form::text('metatitulo[]', $metatitulo, ['class' => 'form-control' ,'placeholder' => 'Meta título'])}}
 
                                     </div>
 
                                     <div class="form-group">
 
                                         {{Form::label('metadescripcion', 'Meta descripción')}}
-                                        {{Form::text('metadescripcion[]', null, ['class' => 'form-control' ,'placeholder' => 'Meta descripción'])}}
+                                        {{Form::text('metadescripcion[]', $metadescripcion, ['class' => 'form-control' ,'placeholder' => 'Meta descripción'])}}
 
                                     </div>
 
                                     <div class="form-group">
 
                                         {{Form::label('visible', 'Visible/Oculto')}}
-                                        {{Form::checkbox('visible[]', $idioma->id, true,['class' => 'flat-green'])}}
+                                        {{Form::checkbox('visible[]', $idioma->id, $visible,['class' => 'flat-green'])}}
 
                                     </div>
                                 </div>
@@ -147,11 +122,112 @@
                 <!-- /.box-body -->
 
                 <div class="box-footer">
-                    <button type="submit" class="btn btn-default">Insertar</button>
+                    <button type="submit" class="btn btn-default">Editar</button>
                 </div>
 
                 {!! Form::close() !!}
 
+            </div>
+            <!-- /.box -->
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <!-- general form elements -->
+            <div class="box box-default">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Multimedia</h3>
+                </div>
+
+
+                <!-- /.box-header -->
+                <!-- form start -->
+                {!! Form::open(['route' => 'galerias.store','files' => true]) !!}
+
+
+
+                <div class="box-body">
+
+
+                    <div class="form-group">
+
+                        {{Form::label('imagen', 'Imagen')}}
+                        {{Form::file('imagen', null, ['class' => 'form-control'])}}
+                        {{-- <p class="help-block">Imagen principal!</p> --}}
+                    </div>
+
+                    <div class="form-group">
+
+                        {{Form::label('url', 'URL video')}}
+                        {{Form::text('url', null, ['class' => 'form-control' ,'placeholder' => 'URL video'])}}
+
+                    </div>
+
+
+                    {{Form::hidden('galeria_id',$galeria->id)}}
+
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-default">Insertar</button>
+                    </div>
+
+
+
+                    {!! Form::close() !!}
+
+
+
+
+
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <!-- general form elements -->
+            <div class="box box-default">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Imagenes</h3>
+                </div>
+
+
+                <!-- /.box-header -->
+                <!-- form start -->
+
+
+
+
+                <div class="box-body">
+
+                    @foreach ($imagenes as $imagen)
+                        <div class="col-xs-6 col-md-3 " style="padding-bottom:1em">
+                            <?php
+                                  if ($imagen->url != '') { ?>
+
+                            <?php } else { ?>
+                                    <img src="{{asset('images/galerias/'.$galeria->carpeta)}}/{{$imagen->imagen or 'sinimagen.png'}}" style="width:100%">
+
+                            <?php } ?>
+                            {{ Form::open(array('method'=> 'DELETE', 'route' => array('galerias.destroy', $imagen),'style'=>'display:inline')) }}
+                            {{Form::hidden('imagen_id',$imagen->id)}}
+                            {{ Form::submit('Eliminar', array('class' => 'btn btn-block btn-danger btn-xs')) }}
+                            {{ Form::close() }}
+                        </div>
+
+
+                    @endforeach
+
+
+
+
+
+
+                </div>
+                <!-- /.box-body -->
             </div>
             <!-- /.box -->
         </div>
@@ -167,13 +243,6 @@
 
     <!-- iCheck -->
     <link rel="stylesheet" href="{{asset('vendor/adminlte/plugins/iCheck/flat/green.css')}}">
-
-    <!-- Bootstrap Datepicker Sandbox -->
-    <link rel="stylesheet" href="{{asset('datePicker/css/bootstrap-datepicker3.css')}}">
-    <link rel="stylesheet" href="{{asset('datePicker/css/bootstrap-datepicker.standalone.css')}}">
-
-    <!-- JQuery Timepicker -->
-    <link rel="stylesheet" href="{{asset('css/jquery.timepicker.css')}}">
 
 @stop
 
@@ -226,38 +295,4 @@
             checkboxClass: 'icheckbox_flat-green'
         });
     </script>
-
-    <!-- Bootstrap Datepicker Sandbox -->
-    <script src="{{asset('datePicker/js/bootstrap-datepicker.js')}}"></script>
-    <!-- Languaje -->
-    <script src="{{asset('datePicker/locales/bootstrap-datepicker.es.min.js')}}"></script>
-    <script language="JavaScript">
-        $('.datepicker').datepicker({
-            format: "dd/mm/yyyy",
-            language: "es",
-            autoclose: true,
-            startDate: '02/12/2017',
-            endDate: '04/12/2017'
-        });
-    </script>
-
-    <!-- JQuery Timepicker -->
-    <script src="{{asset('js/jquery.timepicker.min.js')}}"></script>
-    <script language="JavaScript">
-        $('#hora').timepicker({
-            timeFormat: 'H:i',
-            minTime: '08:00',
-            maxTime: '23:30'
-        });
-    </script>
-
-    <!-- Select2 -->
-    <script src="{{asset('vendor/adminlte/plugins/select2/select2.full.min.js')}}"></script>
-    <script language="JavaScript">
-        $(function () {
-            //Initialize Select2 Elements
-            $(".select2").select2();
-        });
-    </script>
-
 @stop

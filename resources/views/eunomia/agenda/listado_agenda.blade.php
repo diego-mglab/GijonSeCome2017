@@ -38,6 +38,8 @@
                         @foreach ($eventos as $evento)
                             @if ($evento->principal == 1)
                                 <?php
+                                    $fecha = "";
+                                    $hora = "";
                                     if ($evento->fecha != '') {
                                     $time= strtotime($evento->fecha);
                                     $fecha = date('d/m/Y',$time);

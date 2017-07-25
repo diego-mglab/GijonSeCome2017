@@ -3,11 +3,11 @@
 @section('content_header')
     <h1>
         Insertar
-        <small>Evento</small>
+        <small>Galería</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Agenda</li>
+        <li class="active">Galerías</li>
     </ol>
 @stop
 
@@ -29,47 +29,11 @@
 
             <!-- /.box-header -->
                 <!-- form start -->
-                {!! Form::open(['route' => 'agenda.store','files' => true, 'name' => 'form_agenda']) !!}
+                {!! Form::open(['route' => 'galerias.store','files' => true, 'name' => 'form_galerias']) !!}
 
 
 
                 <div class="box-body">
-
-                    <div class="form-group" id="contenedor_fecha">
-                        {{Form::label('fecha', 'Fecha Evento')}}
-
-                        <div class="input-group date">
-
-                            <div class="input-group-addon">
-                                <i class="fa fa-calendar"></i>
-                            </div>
-
-                            {{Form::text('fecha', null, ['class' => 'form-control pull-right datepicker' , 'id' => 'fecha' ,'placeholder' => 'Fecha'])}}
-
-                        </div>
-
-                    </div>
-
-                    <div class="form-group" id="contenedor_lugar">
-
-                        {{Form::label('hora', 'Hora Evento')}}
-                        {{Form::text('hora', null, ['class' => 'form-control' ,'placeholder' => 'Hora'])}}
-
-                    </div>
-
-                    <div class="form-group">
-
-                        {{Form::label('zona_id', 'Zona')}}
-                        {{Form::select('zona_id', $zonas, null, ['class' => 'form-control', 'placeholder'=>'selecciona una zona'])}}
-
-                    </div>
-
-                    <div class="form-group">
-
-                        {{Form::label('ponentes', 'Ponentes')}}
-                        {{Form::select('ponentes[]', $ponentes, null, ['class' => 'form-control select2', 'data-placeholder'=>'selecciona uno o varios ponentes', 'multiple'=>'multiple'])}}
-
-                    </div>
 
                     <!-- Custom tabs (Charts with tabs)-->
                     <div class="nav-tabs-custom">
@@ -86,11 +50,11 @@
                         <div class="tab-content no-padding">
 
                             @foreach($idiomas as $idioma)
-                                {{Form::hidden('idioma_id[]',$idioma->id,['id' => 'idioma_id'])}}
+                                {{Form::hidden('idioma_id[]',$idioma->id,['id' => 'idioma_id_'.$idioma->codigo])}}
                                 <div class="chart tab-pane
                                         @if($idioma->principal == 1)
                                         active
-                                        @endif
+@endif
                                         " id="{{$idioma->codigo}}" style="position: relative;">
 
                                     <!-- /.nav-tabs-custom -->
@@ -107,13 +71,6 @@
 
                                         {{Form::label('subtitulo', 'Subtítulo')}}
                                         {{Form::text('subtitulo[]', null, ['class' => 'form-control' ,'placeholder' => 'Subtítulo'])}}
-
-                                    </div>
-
-                                    <div class="form-group">
-
-                                        {{Form::label('contenido', 'Contenido')}}
-                                        {{Form::textarea('contenido[]', null, ['class' => 'form-control'])}}
 
                                     </div>
 
@@ -168,13 +125,6 @@
     <!-- iCheck -->
     <link rel="stylesheet" href="{{asset('vendor/adminlte/plugins/iCheck/flat/green.css')}}">
 
-    <!-- Bootstrap Datepicker Sandbox -->
-    <link rel="stylesheet" href="{{asset('datePicker/css/bootstrap-datepicker3.css')}}">
-    <link rel="stylesheet" href="{{asset('datePicker/css/bootstrap-datepicker.standalone.css')}}">
-
-    <!-- JQuery Timepicker -->
-    <link rel="stylesheet" href="{{asset('css/jquery.timepicker.css')}}">
-
 @stop
 
 @section('js')
@@ -226,38 +176,4 @@
             checkboxClass: 'icheckbox_flat-green'
         });
     </script>
-
-    <!-- Bootstrap Datepicker Sandbox -->
-    <script src="{{asset('datePicker/js/bootstrap-datepicker.js')}}"></script>
-    <!-- Languaje -->
-    <script src="{{asset('datePicker/locales/bootstrap-datepicker.es.min.js')}}"></script>
-    <script language="JavaScript">
-        $('.datepicker').datepicker({
-            format: "dd/mm/yyyy",
-            language: "es",
-            autoclose: true,
-            startDate: '02/12/2017',
-            endDate: '04/12/2017'
-        });
-    </script>
-
-    <!-- JQuery Timepicker -->
-    <script src="{{asset('js/jquery.timepicker.min.js')}}"></script>
-    <script language="JavaScript">
-        $('#hora').timepicker({
-            timeFormat: 'H:i',
-            minTime: '08:00',
-            maxTime: '23:30'
-        });
-    </script>
-
-    <!-- Select2 -->
-    <script src="{{asset('vendor/adminlte/plugins/select2/select2.full.min.js')}}"></script>
-    <script language="JavaScript">
-        $(function () {
-            //Initialize Select2 Elements
-            $(".select2").select2();
-        });
-    </script>
-
 @stop

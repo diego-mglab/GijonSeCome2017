@@ -15,6 +15,8 @@ use Str;
 
 class PonenteController extends Controller
 {
+    protected $tipo_contenido = 3; // 1 - Contenido, 2 - Agenda, 3 - Ponente, 4 - Portada, 5 - Galería
+
     /**
      * Display a listing of the resource.
      *
@@ -27,6 +29,7 @@ class PonenteController extends Controller
             ->join('idiomas','textos_idiomas.idioma_id','idiomas.id')
             ->select('ponentes.id','ponentes.imagen as imagen_ponentes','imagenslide','orden','titulo','subtitulo','contenido','metadescripcion','metatitulo','visible','principal','idioma','idiomas.imagen')
             ->where('principal','1')
+            ->where('tipo_contenido_id',$this->tipo_contenido)
             ->orderBy('textos_idiomas.titulo','ASC')->get();
         return view('eunomia.ponentes.listado_ponentes', compact('ponentes'));
     }
@@ -108,8 +111,10 @@ class PonenteController extends Controller
             })->save($dirs.$filename );
 
             $ponente->imagenslide = $filename;
-
         }
+
+        $maxorden = Ponente::max('orden');
+        $ponente->orden = is_numeric($maxorden)?$maxorden+1:1;
 
         if ($ponente->save()) {
             $lastId = $ponente->id;
@@ -120,7 +125,7 @@ class PonenteController extends Controller
                     $textosIdioma = new TextosIdioma();
                     $textosIdioma->idioma_id = $request->idioma_id[$i];
                     $textosIdioma->contenido_id = $lastId;
-                    $textosIdioma->tipo_contenido_id = 3; // 1 - Contenido, 2 - Agenda, 3 - Ponente, 4 - Portada
+                    $textosIdioma->tipo_contenido_id = $this->tipo_contenido;
                     $textosIdioma->titulo = $request->titulo[$i];
                     $textosIdioma->subtitulo = $request->subtitulo[$i];
                     $textosIdioma->contenido = $request->contenido[$i];
@@ -166,7 +171,7 @@ class PonenteController extends Controller
             ->join('textos_idiomas','ponentes.id','=','textos_idiomas.contenido_id')
             ->join('idiomas','textos_idiomas.idioma_id','idiomas.id')
             ->select('ponentes.id as ponente_id','titulo','subtitulo','contenido','metadescripcion','metatitulo','visible','principal','idioma','idiomas.imagen','codigo','textos_idiomas.idioma_id')
-            ->where('tipo_contenido_id','3') // 1 - Contenido, 2 - Agenda, 3 - Ponente, 4 - Portada
+            ->where('tipo_contenido_id',$this->tipo_contenido)
             ->where('ponentes.id',$id)
             ->orderBy('principal','DESC')->get();
         $ponente = Ponente::findOrFail($id);
@@ -250,7 +255,7 @@ class PonenteController extends Controller
             //dd($request->visible);
             for($i=0;$i<count($request->idioma_id);$i++) {
                 $textosIdioma = TextosIdioma::where('contenido_id',$id)
-                    ->where('tipo_contenido_id','3') // 1 - Contenido, 2 - Agenda, 3 - Ponente, 4 - Portada
+                    ->where('tipo_contenido_id',$this->tipo_contenido)
                     ->where('idioma_id',$request->idioma_id[$i])->first();
                 if (count($textosIdioma) == 0) {
                     $textosIdioma = new TextosIdioma();
@@ -258,7 +263,7 @@ class PonenteController extends Controller
                 if ($request->titulo[$i] != '') {
                     $textosIdioma->idioma_id = $request->idioma_id[$i];
                     $textosIdioma->contenido_id = $id;
-                    $textosIdioma->tipo_contenido_id = 3; // 1 - Contenido, 2 - Agenda, 3 - Ponente, 4 - Portada
+                    $textosIdioma->tipo_contenido_id = $this->tipo_contenido;
                     $textosIdioma->titulo = $request->titulo[$i];
                     $textosIdioma->subtitulo = $request->subtitulo[$i];
                     $textosIdioma->contenido = $request->contenido[$i];
@@ -293,7 +298,7 @@ class PonenteController extends Controller
     public function destroy($id)
     {
         $textosIdioma = TextosIdioma::where('contenido_id',$id)
-            ->where('tipo_contenido_id','3'); // 1 - Contenido, 2 - Agenda, 3 - Ponente, 4 - Portada
+            ->where('tipo_contenido_id',$this->tipo_contenido);
         $textosIdioma->delete();
         $ponente = Ponente::findOrfail($id);
         $imagenactual = $ponente->imagen;

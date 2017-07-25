@@ -14,6 +14,8 @@ use Str;
 
 class PortadaController extends Controller
 {
+    protected $tipo_contenido = 4; // 1 - Contenido, 2 - Agenda, 3 - Ponente, 4 - Portada, 5 - Galería
+
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +28,7 @@ class PortadaController extends Controller
             ->join('idiomas','textos_idiomas.idioma_id','idiomas.id')
             ->select('portada.id','titulo','subtitulo','contenido','metadescripcion','metatitulo','visible','principal','idioma','idiomas.imagen','portada.orden')
             ->where('principal','1')
-            ->where('tipo_contenido_id','4') // 1 - Contenido, 2 - Agenda, 3 - Ponente, 4 - Portada
+            ->where('tipo_contenido_id',$this->tipo_contenido)
             ->orderBy('textos_idiomas.titulo','ASC')->get();
         return view('eunomia.portada.listado_portada', compact('portada'));
     }
@@ -111,7 +113,7 @@ class PortadaController extends Controller
                     $textosIdioma = new TextosIdioma();
                     $textosIdioma->idioma_id = $request->idioma_id[$i];
                     $textosIdioma->contenido_id = $lastId;
-                    $textosIdioma->tipo_contenido_id = 4; // 1 - Contenido, 2 - Agenda, 3 - Ponente, 4 - Portada
+                    $textosIdioma->tipo_contenido_id = $this->tipo_contenido;
                     $textosIdioma->titulo = $request->titulo[$i];
                     $textosIdioma->subtitulo = $request->subtitulo[$i];
                     $textosIdioma->contenido = $request->contenido[$i];
@@ -157,7 +159,7 @@ class PortadaController extends Controller
             ->join('textos_idiomas','portada.id','=','textos_idiomas.contenido_id')
             ->join('idiomas','textos_idiomas.idioma_id','idiomas.id')
             ->select('portada.id as portada_id','titulo','subtitulo','contenido','metadescripcion','metatitulo','visible','principal','idioma','idiomas.imagen','codigo','textos_idiomas.idioma_id')
-            ->where('tipo_contenido_id','4') // 1 - Contenido, 2 - Agenda, 3 - Ponente, 4 - Portada
+            ->where('tipo_contenido_id',$this->tipo_contenido)
             ->where('portada.id',$id)
             ->orderBy('principal','DESC')->get();
         $portada = Portada::findOrFail($id);
@@ -232,7 +234,7 @@ class PortadaController extends Controller
 
             for($i=0;$i<count($request->idioma_id);$i++) {
                 $textosIdioma = TextosIdioma::where('contenido_id',$id)
-                    ->where('tipo_contenido_id','4') // 1 - Contenido, 2 - Agenda, 3 - Ponente, 4 - Portada
+                    ->where('tipo_contenido_id',$this->tipo_contenido)
                     ->where('idioma_id',$request->idioma_id[$i])->first();
                 if (count($textosIdioma) == 0) {
                     $textosIdioma = new TextosIdioma();
@@ -240,7 +242,7 @@ class PortadaController extends Controller
                 if ($request->titulo[$i] != '') {
                     $textosIdioma->idioma_id = $request->idioma_id[$i];
                     $textosIdioma->contenido_id = $id;
-                    $textosIdioma->tipo_contenido_id = 4; // 1 - Contenido, 2 - Agenda, 3 - Ponente, 4 - Portada
+                    $textosIdioma->tipo_contenido_id = $this->tipo_contenido;
                     $textosIdioma->titulo = $request->titulo[$i];
                     $textosIdioma->subtitulo = $request->subtitulo[$i];
                     $textosIdioma->contenido = $request->contenido[$i];
@@ -272,7 +274,7 @@ class PortadaController extends Controller
     {
         //Eliminamos los textos en los idiomas
         $textosIdioma = TextosIdioma::where('contenido_id',$id)
-            ->where('tipo_contenido_id','4'); // 1 - Contenido, 2 - Agenda, 3 - Ponente, 4 - Portada
+            ->where('tipo_contenido_id',$this->tipo_contenido);
         $textosIdioma->delete();
         $portada = Portada::findOrfail($id);
         //Eliminamos las imagenes en los diferentes tamaños
@@ -285,11 +287,14 @@ class PortadaController extends Controller
         return redirect('eunomia/portada');
     }
 
-    public function UpdateRowOrder($id1,$oldPosition1,$id2,$oldPosition2)
+    public function UpdateRowOrder($id,$oldPosition,$newPosition)
     {
-        Portada::where('id',$id1)
-            ->update(['orden' => $oldPosition2]);
-        Portada::where('id',$id2)
-            ->update(['orden' => $oldPosition1]);
+        if ($newPosition > $oldPosition) {
+            Portada::where('orden', '>=', $newPosition)
+                ->update(['orden' => 'orden-1']);
+        } else {
+            Portada::where('orden', '<=', $newPosition)
+                ->update(['orden' => 'orden+1']);
+        }
     }
 }

@@ -3,13 +3,13 @@
 @section('content_header')
     <h1>
         Listado
-        <small>Ponentes</small>
+        <small>Portada</small>
     </h1>
-    <h2>{{ link_to_route('ponentes.create', 'Nuevo', null, array('class' => 'btn btn-block btn-success btn-xs')) }}</h2>
+    <h2>{{ link_to_route('galerias.create', 'Nuevo', null, array('class' => 'btn btn-block btn-success btn-xs')) }}</h2>
 
     <ol class="breadcrumb">
         <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Ponentes</li>
+        <li class="active">Portada</li>
     </ol>
 @stop
 
@@ -27,22 +27,22 @@
                         <thead>
                         <tr>
                             <th>Orden</th>
-                            <th>Nombre</th>
-                            <th>Restaurante</th>
+                            <th>Título</th>
+                            <th>Subtítulo</th>
                             <th>Visible</th>
                             <th>Acciones</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach ($ponentes as $ponente)
-                            @if ($ponente->principal == 1)
-                                <tr id="{{$ponente->id}}">
-                                    <td class="ordena">{{$ponente->orden}}</td>
-                                    <td>{{$ponente->titulo}}{{--Nombre del ponente --}}</td>
-                                    <td>{{$ponente->subtitulo}}{{--Restaurante del ponente --}}</td>
-                                    <td>{{$ponente->visible==1?'Si':'No'}}</td>
-                                    <td>{{ link_to_route('ponentes.edit', 'Editar', $ponente->id, array('class' => 'btn btn btn-warning btn-xs')) }}
-                                        {{ Form::open(array('method'=> 'DELETE', 'route' => array('ponentes.destroy', $ponente->id),'style'=>'display:inline','class'=>'form_eliminar')) }}
+                        @foreach ($galerias as $galeria)
+                            @if ($galeria->principal == 1)
+                                <tr id="{{$galeria->id}}">
+                                    <td class="ordena">{{$galeria->orden}}</td>
+                                    <td>{{$galeria->titulo}}</td>
+                                    <td>{{$galeria->subtitulo}}</td>
+                                    <td>{{$galeria->visible==1?'Si':'No'}}</td>
+                                    <td>{{ link_to_route('galerias.edit', 'Editar', $galeria->id, array('class' => 'btn btn btn-warning btn-xs')) }}
+                                        {{ Form::open(array('method'=> 'DELETE', 'route' => array('galerias.destroy', $galeria->id),'style'=>'display:inline','class'=>'form_eliminar')) }}
                                         {{ Form::submit('Eliminar', array('class' => 'btn btn btn-danger btn-xs')) }}
                                         {{ Form::close() }}
 
@@ -107,20 +107,20 @@
 
                 if (nregs>1) {
                     // Si el número de registros movidos es mayor que 2 quiere decir que hemos subido el registro mas de una posición, con lo cual
-                    // tenemos que ver en qué direcciñon lo hemos movido para pasar los datos de la primera o la última fila.
+                    // tenemos que ver en qué dirección lo hemos movido para pasar los datos de la primera o la última fila.
                     if (diff[nregs-1].newPosition > diff[nregs-1].oldPosition+1) { // Hemos bajado el registro
                         datos = {
                             id : $(diff[nregs-1].node).attr('id'),
                             oldPosition : diff[nregs-1].oldPosition+1,
                             newPosition : diff[nregs-1].newPosition+1,
-                            tabla : "ponentes" // Tabla a ordenar
+                            tabla : "galerias" // Tabla a ordenar
                         }
                     } else { // Hemos subido el registro
                         datos = {
                             id : $(diff[0].node).attr('id'),
                             oldPosition : diff[0].oldPosition+1,
                             newPosition : diff[0].newPosition+1,
-                            tabla : "ponentes"
+                            tabla : "galerias"
                         }
                     }
                 }
