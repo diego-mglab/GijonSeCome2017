@@ -16,7 +16,7 @@ use File;
 
 class ContentController extends Controller
 {
-    protected $tipo_contenido = 1; // 1 - Contenido, 2 - Agenda, 3 - Ponente, 4 - Portada, 5 - Galería
+    protected $tipo_contenido = 1; // 1 - Contenido, 2 - Agenda, 3 - Ponente, 4 - Portada, 5 - Galería, 6 - Menú
 
     /**
      * Display a listing of the resource.

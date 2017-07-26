@@ -176,9 +176,6 @@
                     {!! Form::close() !!}
 
 
-
-
-
                 </div>
                 <!-- /.box-body -->
             </div>
@@ -198,33 +195,26 @@
                 <!-- /.box-header -->
                 <!-- form start -->
 
-
-
-
                 <div class="box-body">
 
                     @foreach ($imagenes as $imagen)
                         <div class="col-xs-6 col-md-3 " style="padding-bottom:1em">
                             <?php
-                                  if ($imagen->url != '') { ?>
-
+                                  if ($imagen->tipo_multimedia == 'video') { ?>
+                                    <a data-lightbox-gallery="gallery1" class="nivo-lightbox" href="{{$imagen->url}}"><img src="{{asset('images/galerias/'.$galeria->carpeta)}}/{{$imagen->imagen or 'sinimagen.png'}}" style="width:100%"></a>
                             <?php } else { ?>
-                                    <img src="{{asset('images/galerias/'.$galeria->carpeta)}}/{{$imagen->imagen or 'sinimagen.png'}}" style="width:100%">
+                                    <a data-lightbox-gallery="gallery1" class="nivo-lightbox" href="{{asset('images/galerias/'.$galeria->carpeta)}}/{{$imagen->imagen or 'sinimagen.png'}}"><img src="{{asset('images/galerias/'.$galeria->carpeta)}}/{{$imagen->imagen or 'sinimagen.png'}}" style="width:100%"></a>
 
                             <?php } ?>
                             {{ Form::open(array('method'=> 'DELETE', 'route' => array('galerias.destroy', $imagen),'style'=>'display:inline')) }}
-                            {{Form::hidden('imagen_id',$imagen->id)}}
+                                {{ Form::hidden('imagen_id',$imagen->id) }}
+                                {{ Form::hidden('galeria_id',$galeria->id) }}
                             {{ Form::submit('Eliminar', array('class' => 'btn btn-block btn-danger btn-xs')) }}
                             {{ Form::close() }}
                         </div>
 
 
                     @endforeach
-
-
-
-
-
 
                 </div>
                 <!-- /.box-body -->
@@ -239,11 +229,18 @@
 @section('css')
 
     <!-- General -->
-    <link rel="stylesheet" href="{{asset('vendor/adminlte/css/general.css')}}">
+    <link rel="stylesheet" href="{{asset('vendor/adminlte/css/general.css')}}" type="text/css">
 
     <!-- iCheck -->
-    <link rel="stylesheet" href="{{asset('vendor/adminlte/plugins/iCheck/flat/green.css')}}">
+    <link rel="stylesheet" href="{{asset('vendor/adminlte/plugins/iCheck/flat/green.css')}}" type="text/css">
 
+    <!-- Nivo - Lightbox -->
+    <link rel="stylesheet" href="{{asset('css/nivo-lightbox/nivo-lightbox.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/nivo-lightbox/themes/default/default.css')}}" type="text/css">
+
+
+    <!-- Bootstrap Dialog -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.9/css/bootstrap-dialog.min.css" rel="stylesheet" type="text/css" />
 @stop
 
 @section('js')
@@ -295,4 +292,32 @@
             checkboxClass: 'icheckbox_flat-green'
         });
     </script>
+
+    <!-- Nivo - Lightbox -->
+    <script src="{{asset('js/nivo-lightbox.min.js')}}"></script>
+    <script>
+        $(document).ready(function(){
+            $('.nivo-lightbox').nivoLightbox();
+        });
+    </script>
+
+    <!-- Bootstrap Dialog -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.9/js/bootstrap-dialog.min.js"></script>
+
+    <script language="JavaScript">
+        $('.btn-danger').click(function(e){
+            e.preventDefault();
+            boton = this;
+
+            BootstrapDialog.confirm(
+                '¿Está seguro que desea eliminar el registro?', function(result) {
+
+                    if (result) {
+                        $(boton).parent().submit();
+                    }
+
+                });
+        });
+    </script>
+
 @stop

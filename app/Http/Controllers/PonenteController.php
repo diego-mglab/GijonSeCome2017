@@ -15,7 +15,7 @@ use Str;
 
 class PonenteController extends Controller
 {
-    protected $tipo_contenido = 3; // 1 - Contenido, 2 - Agenda, 3 - Ponente, 4 - Portada, 5 - Galería
+    protected $tipo_contenido = 3; // 1 - Contenido, 2 - Agenda, 3 - Ponente, 4 - Portada, 5 - Galería, 6 - Menú
 
     /**
      * Display a listing of the resource.
@@ -27,7 +27,7 @@ class PonenteController extends Controller
         $ponentes = DB::table('ponentes')
             ->join('textos_idiomas','ponentes.id','=','textos_idiomas.contenido_id')
             ->join('idiomas','textos_idiomas.idioma_id','idiomas.id')
-            ->select('ponentes.id','ponentes.imagen as imagen_ponentes','imagenslide','orden','titulo','subtitulo','contenido','metadescripcion','metatitulo','visible','principal','idioma','idiomas.imagen')
+            ->select('ponentes.id','ponentes.anio','ponentes.imagen as imagen_ponentes','imagenslide','orden','titulo','subtitulo','contenido','metadescripcion','metatitulo','visible','principal','idioma','idiomas.imagen')
             ->where('principal','1')
             ->where('tipo_contenido_id',$this->tipo_contenido)
             ->orderBy('textos_idiomas.titulo','ASC')->get();
@@ -112,6 +112,9 @@ class PonenteController extends Controller
 
             $ponente->imagenslide = $filename;
         }
+
+        //Metemos en el campo anio el año actual para poder consultar ediciones pasadas
+        $ponente->anio = date('Y');
 
         $maxorden = Ponente::max('orden');
         $ponente->orden = is_numeric($maxorden)?$maxorden+1:1;

@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'GijónSeCome 2017'),
 
     /*
     |--------------------------------------------------------------------------
@@ -184,6 +184,7 @@ return [
 
         Unisharp\Laravelfilemanager\LaravelFilemanagerServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        'Lavary\Menu\ServiceProvider',
         ],
 
     /*
@@ -221,6 +222,7 @@ return [
         'Lang' => Illuminate\Support\Facades\Lang::class,
         'Log' => Illuminate\Support\Facades\Log::class,
         'Mail' => Illuminate\Support\Facades\Mail::class,
+        'Menu' => 'Lavary\Menu\Facade',
         'Notification' => Illuminate\Support\Facades\Notification::class,
         'Password' => Illuminate\Support\Facades\Password::class,
         'Queue' => Illuminate\Support\Facades\Queue::class,

@@ -29,6 +29,7 @@
                             <th>Orden</th>
                             <th>Nombre</th>
                             <th>Restaurante</th>
+                            <th>Año</th>
                             <th>Visible</th>
                             <th>Acciones</th>
                         </tr>
@@ -38,8 +39,9 @@
                             @if ($ponente->principal == 1)
                                 <tr id="{{$ponente->id}}">
                                     <td class="ordena">{{$ponente->orden}}</td>
-                                    <td>{{$ponente->titulo}}{{--Nombre del ponente --}}</td>
-                                    <td>{{$ponente->subtitulo}}{{--Restaurante del ponente --}}</td>
+                                    <td>{{$ponente->titulo}}{{-- Nombre del ponente --}}</td>
+                                    <td>{{$ponente->subtitulo}}{{-- Restaurante del ponente --}}</td>
+                                    <td>{{$ponente->anio}}{{-- Año --}}</td>
                                     <td>{{$ponente->visible==1?'Si':'No'}}</td>
                                     <td>{{ link_to_route('ponentes.edit', 'Editar', $ponente->id, array('class' => 'btn btn btn-warning btn-xs')) }}
                                         {{ Form::open(array('method'=> 'DELETE', 'route' => array('ponentes.destroy', $ponente->id),'style'=>'display:inline','class'=>'form_eliminar')) }}

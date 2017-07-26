@@ -29,6 +29,7 @@
                             <th>Orden</th>
                             <th>Título</th>
                             <th>Subtítulo</th>
+                            <th>Año</th>
                             <th>Visible</th>
                             <th>Acciones</th>
                         </tr>
@@ -40,9 +41,11 @@
                                     <td class="ordena">{{$galeria->orden}}</td>
                                     <td>{{$galeria->titulo}}</td>
                                     <td>{{$galeria->subtitulo}}</td>
+                                    <td>{{$galeria->anio}}</td>
                                     <td>{{$galeria->visible==1?'Si':'No'}}</td>
                                     <td>{{ link_to_route('galerias.edit', 'Editar', $galeria->id, array('class' => 'btn btn btn-warning btn-xs')) }}
                                         {{ Form::open(array('method'=> 'DELETE', 'route' => array('galerias.destroy', $galeria->id),'style'=>'display:inline','class'=>'form_eliminar')) }}
+                                        {{ Form::hidden('id',$galeria->id) }}
                                         {{ Form::submit('Eliminar', array('class' => 'btn btn btn-danger btn-xs')) }}
                                         {{ Form::close() }}
 

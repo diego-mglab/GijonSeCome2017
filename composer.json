@@ -11,6 +11,7 @@
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "5.4.x-dev",
+        "lavary/laravel-menu": "v1.6.1",
         "unisharp/laravel-filemanager": "^1.8"
     },
     "require-dev": {

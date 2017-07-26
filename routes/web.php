@@ -51,4 +51,16 @@ Route::group(['prefix' => 'eunomia' , 'middleware' => 'auth' ], function () {
 
     Route::resource('/galerias', 'GaleriaController');
 
+    Route::get('/menu', 'MenuController@getIndex');
+
+    // Showing the admin for the menu builder and updating the order of menu items
+    Route::get('/menu', 'MenuController@getIndex');
+    Route::post('/menu', 'MenuController@postIndex');
+
+    Route::post('menu/new', 'MenuController@postNew');
+    Route::post('menu/delete', 'MenuController@postDelete');
+
+    Route::get('menu/edit/{id}', 'MenuController@getEdit');
+    Route::post('menu/edit/{id}', 'MenuController@postEdit');
+
 });
