@@ -40,7 +40,7 @@ class PortadaController extends Controller
      */
     public function create()
     {
-        $idiomas = Idioma::where('activado','1')->orderByDesc('idioma')->get();
+        $idiomas = Idioma::where('activado','1')->orderBy('principal')->get();
         return view('eunomia.portada.form_ins_portada',compact('idiomas'));
     }
 

@@ -91,58 +91,39 @@
                 <!-- Start Navigation List -->
                 <ul class="nav navbar-nav navbar-right">
 
+                    @foreach ($menus as $menu)
+
+                        @if (count($menu->submenu) >=1)
+
+                            <li>
+
+                                {{link_to_route($menu->url, $title = $menu->textos_idioma->titulo, $parameters = [$menu->url])}}
+
+                                <ul class="dropdown">
+
+                                    @foreach($menu->submenu as $submenu)
+
+                                        <li>{{link_to_route($submenu->url, $title = $submenu->textos_idioma->titulo, $parameters = [$submenu->url])}}</li>
 
 
-                    <li> <a href="#">Inicio</a>
-
-
-                        <ul class="dropdown">
-                        </ul></li>
-
-                    <li> <a href="noticias.html">El Festival</a>
-
-
-                        <ul class="dropdown">
-
-
-                            <li>  <a href="detallenoticia.html">Nuestra filosof&iacute;a</a>
+                                    @endforeach
 
 
 
 
-                            <li>  <a href="detallenoticia.html">Gij&oacute;nSeCome es sostenible</a>
+                                </ul></li>
 
 
-                        </ul></li>
 
-                    <li> <a href="#">Primera edici&oacute;n</a>
-
-
-                        <ul class="dropdown">
-
-                            <li>  <a href="chefs.html">Ponentes</a>
+                        @else
+                            <li>{{link_to_route($menu->url, $title = $menu->textos_idioma->titulo, $parameters = [$menu->url])}}</li>
+                        @endif
 
 
-                            <li>  <a href="agenda.html">Programa</a>
-
-                        </ul></li>
-
-                    <li> <a href="#">Zona de prensa</a>
 
 
-                        <ul class="dropdown">
+                    @endforeach
 
-
-                            <li>  <a href="noticias.html">Hemeroteca </a>
-
-
-                        </ul></li>
-
-                    <li> <a href="http://gijonsecome.es/contacta">Contacto</a>
-
-
-                        <ul class="dropdown">
-                        </ul></li>
                 </ul>
 
                 <!-- end navigation list -->

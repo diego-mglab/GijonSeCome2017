@@ -53,7 +53,7 @@ class AgendaController extends Controller
             ->where('tipo_contenido_id',$this->tipo_contenido)
             ->where('principal','1')
             ->pluck('titulo','id'); // titulo como nombre del ponente
-        $idiomas = Idioma::where('activado','1')->orderByDesc('idioma')->get();
+        $idiomas = Idioma::where('activado','1')->orderBy('principal')->get();
         $zonas = Zona::all()->pluck('nombre','id');
         return view('eunomia.agenda.form_ins_agenda',compact('idiomas','ponentes','zonas'));
     }

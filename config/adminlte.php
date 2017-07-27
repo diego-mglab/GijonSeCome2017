@@ -154,6 +154,11 @@ return [
             'url'         => '/eunomia/galerias',
             'icon'        => 'image',
         ],
+        [
+            'text'        => 'Menú',
+            'url'         => '/eunomia/menu',
+            'icon'        => 'navicon',
+        ],
         'ACCOUNT SETTINGS',
         [
             'text' => 'Profile',

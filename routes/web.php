@@ -23,7 +23,24 @@ Route::get('/contacto', 'WebController@contacto')->name('contacto_web');
 Route::get('/noticias', 'WebController@noticias')->name('noticias_web');
 Route::get('/detalle', 'WebController@detalle')->name('detalle_web');
 Route::get('/detalleponentes', 'WebController@detalleponentes')->name('detalle_ponentes_web');
+Route::get('/nuestra-filosofia', 'WebController@detalleponentes')->name('nuestra-filosofia');
+Route::get('/el-festival', 'WebController@detalleponentes')->name('el-festival');
+Route::get('/gijonsecome-es-sostenible', 'WebController@detalleponentes')->name('gijonsecome-es-sostenible');
+Route::get('/primera-edidion', 'WebController@detalleponentes')->name('primera-edidion');
+Route::get('/ponentes', 'WebController@ponentes')->name('ponentes');
+Route::get('/programa', 'WebController@detalleponentes')->name('programa');
+Route::get('/zona-de-prensa', 'WebController@detalleponentes')->name('zona-de-prensa');
+Route::get('/hemeroteca', 'WebController@detalleponentes')->name('hemeroteca');
+Route::get('/contacto', 'WebController@contacto')->name('contacto');
 
+Route::group(['middleware' => ['web']], function () {
+    Route::get('lang/{lang}', function ($lang) {
+        session(['idioma' => $lang]);
+        return \Redirect::back();
+    })->where([
+        'lang' => 'en|es'
+    ]);
+});
 
 //Rutas para gestor de contenido
 
