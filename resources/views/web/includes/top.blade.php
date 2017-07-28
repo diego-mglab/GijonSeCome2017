@@ -9,7 +9,7 @@
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                     <!-- Start Contact Info -->
                     <ul class="contact-details">
-                        <li><a href="#"><i class="fa fa-map-marker"></i> Recinto Ferial Luis Adaro</a>
+                        <li><a href="#"><i class="fa fa-map-marker"></i> {{__('cabecera.recinto_ferial_luis_adaro')}}</a>
                         </li>
                         <li><a href="mialto:info@gijonsecome.es"><i class="fa fa-envelope-o"></i> info@gijonsecome.es</a>
                         </li>
@@ -23,10 +23,10 @@
                     <!-- idiomas -->
                     <ul class="social-list idiomas">
                         <li>
-                            <a class="itl-tooltip" data-placement="bottom" title="Castellano" href=""><i class="fa">CAS</i></a>
+                            <a class="itl-tooltip" data-placement="bottom" title="Castellano" href="{{ url('/', ['es']) }}"><i class="fa">CAS</i></a>
                         </li>
                         <li>
-                            <a class="itl-tooltip" data-placement="bottom" title="Asturianu" href="ast"><i class="fa">AST</i></a>
+                            <a class="itl-tooltip" data-placement="bottom" title="Asturianu" href="{{ url('/', ['as']) }}"><i class="fa">AST</i></a>
                         </li>
                     </ul>
                     <!-- fin idiomas -->
@@ -97,30 +97,22 @@
 
                             <li>
 
-                                {{link_to_route($menu->url, $title = $menu->textos_idioma->titulo, $parameters = [$menu->url])}}
+                                {{link_to_route($menu->url, $title = $menu->textos_idioma->titulo, $parameters = [])}}
 
                                 <ul class="dropdown">
 
                                     @foreach($menu->submenu as $submenu)
 
-                                        <li>{{link_to_route($submenu->url, $title = $submenu->textos_idioma->titulo, $parameters = [$submenu->url])}}</li>
+                                        <li>{{link_to_route($submenu->url, $title = $submenu->textos_idioma->titulo, $parameters = [])}}</li>
 
 
                                     @endforeach
 
-
-
-
                                 </ul></li>
 
-
-
-                        @else
-                            <li>{{link_to_route($menu->url, $title = $menu->textos_idioma->titulo, $parameters = [$menu->url])}}</li>
+                        @elseif ($menu->parent_id == 0)
+                            <li>{{link_to_route($menu->url, $title = $menu->textos_idioma->titulo, $parameters = [])}}</li>
                         @endif
-
-
-
 
                     @endforeach
 
@@ -133,61 +125,32 @@
         <!-- Mobile Menu Start -->
         <ul class="wpb-mobile-menu">
 
+            @foreach ($menus as $menu)
+
+                @if (count($menu->submenu) >=1)
+
+                    <li>
+
+                        {{$submenu->url!=''?link_to_route($submenu->url, $title = $submenu->textos_idioma->titulo, $parameters = []):$submenu->textos_idioma->titulo}}
+
+                        <ul class="dropdown">
+
+                            @foreach($menu->submenu as $submenu)
+
+                                <li>{{$submenu->url!=''?link_to_route($submenu->url, $title = $submenu->textos_idioma->titulo, $parameters = []):$submenu->textos_idioma->titulo}}</li>
 
 
-            <li> <a href="http://gijonsecome.es">Inicio</a>
+                            @endforeach
 
+                        </ul></li>
 
-                <ul class="dropdown">
-                </ul></li>
+                @elseif ($menu->parent_id == 0)
+                    <li>{{$submenu->url!=''?link_to_route($submenu->url, $title = $submenu->textos_idioma->titulo, $parameters = []):$submenu->textos_idioma->titulo}}</li>
+                @endif
 
-            <li> <a href="#">El Festival</a>
+            @endforeach
 
-
-                <ul class="dropdown">
-
-
-                    <li>  <a href="http://gijonsecome.es/detalle/11">Nuestra filosof&iacute;a</a>
-
-
-
-
-                    <li>  <a href="http://gijonsecome.es/detalle/38">Gij&oacute;nSeCome es sostenible</a>
-
-
-                </ul></li>
-
-            <li> <a href="#">Primera edici&oacute;n</a>
-
-
-                <ul class="dropdown">
-
-                    <li>  <a href="http://gijonsecome.es/ponentes">Ponentes</a>
-
-
-                    <li>  <a href="http://gijonsecome.es/agenda">Programa</a>
-
-                </ul></li>
-
-            <li> <a href="http://gijonsecome.es/contactaprensa">Zona de prensa</a>
-
-
-                <ul class="dropdown">
-
-
-                    <li>  <a href="http://gijonsecome.es/detalle/15">Hemeroteca </a>
-
-
-                </ul></li>
-
-            <li> <a href="http://gijonsecome.es/contacta">Contacto</a>
-
-
-                <ul class="dropdown">
-                </ul></li>
         </ul>
-
-
         <!-- Mobile Menu End -->
 
 

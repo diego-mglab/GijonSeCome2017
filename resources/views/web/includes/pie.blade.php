@@ -7,7 +7,7 @@
                 <div>
 
                     <!-- Classic Heading -->
-                    <h4 class="classic-title"><span>Organiza</span></h4>
+                    <h4 class="classic-title"><span>{{__('pie.organiza')}}</span></h4>
 
                     <div class="clients-carousel custom-carousel touch-carousel" data-appeared-items="1">
 
@@ -28,7 +28,7 @@
                 <div>
 
                     <!-- Classic Heading -->
-                    <h4 class="classic-title"><span>Patrocinadores</span></h4>
+                    <h4 class="classic-title"><span>{{__('pie.patrocinadores')}}</span></h4>
 
                     <div class="clients-carousel custom-carousel touch-carousel" data-appeared-items="4">
 
@@ -53,7 +53,7 @@
                 <div>
 
                     <!-- Classic Heading -->
-                    <h4 class="classic-title"><span>Proveedores oficiales</span></h4>
+                    <h4 class="classic-title"><span>{{__('pie.proveedores_oficiales')}}</span></h4>
 
                     <div class="clients-carousel custom-carousel touch-carousel" data-appeared-items="5">
 
@@ -89,7 +89,7 @@
                 <div>
 
                     <!-- Classic Heading -->
-                    <h4 class="classic-title"><span>Colaboradores</span></h4>
+                    <h4 class="classic-title"><span>{{__('pie.colaboradores')}}</span></h4>
 
                     <div class="clients-carousel custom-carousel touch-carousel" data-appeared-items="12">
 
@@ -158,14 +158,14 @@
             <div class="col-lg-2 col-md-2 col-sm-4 col-xs-12  ">
 
                 <div class="footer-widget mail-subscribe-widget">
-                    <h4 class="head-line">Suscríbete a nuestra newsletter</h4>
-                    <p>Toda la información actualizada</p>
+                    <h4 class="head-line">{{__('pie.suscribete_nuestra_news')}}</h4>
+                    <p>{{__('pie.toda_info_actualizada')}}</p>
                     <!-- Begin MailChimp Signup Form -->
                     <div id="mc_embed_signup">
                         <form action="//gijonsecome.us14.list-manage.com/subscribe/post?u=7d3394bce3bcd4a9e1df1e497&amp;id=86f11804a6" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
                             <div id="mc_embed_signup_scroll">
                                 <div class="mc-field-group">
-                                    <label for="mce-EMAIL">Email </label>
+                                    <label for="mce-EMAIL">{{__('pie.email')}} </label>
                                     <input type="email" value="" name="EMAIL" id="mce-EMAIL">
                                 </div>
                                 <div id="mce-responses" class="clear">
@@ -174,7 +174,7 @@
                                 </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
                                 <div style="position: absolute; left: -5000px;" aria-hidden="true">
                                     <input type="text" name="b_7d3394bce3bcd4a9e1df1e497_86f11804a6" tabindex="-1" value=""></div>
-                                <div class="clear"><input type="submit" value="Suscríbete" name="Subscribe" id="mc-embedded-subscribe" class="button"></div>
+                                <div class="clear"><input type="submit" value="{{__('pie.suscribete')}}" name="Subscribe" id="mc-embedded-subscribe" class="button"></div>
                             </div>
                         </form>
                     </div>
@@ -183,7 +183,7 @@
                 </div>
                 <!-- nuestras redes -->
                 <div class="footer-widget social-widget">
-                    <h4 class="head-line">Nuestras redes</h4>
+                    <h4 class="head-line">{{__('pie.nuestras_redes')}}</h4>
                     <ul class="social-icons">
                         <li>
                             <a class="facebook itl-tooltip" data-placement="bottom" title="Facebook" href="https://facebook.com/gijonsecome" target="new"><i class="fa fa-facebook"></i></a>
@@ -215,31 +215,41 @@
             <div class="col-lg-2 col-lg-offset-1 col-md-2 col-md-offset-1 col-sm-4 col-xs-12 ">
 
                 <ul class="mapaweb">
-                    <li>EL FESTIVAL<ul>
-                            <li><a href="#">NUESTRA FILOSOFÍA</a></li>
-                            <li><a href="#"> GIJÓNSECOME ES SOSTENIBLE</a></li>
-                        </ul></li></ul>
-                <ul>
-                    <li> PRIMERA EDICIÓN
-                        <ul> <li><a href="#">PONENTES</a></li>
-                            <li><a href="#">PROGRAMA</a></li></ul>
-                    </li>
-                </ul>
-                <ul>
-                    <li> ZONA DE PRENSA
-                        <ul>       <li><a href="#">HEMEROTECA</a></li>
+                    @foreach ($menus as $menu)
 
-                            <li><a href="#">CONTACTO</a></li></ul>
-                    </li>
+                        @if (count($menu->submenu) >=1 && $menu->menu_pie)
 
+                            <li>
+
+                                {{$menu->url!=''?link_to_route($menu->url, $title = $menu->textos_idioma->titulo, $parameters = []):$menu->textos_idioma->titulo}}
+
+                                <ul>
+
+                                    @foreach($menu->submenu as $submenu)
+
+                                        @if ($submenu->menu_pie)
+
+                                            <li>{{$submenu->url!=''?link_to_route($submenu->url, $title = $submenu->textos_idioma->titulo, $parameters = []):$submenu->textos_idioma->titulo}}</li>
+
+                                        @endif
+
+                                    @endforeach
+
+                                </ul></li>
+
+                        @elseif ($menu->parent_id == 0 && $menu->menu_pie)
+                            <li>{{$menu->url!=''?link_to_route($menu->url, $title = $menu->textos_idioma->titulo, $parameters = []):$menu->textos_idioma->titulo}}</li>
+                        @endif
+
+                    @endforeach
                 </ul>
             </div>
             <div class="col-lg-2 col-md-2 col-xs-12">
                 <div class="footer-widget contacta">
-                    <h4 class="head-line">Contacto</h4>
+                    <h4 class="head-line">{{__('pie.contacto')}}</h4>
                     <p><strong>Teléfono</strong>: <a href="tel:+34984050409">+34 984 05 04 09</a></p>
-                    <p><strong>Email</strong>: <a href="mailto:info@gijonsecome.es">info@gijonsecome.es</a></p>
-                    <p><strong>Web</strong>: <a href="http://www.mglab.es">www.mglab.es</a></p>
+                    <p><strong>{{__('pie.email')}}</strong>: <a href="mailto:info@gijonsecome.es">info@gijonsecome.es</a></p>
+                    <p><strong>{{__('pie.web')}}</strong>: <a href="http://www.mglab.es">www.mglab.es</a></p>
                 </div>
 
             </div>

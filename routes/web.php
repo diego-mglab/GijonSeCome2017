@@ -34,11 +34,12 @@ Route::get('/hemeroteca', 'WebController@detalleponentes')->name('hemeroteca');
 Route::get('/contacto', 'WebController@contacto')->name('contacto');
 
 Route::group(['middleware' => ['web']], function () {
-    Route::get('lang/{lang}', function ($lang) {
-        session(['idioma' => $lang]);
+    Route::get('{lang}', function ($lang) {
+        Session(['idioma' => $lang]);
+        App::SetLocale(Session::get('idioma'));
         return \Redirect::back();
     })->where([
-        'lang' => 'en|es'
+        'lang' => 'es|as'
     ]);
 });
 

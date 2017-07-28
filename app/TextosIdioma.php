@@ -13,4 +13,8 @@ class TextosIdioma extends Model
     public function idioma(){
         return $this->belongsToMany('App\Idioma','idioma_id','id');
     }
+
+    public function portada(){
+        return $this->belongsTo('App\Portada', 'id','contenido_id');
+    }
 }

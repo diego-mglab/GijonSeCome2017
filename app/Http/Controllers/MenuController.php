@@ -49,8 +49,9 @@ class MenuController extends Controller {
 	{
 		$item = Menu::find($request->id);
         $item->title 	= $request->title;
-        //$item->label 	= $request->label;
         $item->url 		= $request->url;
+        if (isset($request->menu_pie))
+            $item->menu_pie 	= $request->menu_pie;
 
         if($item->save()) {
 
@@ -124,9 +125,12 @@ class MenuController extends Controller {
 		$item = new Menu;
 
 		$item->title 	= $request->title;
-		//$item->label 	= $request->label;
 		$item->url 		= $request->url;
 		$item->order 	= Menu::max('order')+1;
+        if (isset($request->menu_pie))
+		    $item->menu_pie 	= $request->menu_pie;
+        else
+            $item->menu_pie = '0';
 
 		if($item->save()) {
             $lastId = $item->id;

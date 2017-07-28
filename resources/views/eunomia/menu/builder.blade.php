@@ -99,6 +99,12 @@
                   {{ Form::text('url',null,array('class'=>'form-control' ,'placeholder' => 'URL'))}}
                 </div>
             </div>
+            <div class="form-group">
+              <label for="menu_pie" class="col-lg-2 control-label">Menú pie</label>
+              <div class="col-lg-10">
+                  {{Form::checkbox('menu_pìe', 1, false,['class' => 'flat-green'])}}
+              </div>
+            </div>
          </div>
          <div class="modal-footer">
            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>

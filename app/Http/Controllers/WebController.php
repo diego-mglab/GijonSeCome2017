@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Menu;
 use App\Idioma;
+use App\Portada;
+use App\Ponente;
 use App\TextosIdioma;
 use Session;
 use Illuminate\Support\Facades\DB;
@@ -19,7 +21,10 @@ class WebController extends Controller
             Session::put('idioma',$idioma->id);
         }
         $menus = Menu::get();
-        return view('web.home',compact('menus'));
+        $portada = Portada::orderBy('orden')->get();
+        $ponentes = Ponente::orderBy('orden')->get();
+        $idioma_principal = Idioma::where('principal','1')->first()->id;
+        return view('web.home',compact('menus','portada','ponentes','idioma_principal'));
     }
 
     public function ponentes()

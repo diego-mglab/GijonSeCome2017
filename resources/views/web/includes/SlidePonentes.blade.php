@@ -10,116 +10,23 @@
                 <div class="clients-carousel">
                     <div class="projects-carousel touch-carousel owl-carousel owl-theme" data-appeared-items="5">
 
-                        <!-- Client 1 -->
-                        <div class="client-item item">
-                            <div class="imagenchef">
+                        @foreach ($ponentes as $ponente)
+                            <div class="client-item item">
+                                <div class="imagenchef">
 
-                                <div class="portfolio-thumb">
-                                    <a  href="detalleponentes/4">
-                                        <img alt="" src="images/fotos/indice.jpg" />
-                                    </a>
-                                </div>
-                                <div class="nombrechef">
+                                    <div class="portfolio-thumb">
+                                        <a  href="detalleponentes/4">
+                                            <img alt="" src="{{asset('images/ponentes/s')}}/{{$ponente->imagen or 'sinimagen.png'}}" />
+                                        </a>
+                                    </div>
+                                    <div class="nombrechef">
 
-                                    <h4>Marcos Morán</h4>
+                                        <h4>{{$ponente->textos_idioma->titulo}}</h4>
 
-                                </div>
-                            </div>
-                        </div>
-                        <div class="client-item item">
-                            <div class="imagenchef">
-
-                                <div class="portfolio-thumb">
-                                    <a  href="detalleponentes/4">
-                                        <img alt="" src="images/fotos/indice.jpg" />
-                                    </a>
-                                </div>
-                                <div class="nombrechef">
-
-                                    <h4>Marcos Morán</h4>
-
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="client-item item">
-                            <div class="imagenchef">
-
-                                <div class="portfolio-thumb">
-                                    <a  href="detalleponentes/4">
-                                        <img alt="" src="images/fotos/indice.jpg" />
-                                    </a>
-                                </div>
-                                <div class="nombrechef">
-
-                                    <h4>Marcos Morán</h4>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="client-item item">
-                            <div class="imagenchef">
-
-                                <div class="portfolio-thumb">
-                                    <a  href="detalleponentes/4">
-                                        <img alt="" src="images/fotos/indice.jpg" />
-                                    </a>
-                                </div>
-                                <div class="nombrechef">
-
-                                    <h4>Marcos Morán</h4>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="client-item item">
-                            <div class="imagenchef">
-
-                                <div class="portfolio-thumb">
-                                    <a  href="detalleponentes/4">
-                                        <img alt="" src="images/fotos/indice.jpg" />
-                                    </a>
-                                </div>
-                                <div class="nombrechef">
-
-                                    <h4>Marcos Morán</h4>
-
-                                </div>
-                            </div>
-                        </div>		<div class="client-item item">
-                            <div class="imagenchef">
-
-                                <div class="portfolio-thumb">
-                                    <a  href="detalleponentes/4">
-                                        <img alt="" src="images/fotos/indice.jpg" />
-                                    </a>
-                                </div>
-                                <div class="nombrechef">
-
-                                    <h4>Marcos Morán</h4>
-
-                                </div>
-                            </div>
-                        </div>		<div class="client-item item">
-                            <div class="imagenchef">
-
-                                <div class="portfolio-thumb">
-                                    <a  href="detalleponentes/4">
-                                        <img alt="" src="images/fotos/indice.jpg" />
-                                    </a>
-                                </div>
-                                <div class="nombrechef">
-
-                                    <h4>Marcos Morán</h4>
-
-                                </div>
-                            </div>
-                        </div>
-
-
-
-
-
-
+                        @endforeach
                     </div>
                 </div>
                 <!--End Clients Carousel-->

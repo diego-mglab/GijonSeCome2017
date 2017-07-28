@@ -26,7 +26,9 @@
 				  @endforeach
 			  </ul>
 			  <div class="tab-content no-padding">
-
+				  <?php
+					  $menu_pie = $item->menu_pie;
+				  ?>
 				  @foreach($idiomas as $idioma)
                       <?php
                       $titulo = "";
@@ -74,6 +76,12 @@
 		    <div class="col-lg-10">
 		      {{ Form::text('url',null,array('class'=>'form-control'))}}
 		    </div>
+		</div>
+		<div class="form-group">
+		  <label for="menu_pie" class="col-lg-2 control-label">Menú pie</label>
+		  <div class="col-lg-10">
+			  {{Form::checkbox('menu_pie', '1', $menu_pie,['class' => 'flat-green'])}}
+		  </div>
 		</div>
 		<div class="form-group">
 		    <div class="col-md-6 col-md-offset-6 text-right">
