@@ -12,6 +12,7 @@
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "5.4.x-dev",
         "lavary/laravel-menu": "v1.6.1",
+        "mobiledetect/mobiledetectlib": "2.8.25",
         "unisharp/laravel-filemanager": "^1.8"
     },
     "require-dev": {

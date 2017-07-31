@@ -14,15 +14,27 @@
 //    return view('welcome');
 //});
 
+use App\Menu;
+use App\Idioma;
+use App\Portada;
+use App\Ponente;
+
 //Rutas para web
 
-Route::get('/', 'WebController@index')->name('home_web');
-Route::get('/ponentes', 'WebController@ponentes')->name('ponentes_web');
-Route::get('/agenda', 'WebController@agenda')->name('agenda_web');
+
+Route::get('/', function(){
+   return redirect('/'.Session::get('idioma') !== null?Session::get('idioma'):Idioma::where('principal',1)->first()->codigo);
+})->name('principal');
+$idiomas = Idioma::all();
+foreach ($idiomas as $idioma){
+    $codigo = $idioma->codigo;
+    Route::get($codigo.'/ponentes', 'WebController@ponentes')->name('ponentes_web_'.$codigo);
+    Route::get($codigo.'/agenda', 'WebController@agenda')->name('agenda_web_'.$codigo);
+    Route::get($codigo.'/detalleponentes/{slug}', 'WebController@detalleponentes')->name('detalleponentes_web_'.$codigo);
+}
 Route::get('/contacto', 'WebController@contacto')->name('contacto_web');
 Route::get('/noticias', 'WebController@noticias')->name('noticias_web');
 Route::get('/detalle', 'WebController@detalle')->name('detalle_web');
-Route::get('/detalleponentes', 'WebController@detalleponentes')->name('detalle_ponentes_web');
 Route::get('/nuestra-filosofia', 'WebController@detalleponentes')->name('nuestra-filosofia');
 Route::get('/el-festival', 'WebController@detalleponentes')->name('el-festival');
 Route::get('/gijonsecome-es-sostenible', 'WebController@detalleponentes')->name('gijonsecome-es-sostenible');
@@ -37,7 +49,10 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('{lang}', function ($lang) {
         Session(['idioma' => $lang]);
         App::SetLocale(Session::get('idioma'));
-        return \Redirect::back();
+        $menus = Menu::get();
+        $portada = Portada::orderBy('orden')->get();
+        $ponentes = Ponente::where('anio',date('Y')-1)->orderBy('orden')->get();
+        return view('web.home',compact('menus','portada','ponentes'));
     })->where([
         'lang' => 'es|as'
     ]);

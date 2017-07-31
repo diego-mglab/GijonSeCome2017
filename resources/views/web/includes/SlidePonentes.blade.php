@@ -21,7 +21,7 @@
                                     </div>
                                     <div class="nombrechef">
 
-                                        <h4>{{$ponente->textos_idioma->titulo}}</h4>
+                                        <h4>{{is_object($ponente->textos_idioma)?$ponente->textos_idioma->titulo:''}}</h4>
 
                                     </div>
                                 </div>

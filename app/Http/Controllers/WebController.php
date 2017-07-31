@@ -11,30 +11,26 @@ use App\Ponente;
 use App\TextosIdioma;
 use Session;
 use Illuminate\Support\Facades\DB;
+use URL;
 
 class WebController extends Controller
 {
     public function index()
     {
-        if (Session::get('idioma') === null) {
-            $idioma = Idioma::where('principal','1')->first();
-            Session::put('idioma',$idioma->id);
-        }
-        $menus = Menu::get();
-        $portada = Portada::orderBy('orden')->get();
-        $ponentes = Ponente::orderBy('orden')->get();
-        $idioma_principal = Idioma::where('principal','1')->first()->id;
-        return view('web.home',compact('menus','portada','ponentes','idioma_principal'));
+        //
     }
 
     public function ponentes()
     {
-        return view('web.ponentes');
+        $menus = Menu::get();
+        $ponentes = Ponente::orderBy('orden')->get();
+        return view('web.ponentes', compact('menus','ponentes'));
     }
 
     public function agenda()
     {
-        return view('web.agenda');
+        $menus = Menu::get();
+        return view('web.agenda', compact('menus'));
     }
 
     public function contacto()

@@ -74,7 +74,7 @@
 		<div class="form-group">
 		    <label for="url" class="col-lg-2 control-label">URL</label>
 		    <div class="col-lg-10">
-		      {{ Form::text('url',null,array('class'=>'form-control'))}}
+				{{ Form::select('url',$paginas,null,array('id' => 'url', 'class'=>'form-control'))}}
 		    </div>
 		</div>
 		<div class="form-group">
@@ -98,6 +98,9 @@
 @section('css')
 	<!-- iCheck -->
 	<link rel="stylesheet" href="{{asset('vendor/adminlte/plugins/iCheck/flat/green.css')}}">
+
+	<!-- jQuery editable select -->
+	<link rel="stylesheet" href="{{asset('css/jquery-editable-select.css')}}">
 @stop
 
 @section('js')
@@ -108,5 +111,11 @@
         $('input[type="checkbox"].flat-green').iCheck({
             checkboxClass: 'icheckbox_flat-green'
         });
+	</script>
+
+	<!-- jQuery editable select -->
+	<script src="{{asset("js/jquery-editable-select.js")}}"> </script>
+	<script type="text/javascript">
+        $('#url').editableSelect();
 	</script>
 @stop

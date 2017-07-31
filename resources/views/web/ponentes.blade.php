@@ -29,149 +29,48 @@
             </hgroup>
         </div>
 
+        <?php
+        $contador = 1;
+        $elementos = count($ponentes);
+        ?>
+        @foreach ($ponentes as $ponente)
+            @if ($contador == 1)
+            <?php
+                $idioma_actual = Session::get('idioma');
+                //se muestran los 4 primeros chefs luego en el siguiente div general se muestran todos menos estos cuatro
+            ?>
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
 
-        <!-- se muestran los 4 primeros chefs luego en el siguiente div general se muestran todos menos estos cuatro  -->
-        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                <div class="portfolio-3column">
+                    <ul id="portfolio-list" data-animated="fadeIn">
+            @endif
+                        <li>
+                            <img src="{{asset('images/chefs/m')}}/{{$ponente->imagen or 'sinimagen.png'}}" alt="" />
+                            <div class="portfolio-item-content">
+                                <span class="header">{{is_object($ponente->textos_idioma)?$ponente->textos_idioma->titulo:''}}</span>
+                                <p class="body">{{is_object($ponente->textos_idioma)?$ponente->textos_idioma->subtitulo:''}}</p>
+                            </div>
+                            <a href="{{route('detalleponentes_web_'.$idioma_actual,[is_object($ponente->textos_idioma)?$ponente->textos_idioma->slug:''])}}"><i class="more">+</i></a>
 
-            <div class="portfolio-3column">
-                <ul id="portfolio-list" data-animated="fadeIn">
-                    <li>
-                        <img src="images/chefs/cocineros.png" alt="" />
-                        <div class="portfolio-item-content">
-                            <span class="header">Marcos Morán dos líneas</span>
-                            <p class="body">Restaurante: Casa Gerardo (Prendes)</p>
-                        </div>
-                        <a href="../detalleponentes/4"><i class="more">+</i></a>
-
-                    </li>
-                    <li>
-                        <img src="images/chefs/cocineros.png" alt="" />
-                        <div class="portfolio-item-content">
-                            <span class="header">Marcos Morán</span>
-                            <p class="body">Restaurante: Casa Gerardo (Prendes)</p>
-                        </div>
-                        <a href="../detalleponentes/4"><i class="more">+</i></a>
-
-                    </li>
-                    <li>
-                        <img src="images/chefs/cocineros.png" alt="" />
-                        <div class="portfolio-item-content">
-                            <span class="header">Marcos Morán</span>
-                            <p class="body">Restaurante: Casa Gerardo (Prendes)</p>
-                        </div>
-                        <a href="../detalleponentes/4"><i class="more">+</i></a>
-
-                    </li>
-                    <li>
-                        <img src="images/chefs/cocineros.png" alt="" />
-                        <div class="portfolio-item-content">
-                            <span class="header">Marcos Morán</span>
-                            <p class="body">Restaurante: Casa Gerardo (Prendes)</p>
-                        </div>
-                        <a href="../detalleponentes/4"><i class="more">+</i></a>
-
-                    </li>
-
+                        </li>
+            @if ($contador == 4 && $elementos>4)
                 </ul>
-
-
-
 
             </div>
 
         </div><!-- fin col lg8 -->
 
-
-
-
-        <!-- se muestran todos los chefs excepto los cuatro primeros  -->
-
-
+        <?php //se muestran todos los chefs excepto los cuatro primeros
+        ?>
 
         <div class="col-lg-12">
             <div class="portfolio-4column">
                 <ul id="portfolio-list" data-animated="fadeIn">
-                    <li>
-                        <img src="images/chefs/cocineros.png" alt="" />
-                        <div class="portfolio-item-content">
-                            <span class="header">Marcos Morán</span>
-                            <p class="body">Restaurante: Casa Gerardo (Prendes)</p>
-                        </div>
-                        <a href="../detalleponentes/4"><i class="more">+</i></a>
-
-                    </li>
-                    <li>
-                        <img src="images/chefs/cocineros.png" alt="" />
-                        <div class="portfolio-item-content">
-                            <span class="header">Marcos Morán</span>
-                            <p class="body">Restaurante: Casa Gerardo (Prendes)</p>
-                        </div>
-                        <a href="../detalleponentes/4"><i class="more">+</i></a>
-
-                    </li>
-                    <li>
-                        <img src="images/chefs/cocineros.png" alt="" />
-                        <div class="portfolio-item-content">
-                            <span class="header">Marcos Morán</span>
-                            <p class="body">Restaurante: Casa Gerardo (Prendes)</p>
-                        </div>
-                        <a href="../detalleponentes/4"><i class="more">+</i></a>
-
-                    </li>
-                    <li>
-                        <img src="images/chefs/cocineros.png" alt="" />
-                        <div class="portfolio-item-content">
-                            <span class="header">Marcos Morán</span>
-                            <p class="body">Restaurante: Casa Gerardo (Prendes)</p>
-                        </div>
-                        <a href="../detalleponentes/4"><i class="more">+</i></a>
-
-                    </li>
-                    <li>
-                        <img src="images/chefs/cocineros.png" alt="" />
-                        <div class="portfolio-item-content">
-                            <span class="header">Marcos Morán</span>
-                            <p class="body">Restaurante: Casa Gerardo (Prendes)</p>
-                        </div>
-                        <a href="../detalleponentes/4"><i class="more">+</i></a>
-
-                    </li>
-                    <li>
-                        <img src="images/chefs/cocineros.png" alt="" />
-                        <div class="portfolio-item-content">
-                            <span class="header">Marcos Morán</span>
-                            <p class="body">Restaurante: Casa Gerardo (Prendes)</p>
-                        </div>
-                        <a href="../detalleponentes/4"><i class="more">+</i></a>
-
-                    </li>
-                    <li>
-                        <img src="images/chefs/cocineros.png" alt="" />
-                        <div class="portfolio-item-content">
-                            <span class="header">Marcos Morán</span>
-                            <p class="body">Restaurante: Casa Gerardo (Prendes)</p>
-                        </div>
-                        <a href="../detalleponentes/4"><i class="more">+</i></a>
-
-                    </li>
-                    <li>
-                        <img src="images/chefs/cocineros.png" alt="" />
-                        <div class="portfolio-item-content">
-                            <span class="header">Marcos Morán</span>
-                            <p class="body">Restaurante: Casa Gerardo (Prendes)</p>
-                        </div>
-                        <a href="../detalleponentes/4"><i class="more">+</i></a>
-
-                    </li>
-                    <li>
-                        <img src="images/chefs/cocineros.png" alt="" />
-                        <div class="portfolio-item-content">
-                            <span class="header">Marcos Morán</span>
-                            <p class="body">Restaurante: Casa Gerardo (Prendes)</p>
-                        </div>
-                        <a href="../detalleponentes/4"><i class="more">+</i></a>
-
-                    </li>
+            @endif
+            <?php
+            $contador++;
+            ?>
+        @endforeach
                 </ul>
 
 
@@ -190,5 +89,5 @@
 @endsection
 
 @section('css')
-    <link rel="stylesheet" type="text/css" href="css/chefs.css"/>
+    <link rel="stylesheet" type="text/css" href="{{asset('css/chefs.css')}}"/>
 @endsection

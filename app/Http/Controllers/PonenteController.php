@@ -222,13 +222,13 @@ class PonenteController extends Controller
             $filename = time() . '.' . $imagen->getClientOriginalExtension();
 
 
-            Image::make($imagen)->resize(970, null, function ($constraint) {
+            Image::make($imagen)->resize(768, null, function ($constraint) {
                 $constraint->aspectRatio();
             })->save($dirl.$filename, 95 );
 
-            Image::make($imagen)->resize(768, null, function ($constraint) {
-                $constraint->aspectRatio();
-            })->save($dirm.$filename, 95 );
+            Image::make($imagen)->fit(480, 480, function ($constraint) {
+                $constraint->upsize();
+            })->save($dirm.$filename );
 
             $ponente->imagen = $filename;
 

@@ -215,30 +215,30 @@
             <div class="col-lg-2 col-lg-offset-1 col-md-2 col-md-offset-1 col-sm-4 col-xs-12 ">
 
                 <ul class="mapaweb">
+                    <?php
+                    $idioma_actual = Session::get('idioma');
+                    ?>
                     @foreach ($menus as $menu)
 
-                        @if (count($menu->submenu) >=1 && $menu->menu_pie)
+                        @if (count($menu->submenu) >=1)
 
                             <li>
 
-                                {{$menu->url!=''?link_to_route($menu->url, $title = $menu->textos_idioma->titulo, $parameters = []):$menu->textos_idioma->titulo}}
+                                {{link_to_route($menu->url!=''?$menu->url."_web_".$idioma_actual:'principal', $title = is_object($menu->textos_idioma)?$menu->textos_idioma->titulo:'', $parameters = [])}}
 
                                 <ul>
 
                                     @foreach($menu->submenu as $submenu)
 
-                                        @if ($submenu->menu_pie)
+                                        <li>{{link_to_route($submenu->url!=''?$submenu->url."_web_".$idioma_actual:'principal', $title = is_object($submenu->textos_idioma)?$submenu->textos_idioma->titulo:'', $parameters = [])}}</li>
 
-                                            <li>{{$submenu->url!=''?link_to_route($submenu->url, $title = $submenu->textos_idioma->titulo, $parameters = []):$submenu->textos_idioma->titulo}}</li>
-
-                                        @endif
 
                                     @endforeach
 
                                 </ul></li>
 
-                        @elseif ($menu->parent_id == 0 && $menu->menu_pie)
-                            <li>{{$menu->url!=''?link_to_route($menu->url, $title = $menu->textos_idioma->titulo, $parameters = []):$menu->textos_idioma->titulo}}</li>
+                        @elseif ($menu->parent_id == 0)
+                            <li>{{link_to_route($menu->url!=''?$menu->url."_web_".$idioma_actual:'principal', $title = is_object($menu->textos_idioma)?$menu->textos_idioma->titulo:'', $parameters = [])}}</li>
                         @endif
 
                     @endforeach

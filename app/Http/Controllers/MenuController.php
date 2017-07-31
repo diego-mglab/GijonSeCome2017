@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Idioma;
 use App\TextosIdioma;
 use Illuminate\Support\Facades\DB;
+use App\Content;
 
 
 
@@ -25,7 +26,13 @@ class MenuController extends Controller {
 
         $idiomas = Idioma::where('activado','1')->orderBy('principal')->get();
 
-		return view('eunomia.menu.builder', compact('items','menu','idiomas'));
+        $contents = DB::table('contents')
+            ->join('textos_idiomas','contents.id','textos_idiomas.contenido_id')
+            ->join('idiomas','textos_idiomas.idioma_id','idiomas.id')
+            ->select('contents.id','titulo','visible','principal','idioma','textos_idiomas.idioma_id')
+            ->where('tipo_contenido_id',1)->pluck('titulo','contents.id');
+
+		return view('eunomia.menu.builder', compact('items','menu','idiomas','contents'));
 
 		//$this->layout->content = View::make('eunomia.menu.builder', array('items'=>$items,'menu'=>$menu));
 	}
@@ -42,14 +49,24 @@ class MenuController extends Controller {
             ->orderBy('principal','DESC')->get();
         $item = Menu::findOrFail($id);
 
-        return view('eunomia.menu.edit', compact('item','textos','idiomas'));
+        $paginas = DB::table('contents')
+            ->join('textos_idiomas','contents.id','textos_idiomas.contenido_id')
+            ->join('idiomas','textos_idiomas.idioma_id','idiomas.id')
+            ->select('contents.id','titulo','visible','principal','idioma','textos_idiomas.idioma_id')
+            ->where('tipo_contenido_id',1)->pluck('slug','slug');
+
+        return view('eunomia.menu.edit', compact('item','textos','idiomas','paginas'));
 	}
 
 	public function postEdit(Request $request)
 	{
 		$item = Menu::find($request->id);
         $item->title 	= $request->title;
-        $item->url 		= $request->url;
+        if (is_numeric($request->url)) {
+            $item->content_id = $request->url;
+        } else {
+            $item->url = $request->url;
+        }
         if (isset($request->menu_pie))
             $item->menu_pie 	= $request->menu_pie;
 
@@ -120,12 +137,16 @@ class MenuController extends Controller {
 	}
 
 	public function postNew(Request $request)
-	{
-		// Create a new menu item and save it
-		$item = new Menu;
+    {
+        // Create a new menu item and save it
+        $item = new Menu;
 
-		$item->title 	= $request->title;
-		$item->url 		= $request->url;
+        $item->title = $request->title;
+        if (is_numeric($request->url)) {
+            $item->content_id = $request->url;
+        } else {
+            $item->url = $request->url;
+        }
 		$item->order 	= Menu::max('order')+1;
         if (isset($request->menu_pie))
 		    $item->menu_pie 	= $request->menu_pie;

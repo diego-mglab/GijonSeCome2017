@@ -11,7 +11,7 @@
                     <ul class="contact-details">
                         <li><a href="#"><i class="fa fa-map-marker"></i> {{__('cabecera.recinto_ferial_luis_adaro')}}</a>
                         </li>
-                        <li><a href="mialto:info@gijonsecome.es"><i class="fa fa-envelope-o"></i> info@gijonsecome.es</a>
+                        <li><a href="mailto:info@gijonsecome.es"><i class="fa fa-envelope-o"></i> info@gijonsecome.es</a>
                         </li>
                         <li><a href="#"><i class="fa fa-phone"></i>+34 984 05 04 09</a></li>
                         <li><a href="#"><i class="fa fa-mobile"></i>+34 658 05 73 38</a></li>
@@ -23,10 +23,10 @@
                     <!-- idiomas -->
                     <ul class="social-list idiomas">
                         <li>
-                            <a class="itl-tooltip" data-placement="bottom" title="Castellano" href="{{ url('/', ['es']) }}"><i class="fa">CAS</i></a>
+                            <a class="itl-tooltip" data-placement="bottom" title="Castellano" href="{{ url('', ['es']) }}"><i class="fa">CAS</i></a>
                         </li>
                         <li>
-                            <a class="itl-tooltip" data-placement="bottom" title="Asturianu" href="{{ url('/', ['as']) }}"><i class="fa">AST</i></a>
+                            <a class="itl-tooltip" data-placement="bottom" title="Asturianu" href="{{ url('', ['as']) }}"><i class="fa">AST</i></a>
                         </li>
                     </ul>
                     <!-- fin idiomas -->
@@ -76,12 +76,12 @@
                 </button>
 
                 <!-- End Toggle Nav Link For Mobiles -->
-                <a href="index.html"><picture>
-                        <source media="(min-width: 1200px)" srcset="images/graficos/logo_cabLG.png"><!-- pc -->
-                        <source media="(min-width: 992px)" srcset="images/graficos/logo_cabMD.png"><!-- pc medio- tablet  -->
-                        <source media="(min-width: 768px)" srcset="images/graficos/logo_cabXS.png"><!-- tablet -->
+                <a href="/"><picture>
+                        <source media="(min-width: 1200px)" srcset="{{asset('images/graficos/logo_cabLG.png')}}"><!-- pc -->
+                        <source media="(min-width: 992px)" srcset="{{asset('images/graficos/logo_cabMD.png')}}"><!-- pc medio- tablet  -->
+                        <source media="(min-width: 768px)" srcset="{{asset('images/graficos/logo_cabXS.png')}}"><!-- tablet -->
                         <!-- img tag for browsers that do not support picture element -->
-                        <img src="images/graficos/logo_cabXS.png" alt="logo gijón se come" class="logo img-responsive" border="0"><!-- movil -->
+                        <img src="{{asset('images/graficos/logo_cabXS.png')}}" alt="logo gijón se come" class="logo img-responsive" border="0"><!-- movil -->
 
                     </picture></a>
 
@@ -90,20 +90,22 @@
                 <!--Menu pc -->
                 <!-- Start Navigation List -->
                 <ul class="nav navbar-nav navbar-right">
-
+                    <?php
+                    $idioma_actual = Session::get('idioma');
+                    ?>
                     @foreach ($menus as $menu)
 
                         @if (count($menu->submenu) >=1)
 
                             <li>
 
-                                {{link_to_route($menu->url, $title = $menu->textos_idioma->titulo, $parameters = [])}}
+                                {{link_to_route($menu->url!=''?$menu->url."_web_".$idioma_actual:'principal', $title = is_object($menu->textos_idioma)?$menu->textos_idioma->titulo:'', $parameters = [])}}
 
                                 <ul class="dropdown">
 
                                     @foreach($menu->submenu as $submenu)
 
-                                        <li>{{link_to_route($submenu->url, $title = $submenu->textos_idioma->titulo, $parameters = [])}}</li>
+                                        <li>{{link_to_route($submenu->url!=''?$submenu->url."_web_".$idioma_actual:'principal', $title = is_object($submenu->textos_idioma)?$submenu->textos_idioma->titulo:'', $parameters = [])}}</li>
 
 
                                     @endforeach
@@ -111,7 +113,7 @@
                                 </ul></li>
 
                         @elseif ($menu->parent_id == 0)
-                            <li>{{link_to_route($menu->url, $title = $menu->textos_idioma->titulo, $parameters = [])}}</li>
+                            <li>{{link_to_route($menu->url!=''?$menu->url."_web_".$idioma_actual:'principal', $title = is_object($menu->textos_idioma)?$menu->textos_idioma->titulo:'', $parameters = [])}}</li>
                         @endif
 
                     @endforeach
@@ -131,13 +133,13 @@
 
                     <li>
 
-                        {{$submenu->url!=''?link_to_route($submenu->url, $title = $submenu->textos_idioma->titulo, $parameters = []):$submenu->textos_idioma->titulo}}
+                        {{link_to_route($menu->url!=''?$menu->url."_web_".$idioma_actual:'principal', $title = is_object($menu->textos_idioma)?$menu->textos_idioma->titulo:'', $parameters = [])}}
 
                         <ul class="dropdown">
 
                             @foreach($menu->submenu as $submenu)
 
-                                <li>{{$submenu->url!=''?link_to_route($submenu->url, $title = $submenu->textos_idioma->titulo, $parameters = []):$submenu->textos_idioma->titulo}}</li>
+                                <li>{{link_to_route($submenu->url!=''?$submenu->url."_web_".$idioma_actual:'principal', $title = is_object($submenu->textos_idioma)?$submenu->textos_idioma->titulo:'', $parameters = [])}}</li>
 
 
                             @endforeach
@@ -145,7 +147,7 @@
                         </ul></li>
 
                 @elseif ($menu->parent_id == 0)
-                    <li>{{$submenu->url!=''?link_to_route($submenu->url, $title = $submenu->textos_idioma->titulo, $parameters = []):$submenu->textos_idioma->titulo}}</li>
+                    <li>{{link_to_route($menu->url!=''?$menu->url."_web_".$idioma_actual:'principal', $title = is_object($menu->textos_idioma)?$menu->textos_idioma->titulo:'', $parameters = [])}}</li>
                 @endif
 
             @endforeach
