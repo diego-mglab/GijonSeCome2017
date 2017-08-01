@@ -40,6 +40,10 @@ class Menu extends Model
         return $this->belongsTo('App\TextosIdioma','id','contenido_id')->where('visible','1')->where('idioma_id',Idioma::fromCodigo(Session::get('idioma')))->where('tipo_contenido_id','6');
     }
 
+    public function content(){
+        return $this->belongsTo('App\Content','content_id','id');
+    }
+
     public function submenu()
     {
         return $this->hasMany('App\Menu', 'parent_id')->orderBy('order', 'asc');

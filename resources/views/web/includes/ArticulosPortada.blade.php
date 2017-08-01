@@ -21,7 +21,7 @@
 
                         <picture>
                             <source media="(min-width: 1200px)" srcset="{{asset('images/portada/l')}}/{{$elemento->imagen or 'sinimagen.png'}}"><!-- pc -->
-                            <source media="(min-width: 992px)" srcset="{{asset('images/portada/m')}}/{{$elemento->imagen or 'sinimagen.png'}}"><!-- medio pc -->
+                            <source media="(min-width: 992px)" srcset="{{asset('images/portada/l')}}/{{$elemento->imagen or 'sinimagen.png'}}"><!-- medio pc -->
                             <source media="(min-width: 768px)" srcset="{{asset('images/portada/s')}}/{{$elemento->imagen or 'sinimagen.png'}}"><!-- tablet -->
                             <!-- img tag for browsers that do not support picture element -->
                             @if ($elemento->url != '')
@@ -76,7 +76,7 @@
 
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 row-eq-height">
                         <picture>
-                            <source media="(min-width: 1200px)" srcset="{{asset('images/portada/l')}}/{{$elemento->imagen or 'sinimagen.png'}}"><!-- pc -->
+                            <source media="(min-width: 1200px)" srcset="{{asset('images/portada/m')}}/{{$elemento->imagen or 'sinimagen.png'}}"><!-- pc -->
                             <source media="(min-width: 992px)" srcset="{{asset('images/portada/m')}}/{{$elemento->imagen or 'sinimagen.png'}}"><!-- medio pc -->
                             <source media="(min-width: 768px)" srcset="{{asset('images/portada/s')}}/{{$elemento->imagen or 'sinimagen.png'}}"><!-- tablet -->
 
@@ -84,7 +84,7 @@
                             @if ($elemento->url != '')
                                 <a href="{{$elemento->url}}">
                                     @endif
-                                    <img src="{{asset('images/portada/l')}}/{{$elemento->imagen or 'sinimagen.png'}}" alt="{{is_object($elemento->textos_idioma)?$elemento->textos_idioma->titulo:''}}">
+                                    <img src="{{asset('images/portada/m')}}/{{$elemento->imagen or 'sinimagen.png'}}" alt="{{is_object($elemento->textos_idioma)?$elemento->textos_idioma->titulo:''}}">
                                     @if ($elemento->url != '')
                                 </a><!-- movil -->
                             @endif
@@ -133,7 +133,7 @@
 
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <picture>
-                        <source media="(min-width: 1200px)" srcset="{{asset('images/portada/l')}}/{{$elemento->imagen or 'sinimagen.png'}}"><!-- pc -->
+                        <source media="(min-width: 1200px)" srcset="{{asset('images/portada/m')}}/{{$elemento->imagen or 'sinimagen.png'}}"><!-- pc -->
                         <source media="(min-width: 992px)" srcset="{{asset('images/portada/m')}}/{{$elemento->imagen or 'sinimagen.png'}}"><!-- medio pc -->
                         <source media="(min-width: 768px)" srcset="{{asset('images/portada/s')}}/{{$elemento->imagen or 'sinimagen.png'}}"><!-- tablet -->
 
@@ -141,7 +141,7 @@
                         @if ($elemento->url != '')
                             <a href="{{$elemento->url}}">
                                 @endif
-                                <img src="{{asset('images/portada/l')}}/{{$elemento->imagen or 'sinimagen.png'}}" alt="{{is_object($elemento->textos_idioma)?$elemento->textos_idioma->titulo:''}}">
+                                <img src="{{asset('images/portada/m')}}/{{$elemento->imagen or 'sinimagen.png'}}" alt="{{is_object($elemento->textos_idioma)?$elemento->textos_idioma->titulo:''}}">
                                 @if ($elemento->url != '')
                             </a><!-- movil -->
                         @endif
@@ -188,7 +188,7 @@
 
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <picture>
-                        <source media="(min-width: 1200px)" srcset="{{asset('images/portada/l')}}/{{$elemento->imagen or 'sinimagen.png'}}"><!-- pc -->
+                        <source media="(min-width: 1200px)" srcset="{{asset('images/portada/m')}}/{{$elemento->imagen or 'sinimagen.png'}}"><!-- pc -->
                         <source media="(min-width: 992px)" srcset="{{asset('images/portada/m')}}/{{$elemento->imagen or 'sinimagen.png'}}"><!-- medio pc -->
                         <source media="(min-width: 768px)" srcset="{{asset('images/portada/s')}}/{{$elemento->imagen or 'sinimagen.png'}}"><!-- tablet -->
 
@@ -196,7 +196,7 @@
                         @if ($elemento->url != '')
                             <a href="{{$elemento->url}}">
                                 @endif
-                                <img src="{{asset('images/portada/l')}}/{{$elemento->imagen or 'sinimagen.png'}}" alt="{{is_object($elemento->textos_idioma)?$elemento->textos_idioma->titulo:''}}">
+                                <img src="{{asset('images/portada/m')}}/{{$elemento->imagen or 'sinimagen.png'}}" alt="{{is_object($elemento->textos_idioma)?$elemento->textos_idioma->titulo:''}}">
                                 @if ($elemento->url != '')
                             </a><!-- movil -->
                         @endif
@@ -243,7 +243,7 @@
 
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <picture>
-                        <source media="(min-width: 1200px)" srcset="{{asset('images/portada/l')}}/{{$elemento->imagen or 'sinimagen.png'}}"><!-- pc -->
+                        <source media="(min-width: 1200px)" srcset="{{asset('images/portada/m')}}/{{$elemento->imagen or 'sinimagen.png'}}"><!-- pc -->
                         <source media="(min-width: 992px)" srcset="{{asset('images/portada/m')}}/{{$elemento->imagen or 'sinimagen.png'}}"><!-- medio pc -->
                         <source media="(min-width: 768px)" srcset="{{asset('images/portada/s')}}/{{$elemento->imagen or 'sinimagen.png'}}"><!-- tablet -->
 
@@ -251,7 +251,7 @@
                         @if ($elemento->url != '')
                             <a href="{{$elemento->url}}">
                                 @endif
-                                <img src="{{asset('images/portada/l')}}/{{$elemento->imagen or 'sinimagen.png'}}" alt="{{is_object($elemento->textos_idioma)?$elemento->textos_idioma->titulo:''}}">
+                                <img src="{{asset('images/portada/m')}}/{{$elemento->imagen or 'sinimagen.png'}}" alt="{{is_object($elemento->textos_idioma)?$elemento->textos_idioma->titulo:''}}">
                                 @if ($elemento->url != '')
                             </a><!-- movil -->
                         @endif
@@ -309,7 +309,7 @@
 
                         <picture>
                             <source media="(min-width: 1200px)" srcset="{{asset('images/portada/l')}}/{{$elemento->imagen or 'sinimagen.png'}}"><!-- pc -->
-                            <source media="(min-width: 992px)" srcset="{{asset('images/portada/m')}}/{{$elemento->imagen or 'sinimagen.png'}}"><!-- medio pc -->
+                            <source media="(min-width: 992px)" srcset="{{asset('images/portada/l')}}/{{$elemento->imagen or 'sinimagen.png'}}"><!-- medio pc -->
                             <source media="(min-width: 768px)" srcset="{{asset('images/portada/s')}}/{{$elemento->imagen or 'sinimagen.png'}}"><!-- tablet -->
 
                             <!-- img tag for browsers that do not support picture element -->
@@ -361,7 +361,7 @@
 
                         <picture>
                             <source media="(min-width: 1200px)" srcset="{{asset('images/portada/l')}}/{{$elemento->imagen or 'sinimagen.png'}}"><!-- pc -->
-                            <source media="(min-width: 992px)" srcset="{{asset('images/portada/m')}}/{{$elemento->imagen or 'sinimagen.png'}}"><!-- medio pc -->
+                            <source media="(min-width: 992px)" srcset="{{asset('images/portada/l')}}/{{$elemento->imagen or 'sinimagen.png'}}"><!-- medio pc -->
                             <source media="(min-width: 768px)" srcset="{{asset('images/portada/s')}}/{{$elemento->imagen or 'sinimagen.png'}}"><!-- tablet -->
 
                             <!-- img tag for browsers that do not support picture element -->

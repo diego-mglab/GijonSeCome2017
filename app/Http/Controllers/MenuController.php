@@ -26,13 +26,14 @@ class MenuController extends Controller {
 
         $idiomas = Idioma::where('activado','1')->orderBy('principal')->get();
 
-        $contents = DB::table('contents')
+        $paginas = DB::table('contents')
             ->join('textos_idiomas','contents.id','textos_idiomas.contenido_id')
             ->join('idiomas','textos_idiomas.idioma_id','idiomas.id')
             ->select('contents.id','titulo','visible','principal','idioma','textos_idiomas.idioma_id')
+            ->where('idiomas.principal',1)
             ->where('tipo_contenido_id',1)->pluck('titulo','contents.id');
 
-		return view('eunomia.menu.builder', compact('items','menu','idiomas','contents'));
+		return view('eunomia.menu.builder', compact('items','menu','idiomas','paginas'));
 
 		//$this->layout->content = View::make('eunomia.menu.builder', array('items'=>$items,'menu'=>$menu));
 	}
@@ -53,7 +54,8 @@ class MenuController extends Controller {
             ->join('textos_idiomas','contents.id','textos_idiomas.contenido_id')
             ->join('idiomas','textos_idiomas.idioma_id','idiomas.id')
             ->select('contents.id','titulo','visible','principal','idioma','textos_idiomas.idioma_id')
-            ->where('tipo_contenido_id',1)->pluck('slug','slug');
+            ->where('idiomas.principal',1)
+            ->where('tipo_contenido_id',1)->pluck('titulo','contents.id');
 
         return view('eunomia.menu.edit', compact('item','textos','idiomas','paginas'));
 	}
@@ -62,9 +64,12 @@ class MenuController extends Controller {
 	{
 		$item = Menu::find($request->id);
         $item->title 	= $request->title;
-        if (is_numeric($request->url)) {
-            $item->content_id = $request->url;
-        } else {
+
+        $item->content_id = null;
+        $item->url = null;
+        if ($request->sel_link == '1') {
+            $item->content_id = $request->content_id;
+        } elseif ($request->sel_link == '2') {
             $item->url = $request->url;
         }
         if (isset($request->menu_pie))
@@ -142,9 +147,11 @@ class MenuController extends Controller {
         $item = new Menu;
 
         $item->title = $request->title;
-        if (is_numeric($request->url)) {
-            $item->content_id = $request->url;
-        } else {
+        $item->content_id = null;
+        $item->url = null;
+        if ($request->sel_link == '1') {
+            $item->content_id = $request->content_id;
+        } elseif ($request->sel_link == '2') {
             $item->url = $request->url;
         }
 		$item->order 	= Menu::max('order')+1;

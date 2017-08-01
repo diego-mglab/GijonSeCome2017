@@ -45,11 +45,13 @@ class WebController extends Controller
 
     public function detalle()
     {
-        return view('web.detalle');
+        $menus = Menu::get();
+        return view('web.detalle',compact('menus'));
     }
 
     public function detalleponentes()
     {
         return view('web.detalleponentes');
     }
+
 }

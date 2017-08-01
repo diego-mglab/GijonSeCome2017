@@ -11,6 +11,7 @@ class Idioma extends Model
     }
 
     public static function fromCodigo($codigo){
-        return Idioma::where('codigo',$codigo)->first()->id;
+        if ($codigo != '')
+            return Idioma::where('codigo',$codigo)->first()->id;
     }
 }

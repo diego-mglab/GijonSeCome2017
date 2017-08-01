@@ -218,30 +218,45 @@
                     <?php
                     $idioma_actual = Session::get('idioma');
                     ?>
-                    @foreach ($menus as $menu)
+                        @foreach ($menus as $menu)
 
-                        @if (count($menu->submenu) >=1)
+                            @if (count($menu->submenu) >=1)
 
-                            <li>
+                                <li>
+                                    @if ($menu->url != '') ?>
+                                    {{link_to($menu->url, $title = is_object($menu->textos_idioma)?$menu->textos_idioma->titulo:'', $parameters = [])}}
+                                    @else
+                                        {{link_to_route(is_object($menu->content)?str_replace("-","",$menu->content->textos_idioma->slug).'_web_'.Session::get('idioma'):'principal',$title = is_object($menu->textos_idioma)?$menu->textos_idioma->titulo:'', $parameters = [])}}
+                                    @endif
 
-                                {{link_to_route($menu->url!=''?$menu->url."_web_".$idioma_actual:'principal', $title = is_object($menu->textos_idioma)?$menu->textos_idioma->titulo:'', $parameters = [])}}
+                                    <ul>
 
-                                <ul>
+                                        @foreach($menu->submenu as $submenu)
 
-                                    @foreach($menu->submenu as $submenu)
+                                            <li>
+                                                @if ($submenu->url != '') ?>
+                                                {{link_to($submenu->url, $title = is_object($submenu->textos_idioma)?$submenu->textos_idioma->titulo:'', $parameters = [])}}
+                                                @else
+                                                    {{link_to_route(is_object($submenu->content)?str_replace("-","",$submenu->content->textos_idioma->slug).'_web_'.Session::get('idioma'):'principal',$title = is_object($submenu->textos_idioma)?$submenu->textos_idioma->titulo:'', $parameters = [])}}
+                                                @endif
+                                            </li>
 
-                                        <li>{{link_to_route($submenu->url!=''?$submenu->url."_web_".$idioma_actual:'principal', $title = is_object($submenu->textos_idioma)?$submenu->textos_idioma->titulo:'', $parameters = [])}}</li>
 
+                                        @endforeach
 
-                                    @endforeach
+                                    </ul></li>
 
-                                </ul></li>
+                            @elseif ($menu->parent_id == 0)
+                                <li>
+                                    @if ($menu->url != '') ?>
+                                    {{link_to($menu->url, $title = is_object($menu->textos_idioma)?$menu->textos_idioma->titulo:'', $parameters = [])}}
+                                    @else
+                                        {{link_to_route(is_object($menu->content)?str_replace("-","",$menu->content->textos_idioma->slug).'_web_'.Session::get('idioma'):'principal',$title = is_object($menu->textos_idioma)?$menu->textos_idioma->titulo:'', $parameters = [])}}
+                                    @endif
+                                </li>
+                            @endif
 
-                        @elseif ($menu->parent_id == 0)
-                            <li>{{link_to_route($menu->url!=''?$menu->url."_web_".$idioma_actual:'principal', $title = is_object($menu->textos_idioma)?$menu->textos_idioma->titulo:'', $parameters = [])}}</li>
-                        @endif
-
-                    @endforeach
+                        @endforeach
                 </ul>
             </div>
             <div class="col-lg-2 col-md-2 col-xs-12">

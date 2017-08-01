@@ -103,10 +103,14 @@ class ContentController extends Controller
         }
 
         $content->lugar = $request->lugar;
-        $fecha_noticia = Carbon::createFromFormat('d/m/Y',$request->fecha);
-        $content->fecha = $fecha_noticia;
-        $fecha_publicacion = Carbon::createFromFormat('d/m/Y',$request->fecha_publicacion);
-        $content->fecha_publicacion = $fecha_publicacion;
+        if ($request->fecha != '') {
+            $fecha_noticia = Carbon::createFromFormat('d/m/Y', $request->fecha);
+            $content->fecha = $fecha_noticia;
+        }
+        if ($request->fecha_publicacion != '') {
+            $fecha_publicacion = Carbon::createFromFormat('d/m/Y', $request->fecha_publicacion);
+            $content->fecha_publicacion = $fecha_publicacion;
+        }
         $content->tipo_contenido = $request->tipo_contenido;
 
         if ($content->save()) {
@@ -235,10 +239,14 @@ class ContentController extends Controller
         }
 
         $content->lugar = $request->lugar;
-        $fecha_noticia = Carbon::createFromFormat('d/m/Y',$request->fecha);
-        $content->fecha = $fecha_noticia;
-        $fecha_publicacion = Carbon::createFromFormat('d/m/Y',$request->fecha_publicacion);
-        $content->fecha_publicacion = $fecha_publicacion;
+        if ($request->fecha != '') {
+            $fecha_noticia = Carbon::createFromFormat('d/m/Y', $request->fecha);
+            $content->fecha = $fecha_noticia;
+        }
+        if ($request->fecha_publicacion != '') {
+            $fecha_publicacion = Carbon::createFromFormat('d/m/Y', $request->fecha_publicacion);
+            $content->fecha_publicacion = $fecha_publicacion;
+        }
 
         if ($content->save()) {
 

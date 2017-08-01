@@ -93,12 +93,24 @@
 
               </div>
             </div>
-            <div class="form-group">
-                <label for="url" class="col-lg-2 control-label">URL</label>
-                <div class="col-lg-10">
-                  {{ Form::select('url',$contents,null,array('id' => 'url', 'class'=>'form-control'))}}
-                </div>
-            </div>
+              <div class="form-group">
+                  <label for="content_id" class="col-lg-2 control-label">Página</label>
+                  <div class="col-lg-9">
+                      {{ Form::select('content_id',$paginas,null,['class' => 'form-control','placeholder' => 'Seleccione una página', 'onchange' => '$("#sel_pagina").prop("checked",true)'])}}
+                  </div>
+                  <div class="col-lg-1">
+                      {{ Form::radio('sel_link',1,null,['id' => 'sel_pagina'])}}
+                  </div>
+              </div>
+              <div class="form-group">
+                  <label for="url" class="col-lg-2 control-label">URL</label>
+                  <div class="col-lg-9">
+                      {{ Form::text('url',null,['class'=>'form-control', 'onkeypress' => '$("#sel_url").prop("checked",true)'])}}
+                  </div>
+                  <div class="col-lg-1">
+                      {{ Form::radio('sel_link',2,null,['id' => 'sel_url'])}}
+                  </div>
+              </div>
             <div class="form-group">
               <label for="menu_pie" class="col-lg-2 control-label">Menú pie</label>
               <div class="col-lg-10">
@@ -145,8 +157,6 @@
     <!-- iCheck -->
     <link rel="stylesheet" href="{{asset('vendor/adminlte/plugins/iCheck/flat/green.css')}}">
 
-    <!-- jQuery editable select -->
-    <link rel="stylesheet" href="{{asset('css/jquery-editable-select.css')}}">
 @stop
 
 @section('js')
@@ -202,9 +212,4 @@
         });
     </script>
 
-    <!-- jQuery editable select -->
-    <script src="{{asset("js/jquery-editable-select.js")}}"> </script>
-    <script type="text/javascript">
-        $('#url').editableSelect();
-    </script>
 @stop

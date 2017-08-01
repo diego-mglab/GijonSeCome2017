@@ -84,17 +84,17 @@ class PortadaController extends Controller
                 File::makeDirectory($dirs);
             }
 
-            Image::make($imagen)->resize(970, null, function ($constraint) {
-                $constraint->aspectRatio();
-            })->save($dirl.$filename, 95 );
+            Image::make($imagen)->fit(480, 480, function ($constraint) {
+                $constraint->upsize();
+            })->save($dirl.$filename );
+
+            Image::make($imagen)->fit(480, 200, function ($constraint) {
+                $constraint->upsize();
+            })->save($dirm.$filename );
 
             Image::make($imagen)->resize(768, null, function ($constraint) {
                 $constraint->aspectRatio();
-            })->save($dirm.$filename, 95 );
-
-            Image::make($imagen)->fit(300, 300, function ($constraint) {
-                $constraint->upsize();
-            })->save($dirs.$filename );
+            })->save($dirs.$filename, 95 );
 
             $portada->imagen = $filename;
 
@@ -212,17 +212,17 @@ class PortadaController extends Controller
                 File::makeDirectory($dirs);
             }
 
-            Image::make($imagen)->resize(970, null, function ($constraint) {
-                $constraint->aspectRatio();
-            })->save($dirl.$filename, 95 );
+            Image::make($imagen)->fit(480, 480, function ($constraint) {
+                $constraint->upsize();
+            })->save($dirl.$filename );
+
+            Image::make($imagen)->fit(480, 200, function ($constraint) {
+                $constraint->upsize();
+            })->save($dirm.$filename );
 
             Image::make($imagen)->resize(768, null, function ($constraint) {
                 $constraint->aspectRatio();
-            })->save($dirm.$filename, 95 );
-
-            Image::make($imagen)->fit(300, 300, function ($constraint) {
-                $constraint->upsize();
-            })->save($dirs.$filename );
+            })->save($dirs.$filename, 95 );
 
             $portada->imagen = $filename;
 
