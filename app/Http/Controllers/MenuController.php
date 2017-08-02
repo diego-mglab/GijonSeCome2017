@@ -64,6 +64,7 @@ class MenuController extends Controller {
 	{
 		$item = Menu::find($request->id);
         $item->title 	= $request->title;
+        $item->label    = $request->title;
 
         $item->content_id = null;
         $item->url = null;
@@ -147,6 +148,7 @@ class MenuController extends Controller {
         $item = new Menu;
 
         $item->title = $request->title;
+        $item->label = $request->title;
         $item->content_id = null;
         $item->url = null;
         if ($request->sel_link == '1') {

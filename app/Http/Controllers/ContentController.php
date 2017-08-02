@@ -28,7 +28,7 @@ class ContentController extends Controller
         $contents = DB::table('contents')
             ->join('textos_idiomas','contents.id','=','textos_idiomas.contenido_id')
             ->join('idiomas','textos_idiomas.idioma_id','idiomas.id')
-            ->select('contents.id','tipo_contenido','titulo','subtitulo','contenido','metadescripcion','metatitulo','visible','principal','idioma','idiomas.imagen')
+            ->select('contents.id','tipo_contenido','pagina_estatica','titulo','subtitulo','contenido','metadescripcion','metatitulo','visible','principal','idioma','idiomas.imagen')
             ->where('principal','1')
             ->where('tipo_contenido_id',$this->tipo_contenido)
             ->orderBy('textos_idiomas.titulo','ASC')->get();
@@ -112,6 +112,11 @@ class ContentController extends Controller
             $content->fecha_publicacion = $fecha_publicacion;
         }
         $content->tipo_contenido = $request->tipo_contenido;
+
+        if (isset($request->pagina_estatica))
+            $content->pagina_estatica 	= '1';
+        else
+            $content->pagina_estatica = '0';
 
         if ($content->save()) {
             $lastId = $content->id;
@@ -247,6 +252,11 @@ class ContentController extends Controller
             $fecha_publicacion = Carbon::createFromFormat('d/m/Y', $request->fecha_publicacion);
             $content->fecha_publicacion = $fecha_publicacion;
         }
+
+        if (isset($request->pagina_estatica))
+            $content->pagina_estatica 	= '1';
+        else
+            $content->pagina_estatica = '0';
 
         if ($content->save()) {
 

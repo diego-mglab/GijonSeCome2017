@@ -168,6 +168,12 @@
                         {{Form::file('imagen', null, ['class' => 'form-control'])}}
                     </div>
 
+                    <div class="form-group">
+
+                        {{Form::label('pagina_estatica', 'Página estática')}}
+                        {{Form::checkbox('pagina_estatica', null, false,['class' => 'flat-green'])}}
+
+                    </div>
 
                 </div>
                 <!-- /.box-body -->

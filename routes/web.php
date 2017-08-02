@@ -30,41 +30,35 @@ Route::get('/', function(){
 })->name('principal');
 $contents = Content::where('tipo_contenido','pagina')->get();
 $idiomas = Idioma::where('activado',1)->get();
+$paginas_estaticas = [''];
 foreach ($contents as $content){
     foreach($idiomas as $idioma) {
         if (is_object($content->textos_idioma_todos($idioma->id))) {
-            echo str_replace("-", "", $content->textos_idioma_todos($idioma->id)->slug)."<br>";
             $parametros = '';
             $metodo = str_replace("-", "", $content->textos_idioma_todos($idioma->id)->slug);
+            $ruta = $content->textos_idioma_todos($idioma->id)->slug;
             if ($content->textos_idioma_principal->slug == 'detalle-ponentes')
                 $parametros = '{slug}';
-            if ($content->textos_idioma_principal->slug == 'nuestra-filosofia')
+            if ($content->pagina_estatica == 0) {
                 $metodo = 'detalle';
+            }
             $codigo = Idioma::where('id', $content->textos_idioma_todos($idioma->id)->idioma_id)->first()->codigo;
             if ($content->id == 1)
                 Route::get($codigo . '/' . $content->textos_idioma_todos($idioma->id)->slug, function () {
                     return redirect('/' . (Session::get('idioma') !== null ? Session::get('idioma') : Idioma::where('principal', 1)->first()->codigo));
                 })->name($content->textos_idioma_todos($idioma->id)->slug . '_web_' . $codigo);
-            else
-                Route::get($codigo . '/' . str_replace("-", "", $content->textos_idioma_todos($idioma->id)->slug) . $parametros, 'WebController@' . $metodo)->name(str_slug($content->textos_idioma_todos($idioma->id)->slug, "") . '_web_' . $codigo);
+            elseif ($metodo != '') {
+                Route::get($codigo . '/' . $ruta . ($parametros != '' ? '/' . $parametros : ''), 'WebController@' . $metodo)->name(str_slug($content->textos_idioma_todos($idioma->id)->slug, "") . '_web_' . $codigo);
+                if ($content->textos_idioma_principal->slug == 'contacto'){
+                    $metodo = 'contacto';
+                    Route::post($codigo . '/' . $ruta . ($parametros != '' ? '/' . $parametros : ''), 'WebController@' . $metodo)->name(str_slug($content->textos_idioma_todos($idioma->id)->slug, "") . '_web_post_' . $codigo);
+                }
+            }
         }
+
     }
-    //Route::get($codigo.'/agenda', 'WebController@agenda')->name('agenda_web_'.$codigo);
-    //Route::get($codigo.'/detalleponentes/{slug}', 'WebController@detalleponentes')->name('detalleponentes_web_'.$codigo);
 }
-dd($codigo);
-/*Route::get('/contacto', 'WebController@contacto')->name('contacto_web');
-Route::get('/noticias', 'WebController@noticias')->name('noticias_web');
-Route::get('/detalle', 'WebController@detalle')->name('detalle_web');
-Route::get('/nuestra-filosofia', 'WebController@detalleponentes')->name('nuestra-filosofia');
-Route::get('/el-festival', 'WebController@detalleponentes')->name('el-festival');
-Route::get('/gijonsecome-es-sostenible', 'WebController@detalleponentes')->name('gijonsecome-es-sostenible');
-Route::get('/primera-edidion', 'WebController@detalleponentes')->name('primera-edidion');
-Route::get('/ponentes', 'WebController@ponentes')->name('ponentes');
-Route::get('/programa', 'WebController@detalleponentes')->name('programa');
-Route::get('/zona-de-prensa', 'WebController@detalleponentes')->name('zona-de-prensa');
-Route::get('/hemeroteca', 'WebController@detalleponentes')->name('hemeroteca');
-Route::get('/contacto', 'WebController@contacto')->name('contacto'); */
+
 
 Route::group(['middleware' => ['web']], function () {
     Route::get('{lang}', function ($lang) {

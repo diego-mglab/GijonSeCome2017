@@ -17,4 +17,6 @@ class TextosIdioma extends Model
     public function portada(){
         return $this->belongsTo('App\Portada', 'id','contenido_id');
     }
+
+
 }

@@ -114,6 +114,7 @@
                                             @else
                                                 {{link_to_route(is_object($submenu->content)?str_replace("-","",$submenu->content->textos_idioma->slug).'_web_'.Session::get('idioma'):'principal',$title = is_object($submenu->textos_idioma)?$submenu->textos_idioma->titulo:'', $parameters = [])}}
                                             @endif
+
                                         </li>
 
 

@@ -26,33 +26,33 @@
 
                     <!-- Start Contact Form -->
 
-                    <form method="POST" action="http://gijonsecome.es/envioformulario" accept-charset="UTF-8" class="contact-form" id="contact-form"><input name="_token" type="hidden" value="Ny6gOyA5kQ8zp4e9Vpswo2aAonvhijwmYuOXxjkh">
+                    {!! Form::open(['action' => 'WebController@contacto','method' => 'POST', 'name' => 'form_contacto', 'class' =>'contact-form', 'id' => 'contact-form']) !!}
                         <div class="form-group">
                             <div class="controls">
-                                <input type="text" placeholder="Nombre" name="nombre">
+                                {{Form::text('nombre', null, ['placeholder' => 'Nombre'])}}
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="controls">
-                                <input type="email" class="email" placeholder="Email" name="email">
+                                {{Form::email('email', null, ['class' => 'email', 'placeholder' => 'Email'])}}
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="controls">
-                                <input type="text" class="requiredField" placeholder="Asunto" name="asunto">
+                                {{Form::text('asunto', null, ['class' => 'requiredField', 'placeholder' => 'Asunto'])}}
                             </div>
                         </div>
 
                         <div class="form-group">
 
                             <div class="controls">
-                                <textarea rows="7" placeholder="Mensaje" name="mensaje"></textarea>
+                                {{Form::textarea('mensaje', null, ['rows' => '7', 'placeholder' => 'Mensaje'])}}
                             </div>
                         </div>
                         <button type="submit" id="submit" class="btn-system btn-large">Enviar</button>
                         <div id="success" style="color:#34495e;"></div>
-                    </form>
+                {!! Form::close() !!}
                     <!-- End Contact Form -->
 
                 </div>

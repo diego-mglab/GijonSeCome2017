@@ -204,6 +204,12 @@
                         @endif
                     </div>
 
+                    <div class="form-group">
+
+                        {{Form::label('pagina_estatica', 'Página estática')}}
+                        {{Form::checkbox('pagina_estatica', null, $content->pagina_estatica,['class' => 'flat-green'])}}
+
+                    </div>
 
                 </div>
                 <!-- /.box-body -->

@@ -228,7 +228,7 @@ class PonenteController extends Controller
 
             Image::make($imagen)->fit(480, 480, function ($constraint) {
                 $constraint->upsize();
-            })->save($dirm.$filename );
+            },'top')->save($dirm.$filename );
 
             $ponente->imagen = $filename;
 

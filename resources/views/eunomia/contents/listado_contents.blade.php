@@ -42,10 +42,11 @@
                                         <td>{{$content->tipo_contenido}}</td>
                                         <td>{{$content->visible==1?'Si':'No'}}</td>
                                         <td>{{ link_to_route('contents.edit', 'Editar', $content->id, array('class' => 'btn btn btn-warning btn-xs')) }}
-                                            {{ Form::open(array('method'=> 'DELETE', 'route' => array('contents.destroy', $content->id),'style'=>'display:inline','class'=>'form_eliminar')) }}
-                                            {{ Form::submit('Eliminar', array('class' => 'btn btn btn-danger btn-xs')) }}
-                                            {{ Form::close() }}
-
+                                            @if ($content->pagina_estatica == 0)
+                                                {{ Form::open(array('method'=> 'DELETE', 'route' => array('contents.destroy', $content->id),'style'=>'display:inline','class'=>'form_eliminar')) }}
+                                                {{ Form::submit('Eliminar', array('class' => 'btn btn btn-danger btn-xs')) }}
+                                                {{ Form::close() }}
+                                            @endif
                                         </td>
                                     </tr>
                                 @endif

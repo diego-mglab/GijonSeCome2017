@@ -16,7 +16,7 @@ class Content extends Model
     }
 
     public function textos_idioma_todos($idioma_id){
-        return TextosIdioma::where('idioma_id',$idioma_id)->where('id',$this->id)->first();
+        return TextosIdioma::where('idioma_id',$idioma_id)->where('contenido_id',$this->id)->where('tipo_contenido_id',1)->first();
     }
 
     public function menu(){
