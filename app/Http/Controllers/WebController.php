@@ -10,9 +10,11 @@ use App\Portada;
 use App\Ponente;
 use App\TextosIdioma;
 use App\Agenda;
+use App\Content;
 use Session;
 use Illuminate\Support\Facades\DB;
 use URL;
+use Redirect;
 
 class WebController extends Controller
 {
@@ -21,15 +23,15 @@ class WebController extends Controller
         //
     }
 
-    public function ponentes()
+    public function ponentes($anio=2017)
     {
         $menus = Menu::get();
-        $ponentes = Ponente::where('anio',date('Y'))->orderBy('orden')->get();
+        $ponentes = Ponente::where('anio',$anio)->orderBy('orden')->get();
         //Breadcrums
         //Definimos el array con los elemento del breadcrum
         $elementos = ['Inicio','El Festival','Ponentes'];
         $breadcrums = $this->devuelveBreadcrums($elementos);
-        return view('web.ponentes', compact('menus','ponentes','breadcrums'));
+        return view('web.ponentes', compact('menus','ponentes','breadcrums','anio'));
     }
 
     public function programa()
@@ -46,18 +48,24 @@ class WebController extends Controller
 
     public function noticias()
     {
-        return view('web.noticias');
+        $menus = Menu::get();
+        return view('web.noticias',compact('menus'));
     }
 
     public function detalle()
     {
         $slug = explode('/',$_SERVER["REQUEST_URI"])[count(explode('/',$_SERVER["REQUEST_URI"]))-1];
         $textosidioma = TextosIdioma::where('slug',$slug)->where('tipo_contenido_id',1)->where('idioma_id',Idioma::fromCodigo(Session::get('idioma')))->first();
+        if ($textosidioma->contenido_id > 0)
+            $content = Content::findOrFail($textosidioma->contenido_id);
+        else
+            return Redirect::to('/');
+        //dd($content);
         //Definimos el array con los elemento del breadcrum
         $elementos = ['Inicio','El Festival',$textosidioma->titulo];
         $breadcrums = $this->devuelveBreadcrums($elementos);
         $menus = Menu::get();
-        return view('web.detalle',compact('menus','textosidioma','breadcrums'));
+        return view('web.detalle',compact('menus','textosidioma','breadcrums','content'));
     }
 
     public function detalleponentes($slug)

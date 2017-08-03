@@ -33,23 +33,17 @@ line-height: 0.9rem;
 	background-position: right bottom;}
 	
 	
-#portfolio-list li .header{
-font-size:2rem;
-line-height: 2rem;
-display: block;
-margin-top: 4rem;
-margin-bottom: 1rem;
+
+.portfolio-item {
+    margin-bottom: 0px;
 }
-#portfolio-list li .body{
-font-size:1.5rem;
-line-height: 1.5rem;
-display: block;
+.portfolio-item .portfolio-thumb {
+    position: relative;
+    overflow: hidden;
+    max-width:100%;
 }
-#portfolio-list li .more {
-    display:none;
-   
-}
-	
+
+
 /*tablet*/
 
 @media only screen and (min-width: 768px){
@@ -85,16 +79,18 @@ padding-bottom: 0px;
 .portfolio-3column #portfolio-list li{
     width: 24.7%;
 }
-.portfolio-4column #portfolio-list li {
-    width: 16.4%;
-	margin-top: -2px;
-}
+
 
 .portfolio-3column #portfolio-list{
     list-style: none;
     margin: 0px;
     padding: 0px;
     display: block;
+	max-height: 128px;
+}
+.portfolio-4column #portfolio-list li {
+    width: 16.4%;
+
 }
 .portfolio-4column #portfolio-list{
     list-style: none;
@@ -102,22 +98,7 @@ padding-bottom: 0px;
     padding: 0px;
     display: block;
 }
-#portfolio-list li .header{
-font-size:0.8rem;
-line-height: 0.8rem;
-display: block;
-margin-top: 3rem;
-margin-bottom: 1rem;
-}
-#portfolio-list li .body{
-font-size:0.56rem;
-line-height: 0.56rem;
-display: block;
-}
-#portfolio-list li .more {
-    display:none;
-   
-}
+
 
 }
 @media only screen and (min-width: 992px) {
@@ -145,13 +126,14 @@ h2{
     width: 24.7%;}
 .portfolio-4column #portfolio-list li {
     width: 16.46%;
-	margin-top: -2px;
+
 }
 .portfolio-3column #portfolio-list {
     list-style: none;
     margin: 0px;
     padding: 0px;
     display: block;
+	max-height: 166px;
 }
 .portfolio-4column #portfolio-list  {
     list-style: none;
@@ -159,16 +141,7 @@ h2{
     padding: 0px;
     display: block;
 }
-#portfolio-list li .header{
-font-size:1em;
-line-height: 1rem;
-    margin-top: 3em;
-    margin-bottom: 1em;
-}
-#portfolio-list li .body{
-font-size:0.72rem;
-line-height:0.72rem;
-}
+
 
 	
 }
@@ -193,27 +166,19 @@ font-size: 0.75rem;
 line-height: 0.75rem;
 
 }
-#portfolio-list li .header{
-font-size:1.25rem;
-line-height: 1.25rem;
-margin-top: 3rem;
-margin-bottom: 1rem;
-}
-#portfolio-list li .body{
-font-size:0.875rem;
-line-height:0.875rem;
-}
+
 .portfolio-3column #portfolio-list li {
     width: 24.8%;}
 .portfolio-4column #portfolio-list li {
-    width: 16.5%;
-	margin-top: -2px;
+    width: 16.519%;
+	max-height: 198px;
 }
 .portfolio-3column #portfolio-list {
     list-style: none;
     margin: 0px;
     padding: 0px;
     display: block;
+	max-height: 200px;
 }
 .portfolio-4column #portfolio-list{
     list-style: none;

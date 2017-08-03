@@ -27,8 +27,14 @@
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 todosloschefs">
 
             <hgroup>
-                <h1>Descubre quién nos acompaño/acompañará en GijónSeCome</h1>
-                <h2>COCINEROS, PONENTES, BLOGUEROS, ETC.</h2>
+                <h1>
+                    @if ($anio == date('Y'))
+                        {{__('ponentes.descubre_quien_acompanara')}}
+                    @else
+                        {{__('ponentes.descubre_quien_acompano')}}
+                    @endif
+                </h1>
+                <h2>{{__('ponentes.cocineros_ponentes_blogueros')}}</h2>
             </hgroup>
         </div>
 
@@ -49,11 +55,12 @@
             @endif
                         <li>
                             <img src="{{asset('images/chefs/m')}}/{{$ponente->imagen or 'sinimagen.png'}}" alt="" />
+                            <a href="{{route('detalleponentes_web_'.$idioma_actual,[is_object($ponente->textos_idioma)?$ponente->textos_idioma->slug:''])}}">
                             <div class="portfolio-item-content">
                                 <span class="header">{{is_object($ponente->textos_idioma)?$ponente->textos_idioma->titulo:''}}</span>
                                 <p class="body">{{is_object($ponente->textos_idioma)?$ponente->textos_idioma->subtitulo:''}}</p>
                             </div>
-                            <a href="{{route('detalleponentes_web_'.$idioma_actual,[is_object($ponente->textos_idioma)?$ponente->textos_idioma->slug:''])}}"><i class="more">+</i></a>
+                            </a>
 
                         </li>
             @if ($contador == 4 && $elementos>4)

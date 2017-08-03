@@ -42,6 +42,9 @@
                         <div class="icono_menu_formulario">
                             <a onclick="muestraOcultaCampos('noticia');" title="Noticia"><i class="fa fa-newspaper-o fa-5x" aria-hidden="true"></i></a>
                         </div>
+                        <div class="icono_menu_formulario">
+                            <a onclick="muestraOcultaCampos('entrevista');" title="Cita a ciegas"><i class="fa fa-users fa-5x" aria-hidden="true"></i></a>
+                        </div>
                         <h2 id="titulo_tipo_contenido" class="icono_menu_formulario titulo_tipo_contenido">
                             Noticia
                         </h2>
@@ -168,7 +171,7 @@
                         {{Form::file('imagen', null, ['class' => 'form-control'])}}
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group" id="contenedor_pagina_estatica">
 
                         {{Form::label('pagina_estatica', 'Página estática')}}
                         {{Form::checkbox('pagina_estatica', null, false,['class' => 'flat-green'])}}
@@ -270,11 +273,13 @@
 
     <!-- Tipo Contenido -->
     <script language="JavaScript">
+        $('#contenedor_pagina_estatica').hide();
         function muestraOcultaCampos(tipo_contenido){
             switch (tipo_contenido){
                 case 'pagina':
                     $('#contenedor_lugar').hide();
                     $('#contenedor_fecha').hide();
+                    $('#contenedor_pagina_estatica').show();
                     @foreach($idiomas as $idioma)
                             $('#contenedor_subtitulo_{{$idioma->codigo}}').hide();
                     @endforeach
@@ -283,10 +288,20 @@
                 case 'noticia':
                     $('#contenedor_lugar').show();
                     $('#contenedor_fecha').show();
+                    $('#contenedor_pagina_estatica').hide();
                     @foreach($idiomas as $idioma)
                             $('#contenedor_subtitulo_{{$idioma->codigo}}').show();
                     @endforeach
                     titulo = "Noticia";
+                    break;
+                case 'entrevista':
+                    $('#contenedor_lugar').hide();
+                    $('#contenedor_fecha').hide();
+                    $('#contenedor_pagina_estatica').hide();
+                    @foreach($idiomas as $idioma)
+                    $('#contenedor_subtitulo_{{$idioma->codigo}}').hide();
+                    @endforeach
+                        titulo = "Cita a ciegas";
                     break;
             }
             $('#tipo_contenido').val(tipo_contenido);

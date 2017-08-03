@@ -24,7 +24,7 @@
                             <source media="(min-width: 992px)" srcset="{{asset('images/portada/l')}}/{{$elemento->imagen or 'sinimagen.png'}}"><!-- medio pc -->
                             <source media="(min-width: 768px)" srcset="{{asset('images/portada/s')}}/{{$elemento->imagen or 'sinimagen.png'}}"><!-- tablet -->
                             <!-- img tag for browsers that do not support picture element -->
-                            @if ($elemento->url != '')
+                            @if ($elemento->url != '' || $elemento->contenido_id > 0)
                                 <a href="{{$elemento->url}}">
                             @endif
                                     <img src="{{asset('images/portada/l')}}/{{$elemento->imagen or 'sinimagen.png'}}" alt="{{is_object($elemento->textos_idioma)?$elemento->textos_idioma->titulo:''}}">
@@ -48,7 +48,7 @@
                         <article>
                             <hgroup>
                                 <h1>
-                                @if ($elemento->url != '')
+                                @if ($elemento->url != '' || $elemento->contenido_id > 0)
                                     <a href="{{$elemento->url}}">
                                 @endif
                                 {{is_object($elemento->textos_idioma)?$elemento->textos_idioma->titulo:''}}
@@ -81,7 +81,7 @@
                             <source media="(min-width: 768px)" srcset="{{asset('images/portada/s')}}/{{$elemento->imagen or 'sinimagen.png'}}"><!-- tablet -->
 
                             <!-- img tag for browsers that do not support picture element -->
-                            @if ($elemento->url != '')
+                            @if ($elemento->url != '' || $elemento->contenido_id > 0)
                                 <a href="{{$elemento->url}}">
                                     @endif
                                     <img src="{{asset('images/portada/m')}}/{{$elemento->imagen or 'sinimagen.png'}}" alt="{{is_object($elemento->textos_idioma)?$elemento->textos_idioma->titulo:''}}">
@@ -202,8 +202,8 @@
                         @endif
                     </picture>
                     <picture>
-                        <source media="(min-width: 992px)" srcset="images/graficos/d_mord.png"><!-- pc -->
-                        <source media="(min-width: 768px)" srcset="images/graficos/d_mord.png"><!-- tablet -->
+                        <source media="(min-width: 992px)" srcset="images/graficos/D_mord.png"><!-- pc -->
+                        <source media="(min-width: 768px)" srcset="images/graficos/D_mord.png"><!-- tablet -->
 
                         <!-- img tag for browsers that do not support picture element -->
                         <img src="images/graficos/D_mord_XS.png" alt="imagen decorativa" class="img-responsive mordisquitos"><!-- movil -->
@@ -257,11 +257,11 @@
                         @endif
                     </picture>
                     <picture>
-                        <source media="(min-width: 992px)" srcset="images/graficos/e_mord.png"><!-- pc -->
-                        <source media="(min-width: 768px)" srcset="images/graficos/e_mord.png"><!-- tablet -->
+                        <source media="(min-width: 992px)" srcset="images/graficos/E_mord.png"><!-- pc -->
+                        <source media="(min-width: 768px)" srcset="images/graficos/E_mord.png"><!-- tablet -->
 
                         <!-- img tag for browsers that do not support picture element -->
-                        <img src="images/graficos/e_mord_XS.png" alt="imagen decorativa" class="img-responsive mordisquitos"><!-- movil -->
+                        <img src="images/graficos/E_mord_XS.png" alt="imagen decorativa" class="img-responsive mordisquitos"><!-- movil -->
                     </picture>
 
 
@@ -322,8 +322,8 @@
                             @endif
                         </picture>
                         <picture>
-                            <source media="(min-width: 769px)" srcset="images/graficos/f_mord.png"><!-- pc -->
-                            <source media="(min-width: 480px)" srcset="images/graficos/f_mord.png"><!-- tablet -->
+                            <source media="(min-width: 769px)" srcset="images/graficos/F_mord.png"><!-- pc -->
+                            <source media="(min-width: 480px)" srcset="images/graficos/F_mord.png"><!-- tablet -->
 
                             <!-- img tag for browsers that do not support picture element -->
                             <img src="images/graficos/F_mord_XS.png" alt="imagen decorativa" class="mordisquitos"><!-- movil -->
@@ -375,8 +375,8 @@
                         </picture>
 
                         <picture>
-                            <source media="(min-width: 992px)" srcset="images/graficos/g_mord.png"><!-- pc -->
-                            <source media="(min-width: 768px)" srcset="images/graficos/g_mord.png"><!-- tablet -->
+                            <source media="(min-width: 992px)" srcset="images/graficos/G_mord.png"><!-- pc -->
+                            <source media="(min-width: 768px)" srcset="images/graficos/G_mord.png"><!-- tablet -->
 
                             <!-- img tag for browsers that do not support picture element -->
                             <img src="images/graficos/g_mord_XS.png" alt="imagen decorativa" class="img-responsive mordisquitos"><!-- movil -->

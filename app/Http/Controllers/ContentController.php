@@ -113,15 +113,16 @@ class ContentController extends Controller
         }
         $content->tipo_contenido = $request->tipo_contenido;
 
-        if (isset($request->pagina_estatica))
-            $content->pagina_estatica 	= '1';
-        else
-            $content->pagina_estatica = '0';
+        if ($request->tipo_contenido == 'pagina')
+            if (isset($request->pagina_estatica))
+                $content->pagina_estatica 	= '1';
+            else
+                $content->pagina_estatica = '0';
 
         if ($content->save()) {
             $lastId = $content->id;
 
-            for($i=0;$i<count($request->idioma_id);$i++) {
+            for ($i = 0; $i < count($request->idioma_id); $i++) {
 
                 if ($request->titulo[$i] != '') {
                     $textosIdioma = new TextosIdioma();
@@ -135,7 +136,7 @@ class ContentController extends Controller
                     $textosIdioma->metatitulo = $request->metatitulo[$i];
                     $textosIdioma->slug = Str::Slug($request->titulo[$i]);
                     $textosIdioma->visible = 0;
-                    foreach($request->visible as $visible) {
+                    foreach ($request->visible as $visible) {
                         if ($visible == $request->idioma_id[$i])
                             $textosIdioma->visible = 1;
                     }
@@ -253,10 +254,11 @@ class ContentController extends Controller
             $content->fecha_publicacion = $fecha_publicacion;
         }
 
-        if (isset($request->pagina_estatica))
-            $content->pagina_estatica 	= '1';
-        else
-            $content->pagina_estatica = '0';
+        if ($request->tipo_contenido == 'pagina')
+            if (isset($request->pagina_estatica))
+                $content->pagina_estatica 	= '1';
+            else
+                $content->pagina_estatica = '0';
 
         if ($content->save()) {
 

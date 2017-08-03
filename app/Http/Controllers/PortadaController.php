@@ -41,7 +41,13 @@ class PortadaController extends Controller
     public function create()
     {
         $idiomas = Idioma::where('activado','1')->orderBy('principal')->get();
-        return view('eunomia.portada.form_ins_portada',compact('idiomas'));
+        $paginas = DB::table('contents')
+            ->join('textos_idiomas','contents.id','textos_idiomas.contenido_id')
+            ->join('idiomas','textos_idiomas.idioma_id','idiomas.id')
+            ->select('contents.id','titulo','visible','principal','idioma','textos_idiomas.idioma_id')
+            ->where('idiomas.principal',1)
+            ->where('tipo_contenido_id',1)->pluck('titulo','contents.id');
+        return view('eunomia.portada.form_ins_portada',compact('idiomas','paginas'));
     }
 
     /**
@@ -90,7 +96,7 @@ class PortadaController extends Controller
 
             Image::make($imagen)->fit(480, 200, function ($constraint) {
                 $constraint->upsize();
-            })->save($dirm.$filename );
+            },'top')->save($dirm.$filename );
 
             Image::make($imagen)->resize(768, null, function ($constraint) {
                 $constraint->aspectRatio();
@@ -100,7 +106,11 @@ class PortadaController extends Controller
 
         }
 
-        $portada->url = $request->url;
+        if ($request->sel_link == '1') {
+            $portada->contenido_id = $request->contenido_id;
+        } elseif ($request->sel_link == '2') {
+            $portada->url = $request->url;
+        }
         $maxorden = Portada::max('orden');
         $portada->orden = is_numeric($maxorden)?$maxorden+1:1;
 
@@ -163,7 +173,13 @@ class PortadaController extends Controller
             ->where('portada.id',$id)
             ->orderBy('principal','DESC')->get();
         $portada = Portada::findOrFail($id);
-        return view('eunomia.portada.form_edit_portada',compact('idiomas','portada','textos'));
+        $paginas = DB::table('contents')
+            ->join('textos_idiomas','contents.id','textos_idiomas.contenido_id')
+            ->join('idiomas','textos_idiomas.idioma_id','idiomas.id')
+            ->select('contents.id','titulo','visible','principal','idioma','textos_idiomas.idioma_id')
+            ->where('idiomas.principal',1)
+            ->where('tipo_contenido_id',1)->pluck('titulo','contents.id');
+        return view('eunomia.portada.form_edit_portada',compact('idiomas','portada','textos','paginas'));
     }
 
     /**
@@ -218,7 +234,7 @@ class PortadaController extends Controller
 
             Image::make($imagen)->fit(480, 200, function ($constraint) {
                 $constraint->upsize();
-            })->save($dirm.$filename );
+            },'top')->save($dirm.$filename );
 
             Image::make($imagen)->resize(768, null, function ($constraint) {
                 $constraint->aspectRatio();
@@ -228,7 +244,11 @@ class PortadaController extends Controller
 
         }
 
-        $portada->url = $request->url;
+        if ($request->sel_link == '1') {
+            $portada->contenido_id = $request->contenido_id;
+        } elseif ($request->sel_link == '2') {
+            $portada->url = $request->url;
+        }
 
         if ($portada->save()) {
 

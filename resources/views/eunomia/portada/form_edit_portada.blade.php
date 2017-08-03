@@ -97,32 +97,11 @@
 
                                     <div class="form-group">
 
-                                        {{Form::label('contenido', 'Contenido')}}
-                                        {{Form::textarea('contenido[]', $contenido, ['class' => 'form-control'])}}
-
-                                    </div>
-
-                                    <div class="form-group">
-
-                                        {{Form::label('metatitulo', 'Meta título')}}
-                                        {{Form::text('metatitulo[]', $metatitulo, ['class' => 'form-control' ,'placeholder' => 'Meta título'])}}
-
-                                    </div>
-
-                                    <div class="form-group">
-
-                                        {{Form::label('metadescripcion', 'Meta descripción')}}
-                                        {{Form::text('metadescripcion[]', $metadescripcion, ['class' => 'form-control' ,'placeholder' => 'Meta descripción'])}}
-
-                                    </div>
-
-                                    <div class="form-group">
-
                                         {{Form::label('visible', 'Visible/Oculto')}}
                                         {{Form::checkbox('visible[]', $idioma->id, $visible,['class' => 'flat-green'])}}
 
                                     </div>
-                                    @if (!$idioma->principal)
+                                    @if (!$idioma->principal && false)
                                         <div class="form-group">
 
                                             {{Form::label('elimina_texto_idioma', 'Eliminar idioma')}}
@@ -133,6 +112,33 @@
                                 </div>
                             @endforeach
 
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-lg12">
+                            {{Form::label('contenido_id', 'Página')}}
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="col-lg-9">
+                                {{ Form::select('contenido_id',$paginas,null,['class' => 'form-control','placeholder' => 'Seleccione una página', 'onchange' => '$("#sel_pagina").prop("checked",true)'])}}
+                            </div>
+                            <div class="col-lg-1">
+                                {{ Form::radio('sel_link',1,$portada->content_id>0?'checked':'',['id' => 'sel_pagina'])}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg12">
+                            {{Form::label('url', 'URL')}}
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="col-lg-9">
+                                {{ Form::text('url',$portada->url,['class'=>'form-control', 'onkeypress' => '$("#sel_url").prop("checked",true)'])}}
+                            </div>
+                            <div class="col-lg-1">
+                                {{ Form::radio('sel_link',2,$portada->url!=''?'checked':'',['id' => 'sel_url'])}}
+                            </div>
                         </div>
                     </div>
 

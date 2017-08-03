@@ -31,6 +31,7 @@
                 <!-- form start -->
                     {{ Form::model($content, ['route' => ['contents.update', $content],'method' => 'PATCH','files' => true ])}}
 
+                    {{Form::hidden('tipo_contenido',$content->tipo_contenido,['id' => 'tipo_contenido'])}}
 
 
                 <div class="box-body">

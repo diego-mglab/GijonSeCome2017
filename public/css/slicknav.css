@@ -30,8 +30,8 @@
     margin: 0; }
   .slicknav_menu .slicknav_icon-bar {
     display: block;
-    width: 1.125em;
-    height: 0.125em;
+    width: 2rem;
+    height: 0.19em;
     margin: 0 auto;
     -webkit-border-radius: 1px;
     -moz-border-radius: 1px;
@@ -65,7 +65,7 @@
     border-top: 1px solid rgba(0,0,0,0.04);
   }
   .slicknav_nav .slicknav_arrow {
-     background: #ededed;
+     background: none; /*#ededed; coco*/
     float: right;
     text-align: center;
     width: 35px;
@@ -113,7 +113,8 @@
 
 .slicknav_nav {
   color: #fff;
-  font-size: 0.875em;
+  font-size: 1em;
+  text-transform: uppercase;
   list-style: outside none none;
   margin: 0;
   max-height: 350px;

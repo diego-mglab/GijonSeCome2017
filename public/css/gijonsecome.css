@@ -460,9 +460,55 @@ footer .social-widget ul.social-icons li a i{
 footer .mail-subscribe-widget{
 	margin-top:150px;
 	}
+	#migadepan{
+	background-color:#009E9B;
+	height: 30px;
+	display: block;
+	clear:both;
+	padding-left: 15px;	
+	margin-top:18px;
+}
+#migadepan ul{
+	font-size: 0.75rem;
+	color:#fff;
+	padding: 0.3em 15px 0.3em ;
+}
+#migadepan li{
+	font-size: 0.75rem;
+	color:#fff;
+	float: left;
+	margin-left: 0.2em;
+	margin-right: 0.2em;
+	text-transform: uppercase;
+}
+#migadepan li a:link{
+	font-size: 0.75rem;
+	color:#fff;
+	float: left;
+}
+#migadepan li a:visited{
+	font-size: 0.75rem;
+	color:#fff;
+	float: left;
+}
+#migadepan li a:hover{
+	font-size: 0.75rem;
+	color:#fff;
+	float: left;
+}
 
 /* sm segun bootstrap--- */
 
+@media only screen and (min-width:480px){
+#migadepan {
+    background-color: #009E9B;
+    height: 30px;
+    display: block;
+    clear: both;
+    padding-left: 15px;
+    margin-top: 26px;
+}
+}
 
 
 @media only screen and (min-width: 768px) {
@@ -470,8 +516,8 @@ footer .mail-subscribe-widget{
 
 /* tablet----------- */
 	h1{
-	font-size: 1.15rem;
-	line-height: 1.15rem;
+	font-size: 1.5625rem;
+	line-height: 1.5625rem;
 	}
 	h2{
 	font-size: 0.8125rem;
@@ -795,12 +841,54 @@ footer .social-widget ul.social-icons li a i{
 
 	}
 	
+#migadepan{
+	background-color:#009E9B;
+	height: 30px;
+	display: block;
+	clear:both;
+	padding-left: 15px;	
+	margin-top:25px;
+}
+
+#migadepan ul{
+	font-size: 0.75rem;
+	color:#fff;
+	padding: 0.3em 15px 0.3em ;
+}
+#migadepan li{
+	font-size: 0.75rem;
+	color:#fff;
+	float: left;
+	margin-left: 0.2em;
+	margin-right: 0.2em;
+	text-transform: uppercase;
+}
+#migadepan li a:link{
+	font-size: 0.75rem;
+	color:#fff;
+	float: left;
+}
+#migadepan li a:visited{
+	font-size: 0.75rem;
+	color:#fff;
+	float: left;
+}
+#migadepan li a:hover{
+	font-size: 0.75rem;
+	color:#fff;
+	float: left;
+}
+	
 }
 
 
 /* md segun bootstrap--- */
 
 @media only screen and (min-width: 992px) {
+.varianteprimera h1{
+font-size:1.5625rem;
+line-height: 1.5265rem;
+}
 .dedosendos{
   display: -webkit-box;
   display: -webkit-flex;
@@ -825,8 +913,8 @@ padding: 1.5625rem 0.8rem 3rem 0.8rem ;
 
 /* Desktops and laptops ----------- */
 	h1{
-	font-size: 1.5625rem;
-	line-height:1.5625rem;
+	font-size: 1.25rem;
+	line-height:1.25rem;
 	}
 	h2{
 	font-size: 1em;
@@ -1157,6 +1245,43 @@ footer .social-widget ul.social-icons li a i{
 
 	}
 	
+#migadepan{
+	background-color:#009E9B;
+	height: 30px;
+	display: block;
+	clear:both;
+	padding-left: 30px;
+	margin-top: 7px;
+}
+#migadepan ul{
+	font-size: 0.75rem;
+	color:#fff;
+	padding: 0.3em 15px 0.3em ;
+}
+#migadepan li{
+	font-size: 0.75rem;
+	color:#fff;
+	float: left;
+	margin-left: 0.2em;
+	margin-right: 0.2em;
+	text-transform: uppercase;
+}
+#migadepan li a:link{
+	font-size: 0.75rem;
+	color:#fff;
+	float: left;
+}
+#migadepan li a:visited{
+	font-size: 0.75rem;
+	color:#fff;
+	float: left;
+}
+#migadepan li a:hover{
+	font-size: 0.75rem;
+	color:#fff;
+	float: left;
+}
+	
 }
 
 
@@ -1188,9 +1313,12 @@ padding:1.875rem 1.875rem 3.75rem 1.875rem; }
 	background-repeat: no-repeat;
 	background-position: left bottom;
 	background-color:#80CFCD;
-	height: 125px;
+	height: 150px;
 
 }
+.navbar {
+    max-height: 150px;
+}/* .navbarcocoañadido a peticion de hector si no funciona quitar*/
 .logo{
 padding: 0;
 position:relative;
@@ -1383,12 +1511,57 @@ footer .social-widget ul.social-icons li a i{
     display: block;
 
 	}
+/* para las páginas de detalle*/
+
+
+#zonavariable{
+margin-top: 30px;}
+
+#migadepan{
+	background-color:#009E9B;
+	height: 30px;
+	display: block;
+	clear:both;
+	padding-left: 30px;
+	margin-top: 42px;
+}
+#migadepan ul{
+	font-size: 0.75rem;
+	color:#fff;
+	padding: 0.3em 15px 0.3em ;
+}
+#migadepan li{
+	font-size: 0.75rem;
+	color:#fff;
+	float: left;
+	margin-left: 0.2em;
+	margin-right: 0.2em;
+	text-transform: uppercase;
+}
+#migadepan li a:link{
+	font-size: 0.75rem;
+	color:#fff;
+	float: left;
+}
+#migadepan li a:visited{
+	font-size: 0.75rem;
+	color:#fff;
+	float: left;
+}
+#migadepan li a:hover{
+	font-size: 0.75rem;
+	color:#fff;
+	float: left;
+}	
 	
 }
 iframe{
 margin-bottom: 50px;
 }
-form{ margin-right: 2rem;}
-#zonavariable{
-margin-top: 5px;
-}
+form{ margin-right: 2rem;
+	margin-bottom: 2rem
+	}
+
+
+
+

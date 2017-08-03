@@ -100,8 +100,10 @@
                             <li>
                                 @if ($menu->url != '')
                                     {{link_to($menu->url, $title = is_object($menu->textos_idioma)?$menu->textos_idioma->titulo:'', $parameters = [])}}
-                                @else
+                                @elseif ($menu->content_id > 0)
                                     {{link_to_route(is_object($menu->content)?str_replace("-","",$menu->content->textos_idioma->slug).'_web_'.Session::get('idioma'):'principal',$title = is_object($menu->textos_idioma)?$menu->textos_idioma->titulo:'', $parameters = [])}}
+                                @else
+                                    <a href="#">{{is_object($menu->textos_idioma)?$menu->textos_idioma->titulo:''}}</a>
                                 @endif
 
                                 <ul class="dropdown">

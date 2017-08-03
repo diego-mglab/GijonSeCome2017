@@ -76,27 +76,6 @@
 
                                     <div class="form-group">
 
-                                        {{Form::label('contenido', 'Contenido')}}
-                                        {{Form::textarea('contenido[]', null, ['class' => 'form-control'])}}
-
-                                    </div>
-
-                                    <div class="form-group">
-
-                                        {{Form::label('metatitulo', 'Meta título')}}
-                                        {{Form::text('metatitulo[]', null, ['class' => 'form-control' ,'placeholder' => 'Meta título'])}}
-
-                                    </div>
-
-                                    <div class="form-group">
-
-                                        {{Form::label('metadescripcion', 'Meta descripción')}}
-                                        {{Form::text('metadescripcion[]', null, ['class' => 'form-control' ,'placeholder' => 'Meta descripción'])}}
-
-                                    </div>
-
-                                    <div class="form-group">
-
                                         {{Form::label('visible', 'Visible/Oculto')}}
                                         {{Form::checkbox('visible[]', $idioma->id, true,['class' => 'flat-green'])}}
 
@@ -108,10 +87,30 @@
                     </div>
 
                     <div class="form-group">
-
-                        {{Form::label('url', 'URL')}}
-                        {{Form::text('url', null, ['class' => 'form-control' ,'placeholder' => 'URL'])}}
-
+                        <div class="col-lg12">
+                            {{Form::label('contenido_id', 'Página')}}
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="col-lg-9">
+                                {{ Form::select('contenido_id',$paginas,null,['class' => 'form-control','placeholder' => 'Seleccione una página', 'onchange' => '$("#sel_pagina").prop("checked",true)'])}}
+                            </div>
+                            <div class="col-lg-1">
+                                {{ Form::radio('sel_link',1,false,['id' => 'sel_pagina'])}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg12">
+                            {{Form::label('url', 'URL')}}
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="col-lg-9">
+                                {{ Form::text('url',null,['class'=>'form-control', 'onkeypress' => '$("#sel_url").prop("checked",true)'])}}
+                            </div>
+                            <div class="col-lg-1">
+                                {{ Form::radio('sel_link',2,false,['id' => 'sel_url'])}}
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-group" id="contenedor_imagen">

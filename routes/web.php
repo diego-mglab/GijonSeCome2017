@@ -31,14 +31,17 @@ Route::get('/', function(){
 $contents = Content::where('tipo_contenido','pagina')->get();
 $idiomas = Idioma::where('activado',1)->get();
 $paginas_estaticas = [''];
-foreach ($contents as $content){
-    foreach($idiomas as $idioma) {
+foreach ($idiomas as $idioma){
+
+    foreach($contents as $content) {
         if (is_object($content->textos_idioma_todos($idioma->id))) {
             $parametros = '';
             $metodo = str_replace("-", "", $content->textos_idioma_todos($idioma->id)->slug);
             $ruta = $content->textos_idioma_todos($idioma->id)->slug;
             if ($content->textos_idioma_principal->slug == 'detalle-ponentes')
                 $parametros = '{slug}';
+            if ($content->textos_idioma_principal->slug == 'ponentes')
+                $parametros = '{anio?}';
             if ($content->pagina_estatica == 0) {
                 $metodo = 'detalle';
             }
@@ -48,10 +51,14 @@ foreach ($contents as $content){
                     return redirect('/' . (Session::get('idioma') !== null ? Session::get('idioma') : Idioma::where('principal', 1)->first()->codigo));
                 })->name($content->textos_idioma_todos($idioma->id)->slug . '_web_' . $codigo);
             elseif ($metodo != '') {
-                Route::get($codigo . '/' . $ruta . ($parametros != '' ? '/' . $parametros : ''), 'WebController@' . $metodo)->name(str_slug($content->textos_idioma_todos($idioma->id)->slug, "") . '_web_' . $codigo);
+                Route::get($codigo . '/' . $ruta . ($parametros != '' ? '/' . $parametros : ''), 'WebController@' . $metodo, function(){
+                    Session(['idioma' => $codigo]);
+                    App::SetLocale(Session::get('idioma'));
+                })->name(str_slug($content->textos_idioma_todos($idioma->id)->slug, "") . '_web_' . $codigo);
                 if ($content->textos_idioma_principal->slug == 'contacto'){
                     $metodo = 'contacto';
-                    Route::post($codigo . '/' . $ruta . ($parametros != '' ? '/' . $parametros : ''), 'WebController@' . $metodo)->name(str_slug($content->textos_idioma_todos($idioma->id)->slug, "") . '_web_post_' . $codigo);
+                    Route::post($codigo . '/' . $ruta . ($parametros != '' ? '/' . $parametros : ''), 'WebController@' . $metodo)
+                        ->name(str_slug($content->textos_idioma_todos($idioma->id)->slug, "") . '_web_post_' . $codigo);
                 }
             }
         }
@@ -66,7 +73,7 @@ Route::group(['middleware' => ['web']], function () {
         App::SetLocale(Session::get('idioma'));
         $menus = Menu::get();
         $portada = Portada::orderBy('orden')->get();
-        $ponentes = Ponente::where('anio',date('Y')-1)->orderBy('orden')->get();
+        $ponentes = Ponente::where('anio',date('Y'))->orderBy('orden')->get();
         return view('web.home',compact('menus','portada','ponentes'));
     })->where([
         'lang' => 'es|as'

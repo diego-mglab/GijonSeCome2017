@@ -29,24 +29,23 @@
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <picture>
                             <!-- img tag for browsers that do not support picture element -->
-                            <img src="images/fotos/destacadauna.png" alt="..." class="img-responsive"><!-- movil -->
+                            <img src="{{asset('images/fotos/destacadauna.png')}}" alt="..." class="img-responsive"><!-- movil -->
                         </picture>
                         <picture>
-                            <source media="(min-width: 992px)" srcset="images/graficos/A_mord.png"><!-- pc -->
-                            <source media="(min-width: 768px)" srcset="images/graficos/A_mord.png"><!-- tablet -->
+                            <source media="(min-width: 992px)" srcset="{{asset('images/graficos/A_mord.png')}}"><!-- pc -->
+                            <source media="(min-width: 768px)" srcset="{{asset('images/graficos/A_mord.png')}}"><!-- tablet -->
 
                             <!-- img tag for browsers that do not support picture element -->
-                            <img src="images/graficos/A_mord_XS.png" alt="imagen decorativa" class="mordisquitos"><!-- movil -->
+                            <img src="{{asset('images/graficos/A_mord_XS.png')}}" alt="imagen decorativa" class="mordisquitos"><!-- movil -->
                         </picture>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <article>
                             <hgroup>
-                                <h3>ANTETÍTULO. FIRMA DE LIBROS</h3>
+                                <time>GIJÓN. 24/04/2017</time>
                                 <h1><a href="#">Titular de página interior. Kim Ossemblok posa como un auténtico maizón.</a></h1>
                                 <h2>SUBTÍTULO DE PÁGINA INTERIOR. KIM ESTÁ HASTA LA POLLA DE POSAR.</h2>
 
-                                <time>GIJÓN. 24/04/2017</time>
                                 <p>Texto general de página interior. Kim es más de té. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</p>
                             </hgroup>
 
@@ -347,5 +346,5 @@
 @endsection
 
 @section('css')
-    <link rel="stylesheet" type="text/css" href="css/noticias.css"/>
+    <link rel="stylesheet" type="text/css" href="{{asset('css/noticias.css')}}"/>
 @endsection

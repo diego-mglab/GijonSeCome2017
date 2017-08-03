@@ -19,42 +19,7 @@ article li a:hover{color:#19A8A5; text-decoration: none;}
 	top:66px;
 	z-index: 99999;
 }
-#migadepan{
-	background-color:#009E9B;
-	height: 30px;
-	display: block;
-	clear:both;
-	padding-left: 15px;	
-	margin-top:18px;
-}
-#migadepan ul{
-	font-size: 0.75rem;
-	color:#fff;
-	padding: 0.3em 15px 0.3em ;
-}
-#migadepan li{
-	font-size: 0.75rem;
-	color:#fff;
-	float: left;
-	margin-left: 0.2em;
-	margin-right: 0.2em;
-	text-transform: uppercase;
-}
-#migadepan li a:link{
-	font-size: 0.75rem;
-	color:#fff;
-	float: left;
-}
-#migadepan li a:visited{
-	font-size: 0.75rem;
-	color:#fff;
-	float: left;
-}
-#migadepan li a:hover{
-	font-size: 0.75rem;
-	color:#fff;
-	float: left;
-}
+
 	#noticias article{
 	padding-left:60px;
 	padding-right: 60px;
@@ -83,6 +48,9 @@ article{
 #agendapc{
 display:none;
 }
+#agendapc h1{
+    font-family: 'Source Sans Pro', sans-serif;
+}
 #agendamov{
 display:block;
 }
@@ -95,7 +63,7 @@ display:block;
 }
 #agendamov article h2{
 	font-size: 1.125rem;
-	font-weight: 600;
+	font-weight: 600i;
 	line-height: 1.125rem;
 	padding: 0 0.5rem;
 	color:#1D1D1B;
@@ -147,35 +115,39 @@ text-decoration: underline;
 opacity: 1;
 box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2);
 position: relative;
+padding: 0 0 0 1rem;
 }
 #agendamov article.showcooking
 {
-	background-image: url(../images/graficos/triangulon.png);
+	background-image: url(../images/graficos/triangulon40.png);
 	background-repeat: no-repeat;
 	background-position: right bottom;
 	border-bottom: 1px solid #f28e3e;
 	width: 100%;
+	padding: 1rem;
 }
 #agendamov article.showcooking h2 spam{
 	color:#F28E3E;
 	margin-right: 1rem;
 }
 #agendamov article.ponencia{
-	background-image: url(../images/graficos/triangulov.png);
+	background-image: url(../images/graficos/triangulov40.png);
 	background-repeat: no-repeat;
 	background-position: right bottom;
 	border-bottom: 1px solid #ADCC53;
-	width: 100%;		
+	width: 100%;
+	padding: 1rem;	
 }
 #agendamov article.ponencia h2 spam{
 	color:#ADCC53;
 	margin-right: 1rem;}
 #agendamov article.otros{
-	background-image: url(../images/graficos/triangulor.png);
+	background-image: url(../images/graficos/triangulor40.png);
 	background-repeat: no-repeat;
 	background-position: right bottom;
 	border-bottom: 1px solid #E16372;
 	width: 100%;
+	padding: 1rem;	
 }
 #agendamov article.otros h2 spam{
 	color:#E16372;
@@ -208,43 +180,6 @@ article li a:hover{color:#19A8A5; text-decoration: none;}
     top: 89px;
     left: 30px;
     z-index: 99999;
-}
-#migadepan{
-	background-color:#009E9B;
-	height: 30px;
-	display: block;
-	clear:both;
-	padding-left: 15px;	
-	margin-top:25px;
-}
-
-#migadepan ul{
-	font-size: 0.75rem;
-	color:#fff;
-	padding: 0.3em 15px 0.3em ;
-}
-#migadepan li{
-	font-size: 0.75rem;
-	color:#fff;
-	float: left;
-	margin-left: 0.2em;
-	margin-right: 0.2em;
-	text-transform: uppercase;
-}
-#migadepan li a:link{
-	font-size: 0.75rem;
-	color:#fff;
-	float: left;
-}
-#migadepan li a:visited{
-	font-size: 0.75rem;
-	color:#fff;
-	float: left;
-}
-#migadepan li a:hover{
-	font-size: 0.75rem;
-	color:#fff;
-	float: left;
 }
 	#noticias article{
 	padding-left:60px;
@@ -349,6 +284,7 @@ position: relative;
 #agendamov article.showcooking h2 spam{
 	color:#F28E3E;
 	margin-right: 1rem;
+	font-family: 'Source Sans Pro', sans-serif;
 }
 #agendamov article.ponencia{
 	background-image: url(../images/graficos/triangulov.png);
@@ -375,6 +311,7 @@ margin-right: 1rem;}
 	 -webkit-column-count:1; /* Chrome, Safari, Opera */
     -moz-column-count:1; /* Firefox */
     column-count:1;
+	margin-top: 1rem;
 }
 #agendamov  .col-sm-6 {
 padding: 15px 30px 30px 30px;;
@@ -399,42 +336,6 @@ article li a:hover{color:#19A8A5; text-decoration: none;}
 	top:89px;
 	z-index: 99999;
 }
-#migadepan{
-	background-color:#009E9B;
-	height: 30px;
-	display: block;
-	clear:both;
-	padding-left: 30px;
-	margin-top: 0;
-}
-#migadepan ul{
-	font-size: 0.75rem;
-	color:#fff;
-	padding: 0.3em 15px 0.3em ;
-}
-#migadepan li{
-	font-size: 0.75rem;
-	color:#fff;
-	float: left;
-	margin-left: 0.2em;
-	margin-right: 0.2em;
-	text-transform: uppercase;
-}
-#migadepan li a:link{
-	font-size: 0.75rem;
-	color:#fff;
-	float: left;
-}
-#migadepan li a:visited{
-	font-size: 0.75rem;
-	color:#fff;
-	float: left;
-}
-#migadepan li a:hover{
-	font-size: 0.75rem;
-	color:#fff;
-	float: left;
-}
 	h1{padding-left: 15px}
 	h2{padding-left: 15px}
 	h3{padding-left: 15px}
@@ -448,7 +349,7 @@ article li a:hover{color:#19A8A5; text-decoration: none;}
 	padding: 20px 15px 0px 15px;	
 }
 #noticias h3{
-	padding: 20px 15px 0px 15px;
+	padding: 7px 15px 0px 15px;
 	font-weight: bold;
 	font-size: 0.75rem;
 }
@@ -467,7 +368,7 @@ article{
 	 -webkit-column-count:1; /* Chrome, Safari, Opera */
     -moz-column-count:1; /* Firefox */
     column-count:1;
-	padding: 30px 30px 60px 30px;
+	padding: 60px 30px 60px 30px;
 	float: left;
 	display: block
 
@@ -483,16 +384,16 @@ display:none;
 	margin: 0rem 0rem 0.5rem 0rem;
 }
 #agendapc article h2{
-	font-size: 1.125rem;
+	font-size: 1.5rem;
 	font-weight: 600;
-	line-height: 1.125rem;
+	line-height: 1.5rem;
 	padding: 0 0.5rem;
 	color:#1D1D1B;
 }
 #agendapc article h2 spam{
 	font-size: 1.125rem;
-	font-weight: 700;
 	font-family: 'Source Sans Pro', sans-serif;
+	font-weight: 800;	
 	
 }
 #agendapc article h3{
@@ -501,6 +402,7 @@ display:none;
 	font-weight: 400;
 	line-height: 1.2rem;	
 	color:#555554;
+	text-transform: uppercase;
 }
 #agendapc article p{
 	padding: 0rem 0.5rem 0 0.5rem;
@@ -524,12 +426,10 @@ padding: 0.0em;
 }	
 
 #agendapc .sabado{
-font-size: 1rem;
+font-size: 1.5rem;
 color: #6A7277;
-text-transform: uppercase;
-font-weight: 600;
+font-weight: 800;
 display: block;
-text-decoration: underline;
 }
 #agendapc header{
 opacity: 1;
@@ -547,6 +447,7 @@ position: relative;
 #agendapc article.showcooking h2 spam{
 	color:#F28E3E;
 	margin-right: 1rem;
+	font-family: 'Source Sans Pro', sans-serif;
 }
 #agendapc article.ponencia{
 	background-image: url(../images/graficos/triangulov.png);
@@ -580,11 +481,18 @@ margin-right: 1rem;}
 	h1{padding-left: 15px}
 	h2{padding-left: 15px}
 	h3{padding-left: 15px}
+	hgroup h2 {
+	    padding-top: 0.39rem;
+	}
 .mordiscodet{
 	position:absolute;
 	right:30px;
 	top:89px;
 	z-index: 99999;
+}
+
+#detallecocina{
+margin-top:0px;
 }
 .decoracion{
 height: 90px;
@@ -592,47 +500,12 @@ width:100%;
 background: #BFE7E6 no-repeat right top url(../images/graficos/detallecocinaLG.png);
 }
 .decoracion h1{color:#333332;
-font-size:1.375em; padding: 2rem 0 0 1.875rem }
+font-size:1.375em; padding: 2.5625rem 0 0 1.875rem }
 article strong{color:#19A8A5}
 article li a:link{color:#19A8A5; text-decoration: underline;}
 article li a:visited{color:#19A8A5; text-decoration: underline;}
 article li a:hover{color:#19A8A5; text-decoration: none;}
-#migadepan{
-	background-color:#009E9B;
-	height: 30px;
-	display: block;
-	clear:both;
-	padding-left:15px;
-	margin-top: 12px;
-}
-#migadepan ul{
-	font-size: 0.75rem;
-	color:#fff;
-	padding: 0.3em 15px 0em ;
-}
-#migadepan li{
-	font-size: 0.75rem;
-	color:#fff;
-	float: left;
-	margin-left: 0.2em;
-	margin-right: 0.2em;
-	text-transform: uppercase;
-}
-#migadepan li a:link{
-	font-size: 0.75rem;
-	color:#fff;
-	float: left;
-}
-#migadepan li a:visited{
-	font-size: 0.75rem;
-	color:#fff;
-	float: left;
-}
-#migadepan li a:hover{
-	font-size: 0.75rem;
-	color:#fff;
-	float: left;
-}
+
 
 #noticias{
 
@@ -643,7 +516,7 @@ article li a:hover{color:#19A8A5; text-decoration: none;}
 	padding: 20px 15px 0px 15px;	
 }
 #noticias h3{
-	padding: 20px 15px 0px 15px;
+	padding: 7px 15px 0px 15px;
 	font-weight: bold;
 	font-size: 0.75rem;
 }
@@ -659,6 +532,7 @@ article li a:hover{color:#19A8A5; text-decoration: none;}
 #agendapc {
 display:block;
 }
+
 #agendapc .col-md-12{padding: 30px 0 0px 30px}
 #agendapc article{
 	padding: 0rem 0rem 0.5rem 0rem;
@@ -666,10 +540,11 @@ display:block;
 }
 #agendapc article h2{
 	font-size: 1.125rem;
-	font-weight: 600;
+	font-weight: 800;
 	line-height: 1.125rem;
 	padding: 0 0.5rem;
 	color:#1D1D1B;
+	font-family: 'Cormorant Garamond', serif;
 }
 #agendapc article h2 spam{
 	font-size: 1.125rem;
@@ -680,7 +555,7 @@ display:block;
 #agendapc article h3{
 	padding: 0.5rem 0.5rem;
 	font-size: 1rem;
-	font-weight: 400;
+	font-weight: 600i;
 	line-height: 1.2rem;	
 	color:#555554;
 }
@@ -702,16 +577,14 @@ color:#C3C3C2;
 text-align: center;
 font-size: 1rem;
 text-transform: uppercase;
-padding: 0.0em;
+padding: 0.1em;
 }	
 
 #agendapc .sabado{
 font-size: 1rem;
 color: #6A7277;
-text-transform: uppercase;
 font-weight: 600;
 display: block;
-text-decoration: underline;
 }
 #agendapc header{
 opacity: 1;
@@ -721,18 +594,19 @@ top:0;
 }
 #agendapc article.showcooking
 {
-	background-image: url(../images/graficos/triangulon.png);
+	background-image: url(../images/graficos/triangulon40.png);
 	background-repeat: no-repeat;
 	background-position: right bottom;
 	border-bottom: 1px solid #f28e3e;
 	width: 100%;
+	margin-top: 25px;
 }
 #agendapc article.showcooking h2 spam{
 	color:#F28E3E;
 	margin-right: 1rem;
 }
 #agendapc article.ponencia{
-	background-image: url(../images/graficos/triangulov.png);
+	background-image: url(../images/graficos/triangulov40.png);
 	background-repeat: no-repeat;
 	background-position: right bottom;
 	border-bottom: 1px solid #ADCC53;
@@ -742,7 +616,7 @@ top:0;
 	color:#ADCC53;
 	margin-right: 1rem;}
 #agendapc article.otros{
-	background-image: url(../images/graficos/triangulor.png);
+	background-image: url(../images/graficos/triangulor40.png);
 	background-repeat: no-repeat;
 	background-position: right bottom;
 	border-bottom: 1px solid #E16372;
@@ -755,7 +629,7 @@ margin-right: 1rem;}
 	 -webkit-column-count:2; /* Chrome, Safari, Opera */
     -moz-column-count:2; /* Firefox */
     column-count:2;
+	column-gap:1.875rem;
 }
-
 
 }
