@@ -22,4 +22,8 @@ class Content extends Model
     public function menu(){
         return $this->hasMany('App\Menu','id','content_id');
     }
+
+    public function portada(){
+        return $this->hasMany('App\Portada','id','contenido_id');
+    }
 }

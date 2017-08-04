@@ -174,7 +174,7 @@ class ContentController extends Controller
         $textos = DB::table('contents')
             ->join('textos_idiomas','contents.id','=','textos_idiomas.contenido_id')
             ->join('idiomas','textos_idiomas.idioma_id','idiomas.id')
-            ->select('contents.id as content_id','tipo_contenido','titulo','subtitulo','contenido','metadescripcion','metatitulo','visible','principal','idioma','idiomas.imagen','codigo','textos_idiomas.idioma_id')
+            ->select('contents.id as content_id','tipo_contenido','titulo','subtitulo','contenido','metadescripcion','metatitulo','slug','visible','principal','idioma','idiomas.imagen','codigo','textos_idiomas.idioma_id')
             ->where('tipo_contenido_id',$this->tipo_contenido)
             ->where('contents.id',$id)
             ->orderBy('principal','DESC')->get();
@@ -279,7 +279,7 @@ class ContentController extends Controller
                     $textosIdioma->contenido = $request->contenido[$i];
                     $textosIdioma->metadescripcion = $request->metadescripcion[$i];
                     $textosIdioma->metatitulo = $request->metatitulo[$i];
-                    $textosIdioma->slug = Str::Slug($request->titulo[$i]);
+                    $textosIdioma->slug = $request->slug[$i];
                     $textosIdioma->visible = 0;
                     foreach($request->visible as $visible) {
                         if ($visible == $request->idioma_id[$i])

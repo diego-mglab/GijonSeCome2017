@@ -28,7 +28,7 @@ use Illuminate\Support\Facades\Session;
 Route::get('/', function(){
    return redirect('/'.(Session::get('idioma') !== null?Session::get('idioma'):Idioma::where('principal',1)->first()->codigo));
 })->name('principal');
-$contents = Content::where('tipo_contenido','pagina')->get();
+$contents = Content::get();
 $idiomas = Idioma::where('activado',1)->get();
 $paginas_estaticas = [''];
 foreach ($idiomas as $idioma){

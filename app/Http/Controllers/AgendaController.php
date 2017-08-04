@@ -50,12 +50,14 @@ class AgendaController extends Controller
             ->join('textos_idiomas','ponentes.id','=','textos_idiomas.contenido_id')
             ->join('idiomas','textos_idiomas.idioma_id','idiomas.id')
             ->select('titulo','ponentes.id as id')
-            ->where('tipo_contenido_id',$this->tipo_contenido)
+            ->where('tipo_contenido_id',3)
             ->where('principal','1')
+            ->orderBy('titulo')
             ->pluck('titulo','id'); // titulo como nombre del ponente
         $idiomas = Idioma::where('activado','1')->orderBy('principal')->get();
         $zonas = Zona::all()->pluck('nombre','id');
-        return view('eunomia.agenda.form_ins_agenda',compact('idiomas','ponentes','zonas'));
+        $tipos_evento = ['showcooking' => 'showcooking','ponencia' => 'ponencia','otros' => 'otros'];
+        return view('eunomia.agenda.form_ins_agenda',compact('idiomas','ponentes','zonas','tipos_evento'));
     }
 
     /**
@@ -72,7 +74,8 @@ class AgendaController extends Controller
            'fecha' => 'required',
            'hora' => 'required',
            'zona_id' => 'required',
-           'ponentes' => 'required'
+           'ponentes' => 'required',
+           'tipo_evento' => 'required'
         ]);
         foreach ($idiomas as $idioma) {
             if ($idioma->principal == 1)
@@ -89,6 +92,7 @@ class AgendaController extends Controller
         }
         $agenda->hora = $request->hora;
         $agenda->zona_id = $request->zona_id;
+        $agenda->tipo_evento = $request->tipo_evento;
 
 
         if ($agenda->save()) {
@@ -107,7 +111,7 @@ class AgendaController extends Controller
                     $textosIdioma->contenido = $request->contenido[$i];
                     $textosIdioma->metadescripcion = $request->metadescripcion[$i];
                     $textosIdioma->metatitulo = $request->metatitulo[$i];
-                    $textosIdioma->slug = Str::Slug($request->titulo[$i]);
+                    //$textosIdioma->slug = Str::Slug($request->titulo[$i]);
                     $textosIdioma->visible = 0;
                     foreach($request->visible as $visible) {
                         if ($visible == $request->idioma_id[$i])
@@ -158,15 +162,16 @@ class AgendaController extends Controller
             ->join('textos_idiomas','ponentes.id','textos_idiomas.contenido_id')
             ->join('idiomas','textos_idiomas.idioma_id','idiomas.id')
             ->select('titulo','ponentes.id as id')
-            ->where('tipo_contenido_id',$this->tipo_contenido)
+            ->where('tipo_contenido_id',3)
             ->where('principal','1')
+            ->orderBy('titulo')
             ->pluck('titulo','id'); // titulo como nombre del ponente
         $ponentes = DB::table('ponentes')
             ->join('textos_idiomas','ponentes.id','textos_idiomas.contenido_id')
             ->join('idiomas','textos_idiomas.idioma_id','idiomas.id')
             ->join('ponentes_agenda','ponentes.id','ponentes_agenda.ponentes_id')
             ->select('titulo','ponentes.id as id')
-            ->where('tipo_contenido_id',$this->tipo_contenido)
+            ->where('tipo_contenido_id',3)
             ->where('principal','1')
             ->where('ponentes_agenda.agenda_id',$id)
             ->pluck('id')->toArray(); // titulo como nombre del ponente
@@ -179,7 +184,8 @@ class AgendaController extends Controller
             ->where('tipo_contenido_id',$this->tipo_contenido)
             ->where('agenda.id',$id)
             ->orderBy('principal','DESC')->get();
-        return view('eunomia.agenda.form_edit_agenda',compact('idiomas','agenda','ponentes','zonas','allponentes','textos'));
+        $tipos_evento = ['showcooking' => 'showcooking','ponencia' => 'ponencia','otros' => 'otros'];
+        return view('eunomia.agenda.form_edit_agenda',compact('idiomas','agenda','ponentes','zonas','allponentes','textos','tipos_evento'));
     }
 
     /**
@@ -215,6 +221,7 @@ class AgendaController extends Controller
         }
         $agenda->hora = $request->hora;
         $agenda->zona_id = $request->zona_id;
+        $agenda->tipo_evento = $request->tipo_evento;
 
         if ($agenda->save()) {
 
@@ -234,7 +241,7 @@ class AgendaController extends Controller
                     $textosIdioma->contenido = $request->contenido[$i];
                     $textosIdioma->metadescripcion = $request->metadescripcion[$i];
                     $textosIdioma->metatitulo = $request->metatitulo[$i];
-                    $textosIdioma->slug = Str::Slug($request->titulo[$i]);
+                    //$textosIdioma->slug = Str::Slug($request->titulo[$i]);
                     $textosIdioma->visible = 0;
                     foreach($request->visible as $visible) {
                         if ($visible == $request->idioma_id[$i])

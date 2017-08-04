@@ -74,6 +74,13 @@
 
                     <div class="form-group">
 
+                        {{Form::label('tipo_evento', 'Tipo de evento')}}
+                        {{Form::select('tipo_evento', $tipos_evento, null, ['class' => 'form-control', 'placeholder'=>'selecciona un tipo de evento'])}}
+
+                    </div>
+
+                    <div class="form-group">
+
                         {{Form::label('ponentes', 'Ponentes')}}
                         {{Form::select('ponentes[]', $allponentes, $ponentes, ['class' => 'form-control select2', 'data-placeholder'=>'selecciona uno o varios ponentes', 'multiple'=>'multiple'])}}
 
@@ -175,7 +182,7 @@
                 <!-- /.box-body -->
 
                 <div class="box-footer">
-                    <button type="submit" class="btn btn-default">Insertar</button>
+                    <button type="submit" class="btn btn-default">Editar</button>
                 </div>
 
                 {!! Form::close() !!}

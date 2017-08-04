@@ -42,7 +42,7 @@
                         </h2>
                     </div>
 
-                    @if ($content->tipo_contenido == 'noticia')
+                    @if ($content->tipo_contenido == 'noticia' || $content->tipo_contenido == 'entrevista')
                         <?php
                             //Convertimos las fechas que nos llegan en formato dd/mm/yyyy
                             $fecha = $fecha_publicacion = '';
@@ -55,13 +55,14 @@
                                 $fecha_publicacion = date('d/m/Y',$time);
                             }
                         ?>
+                        @if ($content->tipo_contenido == 'noticia')
                         <div class="form-group" id="contenedor_lugar">
 
                             {{Form::label('lugar', 'Lugar')}}
                             {{Form::text('lugar', null, ['class' => 'form-control' ,'placeholder' => 'Lugar'])}}
 
                         </div>
-
+                        @endif
                         <div class="form-group" id="contenedor_fecha">
                             {{Form::label('fecha', 'Fecha')}}
 
@@ -114,6 +115,7 @@
                                     $contenido = null;
                                     $metatitulo = null;
                                     $metadescripcion = null;
+                                    $slug = null;
                                     $visible = false;
                                 ?>
                                 @foreach($textos as $texto)
@@ -124,6 +126,7 @@
                                             $contenido = $texto->contenido;
                                             $metatitulo = $texto->metatitulo;
                                             $metadescripcion = $texto->metadescripcion;
+                                            $slug = $texto->slug;
                                             $visible = $texto->visible;
                                         }
                                     ?>
@@ -140,7 +143,7 @@
                                     <div class="form-group">
 
                                         {{Form::label('titulo', 'Título')}}
-                                        {{Form::text('titulo[]', $titulo, ['class' => 'form-control' ,'placeholder' => 'Título'])}}
+                                        {{Form::text('titulo[]', $titulo, ['class' => 'form-control' ,'placeholder' => 'Título', 'id' => 'titulo'.$idioma->id, 'onkeyup' => '$("#slug'.$idioma->id.'").val(slug($("#titulo'.$idioma->id.'").val()));'])}}
 
                                     </div>
 
@@ -177,6 +180,13 @@
 
                                     <div class="form-group">
 
+                                        {{Form::label('slug', 'URL amigable')}}
+                                        {{Form::text('slug[]', $slug, ['class' => 'form-control' ,'placeholder' => 'URL amigable', 'id' => 'slug'.$idioma->id])}}
+
+                                    </div>
+
+                                    <div class="form-group">
+
                                         {{Form::label('visible', 'Visible/Oculto')}}
                                         {{Form::checkbox('visible[]', $idioma->id, $visible,['class' => 'flat-green'])}}
 
@@ -205,12 +215,14 @@
                         @endif
                     </div>
 
+                    @if ($content->tipo_contenido == 'pagina')
                     <div class="form-group">
 
                         {{Form::label('pagina_estatica', 'Página estática')}}
                         {{Form::checkbox('pagina_estatica', null, $content->pagina_estatica,['class' => 'flat-green'])}}
 
                     </div>
+                    @endif
 
                 </div>
                 <!-- /.box-body -->
@@ -331,4 +343,24 @@
         }
     </script>
 
+    <!-- Crear URL amigable a partir de lo que se escriba en el título -->
+    <script language="JavaScript">
+        var slug = function(str) {
+            str = str.replace(/^\s+|\s+$/g, ''); // trim
+            str = str.toLowerCase();
+
+            // remove accents, swap ñ for n, etc
+            var from = "ÁÄÂÀÃÅČÇĆĎÉĚËÈÊẼĔȆÍÌÎÏŇÑÓÖÒÔÕØŘŔŠŤÚŮÜÙÛÝŸŽáäâàãåčçćďéěëèêẽĕȇíìîïňñóöòôõøðřŕšťúůüùûýÿžþÞĐđßÆa·/_,:;";
+            var to   = "AAAAAACCCDEEEEEEEEIIIINNOOOOOORRSTUUUUUYYZaaaaaacccdeeeeeeeeiiiinnooooooorrstuuuuuyyzbBDdBAa------";
+            for (var i=0, l=from.length ; i<l ; i++) {
+                str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
+            }
+
+            str = str.replace(/[^a-z0-9 -]/g, '') // remove invalid chars
+                .replace(/\s+/g, '-') // collapse whitespace and replace by -
+                .replace(/-+/g, '-'); // collapse dashes
+
+            return str;
+        };
+    </script>
 @stop

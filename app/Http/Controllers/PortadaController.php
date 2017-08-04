@@ -244,6 +244,8 @@ class PortadaController extends Controller
 
         }
 
+        $portada->contenido_id = null;
+        $portada->url = null;
         if ($request->sel_link == '1') {
             $portada->contenido_id = $request->contenido_id;
         } elseif ($request->sel_link == '2') {

@@ -20,9 +20,7 @@
     </section><!-- fin migadepan -->
 
     <!-- Start Content -->
-    <div id="content">
-
-
+    <section id="content">
 
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 todosloschefs">
 
@@ -83,18 +81,11 @@
         @endforeach
                 </ul>
 
-
-
-
             </div>     <!-- End Portfolio Items -->
 
         </div><!-- fin col lg12 -->
 
-
-
-
-
-    </div><!-- fin contentr -->
+    </section><!-- fin content -->
 
 @endsection
 

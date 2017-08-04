@@ -8,9 +8,22 @@
 
         <div class="dedosendos">
 
+            <?php
+                $idioma_actual = Session::get('idioma');
+            ?>
             @if (isset($portada[0]))
                 <?php
                 $elemento = $portada[0];
+                //Sacamos el link si lo tuviera, bien de contenido o bien externo
+                $link = '';
+                if (is_object($elemento->contenido)) {
+                    $tipo_pagina = $elemento->contenido->tipo_contenido;
+                    $pagina = str_replace('-','',$elemento->contenido->textos_idioma->slug);
+                    $ruta = $tipo_pagina == 'pagina'?route($pagina.'_web_'.$idioma_actual,[]):route('detalle_web_'.$idioma_actual,[$pagina]);
+                    $link = $ruta;
+                } elseif ($elemento->url!=''){
+                    $link = $elemento->url;
+                }
                 ?>
                 <!-- *********************************variante primera******************************** -->
                 <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 col-xs-12 varianteprimera">
@@ -24,11 +37,11 @@
                             <source media="(min-width: 992px)" srcset="{{asset('images/portada/l')}}/{{$elemento->imagen or 'sinimagen.png'}}"><!-- medio pc -->
                             <source media="(min-width: 768px)" srcset="{{asset('images/portada/s')}}/{{$elemento->imagen or 'sinimagen.png'}}"><!-- tablet -->
                             <!-- img tag for browsers that do not support picture element -->
-                            @if ($elemento->url != '' || $elemento->contenido_id > 0)
-                                <a href="{{$elemento->url}}">
+                            @if ($link != '')
+                                <a href="{{$link}}">
                             @endif
                                     <img src="{{asset('images/portada/l')}}/{{$elemento->imagen or 'sinimagen.png'}}" alt="{{is_object($elemento->textos_idioma)?$elemento->textos_idioma->titulo:''}}">
-                            @if ($elemento->url != '')
+                            @if ($link != '')
                                 </a><!-- movil -->
                             @endif
                         </picture>
@@ -48,11 +61,11 @@
                         <article>
                             <hgroup>
                                 <h1>
-                                @if ($elemento->url != '' || $elemento->contenido_id > 0)
-                                    <a href="{{$elemento->url}}">
+                                @if ($link != '')
+                                    <a href="{{$link}}">
                                 @endif
                                 {{is_object($elemento->textos_idioma)?$elemento->textos_idioma->titulo:''}}
-                                @if ($elemento->url != '')
+                                @if ($link != '')
                                     </a>
                                 @endif
                                 </h1>
@@ -70,6 +83,16 @@
             @if (isset($portada[1]))
                 <?php
                 $elemento = $portada[1];
+                //Sacamos el link si lo tuviera, bien de contenido o bien externo
+                $link = '';
+                if (is_object($elemento->contenido)) {
+                    $tipo_pagina = $elemento->contenido->tipo_contenido;
+                    $pagina = str_replace('-','',$elemento->contenido->textos_idioma->slug);
+                    $ruta = $tipo_pagina == 'pagina'?route($pagina.'_web_'.$idioma_actual,[]):route('detalle_web_'.$idioma_actual,[$pagina]);
+                    $link = $ruta;
+                } elseif ($elemento->url!=''){
+                    $link = $elemento->url;
+                }
                 ?>
                 <!-- *********************************variante segunda******************************** -->
                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 variantesegunda">
@@ -81,11 +104,11 @@
                             <source media="(min-width: 768px)" srcset="{{asset('images/portada/s')}}/{{$elemento->imagen or 'sinimagen.png'}}"><!-- tablet -->
 
                             <!-- img tag for browsers that do not support picture element -->
-                            @if ($elemento->url != '' || $elemento->contenido_id > 0)
-                                <a href="{{$elemento->url}}">
-                                    @endif
+                            @if ($link != '')
+                                <a href="{{$link}}">
+                            @endif
                                     <img src="{{asset('images/portada/m')}}/{{$elemento->imagen or 'sinimagen.png'}}" alt="{{is_object($elemento->textos_idioma)?$elemento->textos_idioma->titulo:''}}">
-                                    @if ($elemento->url != '')
+                            @if ($link != '')
                                 </a><!-- movil -->
                             @endif
                         </picture>
@@ -105,11 +128,11 @@
                             <hgroup>
 
                                 <h1>
-                                @if ($elemento->url != '')
-                                    <a href="{{$elemento->url}}">
+                                @if ($link != '')
+                                    <a href="{{$link}}">
                                 @endif
                                 {{is_object($elemento->textos_idioma)?$elemento->textos_idioma->titulo:''}}
-                                @if ($elemento->url != '')
+                                @if ($link != '')
                                     </a>
                                 @endif
                                 </h1>
@@ -127,6 +150,16 @@
         @if (isset($portada[2]))
             <?php
             $elemento = $portada[2];
+            //Sacamos el link si lo tuviera, bien de contenido o bien externo
+            $link = '';
+            if (is_object($elemento->contenido)) {
+                $tipo_pagina = $elemento->contenido->tipo_contenido;
+                $pagina = str_replace('-','',$elemento->contenido->textos_idioma->slug);
+                $ruta = $tipo_pagina == 'pagina'?route($pagina.'_web_'.$idioma_actual,[]):route('detalle_web_'.$idioma_actual,[$pagina]);
+                $link = $ruta;
+            } elseif ($elemento->url!=''){
+                $link = $elemento->url;
+            }
             ?>
             <!-- *********************************variante tercera******************************** -->
             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 variantetercera">
@@ -138,11 +171,11 @@
                         <source media="(min-width: 768px)" srcset="{{asset('images/portada/s')}}/{{$elemento->imagen or 'sinimagen.png'}}"><!-- tablet -->
 
                         <!-- img tag for browsers that do not support picture element -->
-                        @if ($elemento->url != '')
-                            <a href="{{$elemento->url}}">
-                                @endif
-                                <img src="{{asset('images/portada/m')}}/{{$elemento->imagen or 'sinimagen.png'}}" alt="{{is_object($elemento->textos_idioma)?$elemento->textos_idioma->titulo:''}}">
-                                @if ($elemento->url != '')
+                        @if ($link != '')
+                            <a href="{{$link}}">
+                        @endif
+                            <img src="{{asset('images/portada/m')}}/{{$elemento->imagen or 'sinimagen.png'}}" alt="{{is_object($elemento->textos_idioma)?$elemento->textos_idioma->titulo:''}}">
+                        @if ($link != '')
                             </a><!-- movil -->
                         @endif
                     </picture>
@@ -162,11 +195,11 @@
                     <article>
                         <hgroup>
                             <h1>
-                                @if ($elemento->url != '')
-                                    <a href="{{$elemento->url}}">
+                                @if ($link != '')
+                                    <a href="{{$link}}">
                                 @endif
                                 {{is_object($elemento->textos_idioma)?$elemento->textos_idioma->titulo:''}}
-                                @if ($elemento->url != '')
+                                @if ($link != '')
                                     </a>
                                 @endif
                             </h1>
@@ -182,6 +215,16 @@
         @if (isset($portada[3]))
             <?php
             $elemento = $portada[3];
+            //Sacamos el link si lo tuviera, bien de contenido o bien externo
+            $link = '';
+            if (is_object($elemento->contenido)) {
+                $tipo_pagina = $elemento->contenido->tipo_contenido;
+                $pagina = str_replace('-','',$elemento->contenido->textos_idioma->slug);
+                $ruta = $tipo_pagina == 'pagina'?route($pagina.'_web_'.$idioma_actual,[]):route('detalle_web_'.$idioma_actual,[$pagina]);
+                $link = $ruta;
+            } elseif ($elemento->url!=''){
+                $link = $elemento->url;
+            }
             ?>
             <!-- *********************************variante cuarta******************************** -->
             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 variantecuarta">
@@ -193,11 +236,11 @@
                         <source media="(min-width: 768px)" srcset="{{asset('images/portada/s')}}/{{$elemento->imagen or 'sinimagen.png'}}"><!-- tablet -->
 
                         <!-- img tag for browsers that do not support picture element -->
-                        @if ($elemento->url != '')
-                            <a href="{{$elemento->url}}">
-                                @endif
-                                <img src="{{asset('images/portada/m')}}/{{$elemento->imagen or 'sinimagen.png'}}" alt="{{is_object($elemento->textos_idioma)?$elemento->textos_idioma->titulo:''}}">
-                                @if ($elemento->url != '')
+                        @if ($link != '')
+                            <a href="{{$link}}">
+                        @endif
+                            <img src="{{asset('images/portada/m')}}/{{$elemento->imagen or 'sinimagen.png'}}" alt="{{is_object($elemento->textos_idioma)?$elemento->textos_idioma->titulo:''}}">
+                        @if ($link != '')
                             </a><!-- movil -->
                         @endif
                     </picture>
@@ -216,11 +259,11 @@
                     <article>
                         <hgroup>
                             <h1>
-                                @if ($elemento->url != '')
-                                    <a href="{{$elemento->url}}">
+                                @if ($link != '')
+                                    <a href="{{$link}}">
                                 @endif
                                 {{is_object($elemento->textos_idioma)?$elemento->textos_idioma->titulo:''}}
-                                @if ($elemento->url != '')
+                                @if ($link != '')
                                     </a>
                                 @endif
                             </h1>
@@ -236,6 +279,16 @@
         @if (isset($portada[4]))
             <?php
             $elemento = $portada[4];
+            //Sacamos el link si lo tuviera, bien de contenido o bien externo
+            $link = '';
+            if (is_object($elemento->contenido)) {
+                $tipo_pagina = $elemento->contenido->tipo_contenido;
+                $pagina = str_replace('-','',$elemento->contenido->textos_idioma->slug);
+                $ruta = $tipo_pagina == 'pagina'?route($pagina.'_web_'.$idioma_actual,[]):route('detalle_web_'.$idioma_actual,[$pagina]);
+                $link = $ruta;
+            } elseif ($elemento->url!=''){
+                $link = $elemento->url;
+            }
             ?>
             <!-- *********************************variante quinta******************************** -->
 
@@ -248,11 +301,11 @@
                         <source media="(min-width: 768px)" srcset="{{asset('images/portada/s')}}/{{$elemento->imagen or 'sinimagen.png'}}"><!-- tablet -->
 
                         <!-- img tag for browsers that do not support picture element -->
-                        @if ($elemento->url != '')
-                            <a href="{{$elemento->url}}">
-                                @endif
-                                <img src="{{asset('images/portada/m')}}/{{$elemento->imagen or 'sinimagen.png'}}" alt="{{is_object($elemento->textos_idioma)?$elemento->textos_idioma->titulo:''}}">
-                                @if ($elemento->url != '')
+                        @if ($link != '')
+                            <a href="{{$link}}">
+                        @endif
+                            <img src="{{asset('images/portada/m')}}/{{$elemento->imagen or 'sinimagen.png'}}" alt="{{is_object($elemento->textos_idioma)?$elemento->textos_idioma->titulo:''}}">
+                        @if ($link != '')
                             </a><!-- movil -->
                         @endif
                     </picture>
@@ -271,11 +324,11 @@
                     <article>
                         <hgroup>
                             <h1>
-                                @if ($elemento->url != '')
-                                    <a href="{{$elemento->url}}">
+                                @if ($link != '')
+                                    <a href="{{$link}}">
                                 @endif
                                 {{is_object($elemento->textos_idioma)?$elemento->textos_idioma->titulo:''}}
-                                @if ($elemento->url != '')
+                                @if ($link != '')
                                     </a>
                                 @endif
                             </h1>
@@ -302,6 +355,16 @@
             @if (isset($portada[5]))
                 <?php
                 $elemento = $portada[5];
+                //Sacamos el link si lo tuviera, bien de contenido o bien externo
+                $link = '';
+                if (is_object($elemento->contenido)) {
+                    $tipo_pagina = $elemento->contenido->tipo_contenido;
+                    $pagina = str_replace('-','',$elemento->contenido->textos_idioma->slug);
+                    $ruta = $tipo_pagina == 'pagina'?route($pagina.'_web_'.$idioma_actual,[]):route('detalle_web_'.$idioma_actual,[$pagina]);
+                    $link = $ruta;
+                } elseif ($elemento->url!=''){
+                    $link = $elemento->url;
+                }
                 ?>
                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 programa">
 
@@ -313,11 +376,11 @@
                             <source media="(min-width: 768px)" srcset="{{asset('images/portada/s')}}/{{$elemento->imagen or 'sinimagen.png'}}"><!-- tablet -->
 
                             <!-- img tag for browsers that do not support picture element -->
-                            @if ($elemento->url != '')
-                                <a href="{{$elemento->url}}">
-                                    @endif
-                                    <img src="{{asset('images/portada/l')}}/{{$elemento->imagen or 'sinimagen.png'}}" alt="{{is_object($elemento->textos_idioma)?$elemento->textos_idioma->titulo:''}}">
-                                    @if ($elemento->url != '')
+                            @if ($link != '')
+                                <a href="{{$link}}">
+                            @endif
+                                <img src="{{asset('images/portada/l')}}/{{$elemento->imagen or 'sinimagen.png'}}" alt="{{is_object($elemento->textos_idioma)?$elemento->textos_idioma->titulo:''}}">
+                            @if ($link != '')
                                 </a><!-- movil -->
                             @endif
                         </picture>
@@ -335,11 +398,11 @@
                         <article>
                             <hgroup>
                                 <h1>
-                                    @if ($elemento->url != '')
-                                        <a href="{{$elemento->url}}">
+                                    @if ($link != '')
+                                        <a href="{{$link}}">
                                     @endif
                                     {{is_object($elemento->textos_idioma)?$elemento->textos_idioma->titulo:''}}
-                                    @if ($elemento->url != '')
+                                    @if ($link != '')
                                         </a>
                                     @endif
                                 </h1>
@@ -355,6 +418,16 @@
             @if (isset($portada[6]))
                 <?php
                 $elemento = $portada[6];
+                    //Sacamos el link si lo tuviera, bien de contenido o bien externo
+                    $link = '';
+                    if (is_object($elemento->contenido)) {
+                        $tipo_pagina = $elemento->contenido->tipo_contenido;
+                        $pagina = str_replace('-','',$elemento->contenido->textos_idioma->slug);
+                        $ruta = $tipo_pagina == 'pagina'?route($pagina.'_web_'.$idioma_actual,[]):route('detalle_web_'.$idioma_actual,[$pagina]);
+                        $link = $ruta;
+                    } elseif ($elemento->url!=''){
+                        $link = $elemento->url;
+                    }
                 ?>
                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 newspaper">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 vira">
@@ -365,11 +438,11 @@
                             <source media="(min-width: 768px)" srcset="{{asset('images/portada/s')}}/{{$elemento->imagen or 'sinimagen.png'}}"><!-- tablet -->
 
                             <!-- img tag for browsers that do not support picture element -->
-                            @if ($elemento->url != '')
-                                <a href="{{$elemento->url}}">
-                                    @endif
-                                    <img src="{{asset('images/portada/l')}}/{{$elemento->imagen or 'sinimagen.png'}}" alt="{{is_object($elemento->textos_idioma)?$elemento->textos_idioma->titulo:''}}">
-                                    @if ($elemento->url != '')
+                            @if ($link != '')
+                                <a href="{{$link}}">
+                            @endif
+                                <img src="{{asset('images/portada/l')}}/{{$elemento->imagen or 'sinimagen.png'}}" alt="{{is_object($elemento->textos_idioma)?$elemento->textos_idioma->titulo:''}}">
+                            @if ($link != '')
                                 </a><!-- movil -->
                             @endif
                         </picture>
@@ -390,11 +463,11 @@
                         <article>
                             <hgroup>
                                 <h1>
-                                    @if ($elemento->url != '')
-                                        <a href="{{$elemento->url}}">
+                                    @if ($link != '')
+                                        <a href="{{$link}}">
                                     @endif
                                     {{is_object($elemento->textos_idioma)?$elemento->textos_idioma->titulo:''}}
-                                    @if ($elemento->url != '')
+                                    @if ($link != '')
                                         </a>
                                     @endif
                                 </h1>
@@ -411,16 +484,26 @@
                 @if (isset($portada[7]))
                     <?php
                     $elemento = $portada[7];
+                    //Sacamos el link si lo tuviera, bien de contenido o bien externo
+                    $link = '';
+                    if (is_object($elemento->contenido)) {
+                        $tipo_pagina = $elemento->contenido->tipo_contenido;
+                        $pagina = str_replace('-','',$elemento->contenido->textos_idioma->slug);
+                        $ruta = $tipo_pagina == 'pagina'?route($pagina.'_web_'.$idioma_actual,[]):route('detalle_web_'.$idioma_actual,[$pagina]);
+                        $link = $ruta;
+                    } elseif ($elemento->url!=''){
+                        $link = $elemento->url;
+                    }
                     ?>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 llegar">
                         <article>
                             <hgroup>
                                 <h1>
-                                    @if ($elemento->url != '')
-                                        <a href="{{$elemento->url}}">
+                                    @if ($link != '')
+                                        <a href="{{$link}}">
                                     @endif
                                     {{is_object($elemento->textos_idioma)?$elemento->textos_idioma->titulo:''}}
-                                    @if ($elemento->url != '')
+                                    @if ($link != '')
                                         </a>
                                     @endif
                                 </h1>
@@ -433,16 +516,26 @@
                 @if (isset($portada[8]))
                     <?php
                     $elemento = $portada[8];
+                    //Sacamos el link si lo tuviera, bien de contenido o bien externo
+                    $link = '';
+                    if (is_object($elemento->contenido)) {
+                        $tipo_pagina = $elemento->contenido->tipo_contenido;
+                        $pagina = str_replace('-','',$elemento->contenido->textos_idioma->slug);
+                        $ruta = $tipo_pagina == 'pagina'?route($pagina.'_web_'.$idioma_actual,[]):route('detalle_web_'.$idioma_actual,[$pagina]);
+                        $link = $ruta;
+                    } elseif ($elemento->url!=''){
+                        $link = $elemento->url;
+                    }
                     ?>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 row-eq-height alojamiento">
                         <article>
                             <hgroup>
                                 <h1>
-                                    @if ($elemento->url != '')
-                                        <a href="{{$elemento->url}}">
+                                    @if ($link != '')
+                                        <a href="{{$link}}">
                                     @endif
                                     {{is_object($elemento->textos_idioma)?$elemento->textos_idioma->titulo:''}}
-                                    @if ($elemento->url != '')
+                                    @if ($link != '')
                                         </a>
                                     @endif
                                 </h1>

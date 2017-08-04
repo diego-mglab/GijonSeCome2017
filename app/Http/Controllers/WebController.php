@@ -15,6 +15,7 @@ use Session;
 use Illuminate\Support\Facades\DB;
 use URL;
 use Redirect;
+use Carbon\Carbon;
 
 class WebController extends Controller
 {
@@ -60,12 +61,28 @@ class WebController extends Controller
             $content = Content::findOrFail($textosidioma->contenido_id);
         else
             return Redirect::to('/');
-        //dd($content);
-        //Definimos el array con los elemento del breadcrum
-        $elementos = ['Inicio','El Festival',$textosidioma->titulo];
-        $breadcrums = $this->devuelveBreadcrums($elementos);
         $menus = Menu::get();
-        return view('web.detalle',compact('menus','textosidioma','breadcrums','content'));
+        //Comprobamos que el contenido esté dentro de la fecha de publicación (fecha actual >= fecha publicación
+        $now = Carbon::now();
+        $fecha_publicacion = Carbon::parse($content->fecha_publicacion);
+        if ($now->gte($fecha_publicacion)) {
+            //Definimos el array con los elemento del breadcrum
+            $elementos = ['Inicio', 'El Festival', $textosidioma->titulo];
+            $breadcrums = $this->devuelveBreadcrums($elementos);
+            return view('web.detalle', compact('menus', 'textosidioma', 'breadcrums', 'content'));
+        } else {
+            return redirect('/');
+        }
+    }
+
+    public function agenda()
+    {
+        $menus = Menu::get();
+        $agenda = Agenda::orderBy('fecha')->orderBy('hora')->get();
+        //Definimos el array con los elemento del breadcrum
+        $elementos = ['Inicio','El Festival','Programa'];
+        $breadcrums = $this->devuelveBreadcrums($elementos);
+        return view('web.agenda',compact('menus','agenda','breadcrums'));
     }
 
     public function detalleponentes($slug)

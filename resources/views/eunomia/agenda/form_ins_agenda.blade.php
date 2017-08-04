@@ -71,6 +71,13 @@
 
                     </div>
 
+                    <div class="form-group">
+
+                        {{Form::label('tipo_evento', 'Tipo de evento')}}
+                        {{Form::select('tipo_evento', $tipos_evento, null, ['class' => 'form-control', 'placeholder'=>'selecciona un tipo de evento'])}}
+
+                    </div>
+
                     <!-- Custom tabs (Charts with tabs)-->
                     <div class="nav-tabs-custom">
                         <!-- Tabs within a box -->

@@ -120,7 +120,7 @@
                                     <div class="form-group">
 
                                         {{Form::label('titulo', 'Título')}}
-                                        {{Form::text('titulo[]', null, ['class' => 'form-control' ,'placeholder' => 'Título'])}}
+                                        {{Form::text('titulo[]', null, ['class' => 'form-control' ,'placeholder' => 'Título', 'id' => 'titulo'.$idioma->id, 'onkeyup' => '$("#slug'.$idioma->id.'").val(slug($("#titulo'.$idioma->id.'").val()));'])}}
 
                                     </div>
 
@@ -150,6 +150,13 @@
 
                                         {{Form::label('metadescripcion', 'Meta descripción')}}
                                         {{Form::text('metadescripcion[]', null, ['class' => 'form-control' ,'placeholder' => 'Meta descripción'])}}
+
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        {{Form::label('slug', 'URL amigable')}}
+                                        {{Form::text('slug[]', null, ['class' => 'form-control' ,'placeholder' => 'URL amigable', 'id' => 'slug'.$idioma->id])}}
 
                                     </div>
 
@@ -307,6 +314,27 @@
             $('#tipo_contenido').val(tipo_contenido);
             $('#titulo_tipo_contenido').html(titulo);
         }
+    </script>
+
+    <!-- Crear URL amigable a partir de lo que se escriba en el título -->
+    <script language="JavaScript">
+        var slug = function(str) {
+            str = str.replace(/^\s+|\s+$/g, ''); // trim
+            str = str.toLowerCase();
+
+            // remove accents, swap ñ for n, etc
+            var from = "ÁÄÂÀÃÅČÇĆĎÉĚËÈÊẼĔȆÍÌÎÏŇÑÓÖÒÔÕØŘŔŠŤÚŮÜÙÛÝŸŽáäâàãåčçćďéěëèêẽĕȇíìîïňñóöòôõøðřŕšťúůüùûýÿžþÞĐđßÆa·/_,:;";
+            var to   = "AAAAAACCCDEEEEEEEEIIIINNOOOOOORRSTUUUUUYYZaaaaaacccdeeeeeeeeiiiinnooooooorrstuuuuuyyzbBDdBAa------";
+            for (var i=0, l=from.length ; i<l ; i++) {
+                str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
+            }
+
+            str = str.replace(/[^a-z0-9 -]/g, '') // remove invalid chars
+                .replace(/\s+/g, '-') // collapse whitespace and replace by -
+                .replace(/-+/g, '-'); // collapse dashes
+
+            return str;
+        };
     </script>
 
 @stop

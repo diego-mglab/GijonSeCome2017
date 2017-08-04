@@ -124,7 +124,7 @@
                                 {{ Form::select('contenido_id',$paginas,null,['class' => 'form-control','placeholder' => 'Seleccione una página', 'onchange' => '$("#sel_pagina").prop("checked",true)'])}}
                             </div>
                             <div class="col-lg-1">
-                                {{ Form::radio('sel_link',1,$portada->content_id>0?'checked':'',['id' => 'sel_pagina'])}}
+                                {{ Form::radio('sel_link',1,$portada->contenido_id>0?'checked':'',['id' => 'sel_pagina'])}}
                             </div>
                         </div>
                     </div>
@@ -178,10 +178,6 @@
     <!-- iCheck -->
     <link rel="stylesheet" href="{{asset('vendor/adminlte/plugins/iCheck/flat/green.css')}}">
 
-    <!-- Bootstrap Datepicker Sandbox -->
-    <link rel="stylesheet" href="{{asset('datePicker/css/bootstrap-datepicker3.css')}}">
-    <link rel="stylesheet" href="{{asset('datePicker/css/bootstrap-datepicker.standalone.css')}}">
-
 @stop
 
 @section('js')
@@ -233,43 +229,4 @@
             checkboxClass: 'icheckbox_flat-green'
         });
     </script>
-
-    <!-- Bootstrap Datepicker Sandbox -->
-    <script src="{{asset('datePicker/js/bootstrap-datepicker.js')}}"></script>
-    <!-- Languaje -->
-    <script src="{{asset('datePicker/locales/bootstrap-datepicker.es.min.js')}}"></script>
-    <script language="JavaScript">
-        $('.datepicker').datepicker({
-            format: "dd/mm/yyyy",
-            language: "es",
-            autoclose: true
-        });
-    </script>
-
-    <!-- Tipo Contenido -->
-    <script language="JavaScript">
-        function muestraOcultaCampos(tipo_contenido){
-            switch (tipo_contenido){
-                case 'pagina':
-                    $('#contenedor_lugar').hide();
-                    $('#contenedor_fecha').hide();
-                    @foreach($idiomas as $idioma)
-                    $('#contenedor_subtitulo_{{$idioma->codigo}}').hide();
-                    @endforeach
-                        titulo = "Página";
-                    break;
-                case 'noticia':
-                    $('#contenedor_lugar').show();
-                    $('#contenedor_fecha').show();
-                    @foreach($idiomas as $idioma)
-                    $('#contenedor_subtitulo_{{$idioma->codigo}}').show();
-                    @endforeach
-                        titulo = "Noticia";
-                    break;
-            }
-            $('#tipo_contenido').val(tipo_contenido);
-            $('#titulo_tipo_contenido').html(titulo);
-        }
-    </script>
-
 @stop

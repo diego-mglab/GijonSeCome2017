@@ -1,6 +1,13 @@
 @extends('layouts.web')
 
 @section('contenido')
+<?php
+    $fecha='';
+    if ($content->fecha != ''){
+        $time= strtotime($content->fecha);
+        $fecha = date('d/m/Y',$time);
+    }
+        ?>
     <!-- comienza contenido de la página-->
     <section id="migadepan">
         <div class="col-xs-12">
@@ -9,7 +16,7 @@
                     <li>
                         {{$breadcrum[1]!=''?link_to_route($breadcrum[1].'_web_'.Session::get('idioma'),$title = strtoupper($breadcrum[0])):strtoupper($breadcrum[0])}}
                     </li>
-                    @if(pos($breadcrum) != 'Ponentes')
+                    @if(pos($breadcrum) != $textosidioma->titulo)
                         <li>//</li>
                     @endif
                 @endforeach
@@ -25,10 +32,10 @@
 
                         <h1>{{$textosidioma->titulo}}</h1>
                         <h2>{{$textosidioma->subtitulo}}</h2>
-                        <h3>{{$content->lugar}}. {{$content->fecha}}</h3>
+                        <h3>{{$content->lugar!=''?$content->lugar.'.':''}} {{$fecha}}</h3>
                     </hgroup>
                     <div class="columnas">
-                        {{$textosidioma->contenido}}
+                        {!! $textosidioma->contenido !!}
                     </div><!-- fin columnas -->
                     <picture>
                         <source media="(min-width: 1200px)" srcset="{{asset('images/contenido/l')}}/{{$content->imagen or 'sinimagen.png'}}"><!-- pc -->
