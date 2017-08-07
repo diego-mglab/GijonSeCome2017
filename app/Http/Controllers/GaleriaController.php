@@ -77,6 +77,16 @@ class GaleriaController extends Controller
                     $constraint->aspectRatio();
                 })->save($dir.$filename, 95 );
 
+                //Thumbnail
+                $dir = 'images/galerias/' . $carpeta . '/th/';
+                if (!File::exists($dir)){
+                    File::makeDirectory($dir);
+                }
+
+                Image::make($imagen)->fit(240, 240, function ($constraint) {
+                    $constraint->upsize();
+                })->save($dir.$filename );
+
                 $multimedia->imagen = $filename;
             }
 
@@ -179,7 +189,7 @@ class GaleriaController extends Controller
             ->where('galerias.id',$id)
             ->orderBy('principal','DESC')->get();
         $galeria = Galeria::findOrFail($id);
-        $imagenes = Multimedia::where('galeria_id',$id)->orderBy('created_at','desc')->get();
+        $imagenes = Multimedia::where('galeria_id',$id)->orderBy('orden','asc')->get();
         return view('eunomia.galerias.form_edit_galerias',compact('idiomas','galeria','textos','imagenes'));
     }
 
@@ -192,48 +202,74 @@ class GaleriaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $idiomas = Idioma::where('activado','1')->orderByDesc('principal')->get();
+        if (!$ordenar) {
+            $idiomas = Idioma::where('activado', '1')->orderByDesc('principal')->get();
 
-        foreach ($idiomas as $idioma) {
-            if ($idioma->principal == 1)
-                $this->validate($request, [
-                    'titulo' => 'required'
-                ]);
-        }
-
-        $galeria = Galeria::findOrFail($id);
-
-        if ($galeria->save()) {
-
-            for($i=0;$i<count($request->idioma_id);$i++) {
-                $textosIdioma = TextosIdioma::where('contenido_id',$id)
-                    ->where('tipo_contenido_id',$this->tipo_contenido)
-                    ->where('idioma_id',$request->idioma_id[$i])->first();
-                if (count($textosIdioma) == 0) {
-                    $textosIdioma = new TextosIdioma();
-                }
-                if ($request->titulo[$i] != '') {
-                    $textosIdioma->idioma_id = $request->idioma_id[$i];
-                    $textosIdioma->contenido_id = $id;
-                    $textosIdioma->tipo_contenido_id = $this->tipo_contenido;
-                    $textosIdioma->titulo = $request->titulo[$i];
-                    $textosIdioma->subtitulo = $request->subtitulo[$i];
-                    $textosIdioma->metadescripcion = $request->metadescripcion[$i];
-                    $textosIdioma->metatitulo = $request->metatitulo[$i];
-                    $textosIdioma->slug = Str::Slug($request->titulo[$i]);
-                    $textosIdioma->visible = 0;
-                    foreach($request->visible as $visible) {
-                        if ($visible == $request->idioma_id[$i])
-                            $textosIdioma->visible = 1;
-                    }
-
-                    $textosIdioma->save();
-                }
+            foreach ($idiomas as $idioma) {
+                if ($idioma->principal == 1)
+                    $this->validate($request, [
+                        'titulo' => 'required'
+                    ]);
             }
 
-        }
+            $galeria = Galeria::findOrFail($id);
 
-        return redirect('eunomia/galerias');
+            if ($galeria->save()) {
+
+                for ($i = 0; $i < count($request->idioma_id); $i++) {
+                    $textosIdioma = TextosIdioma::where('contenido_id', $id)
+                        ->where('tipo_contenido_id', $this->tipo_contenido)
+                        ->where('idioma_id', $request->idioma_id[$i])->first();
+                    if (count($textosIdioma) == 0) {
+                        $textosIdioma = new TextosIdioma();
+                    }
+                    if ($request->titulo[$i] != '') {
+                        $textosIdioma->idioma_id = $request->idioma_id[$i];
+                        $textosIdioma->contenido_id = $id;
+                        $textosIdioma->tipo_contenido_id = $this->tipo_contenido;
+                        $textosIdioma->titulo = $request->titulo[$i];
+                        $textosIdioma->subtitulo = $request->subtitulo[$i];
+                        $textosIdioma->metadescripcion = $request->metadescripcion[$i];
+                        $textosIdioma->metatitulo = $request->metatitulo[$i];
+                        $textosIdioma->slug = Str::Slug($request->titulo[$i]);
+                        $textosIdioma->visible = 0;
+                        foreach ($request->visible as $visible) {
+                            if ($visible == $request->idioma_id[$i])
+                                $textosIdioma->visible = 1;
+                        }
+
+                        $textosIdioma->save();
+                    }
+                }
+
+            }
+
+            return redirect('eunomia/galerias');
+        }else{
+            $list_order = $request->list_order;
+            $list = explode(',',$list_order);
+            $i=1;
+            foreach($list as $item_id) {
+                if($itemToOrder = Multimedia::findOrFail($item_id)){
+                    $itemToOrder->orden = $i;
+                    $itemToOrder->save();
+                }
+                $i++;
+            }
+        }
+    }
+
+    function updateOrder(Request $request){
+        $list_order = $request->list_order;
+        $list = explode(',',$list_order);
+        $i=1;
+        foreach($list as $item_id) {
+            if($itemToOrder = Multimedia::findOrFail($item_id)){
+                $itemToOrder->orden = $i;
+                $itemToOrder->save();
+            }
+            $i++;
+        }
     }
 
     /**
@@ -248,9 +284,10 @@ class GaleriaController extends Controller
             $multimedia = Multimedia::findOrfail($request->imagen_id);
             //Sacamos la carpeta de las imágenes de la tabla galerias
             $galeria = Galeria::findOrFail($request->galeria_id);
-            //Eliminamos la imagen
+            //Eliminamos las imagenes
             $imagenactual = $multimedia->imagen;
             File::delete('images/galerias/' . $galeria->carpeta . '/' . $imagenactual);
+            File::delete('images/galerias/' . $galeria->carpeta . '/th/' . $imagenactual);
             //Eliminamos la entrada del contenido
             $multimedia->delete();
             return redirect()->route('galerias.edit',['id' => $request->galeria_id]);

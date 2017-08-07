@@ -31,7 +31,8 @@ class MenuController extends Controller {
             ->join('idiomas','textos_idiomas.idioma_id','idiomas.id')
             ->select('contents.id','titulo','visible','principal','idioma','textos_idiomas.idioma_id')
             ->where('idiomas.principal',1)
-            ->where('tipo_contenido_id',1)->pluck('titulo','contents.id');
+            ->where('tipo_contenido_id',1)
+            ->OrderBy('textos_idiomas.titulo')->pluck('titulo','contents.id');
 
 		return view('eunomia.menu.builder', compact('items','menu','idiomas','paginas'));
 
@@ -55,7 +56,8 @@ class MenuController extends Controller {
             ->join('idiomas','textos_idiomas.idioma_id','idiomas.id')
             ->select('contents.id','titulo','visible','principal','idioma','textos_idiomas.idioma_id')
             ->where('idiomas.principal',1)
-            ->where('tipo_contenido_id',1)->pluck('titulo','contents.id');
+            ->where('tipo_contenido_id',1)
+            ->OrderBy('textos_idiomas.titulo')->pluck('titulo','contents.id');
 
         return view('eunomia.menu.edit', compact('item','textos','idiomas','paginas'));
 	}

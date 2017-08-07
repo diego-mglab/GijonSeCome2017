@@ -1,6 +1,20 @@
 @extends('layouts.web')
 
 @section('contenido')
+    <?php
+    function normaliza ($cadena){
+        $originales = 'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûýýþÿŔŕ';
+        $modificadas = 'aaaaaaaceeeeiiiidnoooooouuuuybsaaaaaaaceeeeiiiidnoooooouuuyybyRr';
+        //$cadena = utf8_decode($cadena);
+        $cadena = strtr($cadena, utf8_decode($originales), $modificadas);
+        $cadena = strtolower($cadena);
+        return utf8_encode($cadena);
+    }
+    use Carbon\Carbon;
+    setlocale(LC_TIME, 'Spanish');
+    $fecha_actual = '';
+    $div_abierto = false;
+    ?>
     <!-- comienza contenido de la página-->
     <section id="migadepan">
         <div class="col-xs-12">
@@ -33,78 +47,63 @@
                     </picture>
                     <!-- agenda en lg md solo esta activo en versiónes de pc -->
                     <section id="agendapc">
+                        @if(count($agenda) > 0)
                         <h1>intervenciones</h1>
-                        <div class="col-md-12">
+                        @endif
 
-                            <div class="sabado">
-                                <header>Sábado día 2</header>
-
-                                <article class="showcooking">
+                        @foreach ($agenda as $evento)
+                            <?php
+                            $fecha = new DateTime($evento->fecha);
+                            $fecha = Carbon::instance($fecha);
+                            $dia = $fecha->formatLocalized('%d');
+                            $diaSemana = utf8_encode($fecha->formatLocalized('%A'));
+                            $tipo_evento = $evento->tipo_evento;
+                            $hora = new DateTime($evento->hora);
+                            $hora = Carbon::instance($hora);
+                            $hora = $hora->formatLocalized('%H:%M');
+                            $titulo = '';
+                            $subtitulo = '';
+                            $contenido = '';
+                            if (is_object($evento)){
+                                $titulo = $evento->titulo;
+                                $subtitulo = $evento->subtitulo;
+                                $contenido = $evento->contenido;
+                            }
+                            $zona = strtoupper($evento->nombre);
+                            if ($fecha_actual != $evento->fecha) {
+                                if ($div_abierto){
+                                    $div_abierto = false;
+                                ?>
+                                    </div><!-- FIN {{normaliza($diaSemana)}}-->
+                                </div><!-- FIN colmd 12-->
+                                <?php
+                                }
+                            ?>
+                            <div class="col-md-12">
+                                <div class="{{normaliza($diaSemana)}}">
+                                <header>{{strtoupper($diaSemana.' día '.$dia)}}</header>
+                            <?php
+                                $fecha_actual = $evento->fecha;
+                                $div_abierto = true;
+                            }
+                                ?>
+                                <article class="{{$tipo_evento}}">
 
                                     <hgroup>
-                                        <h2><spam>12:00</spam>Show cooking con Marcos Morán y Borja Cortina</h2>
-                                        <h3>"El lujo y lo valioso. Productos premium y productos humildes."</h3>
+                                        <h2><spam>{{$hora}}</spam>{{$titulo}}</h2>
+                                        <h3>{{$subtitulo}}</h3>
                                     </hgroup>
 
-                                    <p class="zonas">ZONA COCINAS</p>
+                                    <p class="zonas">{{$zona}}</p>
                                 </article>
+                                    @endforeach
 
-                                <article class="ponencia">
-
-                                    <hgroup>
-                                        <h2><spam>14:00</spam>"La producción y el consumo de alimentos como herramientas de conservación y transformación social." </h2>
-                                        <h3>Ponencia Asturias Sostenible.</h3>
-                                    </hgroup>
-
-                                    <p class="zonas">ZONA PONENCIAS</p>
-                                </article>
-
-                                <article class="otros">
-
-                                    <hgroup>
-                                        <h2><spam>12:00</spam> Presentación y bienvenida</h2>
-                                        <h3>Presentación</h3>
-                                    </hgroup>
-                                    <p class="zonas">GASTRO LIBRERÍA</p>
-                                </article>
-                            </div><!-- FIN sábado-->
+                                    <?php
+                                    if ($div_abierto){ ?>
+                            </div><!-- FIN {{normaliza($diaSemana)}}-->
                         </div><!-- FIN colmd 12-->
-                        <div class="col-md-12">
-
-                            <div class="sabado">
-                                <header>Sábado día 2</header>
-
-                                <article class="showcooking">
-
-                                    <hgroup>
-                                        <h2><spam>12:00</spam>Show cooking con Marcos Morán y Borja Cortina</h2>
-                                        <h3>"El lujo y lo valioso. Productos premium y productos humildes."</h3>
-                                    </hgroup>
-
-                                    <p class="zonas">ZONA COCINAS</p>
-                                </article>
-
-                                <article class="ponencia">
-
-                                    <hgroup>
-                                        <h2><spam>14:00</spam>"La producción y el consumo de alimentos como herramientas de conservación y transformación social." </h2>
-                                        <h3>Ponencia Asturias Sostenible.</h3>
-                                    </hgroup>
-
-                                    <p class="zonas">ZONA PONENCIAS</p>
-                                </article>
-
-                                <article class="otros">
-
-                                    <hgroup>
-                                        <h2><spam>12:00</spam> Presentación y bienvenida</h2>
-                                        <h3>Presentación</h3>
-                                    </hgroup>
-                                    <p class="zonas">GASTRO LIBRERÍA</p>
-                                </article>
-                            </div><!-- FIN sábado-->
-                        </div><!-- FIN colmd 12-->
-
+                                    <?php
+                                    } ?>
                     </section>
                 </div>
                 <div class=" col-lg-8 col-md-8 col-sm-9 col-xs-12">

@@ -11,6 +11,7 @@ use App\Ponente;
 use App\TextosIdioma;
 use App\Agenda;
 use App\Content;
+use App\Galeria;
 use Session;
 use Illuminate\Support\Facades\DB;
 use URL;
@@ -39,6 +40,17 @@ class WebController extends Controller
     {
         $menus = Menu::get();
         return view('web.agenda', compact('menus'));
+    }
+
+    public function galeria($anio=2017)
+    {
+        $menus = Menu::get();
+        $galeria = Galeria::where('anio',$anio)->orderBy('orden')->get();
+        //Breadcrums
+        //Definimos el array con los elemento del breadcrum
+        $elementos = ['Inicio','El Festival','Galería'];
+        $breadcrums = $this->devuelveBreadcrums($elementos);
+        return view('web.galeria', compact('menus','breadcrums','anio','galeria'));
     }
 
     public function contacto()
@@ -81,20 +93,28 @@ class WebController extends Controller
         $agenda = Agenda::orderBy('fecha')->orderBy('hora')->get();
         //Definimos el array con los elemento del breadcrum
         $elementos = ['Inicio','El Festival','Programa'];
+        $dias_evento = ['Sábado','Domingo','Lunes'];
         $breadcrums = $this->devuelveBreadcrums($elementos);
-        return view('web.agenda',compact('menus','agenda','breadcrums'));
+        return view('web.agenda',compact('menus','agenda','breadcrums','dias_evento'));
     }
 
     public function detalleponentes($slug)
     {
         $textosidioma = TextosIdioma::where('slug',$slug)->where('tipo_contenido_id',3)->where('idioma_id',Idioma::fromCodigo(Session::get('idioma')))->first();
         $ponente = Ponente::findOrFail($textosidioma->contenido_id);
+        $agenda = DB::table('ponentes_agenda')
+            ->join('agenda','ponentes_agenda.agenda_id','agenda.id')
+            ->join('textos_idiomas','agenda.id','textos_idiomas.contenido_id')
+            ->join('zonas','agenda.zona_id','zonas.id')
+            ->where('textos_idiomas.tipo_contenido_id','2')
+            ->where('ponentes_agenda.ponentes_id',$ponente->id)
+            ->OrderBy('agenda.fecha')->OrderBy('agenda.hora')->get();
         //Definimos el array con los elemento del breadcrum
         $elementos = ['Inicio','El Festival','Ponentes',$textosidioma->titulo];
         $breadcrums = $this->devuelveBreadcrums($elementos);
         $menus = Menu::get();
 
-        return view('web.detalleponentes',compact('menus','ponente','textosidioma','breadcrums'));
+        return view('web.detalleponentes',compact('menus','ponente','textosidioma','breadcrums','agenda'));
     }
 
     public function devuelveBreadcrums(Array $elementos){

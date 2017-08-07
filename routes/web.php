@@ -40,7 +40,7 @@ foreach ($idiomas as $idioma){
             $ruta = $content->textos_idioma_todos($idioma->id)->slug;
             if ($content->textos_idioma_principal->slug == 'detalle-ponentes')
                 $parametros = '{slug}';
-            if ($content->textos_idioma_principal->slug == 'ponentes')
+            if ($content->textos_idioma_principal->slug == 'ponentes' || $content->textos_idioma_principal->slug == 'galeria')
                 $parametros = '{anio?}';
             if ($content->pagina_estatica == 0) {
                 $metodo = 'detalle';
@@ -117,5 +117,7 @@ Route::group(['prefix' => 'eunomia' , 'middleware' => 'auth' ], function () {
 
     Route::get('menu/edit/{id}', 'MenuController@getEdit');
     Route::post('menu/edit/{id}', 'MenuController@postEdit');
+
+    Route::post('galerias/{galeria}/updateOrder','GaleriaController@updateOrder');
 
 });

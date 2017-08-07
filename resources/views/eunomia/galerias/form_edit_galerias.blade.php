@@ -195,15 +195,15 @@
                 <!-- /.box-header -->
                 <!-- form start -->
 
-                <div class="box-body">
+                <div class="box-body" id="galeria_imagenes">
 
                     @foreach ($imagenes as $imagen)
-                        <div class="col-xs-6 col-md-3 " style="padding-bottom:1em">
+                        <div class="col-xs-6 col-md-2 " style="padding-bottom:1em" id="{{$imagen->id}}">
                             <?php
                                   if ($imagen->tipo_multimedia == 'video') { ?>
-                                    <a data-lightbox-gallery="gallery1" class="nivo-lightbox" href="{{$imagen->url}}"><img src="{{asset('images/galerias/'.$galeria->carpeta)}}/{{$imagen->imagen or 'sinimagen.png'}}" style="width:100%"></a>
+                                    <a data-lightbox-gallery="gallery1" class="nivo-lightbox" href="{{$imagen->url}}"><img src="{{asset('images/galerias/'.$galeria->carpeta.'/th/')}}/{{$imagen->imagen or 'sinimagen.png'}}" style="width:240px;" ></a>
                             <?php } else { ?>
-                                    <a data-lightbox-gallery="gallery1" class="nivo-lightbox" href="{{asset('images/galerias/'.$galeria->carpeta)}}/{{$imagen->imagen or 'sinimagen.png'}}"><img src="{{asset('images/galerias/'.$galeria->carpeta)}}/{{$imagen->imagen or 'sinimagen.png'}}" style="width:100%"></a>
+                                    <a data-lightbox-gallery="gallery1" class="nivo-lightbox" href="{{asset('images/galerias/'.$galeria->carpeta.'/th/')}}/{{$imagen->imagen or 'sinimagen.png'}}"><img src="{{asset('images/galerias/'.$galeria->carpeta.'/th/')}}/{{$imagen->imagen or 'sinimagen.png'}}" style="width:240px;"></a>
 
                             <?php } ?>
                             {{ Form::open(array('method'=> 'DELETE', 'route' => array('galerias.destroy', $imagen),'style'=>'display:inline')) }}
@@ -218,10 +218,13 @@
 
                 </div>
                 <!-- /.box-body -->
+                <div class="box-header" id="mensaje"></div>
             </div>
             <!-- /.box -->
         </div>
     </div>
+    {{ csrf_field() }}
+    <div id="error"></div>
 
 
 @endsection
@@ -320,4 +323,26 @@
         });
     </script>
 
+    <script src="{{asset('vendor/adminlte/plugins/jQueryUI/jquery-ui.min.js')}}"></script>
+    <script language="JavaScript">
+        $(function() {
+            $( "#galeria_imagenes" ).sortable({
+                update: function () {
+                    var ordenElementos = $(this).sortable("toArray").toString();
+                    $.ajax({
+                        url: '/eunomia/galerias/{{$galeria->id}}/updateOrder',
+                        type: 'POST',
+                        data: {list_order: ordenElementos,_token:$("input[name='_token']").val()},
+                        error: function (jqXHR, textStatus) {
+                            $('#error').html(jqXHR.responseText);
+                        },
+                        success: function (data) {
+                            $('#mensaje').html("Orden modificado correctamente");
+                        }
+                    });
+                }
+            });
+            $( "#galeria_imagenes" ).disableSelection();
+        });
+    </script>
 @stop

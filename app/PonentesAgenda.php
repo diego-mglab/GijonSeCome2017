@@ -9,7 +9,7 @@ class PonentesAgenda extends Model
     protected $table='ponentes_agenda';
 
     public function agenda() {
-        return $this->belongsTo('App\Agenda','id','agenda_id');
+        return $this->belongsTo('App\Agenda','id','agenda_id')->orderBy('agenda.fecha')->orderBy('agenda.hora');
     }
 
     public function ponentes() {
