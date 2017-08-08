@@ -15,7 +15,7 @@ use Str;
 
 class PonenteController extends Controller
 {
-    protected $tipo_contenido = 3; // 1 - Contenido, 2 - Agenda, 3 - Ponente, 4 - Portada, 5 - Galería, 6 - Menú
+    protected $tipo_contenido = 3; // 1 - Contenido, 2 - Agenda, 3 - Ponente, 4 - Portada, 5 - Galería, 6 - Menú, 7 - Multimedia
 
     /**
      * Display a listing of the resource.
@@ -41,7 +41,7 @@ class PonenteController extends Controller
      */
     public function create()
     {
-        $idiomas = Idioma::where('activado','1')->orderByDesc('idioma')->get();
+        $idiomas = Idioma::where('activado','1')->orderBy('principal')->get();
         return view('eunomia.ponentes.form_ins_ponentes',compact('idiomas'));
     }
 
@@ -134,7 +134,7 @@ class PonenteController extends Controller
                     $textosIdioma->contenido = $request->contenido[$i];
                     $textosIdioma->metadescripcion = $request->metadescripcion[$i];
                     $textosIdioma->metatitulo = $request->metatitulo[$i];
-                    $textosIdioma->slug = Str::Slug($request->titulo[$i]);
+                    $textosIdioma->slug = Str::Slug($request->titulo[$i]).'-'.date('Y');
                     $textosIdioma->visible = 0;
                     foreach($request->visible as $visible) {
                         if ($visible == $request->idioma_id[$i])
@@ -272,7 +272,7 @@ class PonenteController extends Controller
                     $textosIdioma->contenido = $request->contenido[$i];
                     $textosIdioma->metadescripcion = $request->metadescripcion[$i];
                     $textosIdioma->metatitulo = $request->metatitulo[$i];
-                    $textosIdioma->slug = Str::Slug($request->titulo[$i]);
+                    $textosIdioma->slug = Str::Slug($request->titulo[$i]).'-'.date('Y');
                     $textosIdioma->visible = 0;
                     if (isset($request->visible)) {
                         foreach ($request->visible as $visible) {

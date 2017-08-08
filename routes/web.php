@@ -32,7 +32,6 @@ $contents = Content::get();
 $idiomas = Idioma::where('activado',1)->get();
 $paginas_estaticas = [''];
 foreach ($idiomas as $idioma){
-
     foreach($contents as $content) {
         if (is_object($content->textos_idioma_todos($idioma->id))) {
             $parametros = '';

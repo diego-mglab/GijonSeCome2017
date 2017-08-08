@@ -21,7 +21,11 @@
             <ul>
                 @foreach($breadcrums as $breadcrum)
                 <li>
-                    {{$breadcrum[1]!=''?link_to_route($breadcrum[1].'_web_'.Session::get('idioma'),$title = strtoupper($breadcrum[0])):strtoupper($breadcrum[0])}}
+                    @if ($breadcrum[0]!=$textosidioma->titulo)
+                        {{$breadcrum[1]!=''?link_to_route($breadcrum[1].'_web_'.Session::get('idioma'),$title = strtoupper($breadcrum[0])):strtoupper($breadcrum[0])}}
+                    @else
+                        {{$ponente->anio==date('Y')?($breadcrum[1]!=''?link_to_route($breadcrum[1].'_web_'.Session::get('idioma'),$title = strtoupper($breadcrum[0])):strtoupper($breadcrum[0])):$breadcrum[1]!=''?link_to(Session::get('idioma').'/'.$breadcrum[1].'/'.$ponente->anio,$title=$breadcrum[0],$parameters=[]):$breadcrum[0]}}
+                    @endif
                 </li>
                     @if(pos($breadcrum) != $textosidioma->titulo)
                         <li>//</li>

@@ -19,7 +19,7 @@
                 if (is_object($elemento->contenido)) {
                     $tipo_pagina = $elemento->contenido->tipo_contenido;
                     $pagina = str_replace('-','',$elemento->contenido->textos_idioma->slug);
-                    $ruta = $tipo_pagina == 'pagina'?route($pagina.'_web_'.$idioma_actual,[]):route('detalle_web_'.$idioma_actual,[$pagina]);
+                    $ruta = route($pagina.'_web_'.$idioma_actual,[]);
                     $link = $ruta;
                 } elseif ($elemento->url!=''){
                     $link = $elemento->url;
@@ -88,7 +88,7 @@
                 if (is_object($elemento->contenido)) {
                     $tipo_pagina = $elemento->contenido->tipo_contenido;
                     $pagina = str_replace('-','',$elemento->contenido->textos_idioma->slug);
-                    $ruta = $tipo_pagina == 'pagina'?route($pagina.'_web_'.$idioma_actual,[]):route('detalle_web_'.$idioma_actual,[$pagina]);
+                    $ruta = route($pagina.'_web_'.$idioma_actual,[]);
                     $link = $ruta;
                 } elseif ($elemento->url!=''){
                     $link = $elemento->url;
@@ -155,7 +155,7 @@
             if (is_object($elemento->contenido)) {
                 $tipo_pagina = $elemento->contenido->tipo_contenido;
                 $pagina = str_replace('-','',$elemento->contenido->textos_idioma->slug);
-                $ruta = $tipo_pagina == 'pagina'?route($pagina.'_web_'.$idioma_actual,[]):route('detalle_web_'.$idioma_actual,[$pagina]);
+                $ruta = route($pagina.'_web_'.$idioma_actual,[]);
                 $link = $ruta;
             } elseif ($elemento->url!=''){
                 $link = $elemento->url;
@@ -220,7 +220,7 @@
             if (is_object($elemento->contenido)) {
                 $tipo_pagina = $elemento->contenido->tipo_contenido;
                 $pagina = str_replace('-','',$elemento->contenido->textos_idioma->slug);
-                $ruta = $tipo_pagina == 'pagina'?route($pagina.'_web_'.$idioma_actual,[]):route('detalle_web_'.$idioma_actual,[$pagina]);
+                $ruta = route($pagina.'_web_'.$idioma_actual,[]);
                 $link = $ruta;
             } elseif ($elemento->url!=''){
                 $link = $elemento->url;
@@ -284,7 +284,7 @@
             if (is_object($elemento->contenido)) {
                 $tipo_pagina = $elemento->contenido->tipo_contenido;
                 $pagina = str_replace('-','',$elemento->contenido->textos_idioma->slug);
-                $ruta = $tipo_pagina == 'pagina'?route($pagina.'_web_'.$idioma_actual,[]):route('detalle_web_'.$idioma_actual,[$pagina]);
+                $ruta = route($pagina.'_web_'.$idioma_actual,[]);
                 $link = $ruta;
             } elseif ($elemento->url!=''){
                 $link = $elemento->url;
@@ -360,7 +360,7 @@
                 if (is_object($elemento->contenido)) {
                     $tipo_pagina = $elemento->contenido->tipo_contenido;
                     $pagina = str_replace('-','',$elemento->contenido->textos_idioma->slug);
-                    $ruta = $tipo_pagina == 'pagina'?route($pagina.'_web_'.$idioma_actual,[]):route('detalle_web_'.$idioma_actual,[$pagina]);
+                    $ruta = route($pagina.'_web_'.$idioma_actual,[]);
                     $link = $ruta;
                 } elseif ($elemento->url!=''){
                     $link = $elemento->url;
@@ -423,7 +423,7 @@
                     if (is_object($elemento->contenido)) {
                         $tipo_pagina = $elemento->contenido->tipo_contenido;
                         $pagina = str_replace('-','',$elemento->contenido->textos_idioma->slug);
-                        $ruta = $tipo_pagina == 'pagina'?route($pagina.'_web_'.$idioma_actual,[]):route('detalle_web_'.$idioma_actual,[$pagina]);
+                        $ruta = route($pagina.'_web_'.$idioma_actual,[]);
                         $link = $ruta;
                     } elseif ($elemento->url!=''){
                         $link = $elemento->url;
@@ -489,7 +489,7 @@
                     if (is_object($elemento->contenido)) {
                         $tipo_pagina = $elemento->contenido->tipo_contenido;
                         $pagina = str_replace('-','',$elemento->contenido->textos_idioma->slug);
-                        $ruta = $tipo_pagina == 'pagina'?route($pagina.'_web_'.$idioma_actual,[]):route('detalle_web_'.$idioma_actual,[$pagina]);
+                        $ruta = route($pagina.'_web_'.$idioma_actual,[]);
                         $link = $ruta;
                     } elseif ($elemento->url!=''){
                         $link = $elemento->url;
@@ -521,7 +521,7 @@
                     if (is_object($elemento->contenido)) {
                         $tipo_pagina = $elemento->contenido->tipo_contenido;
                         $pagina = str_replace('-','',$elemento->contenido->textos_idioma->slug);
-                        $ruta = $tipo_pagina == 'pagina'?route($pagina.'_web_'.$idioma_actual,[]):route('detalle_web_'.$idioma_actual,[$pagina]);
+                        $ruta = route($pagina.'_web_'.$idioma_actual,[]);
                         $link = $ruta;
                     } elseif ($elemento->url!=''){
                         $link = $elemento->url;

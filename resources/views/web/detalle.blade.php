@@ -37,6 +37,7 @@
                     <div class="columnas">
                         {!! $textosidioma->contenido !!}
                     </div><!-- fin columnas -->
+                    @if ($content->imagen != '')
                     <picture>
                         <source media="(min-width: 1200px)" srcset="{{asset('images/contenido/l')}}/{{$content->imagen or 'sinimagen.png'}}"><!-- pc -->
                         <source media="(min-width: 992px)" srcset="{{asset('images/contenido/m')}}/{{$content->imagen or 'sinimagen.png'}}"><!-- medio pc -->
@@ -45,6 +46,7 @@
                         <!-- img tag for browsers that do not support picture element -->
                         <img src="{{asset('images/contenido/l')}}/{{$content->imagen or 'sinimagen.png'}}" alt="{{$textosidioma->titulo}}" class="img-responsive"><!-- movil -->
                     </picture>
+                    @endif
                 </article>
 
 

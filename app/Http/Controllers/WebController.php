@@ -62,7 +62,11 @@ class WebController extends Controller
     public function noticias()
     {
         $menus = Menu::get();
-        return view('web.noticias',compact('menus'));
+        $noticias = Content::where('tipo_contenido','noticia')->where('fecha_publicacion','<=',date('Y-m-d'))->get();
+        //Definimos el array con los elemento del breadcrum
+        $elementos = ['Inicio','El Festival','Noticias'];
+        $breadcrums = $this->devuelveBreadcrums($elementos);
+        return view('web.noticias',compact('menus','noticias','breadcrums'));
     }
 
     public function detalle()

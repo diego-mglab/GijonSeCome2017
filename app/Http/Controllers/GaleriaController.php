@@ -15,7 +15,7 @@ use Image;
 
 class GaleriaController extends Controller
 {
-    protected $tipo_contenido = 5; // 1 - Contenido, 2 - Agenda, 3 - Ponente, 4 - Portada, 5 - Galería, 6 - Menú
+    protected $tipo_contenido = 5; // 1 - Contenido, 2 - Agenda, 3 - Ponente, 4 - Portada, 5 - Galería, 6 - Menú, 7 - Multimedia
 
     /**
      * Display a listing of the resource.
@@ -25,12 +25,12 @@ class GaleriaController extends Controller
     public function index()
     {
         $galerias = DB::table('galerias')
-            ->join('textos_idiomas','galerias.id','=','textos_idiomas.contenido_id')
-            ->join('idiomas','textos_idiomas.idioma_id','idiomas.id')
-            ->select('galerias.id','galerias.anio','titulo','subtitulo','contenido','metadescripcion','metatitulo','visible','principal','idioma','idiomas.imagen','galerias.orden')
-            ->where('principal','1')
-            ->where('tipo_contenido_id',$this->tipo_contenido)
-            ->orderBy('textos_idiomas.titulo','ASC')->get();
+            ->join('textos_idiomas', 'galerias.id', '=', 'textos_idiomas.contenido_id')
+            ->join('idiomas', 'textos_idiomas.idioma_id', 'idiomas.id')
+            ->select('galerias.id', 'galerias.anio', 'titulo', 'subtitulo', 'contenido', 'metadescripcion', 'metatitulo', 'visible', 'principal', 'idioma', 'idiomas.imagen', 'galerias.orden')
+            ->where('principal', '1')
+            ->where('tipo_contenido_id', $this->tipo_contenido)
+            ->orderBy('textos_idiomas.titulo', 'ASC')->get();
         return view('eunomia.galerias.listado_galerias', compact('galerias'));
     }
 
@@ -41,26 +41,26 @@ class GaleriaController extends Controller
      */
     public function create()
     {
-        $idiomas = Idioma::where('activado','1')->orderByDesc('idioma')->get();
-        return view('eunomia.galerias.form_ins_galerias',compact('idiomas'));
+        $idiomas = Idioma::where('activado', '1')->orderBy('principal')->get();
+        return view('eunomia.galerias.form_ins_galerias', compact('idiomas'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        if ($request->galeria_id > 0){ //Si se trata de una imagen de la galería
+        if ($request->galeria_id > 0) { //Si se trata de una imagen de la galería
             $multimedia = new Multimedia();
 
             $multimedia->galeria_id = $request->galeria_id;
 
             $galeria = Galeria::findOrFail($request->galeria_id);
 
-            if($request->hasFile('imagen')){
+            if ($request->hasFile('imagen')) {
 
                 $imagen = $request->file('imagen');
 
@@ -69,28 +69,28 @@ class GaleriaController extends Controller
                 $carpeta = Str::Slug($galeria->carpeta);
 
                 $dir = 'images/galerias/' . $carpeta . '/';
-                if (!File::exists($dir)){
+                if (!File::exists($dir)) {
                     File::makeDirectory($dir);
                 }
 
                 Image::make($imagen)->resize(1200, null, function ($constraint) {
                     $constraint->aspectRatio();
-                })->save($dir.$filename, 95 );
+                })->save($dir . $filename, 95);
 
                 //Thumbnail
                 $dir = 'images/galerias/' . $carpeta . '/th/';
-                if (!File::exists($dir)){
+                if (!File::exists($dir)) {
                     File::makeDirectory($dir);
                 }
 
                 Image::make($imagen)->fit(240, 240, function ($constraint) {
                     $constraint->upsize();
-                })->save($dir.$filename );
+                })->save($dir . $filename);
 
                 $multimedia->imagen = $filename;
             }
 
-            if ($request->url != ''){
+            if ($request->url != '') {
                 $multimedia->tipo_multimedia = 'video';
                 $multimedia->url = $request->url;
             } else {
@@ -100,7 +100,7 @@ class GaleriaController extends Controller
 
             $multimedia->save();
 
-            return redirect()->route('galerias.edit',['id' => $request->galeria_id]);
+            return redirect()->route('galerias.edit', ['id' => $request->galeria_id]);
 
         } else { // Si se trata de una galería
 
@@ -164,7 +164,7 @@ class GaleriaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Galeria  $galeria
+     * @param  \App\Galeria $galeria
      * @return \Illuminate\Http\Response
      */
     public function show(Galeria $galeria)
@@ -175,29 +175,30 @@ class GaleriaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Galeria  $galeria
+     * @param  \App\Galeria $galeria
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $idiomas = Idioma::where('activado','1')->orderBy('principal')->get();
+        $idiomas = Idioma::where('activado', '1')->orderBy('principal')->get();
+        $idiomas_imagenes = Idioma::where('activado', '1')->orderBy('principal', 'DESC')->get();
         $textos = DB::table('galerias')
-            ->join('textos_idiomas','galerias.id','=','textos_idiomas.contenido_id')
-            ->join('idiomas','textos_idiomas.idioma_id','idiomas.id')
-            ->select('galerias.id as galeria_id','titulo','subtitulo','metadescripcion','metatitulo','visible','principal','idioma','idiomas.imagen','codigo','textos_idiomas.idioma_id')
-            ->where('tipo_contenido_id',$this->tipo_contenido)
-            ->where('galerias.id',$id)
-            ->orderBy('principal','DESC')->get();
+            ->join('textos_idiomas', 'galerias.id', '=', 'textos_idiomas.contenido_id')
+            ->join('idiomas', 'textos_idiomas.idioma_id', 'idiomas.id')
+            ->select('galerias.id as galeria_id', 'titulo', 'subtitulo', 'metadescripcion', 'metatitulo', 'visible', 'principal', 'idioma', 'idiomas.imagen', 'codigo', 'textos_idiomas.idioma_id')
+            ->where('tipo_contenido_id', $this->tipo_contenido)
+            ->where('galerias.id', $id)
+            ->orderBy('principal', 'DESC')->get();
         $galeria = Galeria::findOrFail($id);
-        $imagenes = Multimedia::where('galeria_id',$id)->orderBy('orden','asc')->get();
-        return view('eunomia.galerias.form_edit_galerias',compact('idiomas','galeria','textos','imagenes'));
+        $imagenes = Multimedia::where('galeria_id', $id)->orderBy('orden', 'asc')->get();
+        return view('eunomia.galerias.form_edit_galerias', compact('idiomas', 'galeria', 'textos', 'imagenes', 'idiomas_imagenes'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Galeria  $galeria
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Galeria $galeria
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -245,12 +246,12 @@ class GaleriaController extends Controller
             }
 
             return redirect('eunomia/galerias');
-        }else{
+        } else {
             $list_order = $request->list_order;
-            $list = explode(',',$list_order);
-            $i=1;
-            foreach($list as $item_id) {
-                if($itemToOrder = Multimedia::findOrFail($item_id)){
+            $list = explode(',', $list_order);
+            $i = 1;
+            foreach ($list as $item_id) {
+                if ($itemToOrder = Multimedia::findOrFail($item_id)) {
                     $itemToOrder->orden = $i;
                     $itemToOrder->save();
                 }
@@ -259,12 +260,13 @@ class GaleriaController extends Controller
         }
     }
 
-    function updateOrder(Request $request){
+    function updateOrder(Request $request)
+    {
         $list_order = $request->list_order;
-        $list = explode(',',$list_order);
-        $i=1;
-        foreach($list as $item_id) {
-            if($itemToOrder = Multimedia::findOrFail($item_id)){
+        $list = explode(',', $list_order);
+        $i = 1;
+        foreach ($list as $item_id) {
+            if ($itemToOrder = Multimedia::findOrFail($item_id)) {
                 $itemToOrder->orden = $i;
                 $itemToOrder->save();
             }
@@ -272,6 +274,9 @@ class GaleriaController extends Controller
         }
     }
 
+    public function updateTextoImagen(Request $request, $id){
+
+    }
     /**
      * Remove the specified resource from storage.
      *

@@ -305,10 +305,7 @@
                     $('#contenedor_lugar').hide();
                     $('#contenedor_fecha').hide();
                     $('#contenedor_pagina_estatica').hide();
-                    @foreach($idiomas as $idioma)
-                    $('#contenedor_subtitulo_{{$idioma->codigo}}').hide();
-                    @endforeach
-                        titulo = "Cita a ciegas";
+                    titulo = "Cita a ciegas";
                     break;
             }
             $('#tipo_contenido').val(tipo_contenido);

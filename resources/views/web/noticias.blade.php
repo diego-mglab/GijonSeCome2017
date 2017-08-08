@@ -6,11 +6,14 @@
     <section id="migadepan">
         <div class="col-xs-12">
             <ul>
-                <li>INICIO</li>
-                <li>//</li>
-                <li><a href="#">EL FESTIVAL</a></li>
-                <li>//</li>
-                <li>TÍO KIM</li>
+                @foreach($breadcrums as $breadcrum)
+                    <li>
+                        {{$breadcrum[1]!=''?link_to_route($breadcrum[1].'_web_'.Session::get('idioma'),$title = strtoupper($breadcrum[0])):strtoupper($breadcrum[0])}}
+                    </li>
+                    @if(pos($breadcrum) != 'Noticias')
+                        <li>//</li>
+                    @endif
+                @endforeach
             </ul>
         </div>
 

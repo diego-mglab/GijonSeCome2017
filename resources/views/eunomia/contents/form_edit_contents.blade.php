@@ -148,14 +148,12 @@
                                     </div>
 
 
-                                    @if ($content->tipo_contenido == 'noticia')
-                                        <div class="form-group" id="contenedor_subtitulo">
+                                    <div class="form-group" id="contenedor_subtitulo_{{$idioma->codigo}}">
 
-                                            {{Form::label('subtitulo', 'Subtítulo')}}
-                                            {{Form::text('subtitulo[]', $subtitulo, ['class' => 'form-control' ,'placeholder' => 'Subtítulo'])}}
+                                        {{Form::label('subtitulo', 'Subtítulo')}}
+                                        {{Form::text('subtitulo[]', $subtitulo, ['class' => 'form-control' ,'placeholder' => 'Subtítulo'])}}
 
-                                        </div>
-                                    @endif
+                                    </div>
 
                                     <div class="form-group">
 
@@ -337,10 +335,16 @@
                     @endforeach
                         titulo = "Noticia";
                     break;
+                case 'entrevista':
+                    $('#contenedor_lugar').hide();
+                    $('#contenedor_fecha').hide();
+                    titulo = "Cita a ciegas";
+                    break;
             }
             $('#tipo_contenido').val(tipo_contenido);
             $('#titulo_tipo_contenido').html(titulo);
         }
+        muestraOcultaCampos('{{$content->tipo_contenido}}');
     </script>
 
     <!-- Crear URL amigable a partir de lo que se escriba en el título -->

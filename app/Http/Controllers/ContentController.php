@@ -16,7 +16,7 @@ use File;
 
 class ContentController extends Controller
 {
-    protected $tipo_contenido = 1; // 1 - Contenido, 2 - Agenda, 3 - Ponente, 4 - Portada, 5 - Galería, 6 - Menú
+    protected $tipo_contenido = 1; // 1 - Contenido, 2 - Agenda, 3 - Ponente, 4 - Portada, 5 - Galería, 6 - Menú, 7 - Multimedia
 
     /**
      * Display a listing of the resource.
@@ -43,7 +43,7 @@ class ContentController extends Controller
     public function create()
     {
         $tiposContenido = TipoContenido::all()->pluck('tipo_contenido','id');
-        $idiomas = Idioma::where('activado','1')->orderByDesc('idioma')->get();
+        $idiomas = Idioma::where('activado','1')->orderBy('principal')->get();
         return view('eunomia.contents.form_ins_contents',compact('tiposContenido','idiomas'));
     }
 
@@ -134,7 +134,7 @@ class ContentController extends Controller
                     $textosIdioma->contenido = $request->contenido[$i];
                     $textosIdioma->metadescripcion = $request->metadescripcion[$i];
                     $textosIdioma->metatitulo = $request->metatitulo[$i];
-                    $textosIdioma->slug = Str::Slug($request->titulo[$i]);
+                    $textosIdioma->slug = $request->slug[$i];
                     $textosIdioma->visible = 0;
                     foreach ($request->visible as $visible) {
                         if ($visible == $request->idioma_id[$i])

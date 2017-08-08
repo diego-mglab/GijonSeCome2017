@@ -19,7 +19,7 @@ use Str;
 
 class AgendaController extends Controller
 {
-    protected $tipo_contenido = 2; // 1 - Contenido, 2 - Agenda, 3 - Ponente, 4 - Portada, 5 - Galería, 6 - Menú
+    protected $tipo_contenido = 2; // 1 - Contenido, 2 - Agenda, 3 - Ponente, 4 - Portada, 5 - Galería, 6 - Menú, 7 - Multimedia
 
     /**
      * Display a listing of the resource.
@@ -175,7 +175,7 @@ class AgendaController extends Controller
             ->where('principal','1')
             ->where('ponentes_agenda.agenda_id',$id)
             ->pluck('id')->toArray(); // titulo como nombre del ponente
-        $idiomas = Idioma::where('activado','1')->orderByDesc('idioma')->get();
+        $idiomas = Idioma::where('activado','1')->orderBy('principal')->get();
         $zonas = Zona::all()->pluck('nombre','id');
         $textos = DB::table('agenda')
             ->join('textos_idiomas','agenda.id','=','textos_idiomas.contenido_id')

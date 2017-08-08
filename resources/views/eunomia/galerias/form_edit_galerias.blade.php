@@ -206,11 +206,18 @@
                                     <a data-lightbox-gallery="gallery1" class="nivo-lightbox" href="{{asset('images/galerias/'.$galeria->carpeta.'/th/')}}/{{$imagen->imagen or 'sinimagen.png'}}"><img src="{{asset('images/galerias/'.$galeria->carpeta.'/th/')}}/{{$imagen->imagen or 'sinimagen.png'}}" style="width:240px;"></a>
 
                             <?php } ?>
-                            {{ Form::open(array('method'=> 'DELETE', 'route' => array('galerias.destroy', $imagen),'style'=>'display:inline')) }}
+                            <div class="box-header">
+                                {{ Form::open(array('method'=> 'DELETE', 'route' => array('galerias.destroy', $imagen),'style'=>'display:inline')) }}
                                 {{ Form::hidden('imagen_id',$imagen->id) }}
                                 {{ Form::hidden('galeria_id',$galeria->id) }}
+                                @foreach ($idiomas_imagenes as $idioma)
+                                    <div class="form-group">
+                                        {{ Form::text('texto_'.$idioma->codigo,is_object($imagen->textos_idioma_todos($idioma->codigo))?$imagen->textos_idioma_todos($idioma->codigo)->titulo:'',['placeholder' => $idioma->idioma, 'class' => 'form-control', 'id' => $imagen->id.'_'.$idioma->id]) }}
+                                    </div>
+                                @endforeach
                             {{ Form::submit('Eliminar', array('class' => 'btn btn-block btn-danger btn-xs')) }}
                             {{ Form::close() }}
+                            </div>
                         </div>
 
 
@@ -323,6 +330,7 @@
         });
     </script>
 
+    <!-- jQueryUI -->
     <script src="{{asset('vendor/adminlte/plugins/jQueryUI/jquery-ui.min.js')}}"></script>
     <script language="JavaScript">
         $(function() {
@@ -344,5 +352,9 @@
             });
             $( "#galeria_imagenes" ).disableSelection();
         });
+    </script>
+
+    <script language="JavaScript">
+
     </script>
 @stop
