@@ -29,6 +29,12 @@
                     {!! Form::open(['action' => 'WebController@contacto','method' => 'POST', 'name' => 'form_contacto', 'class' =>'contact-form', 'id' => 'contact-form']) !!}
                         <div class="form-group">
                             <div class="controls">
+                                {{Form::select('tipo_contacto', ['Expositores' => 'Expositores','Patrocinadores' => 'Patrocinadores','Prensa' => 'Prensa','Programación del festival' => 'Programación del festival'],null, ['placeholder' => 'Tipo contacto', 'id' => 'tipo_contacto'])}}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="controls">
                                 {{Form::text('nombre', null, ['placeholder' => 'Nombre'])}}
                             </div>
                         </div>
@@ -50,6 +56,7 @@
                                 {{Form::textarea('mensaje', null, ['rows' => '7', 'placeholder' => 'Mensaje'])}}
                             </div>
                         </div>
+                        {{Form::hidden('email_envio',null,['id'  => 'email_envio'])}}
                         <button type="submit" id="submit" class="btn-system btn-large">Enviar</button>
                         <div id="success" style="color:#34495e;"></div>
                 {!! Form::close() !!}
@@ -70,7 +77,7 @@
                     <ul class="icons-list">
                         <li><i class="fa fa-globe">  </i> <strong>Dirección:</strong> Recinto Ferial Luis Adaro.</li>
                         <li><i class="fa fa-envelope-o"></i> <strong>Email:</strong>info@gijonsecome.es</li>
-                        <li><i class="fa fa-mobile"></i> <strong>Teléfono:</strong> +34 984 05 04 09 </li>
+                        <li><i class="fa fa-mobile"></i> <strong>Teléfono:</strong> +34 985 17 15 52 </li>
                     </ul>
 
                     <!-- Divider -->
@@ -86,12 +93,15 @@
                     </ul>
 
 
+                    <!-- Divider -->
+                    <div class="hr1" style="margin-bottom:15px;"></div>
+
                     <h4 class="classic-title"><span>Horario del festival GijónSeCome</span></h4>
 
                     <!-- Info - List -->
                     <ul class="list-unstyled">
-                        <li><strong>Viernes 25 y sábado 26 noviembre </strong>- 12:00 a 22:00</li>
-                        <li><strong>Domingo 27 de noviembre</strong> - 12:00 a 21:00</li>
+                        <li><strong>Sábado 3 y domingo 4 de diciembre </strong>- 11:00 a 22:00</li>
+                        <li><strong>Lunes 5 de diciembre</strong> - 11:00 a 22:00</li>
                     </ul>
 
                 </div>
@@ -114,9 +124,18 @@
         </div>
         <!-- End Container -->
 
-
 @endsection
 
 @section('css')
-    <link rel="stylesheet" type="text/css" href="css/agenda.css"/>
+
+@endsection
+
+@section('js')
+    <script language="JavaScript">
+        $(function() {
+            $('#tipo_contacto').change(function (e) {
+                $("#email_envio").val(this.value);
+            });
+        });
+    </script>
 @endsection

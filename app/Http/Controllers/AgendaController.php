@@ -52,6 +52,7 @@ class AgendaController extends Controller
             ->select('titulo','ponentes.id as id')
             ->where('tipo_contenido_id',3)
             ->where('principal','1')
+            ->where('anio',date('Y'))
             ->orderBy('titulo')
             ->pluck('titulo','id'); // titulo como nombre del ponente
         $idiomas = Idioma::where('activado','1')->orderBy('principal')->get();
@@ -164,6 +165,7 @@ class AgendaController extends Controller
             ->select('titulo','ponentes.id as id')
             ->where('tipo_contenido_id',3)
             ->where('principal','1')
+            ->where('anio',date('Y'))
             ->orderBy('titulo')
             ->pluck('titulo','id'); // titulo como nombre del ponente
         $ponentes = DB::table('ponentes')

@@ -33,6 +33,15 @@
                             <th>Acciones</th>
                         </tr>
                         </thead>
+                        <tfoot>
+                        <tr>
+                            <th>Título</th>
+                            <th>Subtítulo</th>
+                            <th>Tipo</th>
+                            <th>Visible</th>
+                            <th>Acciones</th>
+                        </tr>
+                        </tfoot>
                         <tbody>
                             @foreach ($contents as $content)
                                 @if ($content->principal == 1)
@@ -83,10 +92,46 @@
 
     <!-- DataTables -->
     <script src="{{asset("vendor/adminlte/plugins/datatables/jquery.dataTables.min.js")}}"> </script>
+    <script src="//cdn.datatables.net/plug-ins/1.10.15/api/column().title().js"></script>
     <script src="{{asset("vendor/adminlte/plugins/datatables/dataTables.bootstrap.min.js")}}"> </script>
 
     <!-- General -->
-    <script src="{{asset("js/scripts.js")}}"></script>
+    <script>
+        $(function () {
+            $('#list').DataTable({
+                paging: true,
+                lengthChange: true,
+                searching: true,
+                ordering: true,
+                info: true,
+                stateSave: true,
+                responsive: true,
+                language: {
+                    url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+                },
+                initComplete: function () {
+                    this.api().columns().every( function () {
+                            var column = this;
+                            var select = $('<select><option value=""></option></select>')
+                                .appendTo($(column.footer()).empty())
+                                .on('change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+
+                                    column
+                                        .search(val ? '^' + val + '$' : '', true, false)
+                                        .draw();
+                                });
+
+                            column.data().unique().sort().each(function (d, j) {
+                                select.append('<option value="' + d + '">' + d + '</option>')
+                            });
+                    } );
+                }
+            })
+        });
+    </script>
 
     <!-- Bootstrap Dialog -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.9/js/bootstrap-dialog.min.js"></script>

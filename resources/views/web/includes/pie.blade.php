@@ -263,7 +263,7 @@
             <div class="col-lg-2 col-md-2 col-xs-12">
                 <div class="footer-widget contacta">
                     <h4 class="head-line">{{__('pie.contacto')}}</h4>
-                    <p><strong>Teléfono</strong>: <a href="tel:+34984050409">+34 984 05 04 09</a></p>
+                    <p><strong>{{__('pie.telefono')}}</strong>: <a href="tel:+34984050409">+34 985 17 15 52</a></p>
                     <p><strong>{{__('pie.email')}}</strong>: <a href="mailto:info@gijonsecome.es">info@gijonsecome.es</a></p>
                     <p><strong>{{__('pie.web')}}</strong>: <a href="http://www.mglab.es">www.mglab.es</a></p>
                 </div>
@@ -283,3 +283,5 @@
 
 <!-- Go To Top Link -->
 <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
+
+@yield('js')

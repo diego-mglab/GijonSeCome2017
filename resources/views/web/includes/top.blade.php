@@ -13,7 +13,7 @@
                         </li>
                         <li><a href="mailto:info@gijonsecome.es"><i class="fa fa-envelope-o"></i> info@gijonsecome.es</a>
                         </li>
-                        <li><a href="#"><i class="fa fa-phone"></i>+34 984 05 04 09</a></li>
+                        <li><a href="#"><i class="fa fa-phone"></i>+34 985 17 15 52</a></li>
                         <li><a href="#"><i class="fa fa-mobile"></i>+34 658 05 73 38</a></li>
                     </ul>
                     <!-- End Contact Info -->

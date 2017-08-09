@@ -28,11 +28,27 @@
 
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 row-eq-height">
 
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 destacadauna">
+                @for($i=0;$i<2;$i++)
+                    <?php
+                    $lugar = strtoupper($noticias[$i]->lugar);
+                    $imagen = asset('images/contenido').'/'.$noticias[$i]->imagen or 'sinimagen.png';
+                    $fecha='';
+                    if ($noticias[$i]->fecha != ''){
+                        $time= strtotime($noticias[$i]->fecha);
+                        $fecha = date('d/m/Y',$time);
+                    }
+                    if (is_object($noticias[$i]->textos_idioma)){
+                        $titulo = $noticias[$i]->textos_idioma->titulo;
+                        $subtitulo = $noticias[$i]->textos_idioma->subtitulo;
+                        $contenido = $noticias[$i]->getSubString($noticias[$i]->textos_idioma->contenido,150);
+                        $ruta = str_replace('-','',$noticias[$i]->textos_idioma->slug).'_web_'.Session::get('idioma');
+                    }
+                    ?>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 {{$i==0?'destacadauna':'destacadados'}}">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <picture>
                             <!-- img tag for browsers that do not support picture element -->
-                            <img src="{{asset('images/fotos/destacadauna.png')}}" alt="..." class="img-responsive"><!-- movil -->
+                            <img src="{{$imagen}}" alt="..." class="img-responsive"><!-- movil -->
                         </picture>
                         <picture>
                             <source media="(min-width: 992px)" srcset="{{asset('images/graficos/A_mord.png')}}"><!-- pc -->
@@ -45,11 +61,11 @@
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <article>
                             <hgroup>
-                                <time>GIJÓN. 24/04/2017</time>
-                                <h1><a href="#">Titular de página interior. Kim Ossemblok posa como un auténtico maizón.</a></h1>
-                                <h2>SUBTÍTULO DE PÁGINA INTERIOR. KIM ESTÁ HASTA LA POLLA DE POSAR.</h2>
+                                <time>{{$lugar!=''?$lugar.'.':''}} {{$fecha}}</time>
+                                <h1>{{link_to_route($ruta,$title=$titulo)}}</h1>
+                                <h2>{{$subtitulo}}</h2>
 
-                                <p>Texto general de página interior. Kim es más de té. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</p>
+                                <p>{{$contenido}}</p>
                             </hgroup>
 
                         </article>
@@ -57,37 +73,7 @@
                     </div>
 
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 destacadados">
-
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        <picture>
-                            <!-- img tag for browsers that do not support picture element -->
-                            <img src="images/fotos/destacadauna.png" alt="..." class="img-responsive"><!-- movil -->
-                        </picture>
-                        <picture>
-                            <source media="(min-width: 992px)" srcset="images/graficos/destacadonoticiasB.png"><!-- pc -->
-                            <source media="(min-width: 768px)" srcset="images/graficos/destacadonoticiasB.png"><!-- tablet -->
-
-                            <!-- img tag for browsers that do not support picture element -->
-                            <img src="images/graficos/mordiscodestacadodosxs.png" alt="imagen decorativa" class="mordisquitos"><!-- movil -->
-                        </picture>
-
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        <article>
-                            <hgroup>
-                                <h3>ANTETÍTULO. FIRMA DE LIBROS</h3>
-                                <h1><a href="#">Titular de página interior. Kim Ossemblok posa como un auténtico maizón.</a></h1>
-                                <h2>SUBTÍTULO DE PÁGINA INTERIOR. KIM ESTÁ HASTA LA POLLA DE POSAR.</h2>
-
-                                <time>GIJÓN. 24/04/2017</time>
-                            </hgroup>
-                            <p>Texto general de página interior. Kim es más de té. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</p>
-                        </article>
-                    </div>
-
-
-                </div>
+                @endfor
             </div>
 
         </div><!-- fin row -->
@@ -101,24 +87,39 @@
 
 
                     <!-- se repiten los cuatro primeros los dos últimos tienen una clase diferente -->
-
+                    @for($i=2;$i<count($noticias);$i++)
+                    <?php
+                        $lugar = strtoupper($noticias[$i]->lugar);
+                        $imagen = $noticias[$i]->imagen;
+                        $fecha='';
+                        if ($noticias[$i]->fecha != ''){
+                            $time= strtotime($noticias[$i]->fecha);
+                            $fecha = date('d/m/Y',$time);
+                        }
+                        if (is_object($noticias[$i]->textos_idioma)){
+                            $titulo = $noticias[$i]->textos_idioma->titulo;
+                            $subtitulo = $noticias[$i]->textos_idioma->subtitulo;
+                            $contenido = $noticias[$i]->getSubString($noticias[$i]->textos_idioma->contenido,150);
+                            $ruta = str_replace('-','',$noticias[$i]->textos_idioma->slug).'_web_'.Session::get('idioma');
+                        }
+                        ?>
 
                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 vira">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 vira<?php $i%4==0||$i%4==1?' inversa':''?>">
                             <picture>
-                                <source media="(min-width: 1200px)" srcset="images/pc/06.png"><!-- pc -->
-                                <source media="(min-width: 992px)" srcset="images/laptop/06.png"><!-- medio pc -->
-                                <source media="(min-width: 768px)" srcset="images/tablet/06.png"><!-- tablet -->
+                                <source media="(min-width: 1200px)" srcset="{{asset('images/l')}}/{{$imagen or 'sinimagen.png'}}"><!-- pc -->
+                                <source media="(min-width: 992px)" srcset="{{asset('images/m')}}/{{$imagen or 'sinimagen.png'}}"><!-- medio pc -->
+                                <source media="(min-width: 768px)" srcset="{{asset('images/s')}}/{{$imagen or 'sinimagen.png'}}"><!-- tablet -->
 
                                 <!-- img tag for browsers that do not support picture element -->
-                                <img src="images/smartphone/06.png" alt="..." class="img-responsive"><!-- movil -->
+                                <img src="{{asset('images/l')}}/{{$imagen or 'sinimagen.png'}}" alt="..." class="img-responsive"><!-- movil -->
                             </picture>
                             <picture>
 
-                                <source media="(min-width: 768px)" srcset="images/graficos/noticia_a_lg.png"><!-- tablet -->
+                                <source media="(min-width: 768px)" srcset="{{asset('images/graficos/noticia_a_lg.png')}}"><!-- tablet -->
 
                                 <!-- img tag for browsers that do not support picture element -->
-                                <img src="images/graficos/noticia_a_xs.png" alt="imagen decorativa" class="img-responsive mordisquitos"><!-- movil -->
+                                <img src="{{asset('images/graficos/noticia_a_xs.png')}}" alt="imagen decorativa" class="img-responsive mordisquitos"><!-- movil -->
                             </picture>
 
 
@@ -126,220 +127,14 @@
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 
 
-                            <h1 class="white"><a href="#">Estos 3 elementos tienen pinta de mangarla cuando cierran el bus.</a></h1>
-                            <time class="black">GIJÓN. 24/04/2017</time>
+                            <time class="black">{{$lugar!=''?$lugar.'.':''}} {{$fecha}}</time>
+                            <h1 class="white">{{link_to_route($ruta,$title=$titulo)}}</h1>
 
 
                         </div>
 
                     </div><!-- fin comun uno -->
-                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 vira">
-                            <picture>
-                                <source media="(min-width: 1200px)" srcset="images/pc/06.png"><!-- pc -->
-                                <source media="(min-width: 992px)" srcset="images/laptop/06.png"><!-- medio pc -->
-                                <source media="(min-width: 768px)" srcset="images/tablet/06.png"><!-- tablet -->
-
-                                <!-- img tag for browsers that do not support picture element -->
-                                <img src="images/smartphone/06.png" alt="..." class="img-responsive"><!-- movil -->
-                            </picture>
-                            <picture>
-
-                                <source media="(min-width: 768px)" srcset="images/graficos/noticia_b_LG.png"><!-- tablet -->
-
-                                <!-- img tag for browsers that do not support picture element -->
-                                <img src="images/graficos/noticia_b_xs.png" alt="imagen decorativa" class="img-responsive mordisquitos"><!-- movil -->
-                            </picture>
-
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-
-
-                            <h1 class="black"><a href="#">Titular de página interior. Kim Ossemblok posa como un auténtico maizón.</a></h1>
-                            <time class="white">GIJÓN. 24/04/2017</time>
-
-
-                        </div>
-                    </div><!-- fin comun dos -->
-
-                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 vira inversa">
-                            <picture>
-                                <source media="(min-width: 1200px)" srcset="images/pc/06.png"><!-- pc -->
-                                <source media="(min-width: 992px)" srcset="images/laptop/06.png"><!-- medio pc -->
-                                <source media="(min-width: 768px)" srcset="images/tablet/06.png"><!-- tablet -->
-
-                                <!-- img tag for browsers that do not support picture element -->
-                                <img src="images/smartphone/06.png" alt="..." class="img-responsive"><!-- movil -->
-                            </picture>
-                            <picture>
-
-                                <source media="(min-width: 768px)" srcset="images/graficos/noticia_a_lg.png"><!-- tablet -->
-
-                                <!-- img tag for browsers that do not support picture element -->
-                                <img src="images/graficos/noticia_a_xs.png" alt="imagen decorativa" class="img-responsive mordisquitos"><!-- movil -->
-                            </picture>
-
-
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-
-
-                            <h1 class="white"><a href="#">Estos 3 elementos tienen pinta de mangarla cuando cierran el bus.</a></h1>
-                            <time class="black">GIJÓN. 24/04/2017</time>
-
-
-                        </div>
-
-                    </div><!-- fin comun uno -->
-                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 vira inversa">
-                            <picture>
-                                <source media="(min-width: 1200px)" srcset="images/pc/06.png"><!-- pc -->
-                                <source media="(min-width: 992px)" srcset="images/laptop/06.png"><!-- medio pc -->
-                                <source media="(min-width: 768px)" srcset="images/tablet/06.png"><!-- tablet -->
-
-                                <!-- img tag for browsers that do not support picture element -->
-                                <img src="images/smartphone/06.png" alt="..." class="img-responsive"><!-- movil -->
-                            </picture>
-                            <picture>
-
-                                <source media="(min-width: 768px)" srcset="images/graficos/noticia_b_LG.png"><!-- tablet -->
-
-                                <!-- img tag for browsers that do not support picture element -->
-                                <img src="images/graficos/noticia_b_xs.png" alt="imagen decorativa" class="img-responsive mordisquitos"><!-- movil -->
-                            </picture>
-
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-
-
-                            <h1 class="black"><a href="#">Titular de página interior. Kim Ossemblok posa como un auténtico maizón.</a></h1>
-                            <time class="white">GIJÓN. 24/04/2017</time>
-
-
-                        </div>
-                    </div><!-- fin comun dos -->
-
-                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 vira">
-                            <picture>
-                                <source media="(min-width: 1200px)" srcset="images/pc/06.png"><!-- pc -->
-                                <source media="(min-width: 992px)" srcset="images/laptop/06.png"><!-- medio pc -->
-                                <source media="(min-width: 768px)" srcset="images/tablet/06.png"><!-- tablet -->
-
-                                <!-- img tag for browsers that do not support picture element -->
-                                <img src="images/smartphone/06.png" alt="..." class="img-responsive"><!-- movil -->
-                            </picture>
-                            <picture>
-
-                                <source media="(min-width: 768px)" srcset="images/graficos/noticia_a_lg.png"><!-- tablet -->
-
-                                <!-- img tag for browsers that do not support picture element -->
-                                <img src="images/graficos/noticia_a_xs.png" alt="imagen decorativa" class="img-responsive mordisquitos"><!-- movil -->
-                            </picture>
-
-
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-
-
-                            <h1 class="white"><a href="#">Estos 3 elementos tienen pinta de mangarla cuando cierran el bus.</a></h1>
-                            <time class="black">GIJÓN. 24/04/2017</time>
-
-
-                        </div>
-
-                    </div><!-- fin comun uno -->
-                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 vira">
-                            <picture>
-                                <source media="(min-width: 1200px)" srcset="images/pc/06.png"><!-- pc -->
-                                <source media="(min-width: 992px)" srcset="images/laptop/06.png"><!-- medio pc -->
-                                <source media="(min-width: 768px)" srcset="images/tablet/06.png"><!-- tablet -->
-
-                                <!-- img tag for browsers that do not support picture element -->
-                                <img src="images/smartphone/06.png" alt="..." class="img-responsive"><!-- movil -->
-                            </picture>
-                            <picture>
-
-                                <source media="(min-width: 768px)" srcset="images/graficos/noticia_b_LG.png"><!-- tablet -->
-
-                                <!-- img tag for browsers that do not support picture element -->
-                                <img src="images/graficos/noticia_b_xs.png" alt="imagen decorativa" class="img-responsive mordisquitos"><!-- movil -->
-                            </picture>
-
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-
-
-                            <h1 class="black"><a href="#">Titular de página interior. Kim Ossemblok posa como un auténtico maizón.</a></h1>
-                            <time class="white">GIJÓN. 24/04/2017</time>
-
-
-                        </div>
-                    </div><!-- fin comun dos -->
-
-                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 vira inversa">
-                            <picture>
-                                <source media="(min-width: 1200px)" srcset="images/pc/06.png"><!-- pc -->
-                                <source media="(min-width: 992px)" srcset="images/laptop/06.png"><!-- medio pc -->
-                                <source media="(min-width: 768px)" srcset="images/tablet/06.png"><!-- tablet -->
-
-                                <!-- img tag for browsers that do not support picture element -->
-                                <img src="images/smartphone/06.png" alt="..." class="img-responsive"><!-- movil -->
-                            </picture>
-                            <picture>
-
-                                <source media="(min-width: 768px)" srcset="images/graficos/noticia_a_lg.png"><!-- tablet -->
-
-                                <!-- img tag for browsers that do not support picture element -->
-                                <img src="images/graficos/noticia_a_xs.png" alt="imagen decorativa" class="img-responsive mordisquitos"><!-- movil -->
-                            </picture>
-
-
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-
-
-                            <h1 class="white"><a href="#">Estos 3 elementos tienen pinta de mangarla cuando cierran el bus.</a></h1>
-                            <time class="black">GIJÓN. 24/04/2017</time>
-
-
-                        </div>
-
-                    </div><!-- fin comun uno -->
-                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 vira inversa">
-                            <picture>
-                                <source media="(min-width: 1200px)" srcset="images/pc/06.png"><!-- pc -->
-                                <source media="(min-width: 992px)" srcset="images/laptop/06.png"><!-- medio pc -->
-                                <source media="(min-width: 768px)" srcset="images/tablet/06.png"><!-- tablet -->
-
-                                <!-- img tag for browsers that do not support picture element -->
-                                <img src="images/smartphone/06.png" alt="..." class="img-responsive"><!-- movil -->
-                            </picture>
-                            <picture>
-
-                                <source media="(min-width: 768px)" srcset="images/graficos/noticia_b_LG.png"><!-- tablet -->
-
-                                <!-- img tag for browsers that do not support picture element -->
-                                <img src="images/graficos/noticia_b_xs.png" alt="imagen decorativa" class="img-responsive mordisquitos"><!-- movil -->
-                            </picture>
-
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-
-
-                            <h1 class="black"><a href="#">Titular de página interior. Kim Ossemblok posa como un auténtico maizón.</a></h1>
-                            <time class="white">GIJÓN. 24/04/2017</time>
-
-
-                        </div>
-                    </div><!-- fin comun dos -->
-
-
+                    @endfor
                 </div><!-- fin sin destacar-->
             </div><!-- fin row-->
         </section>

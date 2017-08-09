@@ -272,7 +272,10 @@ class PonenteController extends Controller
                     $textosIdioma->contenido = $request->contenido[$i];
                     $textosIdioma->metadescripcion = $request->metadescripcion[$i];
                     $textosIdioma->metatitulo = $request->metatitulo[$i];
-                    $textosIdioma->slug = Str::Slug($request->titulo[$i]).'-'.date('Y');
+                    if ($ponente->anio > '2016')
+                        $textosIdioma->slug = Str::Slug($request->titulo[$i]).'-'.$ponente->anio;
+                    else
+                        $textosIdioma->slug = Str::Slug($request->titulo[$i]);
                     $textosIdioma->visible = 0;
                     if (isset($request->visible)) {
                         foreach ($request->visible as $visible) {

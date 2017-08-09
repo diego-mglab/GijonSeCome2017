@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\DB;
 use URL;
 use Redirect;
 use Carbon\Carbon;
+use Mail;
 
 class WebController extends Controller
 {
@@ -53,8 +54,27 @@ class WebController extends Controller
         return view('web.galeria', compact('menus','breadcrums','anio','galeria'));
     }
 
-    public function contacto()
+    public function contacto(Request $request)
     {
+        if ($request->nombre != ''){
+            $email = '';
+            switch($request->tipo_contacto){
+                case 'Expositores' || 'Patrocinadores':
+                    $email = 'info@gijonsecome.es';
+                    break;
+                case 'Prensa':
+                    $email = 'prensa@gijonsecome.es';
+                    break;
+                case 'Programación del festival':
+                    $email = 'programacion@gijonsecome.es';
+                    break;
+            }
+            $email = 'diego@mglab.es';
+            Mail::send('web.includes.contacta', $request->all(), function($msj){
+            $msj->subject('Formulario contacto web GijonSeCome');
+            $msj->to('diego@mglab.es');
+            });
+        }
         $menus = Menu::get();
         return view('web.contacto',compact('menus'));
     }
