@@ -329,11 +329,13 @@ class ComposerStaticInit8f524d259efdeab5a5bf051dcd1d1d83
     );
 
     public static $classMap = array (
+        'AddSpecialRoleColumn' => __DIR__ . '/../..' . '/database/migrations/2015_12_04_003040_add_special_role_column.php',
         'App\\Agenda' => __DIR__ . '/../..' . '/app/Agenda.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Content' => __DIR__ . '/../..' . '/app/Content.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Galeria' => __DIR__ . '/../..' . '/app/Galeria.php',
+        'App\\Handlers\\LfmConfigHandler' => __DIR__ . '/../..' . '/app/Handlers/LfmConfigHandler.php',
         'App\\Http\\Controllers\\AgendaController' => __DIR__ . '/../..' . '/app/Http/Controllers/AgendaController.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
@@ -361,6 +363,7 @@ class ComposerStaticInit8f524d259efdeab5a5bf051dcd1d1d83
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Idioma' => __DIR__ . '/../..' . '/app/Idioma.php',
+        'App\\Mail\\FormContacta' => __DIR__ . '/../..' . '/app/Mail/FormContacta.php',
         'App\\Menu' => __DIR__ . '/../..' . '/app/Menu.php',
         'App\\Multimedia' => __DIR__ . '/../..' . '/app/Multimedia.php',
         'App\\Ponente' => __DIR__ . '/../..' . '/app/Ponente.php',
@@ -393,6 +396,10 @@ class ComposerStaticInit8f524d259efdeab5a5bf051dcd1d1d83
         'Collective\\Html\\HtmlBuilder' => __DIR__ . '/..' . '/laravelcollective/html/src/HtmlBuilder.php',
         'Collective\\Html\\HtmlFacade' => __DIR__ . '/..' . '/laravelcollective/html/src/HtmlFacade.php',
         'Collective\\Html\\HtmlServiceProvider' => __DIR__ . '/..' . '/laravelcollective/html/src/HtmlServiceProvider.php',
+        'CreatePermissionRoleTable' => __DIR__ . '/../..' . '/database/migrations/2015_01_24_080433_create_permission_role_table.php',
+        'CreatePermissionsTable' => __DIR__ . '/../..' . '/database/migrations/2015_01_24_080208_create_permissions_table.php',
+        'CreateRoleUserTable' => __DIR__ . '/../..' . '/database/migrations/2015_01_20_084525_create_role_user_table.php',
+        'CreateRolesTable' => __DIR__ . '/../..' . '/database/migrations/2015_01_20_084450_create_roles_table.php',
         'Cron\\AbstractField' => __DIR__ . '/..' . '/mtdowling/cron-expression/src/Cron/AbstractField.php',
         'Cron\\CronExpression' => __DIR__ . '/..' . '/mtdowling/cron-expression/src/Cron/CronExpression.php',
         'Cron\\DayOfMonthField' => __DIR__ . '/..' . '/mtdowling/cron-expression/src/Cron/DayOfMonthField.php',

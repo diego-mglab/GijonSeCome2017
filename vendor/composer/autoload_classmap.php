@@ -6,11 +6,13 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AddSpecialRoleColumn' => $baseDir . '/database/migrations/2015_12_04_003040_add_special_role_column.php',
     'App\\Agenda' => $baseDir . '/app/Agenda.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Content' => $baseDir . '/app/Content.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Galeria' => $baseDir . '/app/Galeria.php',
+    'App\\Handlers\\LfmConfigHandler' => $baseDir . '/app/Handlers/LfmConfigHandler.php',
     'App\\Http\\Controllers\\AgendaController' => $baseDir . '/app/Http/Controllers/AgendaController.php',
     'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
     'App\\Http\\Controllers\\Auth\\LoginController' => $baseDir . '/app/Http/Controllers/Auth/LoginController.php',
@@ -38,6 +40,7 @@ return array(
     'App\\Http\\Middleware\\TrimStrings' => $baseDir . '/app/Http/Middleware/TrimStrings.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
     'App\\Idioma' => $baseDir . '/app/Idioma.php',
+    'App\\Mail\\FormContacta' => $baseDir . '/app/Mail/FormContacta.php',
     'App\\Menu' => $baseDir . '/app/Menu.php',
     'App\\Multimedia' => $baseDir . '/app/Multimedia.php',
     'App\\Ponente' => $baseDir . '/app/Ponente.php',
@@ -70,6 +73,10 @@ return array(
     'Collective\\Html\\HtmlBuilder' => $vendorDir . '/laravelcollective/html/src/HtmlBuilder.php',
     'Collective\\Html\\HtmlFacade' => $vendorDir . '/laravelcollective/html/src/HtmlFacade.php',
     'Collective\\Html\\HtmlServiceProvider' => $vendorDir . '/laravelcollective/html/src/HtmlServiceProvider.php',
+    'CreatePermissionRoleTable' => $baseDir . '/database/migrations/2015_01_24_080433_create_permission_role_table.php',
+    'CreatePermissionsTable' => $baseDir . '/database/migrations/2015_01_24_080208_create_permissions_table.php',
+    'CreateRoleUserTable' => $baseDir . '/database/migrations/2015_01_20_084525_create_role_user_table.php',
+    'CreateRolesTable' => $baseDir . '/database/migrations/2015_01_20_084450_create_roles_table.php',
     'Cron\\AbstractField' => $vendorDir . '/mtdowling/cron-expression/src/Cron/AbstractField.php',
     'Cron\\CronExpression' => $vendorDir . '/mtdowling/cron-expression/src/Cron/CronExpression.php',
     'Cron\\DayOfMonthField' => $vendorDir . '/mtdowling/cron-expression/src/Cron/DayOfMonthField.php',

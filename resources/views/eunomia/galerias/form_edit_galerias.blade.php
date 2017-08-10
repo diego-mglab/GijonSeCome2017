@@ -212,7 +212,7 @@
                                 {{ Form::hidden('galeria_id',$galeria->id) }}
                                 @foreach ($idiomas_imagenes as $idioma)
                                     <div class="form-group">
-                                        {{ Form::text('texto_'.$idioma->codigo,is_object($imagen->textos_idioma_todos($idioma->codigo))?$imagen->textos_idioma_todos($idioma->codigo)->titulo:'',['placeholder' => $idioma->idioma, 'class' => 'form-control', 'id' => $imagen->id.'_'.$idioma->id]) }}
+                                        {{ Form::text('texto_'.$idioma->codigo,is_object($imagen->textos_idioma_todos($idioma->codigo))?$imagen->textos_idioma_todos($idioma->codigo)->titulo:'',['placeholder' => 'Título en '.$idioma->idioma, 'class' => 'form-control', 'id' => $imagen->id.'_'.$idioma->id]) }}
                                     </div>
                                 @endforeach
                             {{ Form::submit('Eliminar', array('class' => 'btn btn-block btn-danger btn-xs')) }}
@@ -351,6 +351,21 @@
                 }
             });
             $( "#galeria_imagenes" ).disableSelection();
+            $('#galeria_imagenes :input[type=text]').on('blur',function(){
+                var id = this.id.split('_')[0];
+                var idioma = this.id.split('_')[1];
+                $.ajax({
+                    url: '/eunomia/galerias/{{$galeria->id}}/updateTextoImagen',
+                    type: 'POST',
+                    data: {titulo: this.value,id:id,idioma:idioma,_token:$("input[name='_token']").val()},
+                    error: function (jqXHR, textStatus) {
+                        $('#error').html(jqXHR.responseText);
+                    },
+                    success: function (data) {
+                        $('#mensaje').html("Título modificado correctamente");
+                    }
+                })
+            })
         });
     </script>
 

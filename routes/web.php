@@ -119,4 +119,6 @@ Route::group(['prefix' => 'eunomia' , 'middleware' => 'auth' ], function () {
 
     Route::post('galerias/{galeria}/updateOrder','GaleriaController@updateOrder');
 
+    Route::post('galerias/{galeria}/updateTextoImagen','GaleriaController@updateTextoImagen');
+
 });

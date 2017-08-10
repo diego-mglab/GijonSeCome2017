@@ -58,8 +58,8 @@
 
                     <div class="form-group" id="contenedor_lugar">
 
-                        {{Form::label('lugar', 'Lugar')}}
-                        {{Form::text('lugar', null, ['class' => 'form-control' ,'placeholder' => 'Lugar'])}}
+                        {{Form::label('lugar', 'Autor')}}
+                        {{Form::text('lugar', null, ['class' => 'form-control' ,'placeholder' => 'Autor'])}}
 
                     </div>
 
@@ -302,7 +302,7 @@
                     titulo = "Noticia";
                     break;
                 case 'entrevista':
-                    $('#contenedor_lugar').hide();
+                    $('#contenedor_lugar').show();
                     $('#contenedor_fecha').hide();
                     $('#contenedor_pagina_estatica').hide();
                     titulo = "Cita a ciegas";

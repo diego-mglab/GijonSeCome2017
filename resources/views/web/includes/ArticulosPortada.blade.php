@@ -18,9 +18,11 @@
                 $link = '';
                 if (is_object($elemento->contenido)) {
                     $tipo_pagina = $elemento->contenido->tipo_contenido;
-                    $pagina = str_replace('-','',$elemento->contenido->textos_idioma->slug);
-                    $ruta = route($pagina.'_web_'.$idioma_actual,[]);
-                    $link = $ruta;
+                    if (is_object($elemento->contenido->textos_idioma)){
+                        $pagina = str_replace('-','',$elemento->contenido->textos_idioma->slug);
+                        $ruta = route($pagina.'_web_'.$idioma_actual,[]);
+                        $link = $ruta;
+                    }
                 } elseif ($elemento->url!=''){
                     $link = $elemento->url;
                 }
@@ -87,9 +89,11 @@
                 $link = '';
                 if (is_object($elemento->contenido)) {
                     $tipo_pagina = $elemento->contenido->tipo_contenido;
-                    $pagina = str_replace('-','',$elemento->contenido->textos_idioma->slug);
-                    $ruta = route($pagina.'_web_'.$idioma_actual,[]);
-                    $link = $ruta;
+                    if (is_object($elemento->contenido->textos_idioma)){
+                        $pagina = str_replace('-','',$elemento->contenido->textos_idioma->slug);
+                        $ruta = route($pagina.'_web_'.$idioma_actual,[]);
+                        $link = $ruta;
+                    }
                 } elseif ($elemento->url!=''){
                     $link = $elemento->url;
                 }
@@ -154,9 +158,11 @@
             $link = '';
             if (is_object($elemento->contenido)) {
                 $tipo_pagina = $elemento->contenido->tipo_contenido;
-                $pagina = str_replace('-','',$elemento->contenido->textos_idioma->slug);
-                $ruta = route($pagina.'_web_'.$idioma_actual,[]);
-                $link = $ruta;
+                if (is_object($elemento->contenido->textos_idioma)){
+                    $pagina = str_replace('-','',$elemento->contenido->textos_idioma->slug);
+                    $ruta = route($pagina.'_web_'.$idioma_actual,[]);
+                    $link = $ruta;
+                }
             } elseif ($elemento->url!=''){
                 $link = $elemento->url;
             }
@@ -219,9 +225,11 @@
             $link = '';
             if (is_object($elemento->contenido)) {
                 $tipo_pagina = $elemento->contenido->tipo_contenido;
-                $pagina = str_replace('-','',$elemento->contenido->textos_idioma->slug);
-                $ruta = route($pagina.'_web_'.$idioma_actual,[]);
-                $link = $ruta;
+                if (is_object($elemento->contenido->textos_idioma)){
+                    $pagina = str_replace('-','',$elemento->contenido->textos_idioma->slug);
+                    $ruta = route($pagina.'_web_'.$idioma_actual,[]);
+                    $link = $ruta;
+                }
             } elseif ($elemento->url!=''){
                 $link = $elemento->url;
             }
@@ -283,9 +291,11 @@
             $link = '';
             if (is_object($elemento->contenido)) {
                 $tipo_pagina = $elemento->contenido->tipo_contenido;
-                $pagina = str_replace('-','',$elemento->contenido->textos_idioma->slug);
-                $ruta = route($pagina.'_web_'.$idioma_actual,[]);
-                $link = $ruta;
+                if (is_object($elemento->contenido->textos_idioma)){
+                    $pagina = str_replace('-','',$elemento->contenido->textos_idioma->slug);
+                    $ruta = route($pagina.'_web_'.$idioma_actual,[]);
+                    $link = $ruta;
+                }
             } elseif ($elemento->url!=''){
                 $link = $elemento->url;
             }
@@ -359,9 +369,11 @@
                 $link = '';
                 if (is_object($elemento->contenido)) {
                     $tipo_pagina = $elemento->contenido->tipo_contenido;
-                    $pagina = str_replace('-','',$elemento->contenido->textos_idioma->slug);
-                    $ruta = route($pagina.'_web_'.$idioma_actual,[]);
-                    $link = $ruta;
+                    if (is_object($elemento->contenido->textos_idioma)){
+                        $pagina = str_replace('-','',$elemento->contenido->textos_idioma->slug);
+                        $ruta = route($pagina.'_web_'.$idioma_actual,[]);
+                        $link = $ruta;
+                    }
                 } elseif ($elemento->url!=''){
                     $link = $elemento->url;
                 }
@@ -422,9 +434,11 @@
                     $link = '';
                     if (is_object($elemento->contenido)) {
                         $tipo_pagina = $elemento->contenido->tipo_contenido;
-                        $pagina = str_replace('-','',$elemento->contenido->textos_idioma->slug);
-                        $ruta = route($pagina.'_web_'.$idioma_actual,[]);
-                        $link = $ruta;
+                        if (is_object($elemento->contenido->textos_idioma)){
+                            $pagina = str_replace('-','',$elemento->contenido->textos_idioma->slug);
+                            $ruta = route($pagina.'_web_'.$idioma_actual,[]);
+                            $link = $ruta;
+                        }
                     } elseif ($elemento->url!=''){
                         $link = $elemento->url;
                     }
@@ -488,9 +502,11 @@
                     $link = '';
                     if (is_object($elemento->contenido)) {
                         $tipo_pagina = $elemento->contenido->tipo_contenido;
-                        $pagina = str_replace('-','',$elemento->contenido->textos_idioma->slug);
-                        $ruta = route($pagina.'_web_'.$idioma_actual,[]);
-                        $link = $ruta;
+                        if (is_object($elemento->contenido->textos_idioma)){
+                            $pagina = str_replace('-','',$elemento->contenido->textos_idioma->slug);
+                            $ruta = route($pagina.'_web_'.$idioma_actual,[]);
+                            $link = $ruta;
+                        }
                     } elseif ($elemento->url!=''){
                         $link = $elemento->url;
                     }
@@ -520,9 +536,11 @@
                     $link = '';
                     if (is_object($elemento->contenido)) {
                         $tipo_pagina = $elemento->contenido->tipo_contenido;
-                        $pagina = str_replace('-','',$elemento->contenido->textos_idioma->slug);
-                        $ruta = route($pagina.'_web_'.$idioma_actual,[]);
-                        $link = $ruta;
+                        if (is_object($elemento->contenido->textos_idioma)){
+                            $pagina = str_replace('-','',$elemento->contenido->textos_idioma->slug);
+                            $ruta = route($pagina.'_web_'.$idioma_actual,[]);
+                            $link = $ruta;
+                        }
                     } elseif ($elemento->url!=''){
                         $link = $elemento->url;
                     }

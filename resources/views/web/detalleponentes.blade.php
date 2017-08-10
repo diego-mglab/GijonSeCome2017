@@ -113,6 +113,7 @@
                 <div class=" col-lg-8 col-md-8 col-sm-9 col-xs-12">
                     <div class="decoracion">
                         <h1>{{$textosidioma->titulo}}</h1>
+                        <h2>{{$textosidioma->subtitulo}}</h2>
                         <img src="{{asset('images/graficos/mordiscogeneralup.png')}}" class="mordiscodet" alt="imagen decorativa"/>
                     </div>
                     <article class="columnas">

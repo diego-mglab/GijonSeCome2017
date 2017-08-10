@@ -32,7 +32,7 @@
 
                         <h1>{{$textosidioma->titulo}}</h1>
                         <h2>{{$textosidioma->subtitulo}}</h2>
-                        <h3>{{$content->lugar!=''?$content->lugar.'.':''}} {{$fecha}}</h3>
+                        <h3>{{$content->lugar!=''?strtoupper($content->lugar).'.':''}} {{$fecha}}</h3>
                     </hgroup>
                     <div class="columnas">
                         {!! $textosidioma->contenido !!}

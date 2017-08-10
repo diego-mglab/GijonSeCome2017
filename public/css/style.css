@@ -1107,13 +1107,31 @@ label .required {
 input[type="submit"] {
     outline: none;
 }
-
+#contact-form select{
+color: #666;
+    font-size: 13px;
+    font-family: 'Source Sans Pro', sans-serif;
+    border: 1px solid #eee;
+    border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -o-border-radius: 2px;
+    outline: none;
+    width: 100%;
+    padding: 7px 14px;
+    display: block;
+    margin-bottom: 10px;  
+	transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -webkit-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+}
 .widget-search input[type="search"],
 #contact-form input[type="text"],
-#contact-form textarea,
+#contact-form textarea, 
 #respond input[type="text"],
 #respond textarea, .email {
-    color: #666fb5;
+    color: #666;
     font-size: 13px;
     font-family: 'Source Sans Pro', sans-serif;
     border: 1px solid #eee;

@@ -12,6 +12,7 @@ use App\TextosIdioma;
 use App\Agenda;
 use App\Content;
 use App\Galeria;
+use App\Multimedia;
 use Session;
 use Illuminate\Support\Facades\DB;
 use URL;
@@ -46,12 +47,14 @@ class WebController extends Controller
     public function galeria($anio=2017)
     {
         $menus = Menu::get();
-        $galeria = Galeria::where('anio',$anio)->orderBy('orden')->get();
+        $galeria = Galeria::where('anio',$anio)->orderBy('orden')->first();
+        if (is_object($galeria))
+            $multimedia = Multimedia::where('galeria_id',$galeria->id)->orderBy('orden')->get();
         //Breadcrums
         //Definimos el array con los elemento del breadcrum
         $elementos = ['Inicio','El Festival','Galería'];
         $breadcrums = $this->devuelveBreadcrums($elementos);
-        return view('web.galeria', compact('menus','breadcrums','anio','galeria'));
+        return view('web.galeria', compact('menus','breadcrums','anio','galeria','multimedia'));
     }
 
     public function contacto(Request $request)

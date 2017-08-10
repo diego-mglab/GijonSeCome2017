@@ -146,6 +146,11 @@ h2{
 	
 }
 @media only screen and (min-width : 1200px){
+#galeria{
+display:block;
+float:none;
+clear: both;
+}
 .col-xs-12.todosloschefs{
 	min-height: 198px;
 	}

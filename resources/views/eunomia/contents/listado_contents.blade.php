@@ -110,7 +110,9 @@
                     url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
                 },
                 initComplete: function () {
+                    var i = 1;
                     this.api().columns().every( function () {
+                        if (i==3) {
                             var column = this;
                             var select = $('<select><option value=""></option></select>')
                                 .appendTo($(column.footer()).empty())
@@ -127,6 +129,8 @@
                             column.data().unique().sort().each(function (d, j) {
                                 select.append('<option value="' + d + '">' + d + '</option>')
                             });
+                        }
+                        i++;
                     } );
                 }
             })

@@ -34,6 +34,17 @@
                             <th>Acciones</th>
                         </tr>
                         </thead>
+
+                        <tfoot>
+                        <tr>
+                            <th>Orden</th>
+                            <th>Nombre</th>
+                            <th>Restaurante</th>
+                            <th>Año</th>
+                            <th>Visible</th>
+                            <th>Acciones</th>
+                        </tr>
+                        </tfoot>
                         <tbody>
                         @foreach ($ponentes as $ponente)
                             @if ($ponente->principal == 1)
@@ -101,6 +112,30 @@
                 rowReorder: true,
                 language: {
                     url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+                },
+                initComplete: function () {
+                    var i = 1;
+                    this.api().columns().every( function () {
+                        if (i==4) {
+                            var column = this;
+                            var select = $('<select><option value=""></option></select>')
+                                .appendTo($(column.footer()).empty())
+                                .on('change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+
+                                    column
+                                        .search(val ? '^' + val + '$' : '', true, false)
+                                        .draw();
+                                });
+
+                            column.data().unique().sort().each(function (d, j) {
+                                select.append('<option value="' + d + '">' + d + '</option>')
+                            });
+                        }
+                        i++;
+                    } );
                 }
             });
             table.on('row-reordered',function( e, diff, changes ){

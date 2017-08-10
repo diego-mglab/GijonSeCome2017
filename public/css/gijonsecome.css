@@ -89,10 +89,16 @@ footer .footer{
   display: -ms-flexbox;
   display:  flex;
 	}
+
+
 article{
 padding: 1.875rem 1.875rem 3.75rem 1.875rem;
 word-break:normal;
-	word-wrap:normal;
+word-wrap:normal;
+}
+#zonavariable article  {
+height:100%;
+overflow: hidden;
 }
 hgroup{padding:0;
 }
@@ -338,6 +344,7 @@ display:block;
 	padding-top:15px;
 	padding-left: 15px;
 	padding-right: 15px;
+	clear: both;
 }
 
 
@@ -696,7 +703,10 @@ header{
 		margin-top:-1px;
 	}
 
-	
+#zonavariable article  {
+height:210px;
+overflow: hidden;
+}
 	
 /* zona el festival*/
 
@@ -889,11 +899,31 @@ footer .social-widget ul.social-icons li a i{
 font-size:1.5625rem;
 line-height: 1.5265rem;
 }
+#zonavariable article{
+height:100%;
+overflow: auto;
+}
+#zonavariable .variantesegunda article{
+ height: 100%;
+ overflow:auto;
+ }
+#zonavariable .variantetercera article{
+ height: 170px;
+ overflow: hidden;
+ }
+#zonavariable .variantecuarta article{
+ height: 170px;
+ overflow: hidden;
+ }
+#zonavariable .variantequinta article{
+ height: 170px;
+ overflow: hidden;
+ }
 .dedosendos{
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
-		display: flex;
+		display: fl ex;
 }
 .gijonsecome{
 	background-image:url(../images/graficos/verduras_cab_MD.png);

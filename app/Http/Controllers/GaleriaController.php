@@ -274,8 +274,19 @@ class GaleriaController extends Controller
         }
     }
 
-    public function updateTextoImagen(Request $request, $id){
+    public function updateTextoImagen(Request $request){
+        $textosIdioma = TextosIdioma::where('contenido_id',$request->id)
+            ->where('idioma_id',$request->idioma)
+            ->where('tipo_contenido_id','7')->first();
+        if (count($textosIdioma) == 0) {
+            $textosIdioma = new TextosIdioma();
+            $textosIdioma->tipo_contenido_id = '7';
+        }
+        $textosIdioma->idioma_id = $request->idioma;
+        $textosIdioma->contenido_id = $request->id;
+        $textosIdioma->titulo = $request->titulo;
 
+        $textosIdioma->save();
     }
     /**
      * Remove the specified resource from storage.
