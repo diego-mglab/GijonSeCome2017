@@ -116,8 +116,20 @@
                         <h2>{{$textosidioma->subtitulo}}</h2>
                         <img src="{{asset('images/graficos/mordiscogeneralup.png')}}" class="mordiscodet" alt="imagen decorativa"/>
                     </div>
-                    <article class="columnas">
-                        {!! $textosidioma->contenido !!}
+                    <article>
+                        <div class="columnas">
+                            {!! $textosidioma->contenido !!}
+                        </div>
+                        <div class="margin-top"></div>
+                        <?php
+                        $url_rrss = 'http://'.$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"];
+                        ?>
+                        <div class="post-share left">
+                            <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u={{$url_rrss}}" target="_blank"><i class="fa fa-facebook"></i></a>
+                            <a class="twitter" href="https://twitter.com/intent/tweet?url={{$url_rrss}}&text={{$textosidioma->titulo}}" target="_blank"><i class="fa fa-twitter"></i></a>
+                            <a class="gplus" href="https://plus.google.com/share?url={{$url_rrss}}" target="_blank"><i class="fa fa-google-plus"></i></a>
+                            <a class="mail" href="whatsapp://send?text={{$textosidioma->titulo}}" data-action="share/whatsapp/share"><i class="fa fa-whatsapp"></i></a>
+                        </div>
                     </article>
 
                 </div>

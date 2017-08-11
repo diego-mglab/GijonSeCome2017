@@ -156,7 +156,7 @@
                                     <div class="form-group">
 
                                         {{Form::label('slug', 'URL amigable')}}
-                                        {{Form::text('slug[]', null, ['class' => 'form-control' ,'placeholder' => 'URL amigable', 'id' => 'slug'.$idioma->id])}}
+                                        {{Form::text('slug[]', null, ['class' => 'form-control slug' ,'placeholder' => 'URL amigable', 'id' => 'slug'.$idioma->id])}}
 
                                     </div>
 
@@ -176,6 +176,12 @@
 
                         {{Form::label('imagen', 'Imagen')}}
                         {{Form::file('imagen', null, ['class' => 'form-control'])}}
+                    </div>
+
+                    <div class="form-group">
+                        {{Form::label('columnas','Columnas')}}<br>
+                        {{Form::radio('columnas',1,true,[])}}<img src="{{asset('images/icono-una-columna.png')}}">
+                        {{Form::radio('columnas',2,false,[])}}<img src="{{asset('images/icono-dos-columnas.png')}}">
                     </div>
 
                     <div class="form-group" id="contenedor_pagina_estatica">
@@ -332,6 +338,13 @@
 
             return str;
         };
+    </script>
+
+    <script language="JavaScript">
+        $('.slug').keypress(function(tecla) {
+            alert(tecla.charCode);
+            if(tecla.charCode < 97 || tecla.charCode > 122) return false;
+        });
     </script>
 
 @stop

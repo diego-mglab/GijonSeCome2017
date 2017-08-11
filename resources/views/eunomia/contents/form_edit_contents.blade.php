@@ -204,13 +204,28 @@
                     </div>
 
                     <div class="form-group" id="contenedor_imagen">
-
-                        {{Form::label('imagen', 'Imagen')}}
-                        {{Form::file('imagen', null, ['class' => 'form-control'])}}
+                        <div class="form-group">
+                            {{Form::label('imagen', 'Imagen')}}
+                            {{Form::file('imagen', null, ['class' => 'form-control'])}}
+                        </div>
+                        <div class="form-group">
+                            @if ($content->imagen != '')
+                                <div class="label_imagen_editar"><strong>Imagen actual:</strong></div>
+                                <div class="contenedor_imagen_editar"><img src="/images/contenido/s/{{$content->imagen or 'sinimagen.png'}}" alt="" class="img-responsive" ></div>
+                            @endif
+                        </div>
                         @if ($content->imagen != '')
-                            <div class="label_imagen_editar"><strong>Imagen actual:</strong></div>
-                            <div class="contenedor_imagen_editar"><img src="/images/contenido/s/{{$content->imagen or 'sinimagen.png'}}" alt="" class="img-responsive" ></div>
+                        <div class="form-group">
+                            {{Form::label('elimina_imagen', 'Eliminar imagen')}}
+                            {{Form::checkbox('elimina_imagen', null, null,['class' => 'flat-green'])}}
+                        </div>
                         @endif
+                    </div>
+
+                    <div class="form-group">
+                        {{Form::label('columnas','Columnas')}}<br>
+                        {{Form::radio('columnas',1,null,[])}}<img src="{{asset('images/icono-una-columna.png')}}">
+                        {{Form::radio('columnas',2,null,[])}}<img src="{{asset('images/icono-dos-columnas.png')}}">
                     </div>
 
                     @if ($content->tipo_contenido == 'pagina')

@@ -29,7 +29,8 @@ class WebController extends Controller
 
     public function ponentes($anio=2017)
     {
-        $menus = Menu::get();
+        //dd(Session::all());
+        $menus = Menu::orderBy('order')->get();
         $ponentes = Ponente::where('anio',$anio)->orderBy('orden')->get();
         //Breadcrums
         //Definimos el array con los elemento del breadcrum
@@ -40,13 +41,13 @@ class WebController extends Controller
 
     public function programa()
     {
-        $menus = Menu::get();
+        $menus = Menu::orderBy('order')->get();
         return view('web.agenda', compact('menus'));
     }
 
     public function galeria($anio=2017)
     {
-        $menus = Menu::get();
+        $menus = Menu::orderBy('order')->get();
         $galeria = Galeria::where('anio',$anio)->orderBy('orden')->first();
         if (is_object($galeria))
             $multimedia = Multimedia::where('galeria_id',$galeria->id)->orderBy('orden')->get();
@@ -78,13 +79,13 @@ class WebController extends Controller
             $msj->to('diego@mglab.es');
             });
         }
-        $menus = Menu::get();
+        $menus = Menu::orderBy('order')->get();
         return view('web.contacto',compact('menus'));
     }
 
     public function noticias()
     {
-        $menus = Menu::get();
+        $menus = Menu::orderBy('order')->get();
         $noticias = Content::where('tipo_contenido','noticia')->where('fecha_publicacion','<=',date('Y-m-d'))->get();
         //Definimos el array con los elemento del breadcrum
         $elementos = ['Inicio','El Festival','Noticias'];
@@ -100,7 +101,22 @@ class WebController extends Controller
             $content = Content::findOrFail($textosidioma->contenido_id);
         else
             return Redirect::to('/');
-        $menus = Menu::get();
+        $menus = Menu::orderBy('order')->get();
+        //Devolvemos los tres últimos registros salvo este para pintarlos al final de la página detalle
+        if ($content->tipo_contenido == 'noticia' || $content->tipo_contenido == 'entrevista')
+            $registros = DB::table('contents')
+                ->join('textos_idiomas','contents.id','textos_idiomas.contenido_id')
+                ->join('idiomas','textos_idiomas.idioma_id','idiomas.id')
+                ->select('titulo','subtitulo','contents.imagen','slug')
+                ->where('textos_idiomas.visible','1')
+                ->where('tipo_contenido_id','1')
+                //->where('fecha_publicacion','<=',date('Y-m-d'))
+                ->where('contents.id','<>',$content->id)
+                ->where('tipo_contenido',$content->tipo_contenido)
+                ->orderBy('fecha_publicacion','DESC')
+                ->limit(3)->get();
+        else
+            $registros = null;
         //Comprobamos que el contenido esté dentro de la fecha de publicación (fecha actual >= fecha publicación
         $now = Carbon::now();
         $fecha_publicacion = Carbon::parse($content->fecha_publicacion);
@@ -108,7 +124,7 @@ class WebController extends Controller
             //Definimos el array con los elemento del breadcrum
             $elementos = ['Inicio', 'El Festival', $textosidioma->titulo];
             $breadcrums = $this->devuelveBreadcrums($elementos);
-            return view('web.detalle', compact('menus', 'textosidioma', 'breadcrums', 'content'));
+            return view('web.detalle', compact('menus', 'textosidioma', 'breadcrums', 'content','registros'));
         } else {
             return redirect('/');
         }
@@ -116,7 +132,7 @@ class WebController extends Controller
 
     public function agenda()
     {
-        $menus = Menu::get();
+        $menus = Menu::orderBy('order')->get();
         $agenda = Agenda::orderBy('fecha')->orderBy('hora')->get();
         //Definimos el array con los elemento del breadcrum
         $elementos = ['Inicio','El Festival','Programa'];
@@ -139,7 +155,7 @@ class WebController extends Controller
         //Definimos el array con los elemento del breadcrum
         $elementos = ['Inicio','El Festival','Ponentes',$textosidioma->titulo];
         $breadcrums = $this->devuelveBreadcrums($elementos);
-        $menus = Menu::get();
+        $menus = Menu::orderBy('order')->get();
 
         return view('web.detalleponentes',compact('menus','ponente','textosidioma','breadcrums','agenda'));
     }

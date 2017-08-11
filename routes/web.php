@@ -21,7 +21,21 @@ use App\Ponente;
 use App\Content;
 use Illuminate\Support\Facades\Session;
 
-
+//Si accedemos a una url interna que no sea el index hay que capturar con qué idioma viene para activar la vble de sesión
+//if (Session::get('idioma') == null || Session::get('idioma') == '') {
+    $url = $_SERVER["REQUEST_URI"];
+    $codigo = explode('/', $url)[1];
+    if ($codigo != 'eunomia') {
+        $idioma = Idioma::fromCodigo($codigo);
+        if ($idioma > 0) {
+            Session(['idioma' => $codigo]);
+            App::SetLocale(Session::get('idioma'));
+        } else {
+            Session(['idioma' => Idioma::where('principal', '1')->first()->codigo]);
+            App::SetLocale(Session::get('idioma'));
+        }
+    }
+//}
 //Rutas para web
 
 
@@ -51,8 +65,8 @@ foreach ($idiomas as $idioma){
                 })->name($content->textos_idioma_todos($idioma->id)->slug . '_web_' . $codigo);
             elseif ($metodo != '') {
                 Route::get($codigo . '/' . $ruta . ($parametros != '' ? '/' . $parametros : ''), 'WebController@' . $metodo, function(){
-                    Session(['idioma' => $codigo]);
-                    App::SetLocale(Session::get('idioma'));
+                    //Session(['idioma' => $codigo]);
+                    //App::SetLocale(Session::get('idioma'));
                 })->name(str_slug($content->textos_idioma_todos($idioma->id)->slug, "") . '_web_' . $codigo);
                 if ($content->textos_idioma_principal->slug == 'contacto'){
                     $metodo = 'contacto';
@@ -70,7 +84,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('{lang}', function ($lang) {
         Session(['idioma' => $lang]);
         App::SetLocale(Session::get('idioma'));
-        $menus = Menu::get();
+        $menus = Menu::orderBy('order')->get();
         $portada = Portada::orderBy('orden')->get();
         $ponentes = Ponente::where('anio',date('Y'))->orderBy('orden')->get();
         return view('web.home',compact('menus','portada','ponentes'));
@@ -122,3 +136,5 @@ Route::group(['prefix' => 'eunomia' , 'middleware' => 'auth' ], function () {
     Route::post('galerias/{galeria}/updateTextoImagen','GaleriaController@updateTextoImagen');
 
 });
+
+//dd(Session::get('idioma'));

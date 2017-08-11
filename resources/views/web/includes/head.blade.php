@@ -13,6 +13,42 @@
     <meta name="description" content="gijon se come">
     <meta name="author" content="www.mglab.es">
 
+    <!-- Cabeceras para el Facebook en las páginas de contenido (noticias y entrvistas) y detalle ponentes -->
+    @if (isset($textosidioma))
+        <?php $es_contenido_rrss = false; ?>
+        @if($textosidioma->tipo_contenido_id == 1)
+            @if($content->pagina_estatica != '1')
+                <?php
+                    $imagen = asset('images/contenido/l').'/'.$content->imagen or 'sinimagen.png';
+                    $es_contenido_rrss = true;
+                    $descripcion = $content->getSubString($textosidioma->contenido,150);
+                ?>
+            @endif
+        @endif
+        @if($textosidioma->tipo_contenido_id == 3)
+            <?php
+                $imagen = asset('images/chefs/l').'/'.$ponente->imagen or 'sinimagen.png';
+                $es_contenido_rrss = true;
+                $titulo = $textosidioma->titulo;
+                $descripcion = $ponente->getSubString($textosidioma->contenido,150);
+            ?>
+        @endif
+
+        @if($es_contenido_rrss)
+            <meta property="og:title" content="{{$titulo}}" />
+            <meta property="og:type" content="article" />
+            <meta property="og:url" content="http://{{$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"]}}" />
+            <meta property="og:image" content="{{$imagen}}" />
+            <meta property="og:description" content="{{$descripcion}}" />
+
+            <meta name="twitter:card" content="summary" />
+            <meta name="twitter:site" content="@gijonsecome">
+            <meta name="twitter:title" content="{{$titulo}}" />
+            <meta name="twitter:description" content="{{$descripcion}}" />
+            <meta name="twitter:creator" content="@gijonsecome">
+        @endif
+    @endif
+
     <!-- Bootstrap CSS  -->
     <link rel="stylesheet" href="{{asset('asset/css/bootstrap.min.css')}}" type="text/css" media="screen">
 

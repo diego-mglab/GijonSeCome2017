@@ -119,6 +119,8 @@ class ContentController extends Controller
             else
                 $content->pagina_estatica = '0';
 
+        $content->columnas = $request->columnas;
+
         if ($content->save()) {
             $lastId = $content->id;
 
@@ -174,7 +176,7 @@ class ContentController extends Controller
         $textos = DB::table('contents')
             ->join('textos_idiomas','contents.id','=','textos_idiomas.contenido_id')
             ->join('idiomas','textos_idiomas.idioma_id','idiomas.id')
-            ->select('contents.id as content_id','tipo_contenido','titulo','subtitulo','contenido','metadescripcion','metatitulo','slug','visible','principal','idioma','idiomas.imagen','codigo','textos_idiomas.idioma_id')
+            ->select('contents.id as content_id','tipo_contenido','columnas','titulo','subtitulo','contenido','metadescripcion','metatitulo','slug','visible','principal','idioma','idiomas.imagen','codigo','textos_idiomas.idioma_id')
             ->where('tipo_contenido_id',$this->tipo_contenido)
             ->where('contents.id',$id)
             ->orderBy('principal','DESC')->get();
@@ -202,7 +204,16 @@ class ContentController extends Controller
 
         $content = Content::findOrFail($id);
 
+
         $imagenactual = $content->imagen;
+
+        //Eliminamos la imagen si el checkbox está activado
+        if ($request->elimina_imagen) {
+            File::delete('images/contenido/l/' . $imagenactual);
+            File::delete('images/contenido/m/' . $imagenactual);
+            File::delete('images/contenido/s/' . $imagenactual);
+            $content->imagen = '';
+        }
 
         if($request->hasFile('imagen')){
 
@@ -259,6 +270,8 @@ class ContentController extends Controller
                 $content->pagina_estatica 	= '1';
             else
                 $content->pagina_estatica = '0';
+
+        $content->columnas = $request->columnas;
 
         if ($content->save()) {
 
