@@ -35,66 +35,67 @@
             @endif
         </hgroup>
     </div>
-    <?php
-    $contador = 1;
-    $elementos = count($multimedia);
-    ?>
-    @foreach ($multimedia as $elemento)
+    @if (isset($multimedia))
         <?php
-            $titulo = '';
-            if (is_object($elemento->textos_idioma)){
-                $titulo = $elemento->textos_idioma->titulo;
-            }
+        $contador = 1;
+        $elementos = count($multimedia);
         ?>
-        @if ($contador == 1)
+        @foreach ($multimedia as $elemento)
             <?php
-            $idioma_actual = Session::get('idioma');
-            //se muestran las 4 primeras imagenes luego en el siguiente div general se muestran todas menos estas cuatro
+                $titulo = '';
+                if (is_object($elemento->textos_idioma)){
+                    $titulo = $elemento->textos_idioma->titulo;
+                }
             ?>
-    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+            @if ($contador == 1)
+                <?php
+                $idioma_actual = Session::get('idioma');
+                //se muestran las 4 primeras imagenes luego en el siguiente div general se muestran todas menos estas cuatro
+                ?>
+        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
 
-        <div class=" gallery-post portfolio-3column">
+            <div class=" gallery-post portfolio-3column">
 
-            <ul id="portfolio-list" data-animated="fadeIn">
-        @endif
-                <li>
-                    <div class="portfolio-item item">
-                        <div class="portfolio-border">
-                            <div class="portfolio-thumb">
-                                <a class="lightbox" title="{{$titulo}}" href="{{asset('images/galerias/'.$galeria->carpeta)}}/{{$elemento->imagen or 'sinimagen.png'}}" data-lightbox-gallery="gallery1">
-                                    <div class="thumb-overlay"><i class="fa fa-arrows-alt"></i></div>
-                                    <img alt="{{$titulo}}" src="{{asset('images/galerias/'.$galeria->carpeta.'/th')}}/{{$elemento->imagen or 'sinimagen.png'}}"/>
-                                </a>
-                            </div>
-                            <div class="portfolio-details">
+                <ul id="portfolio-list" data-animated="fadeIn">
+            @endif
+                    <li>
+                        <div class="portfolio-item item">
+                            <div class="portfolio-border">
+                                <div class="portfolio-thumb">
+                                    <a class="lightbox" title="{{$titulo}}" href="{{asset('images/galerias/'.$galeria->carpeta)}}/{{$elemento->imagen or 'sinimagen.png'}}" data-lightbox-gallery="gallery1">
+                                        <div class="thumb-overlay"><i class="fa fa-arrows-alt"></i></div>
+                                        <img alt="{{$titulo}}" src="{{asset('images/galerias/'.$galeria->carpeta.'/th')}}/{{$elemento->imagen or 'sinimagen.png'}}"/>
+                                    </a>
+                                </div>
+                                <div class="portfolio-details">
 
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </li>
-        @if ($contador == 4 && $elementos>4)
-            </ul>
+                    </li>
+            @if ($contador == 4 && $elementos>4)
+                </ul>
+            </div>
         </div>
-    </div>
 
-            <?php //se muestran todas las imagenes excepto las cuatro primeras
+                <?php //se muestran todas las imagenes excepto las cuatro primeras
+                ?>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+            <div class=" portfolio-page portfolio-4column">
+
+                <ul id="portfolio-list" data-animated="fadeIn">
+            @endif
+            <?php
+            $contador++;
             ?>
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        @endforeach
+                </ul>
 
-        <div class=" portfolio-page portfolio-4column">
-
-            <ul id="portfolio-list" data-animated="fadeIn">
-        @endif
-        <?php
-        $contador++;
-        ?>
-    @endforeach
-            </ul>
+            </div>
 
         </div>
-
-    </div>
-
+    @endif
 
 @endsection
 

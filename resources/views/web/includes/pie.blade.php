@@ -224,7 +224,7 @@
 
                                 <li>
                                     @if ($menu->url != '')
-                                    {{link_to($menu->url, $title = is_object($menu->textos_idioma)?$menu->textos_idioma->titulo:'', $parameters = [])}}
+                                    {{link_to(str_contains($menu->url,['http://','https://'])?$menu->url:(Session::get('idioma').'/'.$menu->url), $title = is_object($menu->textos_idioma)?$menu->textos_idioma->titulo:'', $parameters = [])}}
                                     @else
                                         {{link_to_route(is_object($menu->content)?str_replace("-","",$menu->content->textos_idioma->slug).'_web_'.Session::get('idioma'):'principal',$title = is_object($menu->textos_idioma)?$menu->textos_idioma->titulo:'', $parameters = [])}}
                                     @endif
@@ -236,9 +236,17 @@
 
                                             <li>
                                                 @if ($submenu->url != '')
-                                                {{link_to($submenu->url, $title = is_object($submenu->textos_idioma)?$submenu->textos_idioma->titulo:'', $parameters = [])}}
+                                                {{link_to(str_contains($submenu->url,['http://','https://'])?$submenu->url:(Session::get('idioma').'/'.$submenu->url), $title = is_object($submenu->textos_idioma)?$submenu->textos_idioma->titulo:'', $parameters = [])}}
                                                 @else
-                                                    {{link_to_route(is_object($submenu->content)?str_replace("-","",$submenu->content->textos_idioma->slug).'_web_'.Session::get('idioma'):'principal',$title = is_object($submenu->textos_idioma)?$submenu->textos_idioma->titulo:'', $parameters = [])}}
+                                                    @if (is_object($submenu->content))
+                                                        @if (is_object($submenu->content->textos_idioma))
+                                                            {{link_to_route(str_replace("-","",$submenu->content->textos_idioma->slug).'_web_'.Session::get('idioma'), $title = is_object($submenu->textos_idioma)?$submenu->textos_idioma->titulo:'', $parameters = [])}}
+                                                        @else
+                                                            {{link_to_route('principal',$title = is_object($submenu->textos_idioma)?$submenu->textos_idioma->titulo:'', $parameters = [])}}
+                                                        @endif
+                                                    @else
+                                                        {{link_to_route('principal',$title = is_object($submenu->textos_idioma)?$submenu->textos_idioma->titulo:'', $parameters = [])}}
+                                                    @endif
                                                 @endif
                                             </li>
                                             @endif
@@ -250,7 +258,7 @@
                             @elseif ($menu->parent_id == 0 && $menu->menu_pie == 1)
                                 <li>
                                     @if ($menu->url != '')
-                                    {{link_to($menu->url, $title = is_object($menu->textos_idioma)?$menu->textos_idioma->titulo:'', $parameters = [])}}
+                                    {{link_to(str_contains($menu->url,['http://','https://'])?$menu->url:(Session::get('idioma').'/'.$menu->url), $title = is_object($menu->textos_idioma)?$menu->textos_idioma->titulo:'', $parameters = [])}}
                                     @else
                                         {{link_to_route(is_object($menu->content)?str_replace("-","",$menu->content->textos_idioma->slug).'_web_'.Session::get('idioma'):'principal',$title = is_object($menu->textos_idioma)?$menu->textos_idioma->titulo:'', $parameters = [])}}
                                     @endif

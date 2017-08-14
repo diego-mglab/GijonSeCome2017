@@ -21,21 +21,6 @@ use App\Ponente;
 use App\Content;
 use Illuminate\Support\Facades\Session;
 
-//Si accedemos a una url interna que no sea el index hay que capturar con qué idioma viene para activar la vble de sesión
-//if (Session::get('idioma') == null || Session::get('idioma') == '') {
-    $url = $_SERVER["REQUEST_URI"];
-    $codigo = explode('/', $url)[1];
-    if ($codigo != 'eunomia') {
-        $idioma = Idioma::fromCodigo($codigo);
-        if ($idioma > 0) {
-            Session(['idioma' => $codigo]);
-            App::SetLocale(Session::get('idioma'));
-        } else {
-            Session(['idioma' => Idioma::where('principal', '1')->first()->codigo]);
-            App::SetLocale(Session::get('idioma'));
-        }
-    }
-//}
 //Rutas para web
 
 
@@ -49,7 +34,10 @@ foreach ($idiomas as $idioma){
     foreach($contents as $content) {
         if (is_object($content->textos_idioma_todos($idioma->id))) {
             $parametros = '';
-            $metodo = str_replace("-", "", $content->textos_idioma_todos($idioma->id)->slug);
+            if ($content->pagina_estatica != '1')
+                $metodo = str_replace("-", "", $content->textos_idioma_todos($idioma->id)->slug);
+            else
+                $metodo = str_replace("-", "", $content->textos_idioma_todos(Idioma::where('principal',1)->first()->id)->slug);
             $ruta = $content->textos_idioma_todos($idioma->id)->slug;
             if ($content->textos_idioma_principal->slug == 'detalle-ponentes')
                 $parametros = '{slug}';
@@ -67,6 +55,7 @@ foreach ($idiomas as $idioma){
                 Route::get($codigo . '/' . $ruta . ($parametros != '' ? '/' . $parametros : ''), 'WebController@' . $metodo, function(){
                     //Session(['idioma' => $codigo]);
                     //App::SetLocale(Session::get('idioma'));
+                    abort(404);
                 })->name(str_slug($content->textos_idioma_todos($idioma->id)->slug, "") . '_web_' . $codigo);
                 if ($content->textos_idioma_principal->slug == 'contacto'){
                     $metodo = 'contacto';
@@ -75,9 +64,10 @@ foreach ($idiomas as $idioma){
                 }
             }
         }
-
     }
+    Route::get($codigo.'/404','WebController@pag404')->name('pag404');
 }
+
 
 
 Route::group(['middleware' => ['web']], function () {

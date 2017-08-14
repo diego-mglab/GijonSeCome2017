@@ -15,7 +15,13 @@
 
     <!-- Cabeceras para el Facebook en las páginas de contenido (noticias y entrvistas) y detalle ponentes -->
     @if (isset($textosidioma))
-        <?php $es_contenido_rrss = false; ?>
+        <?php
+            $es_contenido_rrss = false;
+            $titulo = '';
+            $imagen = '';
+            $descripcion = '';
+        ?>
+
         @if($textosidioma->tipo_contenido_id == 1)
             @if($content->pagina_estatica != '1')
                 <?php

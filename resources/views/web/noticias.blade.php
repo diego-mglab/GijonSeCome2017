@@ -31,7 +31,7 @@
                 @for($i=0;$i<2;$i++)
                     <?php
                     $lugar = strtoupper($noticias[$i]->lugar);
-                    $imagen = asset('images/contenido').'/'.$noticias[$i]->imagen or 'sinimagen.png';
+                    $imagen = asset('images/contenido').'/l/'.$noticias[$i]->imagen or 'sinimagen.png';
                     $fecha='';
                     if ($noticias[$i]->fecha != ''){
                         $time= strtotime($noticias[$i]->fecha);
@@ -107,12 +107,12 @@
                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 vira<?php $i%4==0||$i%4==1?' inversa':''?>">
                             <picture>
-                                <source media="(min-width: 1200px)" srcset="{{asset('images/l')}}/{{$imagen or 'sinimagen.png'}}"><!-- pc -->
-                                <source media="(min-width: 992px)" srcset="{{asset('images/m')}}/{{$imagen or 'sinimagen.png'}}"><!-- medio pc -->
-                                <source media="(min-width: 768px)" srcset="{{asset('images/s')}}/{{$imagen or 'sinimagen.png'}}"><!-- tablet -->
+                                <source media="(min-width: 1200px)" srcset="{{asset('images/contenido/l')}}/{{$imagen or 'sinimagen.png'}}"><!-- pc -->
+                                <source media="(min-width: 992px)" srcset="{{asset('images/contenido/m')}}/{{$imagen or 'sinimagen.png'}}"><!-- medio pc -->
+                                <source media="(min-width: 768px)" srcset="{{asset('images/contenido/s')}}/{{$imagen or 'sinimagen.png'}}"><!-- tablet -->
 
                                 <!-- img tag for browsers that do not support picture element -->
-                                <img src="{{asset('images/l')}}/{{$imagen or 'sinimagen.png'}}" alt="..." class="img-responsive"><!-- movil -->
+                                <img src="{{asset('images/contenido/l')}}/{{$imagen or 'sinimagen.png'}}" alt="..." class="img-responsive"><!-- movil -->
                             </picture>
                             <picture>
 

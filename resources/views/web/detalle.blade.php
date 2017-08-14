@@ -77,6 +77,7 @@
     @if (is_object($registros))
         <section id="zonavariable">
             <div class="row row-eq-height"><!-- row zona variable-->
+                <?php $cont = 1; ?>
                 @foreach($registros as $registro)
                 <?php
                     $link = '';
@@ -90,28 +91,41 @@
                         $titulo = $registro->titulo;
                         $subtitulo = $registro->subtitulo;
                     }
+                    switch ($cont) {
+                        case 1:
+                            $clase = 'variantetercera';
+                            $imgdecorativa = 'C_mord.png';
+                            break;
+                        case 2:
+                            $clase = 'variantecuarta';
+                            $imgdecorativa = 'D_mord.png';
+                            break;
+                        case 3:
+                            $clase = 'variantequita';
+                            $imgdecorativa = 'E_mord.png';
+                    }
                 ?>
-                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 variantetercera">
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 {{$clase}}">
 
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <picture>
-                            <source media="(min-width: 1200px)" srcset="{{asset('images/portada/m')}}/{{$registro->imagen or 'sinimagen.png'}}"><!-- pc -->
-                            <source media="(min-width: 992px)" srcset="{{asset('images/portada/m')}}/{{$registro->imagen or 'sinimagen.png'}}"><!-- medio pc -->
-                            <source media="(min-width: 768px)" srcset="{{asset('images/portada/s')}}/{{$registro->imagen or 'sinimagen.png'}}"><!-- tablet -->
+                            <source media="(min-width: 1200px)" srcset="{{asset('images/contenido/m')}}/{{$registro->imagen or 'sinimagen.png'}}"><!-- pc -->
+                            <source media="(min-width: 992px)" srcset="{{asset('images/contenido/m')}}/{{$registro->imagen or 'sinimagen.png'}}"><!-- medio pc -->
+                            <source media="(min-width: 768px)" srcset="{{asset('images/contenido/s')}}/{{$registro->imagen or 'sinimagen.png'}}"><!-- tablet -->
 
                             <!-- img tag for browsers that do not support picture element -->
                             @if ($link != '')
                                 <a href="{{$link}}">
                                     @endif
-                                    <img src="{{asset('images/portada/m')}}/{{$registro->imagen or 'sinimagen.png'}}" alt="{{$titulo}}">
+                                    <img src="{{asset('images/contenido/m')}}/{{$registro->imagen or 'sinimagen.png'}}" alt="{{$titulo}}">
                                     @if ($link != '')
                                 </a><!-- movil -->
                             @endif
                         </picture>
                         <picture>
-                            <source media="(min-width: 768px)" srcset="{{asset('images/graficos/C_mord.png')}}"><!-- tablet -->
+                            <source media="(min-width: 768px)" srcset="{{asset('images/graficos')}}/{{$imgdecorativa}}"><!-- tablet -->
                             <!-- img tag for browsers that do not support picture element -->
-                            <img src="{{asset('images/graficos/C_mord.png')}}" alt="imagen decorativa" class="img-responsive mordisquitos"><!-- movil -->
+                            <img src="{{asset('images/graficos')}}/{{$imgdecorativa}}" alt="imagen decorativa" class="img-responsive mordisquitos"><!-- movil -->
                         </picture>
                     </div>
 
@@ -124,6 +138,7 @@
                         </article>
                     </div>
                 </div><!-- fin col lg 5 -->
+                    <?php $cont++; ?>
                 @endforeach
             </div>
         </section>

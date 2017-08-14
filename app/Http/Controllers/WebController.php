@@ -19,6 +19,7 @@ use URL;
 use Redirect;
 use Carbon\Carbon;
 use Mail;
+use App;
 
 class WebController extends Controller
 {
@@ -27,8 +28,16 @@ class WebController extends Controller
         //
     }
 
+    public function pag404(){
+        $menus = Menu::orderBy('order')->get();
+        $portada = Portada::orderBy('orden')->get();
+        $ponentes = Ponente::where('anio',date('Y'))->orderBy('orden')->get();
+        return view('errors.404',compact('menus','portada','ponentes'));
+    }
+
     public function ponentes($anio=2017)
     {
+        $this->estableceIdioma();
         //dd(Session::all());
         $menus = Menu::orderBy('order')->get();
         $ponentes = Ponente::where('anio',$anio)->orderBy('orden')->get();
@@ -41,12 +50,14 @@ class WebController extends Controller
 
     public function programa()
     {
+        $this->estableceIdioma();
         $menus = Menu::orderBy('order')->get();
         return view('web.agenda', compact('menus'));
     }
 
     public function galeria($anio=2017)
     {
+        $this->estableceIdioma();
         $menus = Menu::orderBy('order')->get();
         $galeria = Galeria::where('anio',$anio)->orderBy('orden')->first();
         if (is_object($galeria))
@@ -60,6 +71,7 @@ class WebController extends Controller
 
     public function contacto(Request $request)
     {
+        $this->estableceIdioma();
         if ($request->nombre != ''){
             $email = '';
             switch($request->tipo_contacto){
@@ -83,8 +95,24 @@ class WebController extends Controller
         return view('web.contacto',compact('menus'));
     }
 
+    public function zonadeprensa(Request $request)
+    {
+        $this->estableceIdioma();
+        if ($request->nombre != ''){
+            $email = 'prensa@gijonsecome.es';
+            $email = 'diego@mglab.es';
+            Mail::send('web.includes.zonadeprensa', $request->all(), function($msj){
+                $msj->subject('Formulario prensa web GijonSeCome');
+                $msj->to('diego@mglab.es');
+            });
+        }
+        $menus = Menu::orderBy('order')->get();
+        return view('web.zonadeprensa',compact('menus'));
+    }
+
     public function noticias()
     {
+        $this->estableceIdioma();
         $menus = Menu::orderBy('order')->get();
         $noticias = Content::where('tipo_contenido','noticia')->where('fecha_publicacion','<=',date('Y-m-d'))->get();
         //Definimos el array con los elemento del breadcrum
@@ -95,9 +123,10 @@ class WebController extends Controller
 
     public function detalle()
     {
+        $this->estableceIdioma();
         $slug = explode('/',$_SERVER["REQUEST_URI"])[count(explode('/',$_SERVER["REQUEST_URI"]))-1];
         $textosidioma = TextosIdioma::where('slug',$slug)->where('tipo_contenido_id',1)->where('idioma_id',Idioma::fromCodigo(Session::get('idioma')))->first();
-        if ($textosidioma->contenido_id > 0)
+        if (is_object($textosidioma))
             $content = Content::findOrFail($textosidioma->contenido_id);
         else
             return Redirect::to('/');
@@ -132,6 +161,7 @@ class WebController extends Controller
 
     public function agenda()
     {
+        $this->estableceIdioma();
         $menus = Menu::orderBy('order')->get();
         $agenda = Agenda::orderBy('fecha')->orderBy('hora')->get();
         //Definimos el array con los elemento del breadcrum
@@ -143,6 +173,7 @@ class WebController extends Controller
 
     public function detalleponentes($slug)
     {
+        $this->estableceIdioma();
         $textosidioma = TextosIdioma::where('slug',$slug)->where('tipo_contenido_id',3)->where('idioma_id',Idioma::fromCodigo(Session::get('idioma')))->first();
         $ponente = Ponente::findOrFail($textosidioma->contenido_id);
         $agenda = DB::table('ponentes_agenda')
@@ -180,6 +211,25 @@ class WebController extends Controller
             }
         }
         return $breadcrums;
+    }
+
+    public function estableceIdioma(){
+        //Si accedemos a una url interna que no sea el index hay que capturar con qué idioma viene para activar la vble de sesión
+        //if (Session::get('idioma') == null || Session::get('idioma') == '') {
+        $url = $_SERVER["REQUEST_URI"];
+        $codigo = explode('/', $url)[1];
+        if ($codigo != 'eunomia' && $codigo != 'login') {
+            $idioma = Idioma::fromCodigo($codigo);
+            if ($idioma > 0) {
+                Session::put('idioma', $codigo);
+                App::SetLocale(Session::get('idioma'));
+            } else {
+                Session::put('idioma', Idioma::where('principal', '1')->first()->codigo);
+                App::SetLocale(Session::get('idioma'));
+            }
+        }
+        //}
+
     }
 
 }

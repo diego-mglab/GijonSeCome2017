@@ -15,7 +15,7 @@ use Image;
 
 class GaleriaController extends Controller
 {
-    protected $tipo_contenido = 5; // 1 - Contenido, 2 - Agenda, 3 - Ponente, 4 - Portada, 5 - Galería, 6 - Menú, 7 - Multimedia
+    protected $tipo_contenido = 5; // 1 - Contenido, 2 - Agenda, 3 - Ponente, 4 - Portada, 5 - Galería, 6 - Menú, 7 - Multimedia, 8 - Documentos Prensa
 
     /**
      * Display a listing of the resource.

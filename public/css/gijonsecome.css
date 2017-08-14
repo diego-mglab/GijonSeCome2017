@@ -1476,11 +1476,12 @@ footer input[type="submit"]{
 .mapaweb{
 	padding-top: 30px;
 	}
-footer.footer{
+footer .footer{
 	background-image:url(../images/graficos/huerto_pie_LG.png);
 	background-repeat: no-repeat;
-	background-position: bottom right;
+	background-position: top right;
 }
+	
 .col-lg-12.footer{
 padding: 1.875rem;
 }
