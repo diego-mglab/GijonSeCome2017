@@ -70,7 +70,7 @@
                         }
                         ?>
                     <div class="col-md-4 {{normaliza($diaSemana)}}">
-                        <header>{{$diaSemana}} día {{$dia}}</header>
+                        <header>{{$diaSemana}} {{__('agenda.dia')}} {{$dia}}</header>
                     <?php
                         $fecha_actual = $evento->fecha;
                         $div_abierto = true;

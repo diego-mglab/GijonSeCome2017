@@ -466,7 +466,7 @@
                             <source media="(min-width: 768px)" srcset="images/graficos/G_mord.png"><!-- tablet -->
 
                             <!-- img tag for browsers that do not support picture element -->
-                            <img src="images/graficos/g_mord_XS.png" alt="imagen decorativa" class="img-responsive mordisquitos"><!-- movil -->
+                            <img src="images/graficos/G_mord_XS.png" alt="imagen decorativa" class="img-responsive mordisquitos"><!-- movil -->
                         </picture>
 
 

@@ -33,6 +33,10 @@
                     $lugar = strtoupper($noticias[$i]->lugar);
                     $imagen = asset('images/contenido').'/l/'.$noticias[$i]->imagen or 'sinimagen.png';
                     $fecha='';
+                    $ruta = '';
+                    $titulo = '';
+                    $subtitulo = '';
+                    $contenido = '';
                     if ($noticias[$i]->fecha != ''){
                         $time= strtotime($noticias[$i]->fecha);
                         $fecha = date('d/m/Y',$time);
@@ -62,7 +66,7 @@
                         <article>
                             <hgroup>
                                 <time>{{$lugar!=''?$lugar.'.':''}} {{$fecha}}</time>
-                                <h1>{{link_to_route($ruta,$title=$titulo)}}</h1>
+                                <h1>{{$ruta!=''?link_to_route($ruta,$title=$titulo):$titulo}}</h1>
                                 <h2>{{$subtitulo}}</h2>
 
                                 <p>{{$contenido}}</p>
@@ -92,6 +96,10 @@
                         $lugar = strtoupper($noticias[$i]->lugar);
                         $imagen = $noticias[$i]->imagen;
                         $fecha='';
+                        $ruta = '';
+                        $titulo = '';
+                        $subtitulo = '';
+                        $contenido = '';
                         if ($noticias[$i]->fecha != ''){
                             $time= strtotime($noticias[$i]->fecha);
                             $fecha = date('d/m/Y',$time);
@@ -128,7 +136,7 @@
 
 
                             <time class="black">{{$lugar!=''?$lugar.'.':''}} {{$fecha}}</time>
-                            <h1 class="white">{{link_to_route($ruta,$title=$titulo)}}</h1>
+                            <h1 class="white">{{$ruta!=''?link_to_route($ruta,$title=$titulo):$titulo}}</h1>
 
 
                         </div>

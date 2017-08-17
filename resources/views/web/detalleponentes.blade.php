@@ -52,7 +52,7 @@
                     <!-- agenda en lg md solo esta activo en versiónes de pc -->
                     <section id="agendapc">
                         @if(count($agenda) > 0)
-                        <h1>intervenciones</h1>
+                        <h1>{{__('detalleponentes.intervenciones')}}</h1>
                         @endif
 
                         @foreach ($agenda as $evento)
@@ -137,75 +137,68 @@
                 <!-- agenda en sm xs esta parte solo esta activa en versión tablet y móvil-->
                 <div class="col-sm-12 col-sm-offset-0 col-xs-12">
                     <section id="agendamov">
-                        <h1>intervenciones</h1>
+                        @if(count($agenda) > 0)
+                            <h1>{{__('detalleponentes.intervenciones')}}</h1>
+                        @endif
+                        <?php
+                            $fecha_actual = '';
+                            $div_abierto = false;
+                        ?>
+                        @foreach ($agenda as $evento)
+                            <?php
+                            $fecha = new DateTime($evento->fecha);
+                            $fecha = Carbon::instance($fecha);
+                            $dia = $fecha->formatLocalized('%d');
+                            $diaSemana = utf8_encode($fecha->formatLocalized('%A'));
+                            $tipo_evento = $evento->tipo_evento;
+                            $hora = new DateTime($evento->hora);
+                            $hora = Carbon::instance($hora);
+                            $hora = $hora->formatLocalized('%H:%M');
+                            $titulo = '';
+                            $subtitulo = '';
+                            $contenido = '';
+                            if (is_object($evento)){
+                                $titulo = $evento->titulo;
+                                $subtitulo = $evento->subtitulo;
+                                $contenido = $evento->contenido;
+                            }
+                            $zona = strtoupper($evento->nombre);
+                            if ($fecha_actual != $evento->fecha) {
+                                if ($div_abierto){
+                                    $div_abierto = false;
+                                ?>
+                                    </div><!-- FIN {{normaliza($diaSemana)}}-->
+                                </div><!-- FIN col-sm-6-->
+                                <?php
+                            }
+                            ?>
                         <div class="col-sm-6">
 
-                            <div class="sabado">
-                                <header>Sábado día 2</header>
+                            <div class="{{normaliza($diaSemana)}}">
+                                <header>{{strtoupper($diaSemana.' día '.$dia)}}</header>
+                                <?php
+                                $fecha_actual = $evento->fecha;
+                                $div_abierto = true;
+                            }
+                                ?>
 
-                                <article class="showcooking">
-
-                                    <hgroup>
-                                        <h2><spam>12:00</spam>Show cooking con Marcos Morán y Borja Cortina</h2>
-                                        <h3>"El lujo y lo valioso. Productos premium y productos humildes."</h3>
-                                    </hgroup>
-
-                                    <p class="zonas">ZONA COCINAS</p>
-                                </article>
-
-
-                                <article class="otros">
+                                <article class="{{$tipo_evento}}">
 
                                     <hgroup>
-                                        <h2><spam>12:00</spam> Presentación y bienvenida</h2>
-                                        <h3>Presentación</h3>
+                                        <h2><spam>{{$hora}}</spam>{{$titulo}}</h2>
+                                        <h3>{{$subtitulo}}</h3>
                                     </hgroup>
-                                    <p class="zonas">GASTRO LIBRERÍA</p>
+
+                                    <p class="zonas">{{$zona}}</p>
                                 </article>
+                         @endforeach
+
+                                <?php
+                                if ($div_abierto){ ?>
                             </div><!-- FIN sábado-->
                         </div><!-- FIN col sm y xs 6-->
-                        <div class="col-sm-6 ">
-                            <div class="sabado">
-                                <header>Domingo día 3</header>
-
-                                <article class="showcooking">
-
-                                    <hgroup>
-                                        <h2><spam>12:00</spam>Show cooking con Marcos Morán y Borja Cortina</h2>
-                                        <h3>"El lujo y lo valioso. Productos premium y productos humildes."</h3>
-                                    </hgroup>
-
-                                    <p class="zonas">ZONA COCINAS</p>
-                                </article>
-
-
-                            </div><!-- FIN sábado-->
-
-
-
-
-                        </div><!-- FIN col sm y xs 6-->
-                        <div class="col-sm-6">
-                            <div class="sabado">
-                                <header>Lunes día 4</header>
-
-                                <article class="showcooking">
-
-                                    <hgroup>
-                                        <h2><spam>12:00</spam>Show cooking con Marcos Morán y Borja Cortina</h2>
-                                        <h3>"El lujo y lo valioso. Productos premium y productos humildes."</h3>
-                                    </hgroup>
-
-                                    <p class="zonas">ZONA COCINAS</p>
-                                </article>
-
-
-                            </div><!-- FIN sábado-->
-
-
-
-
-                        </div><!-- FIN col sm y xs 6-->
+                                <?php
+                                } ?>
 
                     </section>
                 </div><!-- FIN agenda particular-->

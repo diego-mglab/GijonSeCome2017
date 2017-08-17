@@ -5,7 +5,9 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Psy\Exception\ErrorException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Illuminate\Support\Facades\Session;
 
 class Handler extends ExceptionHandler
 {
@@ -48,7 +50,11 @@ class Handler extends ExceptionHandler
         // You can add your own exception here
         // so redirect to the home route
         if ($e instanceof NotFoundHttpException) {
-            return redirect()->action('WebController@pag404');
+            return redirect()->route('pag404');
+        }
+
+        if ($e instanceof ErrorException){
+            return redirect()->route('pag404');
         }
 
         return parent::render($request, $e);

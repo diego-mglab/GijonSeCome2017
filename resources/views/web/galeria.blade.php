@@ -27,11 +27,11 @@
 
         <hgroup>
             @if ($anio != '2016')
-                <h1>Galería fotográfica: Festival gastronómico y sostenible de Asturias</h1>
-                <h2>Gijón se come {{date('Y')}}</h2>
+                <h1>{{__('galeria.festival_gastronomico')}}</h1>
+                <h2>{{__('galeria.gijonsecome')}} {{date('Y')}}</h2>
             @else
-                <h1>Galería fotográfica: Primer festival gastronómico y sostenible de Asturias</h1>
-                <h2>Gijón se come 2016</h2>
+                <h1>{{__('galeria.primer_festival')}}</h1>
+                <h2>{{__('galeria.gijonsecome')}} 2016</h2>
             @endif
         </hgroup>
     </div>

@@ -6,7 +6,7 @@
         <div class="col-xs-12">
             <ul>
                 <li>
-                    INICIO // 404
+                    <a href="/">INICIO</a> // 404
                 </li>
             </ul>
         </div>
@@ -16,7 +16,7 @@
         <div class="row">
             <div class="col-xs-12">
                 <article>
-                    <h1>Ooops, la página que buscas no existe</h1>
+                    <h1>{{__('404.noexiste')}}</h1>
                     <div style="width: 100%; text-align: center; margin-top: 1em;"><img src="{{asset('images/huevo-roto-rsm.jpg')}}"></div>
                 </article>
             </div>

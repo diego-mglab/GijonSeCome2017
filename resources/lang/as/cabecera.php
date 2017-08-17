@@ -8,6 +8,6 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'recinto_ferial_luis_adaro' => 'Recinto Ferial Luis Adaro',
+    'recinto_ferial_luis_adaro' => 'Cortil Ferial Luis Adaro',
 
 ];

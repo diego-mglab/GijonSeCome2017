@@ -174,21 +174,25 @@ class WebController extends Controller
     public function detalleponentes($slug)
     {
         $this->estableceIdioma();
-        $textosidioma = TextosIdioma::where('slug',$slug)->where('tipo_contenido_id',3)->where('idioma_id',Idioma::fromCodigo(Session::get('idioma')))->first();
-        $ponente = Ponente::findOrFail($textosidioma->contenido_id);
-        $agenda = DB::table('ponentes_agenda')
-            ->join('agenda','ponentes_agenda.agenda_id','agenda.id')
-            ->join('textos_idiomas','agenda.id','textos_idiomas.contenido_id')
-            ->join('zonas','agenda.zona_id','zonas.id')
-            ->where('textos_idiomas.tipo_contenido_id','2')
-            ->where('ponentes_agenda.ponentes_id',$ponente->id)
-            ->OrderBy('agenda.fecha')->OrderBy('agenda.hora')->get();
-        //Definimos el array con los elemento del breadcrum
-        $elementos = ['Inicio','El Festival','Ponentes',$textosidioma->titulo];
-        $breadcrums = $this->devuelveBreadcrums($elementos);
         $menus = Menu::orderBy('order')->get();
+        $textosidioma = TextosIdioma::where('slug',$slug)->where('tipo_contenido_id',3)->where('idioma_id',Idioma::fromCodigo(Session::get('idioma')))->first();
+        if (is_object($textosidioma)) {
+            $ponente = Ponente::findOrFail($textosidioma->contenido_id);
+            $agenda = DB::table('ponentes_agenda')
+                ->join('agenda', 'ponentes_agenda.agenda_id', 'agenda.id')
+                ->join('textos_idiomas', 'agenda.id', 'textos_idiomas.contenido_id')
+                ->join('zonas', 'agenda.zona_id', 'zonas.id')
+                ->where('textos_idiomas.tipo_contenido_id', '2')
+                ->where('ponentes_agenda.ponentes_id', $ponente->id)
+                ->OrderBy('agenda.fecha')->OrderBy('agenda.hora')->get();
+            //Definimos el array con los elemento del breadcrum
+            $elementos = ['Inicio', 'El Festival', 'Ponentes', $textosidioma->titulo];
+            $breadcrums = $this->devuelveBreadcrums($elementos);
 
-        return view('web.detalleponentes',compact('menus','ponente','textosidioma','breadcrums','agenda'));
+            return view('web.detalleponentes', compact('menus', 'ponente', 'textosidioma', 'breadcrums', 'agenda'));
+        } else{
+            return view('errors.404',compact('menus'));
+        }
     }
 
     public function devuelveBreadcrums(Array $elementos){

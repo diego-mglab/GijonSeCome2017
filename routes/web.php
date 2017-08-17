@@ -65,7 +65,7 @@ foreach ($idiomas as $idioma){
             }
         }
     }
-    Route::get($codigo.'/404','WebController@pag404')->name('pag404');
+    Route::get('/404','WebController@pag404')->name('pag404');
 }
 
 
@@ -109,6 +109,8 @@ Route::group(['prefix' => 'eunomia' , 'middleware' => 'auth' ], function () {
 
     Route::resource('/galerias', 'GaleriaController');
 
+    Route::resource('/documentos_prensa','DocumentosPrensaController');
+
     Route::get('/menu', 'MenuController@getIndex');
 
     // Showing the admin for the menu builder and updating the order of menu items
@@ -126,5 +128,3 @@ Route::group(['prefix' => 'eunomia' , 'middleware' => 'auth' ], function () {
     Route::post('galerias/{galeria}/updateTextoImagen','GaleriaController@updateTextoImagen');
 
 });
-
-//dd(Session::get('idioma'));

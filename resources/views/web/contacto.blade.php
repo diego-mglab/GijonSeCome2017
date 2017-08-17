@@ -22,42 +22,42 @@
                 <div class="col-md-8">
 
                     <!-- Classic Heading -->
-                    <h4 class="classic-title"><span>Contacta con nosotros</span></h4>
+                    <h4 class="classic-title"><span>{{__('contacto.contacta_con_nosotros')}}</span></h4>
 
                     <!-- Start Contact Form -->
 
                     {!! Form::open(['action' => 'WebController@contacto','method' => 'POST', 'name' => 'form_contacto', 'class' =>'contact-form', 'id' => 'contact-form']) !!}
                         <div class="form-group">
                             <div class="controls">
-                                {{Form::select('tipo_contacto', ['Expositores' => 'Expositores','Patrocinadores' => 'Patrocinadores','Prensa' => 'Prensa','Programación del festival' => 'Programación del festival'],null, ['placeholder' => 'Tipo contacto', 'id' => 'tipo_contacto'])}}
+                                {{Form::select('tipo_contacto', ['Expositores' => __('contacto.expositores'),'Patrocinadores' => __('contacto.patrocinadores'),'Programación del festival' => __('contacto.programacion_festival')],null, ['placeholder' => __('contacto.tipo_contacto'), 'id' => 'tipo_contacto'])}}
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="controls">
-                                {{Form::text('nombre', null, ['placeholder' => 'Nombre'])}}
+                                {{Form::text('nombre', null, ['placeholder' => __('contacto.nombre')])}}
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="controls">
-                                {{Form::email('email', null, ['class' => 'email', 'placeholder' => 'Email'])}}
+                                {{Form::email('email', null, ['class' => 'email', 'placeholder' => __('contacto.email')])}}
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="controls">
-                                {{Form::text('asunto', null, ['class' => 'requiredField', 'placeholder' => 'Asunto'])}}
+                                {{Form::text('asunto', null, ['class' => 'requiredField', 'placeholder' => __('contacto.asunto')])}}
                             </div>
                         </div>
 
                         <div class="form-group">
 
                             <div class="controls">
-                                {{Form::textarea('mensaje', null, ['rows' => '7', 'placeholder' => 'Mensaje'])}}
+                                {{Form::textarea('mensaje', null, ['rows' => '7', 'placeholder' => __('contacto.mensaje')])}}
                             </div>
                         </div>
                         {{Form::hidden('email_envio',null,['id'  => 'email_envio'])}}
-                        <button type="submit" id="submit" class="btn-system btn-large">Enviar</button>
+                        <button type="submit" id="submit" class="btn-system btn-large">{{__('contacto.enviar')}}</button>
                         <div id="success" style="color:#34495e;"></div>
                 {!! Form::close() !!}
                     <!-- End Contact Form -->
@@ -67,7 +67,7 @@
                 <div class="col-md-4">
 
                     <!-- Classic Heading -->
-                    <h4 class="classic-title"><span>Información</span></h4>
+                    <h4 class="classic-title"><span>{{__('contacto.informacion')}}</span></h4>
 
                     <!-- Some Info -->
 
@@ -75,33 +75,33 @@
 
                     <!-- Info - Icons List -->
                     <ul class="icons-list">
-                        <li><i class="fa fa-globe">  </i> <strong>Dirección:</strong> Recinto Ferial Luis Adaro.</li>
-                        <li><i class="fa fa-envelope-o"></i> <strong>Email:</strong>info@gijonsecome.es</li>
-                        <li><i class="fa fa-mobile"></i> <strong>Teléfono:</strong> +34 985 17 15 52 </li>
+                        <li><i class="fa fa-globe">  </i> <strong>{{__('contacto.direccion')}}:</strong> {{__('contacto.recinto_ferial_luis_adaro')}}.</li>
+                        <li><i class="fa fa-envelope-o"></i> <strong>{{__('contacto.email')}}:</strong>info@gijonsecome.es</li>
+                        <li><i class="fa fa-mobile"></i> <strong>{{__('contacto.telefono')}}:</strong> +34 985 17 15 52 </li>
                     </ul>
 
                     <!-- Divider -->
                     <div class="hr1" style="margin-bottom:15px;"></div>
 
                     <!-- Classic Heading -->
-                    <h4 class="classic-title"><span>Horario de atención telefónica (mglab)</span></h4>
+                    <h4 class="classic-title"><span>{{__('contacto.horario_atencion_telefonica')}} (mglab)</span></h4>
 
                     <!-- Info - List -->
                     <ul class="list-unstyled">
-                        <li><strong>Lunes a viernes</strong>- 9:00 a 18:00 </li>
-                        <li><strong>Sábado y domingo</strong> - cerrado</li>
+                        <li><strong>{{__('contacto.lunes')}} a {{__('contacto.viernes')}}</strong>- 9:00 a 18:00 </li>
+                        <li><strong>{{__('contacto.sabado')}} y {{__('contacto.domingo')}}</strong> - {{__('contacto.cerrado')}}</li>
                     </ul>
 
 
                     <!-- Divider -->
                     <div class="hr1" style="margin-bottom:15px;"></div>
 
-                    <h4 class="classic-title"><span>Horario del festival GijónSeCome</span></h4>
+                    <h4 class="classic-title"><span>{{__('contacto.horario_festival')}} {{__('contacto.gijonsecome')}}</span></h4>
 
                     <!-- Info - List -->
                     <ul class="list-unstyled">
-                        <li><strong>Sábado 3 y domingo 4 de diciembre </strong>- 11:00 a 22:00</li>
-                        <li><strong>Lunes 5 de diciembre</strong> - 11:00 a 22:00</li>
+                        <li><strong>{{__('contacto.sabado')}} 3 y {{__('contacto.domingo')}} 4 de {{__('contacto.diciembre')}} </strong>- 11:00 a 22:00</li>
+                        <li><strong>{{__('contacto.lunes')}} 5 de {{__('contacto.diciembre')}}</strong> - 11:00 a 22:00</li>
                     </ul>
 
                 </div>
