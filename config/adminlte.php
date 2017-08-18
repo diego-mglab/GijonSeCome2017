@@ -85,15 +85,15 @@ return [
     |
     */
 
-    'dashboard_url' => 'home',
+    'dashboard_url' => 'eunomia/home',
 
-    'logout_url' => 'logout',
+    'logout_url' => 'eunomia/logout',
 
     'logout_method' => null,
 
-    'login_url' => 'login',
+    'login_url' => 'eunomia/login',
 
-    'register_url' => 'register',
+    'register_url' => 'eunomia/register',
 
     /*
     |--------------------------------------------------------------------------
@@ -159,67 +159,21 @@ return [
             'url'         => '/eunomia/menu',
             'icon'        => 'navicon',
         ],
+        [
+            'text'        => 'Documentos Prensa',
+            'url'         => '/eunomia/documentos_prensa',
+            'icon'        => 'file-pdf-o',
+        ],
         'ACCOUNT SETTINGS',
         [
             'text' => 'Profile',
-            'url'  => 'admin/settings',
+            'url'  => 'eunomia/settings',
             'icon' => 'user',
         ],
         [
             'text' => 'Change Password',
-            'url'  => 'admin/settings',
+            'url'  => 'eunomia/settings',
             'icon' => 'lock',
-        ],
-        [
-            'text'    => 'Multilevel',
-            'icon'    => 'share',
-            'submenu' => [
-                [
-                    'text' => 'Level One',
-                    'url'  => '#',
-                ],
-                [
-                    'text'    => 'Level One',
-                    'url'     => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'Level Two',
-                            'url'  => '#',
-                        ],
-                        [
-                            'text'    => 'Level Two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'Level Three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'Level Three',
-                                    'url'  => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'Level One',
-                    'url'  => '#',
-                ],
-            ],
-        ],
-        'LABELS',
-        [
-            'text'       => 'Important',
-            'icon_color' => 'red',
-        ],
-        [
-            'text'       => 'Warning',
-            'icon_color' => 'yellow',
-        ],
-        [
-            'text'       => 'Information',
-            'icon_color' => 'aqua',
         ],
     ],
 

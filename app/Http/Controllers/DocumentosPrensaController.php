@@ -68,7 +68,7 @@ class DocumentosPrensaController extends Controller
                 File::makeDirectory($dir);
             }
 
-            \Storage::disk('ficheros')->put($filename,file_get_contents($fichero));
+            \Storage::disk('ficheros')->put($filename,\File::get($fichero));
 
             $documentoPrensa->fichero = $filename;
 
@@ -164,7 +164,7 @@ class DocumentosPrensaController extends Controller
                 File::makeDirectory($dir);
             }
 
-            \Storage::disk('ficheros')->put($filename,file_get_contents($fichero));
+            \Storage::disk('ficheros')->put($filename,\File::get($fichero));
 
             $documentoPrensa->fichero = $filename;
 

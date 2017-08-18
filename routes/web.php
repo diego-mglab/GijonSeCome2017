@@ -62,6 +62,11 @@ foreach ($idiomas as $idioma){
                     Route::post($codigo . '/' . $ruta . ($parametros != '' ? '/' . $parametros : ''), 'WebController@' . $metodo)
                         ->name(str_slug($content->textos_idioma_todos($idioma->id)->slug, "") . '_web_post_' . $codigo);
                 }
+                if ($content->textos_idioma_principal->slug == 'zona-de-prensa'){
+                    $metodo = 'zonadeprensa';
+                    Route::post($codigo . '/' . $ruta . ($parametros != '' ? '/' . $parametros : ''), 'WebController@' . $metodo)
+                        ->name(str_slug($content->textos_idioma_todos($idioma->id)->slug, "") . '_web_post_' . $codigo);
+                }
             }
         }
     }

@@ -22,7 +22,7 @@
                 <div class="col-md-8">
 
                     <!-- Classic Heading -->
-                    <h4 class="classic-title"><span>Zona de prensa</span></h4>
+                    <h4 class="classic-title"><span>{{__('zonadeprensa.zona_de_prensa')}}</span></h4>
 
                     <!-- Start Contact Form -->
 
@@ -30,34 +30,34 @@
 
                         <div class="form-group">
                             <div class="controls">
-                                {{Form::text('nombre', null, ['placeholder' => 'Nombre'])}}
+                                {{Form::text('nombre', null, ['placeholder' => __('zonadeprensa.nombre')])}}
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="controls">
-                                {{Form::text('medio', null, ['placeholder' => 'Medio o blog'])}}
+                                {{Form::text('medio', null, ['placeholder' => __('zonadeprensa.medio_o_blog')])}}
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="controls">
-                                {{Form::email('email', null, ['class' => 'email', 'placeholder' => 'Email'])}}
+                                {{Form::email('email', null, ['class' => 'email', 'placeholder' => __('zonadeprensa.email')])}}
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="controls">
-                                {{Form::text('asunto', null, ['class' => 'requiredField', 'placeholder' => 'Asunto'])}}
+                                {{Form::text('asunto', null, ['class' => 'requiredField', 'placeholder' => __('zonadeprensa.asunto')])}}
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="controls">
-                                {{Form::textarea('mensaje', null, ['rows' => '7', 'placeholder' => 'Mensaje'])}}
+                                {{Form::textarea('mensaje', null, ['rows' => '7', 'placeholder' => __('zonadeprensa.mensaje')])}}
                             </div>
                         </div>
                         {{Form::hidden('email_envio',null,['id'  => 'email_envio'])}}
-                        <button type="submit" id="submit" class="btn-system btn-large">Enviar</button>
+                        <button type="submit" id="submit" class="btn-system btn-large">{{__('zonadeprensa.enviar')}}</button>
                         <div id="success" style="color:#34495e;"></div>
                 {!! Form::close() !!}
                     <!-- End Contact Form -->
@@ -67,15 +67,19 @@
                 <div class="col-md-4">
 
                     <!-- Classic Heading -->
-                    <h4 class="classic-title"><span>Documentos para prensa</span></h4>
+                    <h4 class="classic-title"><span>{{__('zonadeprensa.documentos_para_prensa')}}</span></h4>
                     <ul>
-                        <li>
-                            <a href="#">DOCUMENTO PRUEBA</a>
-                        </li>
+                        @foreach($documentosPrensa as $documento)
+                            @if (is_object($documento->textos_idioma))
+                            <li>
+                                <a href="{{asset('files/prensa')}}/{{$documento->fichero}}" target="_blank">{{$documento->textos_idioma->titulo}}</a>
+                            </li>
+                            @endif
+                        @endforeach
                     </ul>
 
                     <!-- Classic Heading -->
-                    <h4 class="classic-title"><span>Información</span></h4>
+                    <h4 class="classic-title"><span>{{__('zonadeprensa.informacion')}}</span></h4>
 
                     <!-- Some Info -->
 
@@ -83,33 +87,33 @@
 
                     <!-- Info - Icons List -->
                     <ul class="icons-list">
-                        <li><i class="fa fa-globe">  </i> <strong>Dirección:</strong> Recinto Ferial Luis Adaro.</li>
-                        <li><i class="fa fa-envelope-o"></i> <strong>Email:</strong>info@gijonsecome.es</li>
-                        <li><i class="fa fa-mobile"></i> <strong>Teléfono:</strong> +34 985 17 15 52 </li>
+                        <li><i class="fa fa-globe">  </i> <strong>{{__('zonadeprensa.direccion')}}:</strong> {{__('zonadeprensa.recinto_ferial')}}.</li>
+                        <li><i class="fa fa-envelope-o"></i> <strong>{{__('zonadeprensa.email')}}:</strong>info@gijonsecome.es</li>
+                        <li><i class="fa fa-mobile"></i> <strong>{{__('zonadeprensa.telefono')}}:</strong> +34 985 17 15 52 </li>
                     </ul>
 
                     <!-- Divider -->
                     <div class="hr1" style="margin-bottom:15px;"></div>
 
                     <!-- Classic Heading -->
-                    <h4 class="classic-title"><span>Horario de atención telefónica (mglab)</span></h4>
+                    <h4 class="classic-title"><span>{{__('zonadeprensa.horario_atencion_telefonica')}} (mglab)</span></h4>
 
                     <!-- Info - List -->
                     <ul class="list-unstyled">
-                        <li><strong>Lunes a viernes</strong>- 9:00 a 18:00 </li>
-                        <li><strong>Sábado y domingo</strong> - cerrado</li>
+                        <li><strong>{{__('zonadeprensa.lunes')}} a {{__('zonadeprensa.viernes')}}</strong>- 9:00 a 18:00 </li>
+                        <li><strong>{{__('zonadeprensa.sabado')}} y {{__('zonadeprensa.domingo')}}</strong> - {{__('zonadeprensa.cerrado')}}</li>
                     </ul>
 
 
                     <!-- Divider -->
                     <div class="hr1" style="margin-bottom:15px;"></div>
 
-                    <h4 class="classic-title"><span>Horario del festival GijónSeCome</span></h4>
+                    <h4 class="classic-title"><span>{{__('zonadeprensa.horario_festival')}} {{__('zonadeprensa.gijonsecome')}}</span></h4>
 
                     <!-- Info - List -->
                     <ul class="list-unstyled">
-                        <li><strong>Sábado 3 y domingo 4 de diciembre </strong>- 11:00 a 22:00</li>
-                        <li><strong>Lunes 5 de diciembre</strong> - 11:00 a 22:00</li>
+                        <li><strong>{{__('zonadeprensa.sabado')}} 3 y {{__('zonadeprensa.domingo')}} 4 de {{__('zonadeprensa.diciembre')}} </strong>- 11:00 a 22:00</li>
+                        <li><strong>{{__('zonadeprensa.lunes')}} 5 de {{__('zonadeprensa.diciembre')}}</strong> - 11:00 a 22:00</li>
                     </ul>
 
                 </div>

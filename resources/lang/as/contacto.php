@@ -26,7 +26,7 @@ return [
     'viernes' => 'vienres',
     'sabado' => 'Sábadu',
     'domingo' => 'Domingu',
-    'cerrado' => 'Pesllao',
+    'cerrado' => 'pesllao',
     'horario_festival' => 'Horariu del festival',
     'gijonsecome' => 'XixónComese',
     'diciembre' => 'avientu',

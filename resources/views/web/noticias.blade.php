@@ -36,7 +36,6 @@
                     $ruta = '';
                     $titulo = '';
                     $subtitulo = '';
-                    $contenido = '';
                     if ($noticias[$i]->fecha != ''){
                         $time= strtotime($noticias[$i]->fecha);
                         $fecha = date('d/m/Y',$time);
@@ -44,8 +43,14 @@
                     if (is_object($noticias[$i]->textos_idioma)){
                         $titulo = $noticias[$i]->textos_idioma->titulo;
                         $subtitulo = $noticias[$i]->textos_idioma->subtitulo;
-                        $contenido = $noticias[$i]->getSubString($noticias[$i]->textos_idioma->contenido,150);
                         $ruta = str_replace('-','',$noticias[$i]->textos_idioma->slug).'_web_'.Session::get('idioma');
+                        if ($i==0){
+                            $imagen_mord = 'A_mord.png';
+                            $imagen_mov = 'A_mord_XS.png';
+                        } else {
+                            $imagen_mord = 'destacadonoticiasB.png';
+                            $imagen_mov = 'mordiscodestacadodosxs.png';
+                        }
                     }
                     ?>
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 {{$i==0?'destacadauna':'destacadados'}}">
@@ -55,11 +60,11 @@
                             <img src="{{$imagen}}" alt="..." class="img-responsive"><!-- movil -->
                         </picture>
                         <picture>
-                            <source media="(min-width: 992px)" srcset="{{asset('images/graficos/A_mord.png')}}"><!-- pc -->
-                            <source media="(min-width: 768px)" srcset="{{asset('images/graficos/A_mord.png')}}"><!-- tablet -->
+                            <source media="(min-width: 992px)" srcset="{{asset('images/graficos')}}/{{$imagen_mord}}"><!-- pc -->
+                            <source media="(min-width: 768px)" srcset="{{asset('images/graficos')}}/{{$imagen_mord}}"><!-- tablet -->
 
                             <!-- img tag for browsers that do not support picture element -->
-                            <img src="{{asset('images/graficos/A_mord_XS.png')}}" alt="imagen decorativa" class="mordisquitos"><!-- movil -->
+                            <img src="{{asset('images/graficos')}}/{{$imagen_mov}}" alt="imagen decorativa" class="mordisquitos"><!-- movil -->
                         </picture>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -68,8 +73,6 @@
                                 <time>{{$lugar!=''?$lugar.'.':''}} {{$fecha}}</time>
                                 <h1>{{$ruta!=''?link_to_route($ruta,$title=$titulo):$titulo}}</h1>
                                 <h2>{{$subtitulo}}</h2>
-
-                                <p>{{$contenido}}</p>
                             </hgroup>
 
                         </article>
@@ -98,16 +101,12 @@
                         $fecha='';
                         $ruta = '';
                         $titulo = '';
-                        $subtitulo = '';
-                        $contenido = '';
                         if ($noticias[$i]->fecha != ''){
                             $time= strtotime($noticias[$i]->fecha);
                             $fecha = date('d/m/Y',$time);
                         }
                         if (is_object($noticias[$i]->textos_idioma)){
                             $titulo = $noticias[$i]->textos_idioma->titulo;
-                            $subtitulo = $noticias[$i]->textos_idioma->subtitulo;
-                            $contenido = $noticias[$i]->getSubString($noticias[$i]->textos_idioma->contenido,150);
                             $ruta = str_replace('-','',$noticias[$i]->textos_idioma->slug).'_web_'.Session::get('idioma');
                         }
                         ?>

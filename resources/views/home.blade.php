@@ -7,5 +7,9 @@
 @stop
 
 @section('content')
-    <p>You are logged in!</p>
+    @include('eunomia.includes.box')
+
+    <div class="row">
+
+    </div>
 @stop

@@ -20,6 +20,7 @@ use Redirect;
 use Carbon\Carbon;
 use Mail;
 use App;
+use App\DocumentosPrensa;
 
 class WebController extends Controller
 {
@@ -106,19 +107,35 @@ class WebController extends Controller
                 $msj->to('diego@mglab.es');
             });
         }
+        $documentosPrensa = DocumentosPrensa::all();
         $menus = Menu::orderBy('order')->get();
-        return view('web.zonadeprensa',compact('menus'));
+        return view('web.zonadeprensa',compact('menus','documentosPrensa'));
     }
 
     public function noticias()
     {
         $this->estableceIdioma();
         $menus = Menu::orderBy('order')->get();
-        $noticias = Content::where('tipo_contenido','noticia')->where('fecha_publicacion','<=',date('Y-m-d'))->get();
-        //Definimos el array con los elemento del breadcrum
+        $noticias = Content::where('tipo_contenido','noticia')
+            ->where('fecha_publicacion','<=',date('Y-m-d'))
+            ->orderBy('fecha','DESC')->get();
+        //Definimos el array con los elementos del breadcrum
         $elementos = ['Inicio','El Festival','Noticias'];
         $breadcrums = $this->devuelveBreadcrums($elementos);
         return view('web.noticias',compact('menus','noticias','breadcrums'));
+    }
+
+    public function entrevistas()
+    {
+        $this->estableceIdioma();
+        $menus = Menu::orderBy('order')->get();
+        $entrevistas = Content::where('tipo_contenido','entrevista')
+            ->where('fecha_publicacion','<=',date('Y-m-d'))
+            ->orderBy('fecha','DESC')->get();
+        //Definimos el array con los elementos del breadcrum
+        $elementos = ['Inicio','El Festival','Entrevistas'];
+        $breadcrums = $this->devuelveBreadcrums($elementos);
+        return view('web.entrevistas',compact('menus','entrevistas','breadcrums'));
     }
 
     public function detalle()
@@ -138,6 +155,7 @@ class WebController extends Controller
                 ->join('idiomas','textos_idiomas.idioma_id','idiomas.id')
                 ->select('titulo','subtitulo','contents.imagen','slug')
                 ->where('textos_idiomas.visible','1')
+                ->where('fecha_publicacion','<=',date('Y-m-d'))
                 ->where('tipo_contenido_id','1')
                 //->where('fecha_publicacion','<=',date('Y-m-d'))
                 ->where('contents.id','<>',$content->id)

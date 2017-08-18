@@ -101,7 +101,7 @@
                             $imgdecorativa = 'D_mord.png';
                             break;
                         case 3:
-                            $clase = 'variantequita';
+                            $clase = 'variantequinta';
                             $imgdecorativa = 'E_mord.png';
                     }
                 ?>

@@ -1,0 +1,19 @@
+{
+    "name": "adzon/laravel-gantt",
+    "description": "Laravel package to display items within a Gantt Chart.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "adzon",
+            "email": "76762@qq.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Swatkins\\LaravelGantt\\": "src/"
+        }
+    }
+}

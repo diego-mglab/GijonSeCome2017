@@ -185,7 +185,9 @@ return [
         Unisharp\Laravelfilemanager\LaravelFilemanagerServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         'Lavary\Menu\ServiceProvider',
-        ],
+        Illuminate\Foundation\Providers\ArtisanServiceProvider::class,
+        //Bican\Roles\RolesServiceProvider::class,
+    ],
 
     /*
     |--------------------------------------------------------------------------

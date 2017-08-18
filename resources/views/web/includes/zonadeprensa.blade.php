@@ -2,10 +2,10 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Mensaje formulario web </title>
+    <title>Mensaje formulario Zona de prensa </title>
   </head>
   <body>
-    <h1>Mensaje de formulario web</h1>
+    <h1>Mensaje de formulario Zona de prensa</h1>
 
     <p>
         Nombre: {!! $nombre !!}
