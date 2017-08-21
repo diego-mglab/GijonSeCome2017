@@ -343,6 +343,7 @@ class ComposerStaticInit8f524d259efdeab5a5bf051dcd1d1d83
 
     public static $classMap = array (
         'App\\Agenda' => __DIR__ . '/../..' . '/app/Agenda.php',
+        'App\\Configuracion' => __DIR__ . '/../..' . '/app/Configuracion.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Content' => __DIR__ . '/../..' . '/app/Content.php',
         'App\\DocumentosPrensa' => __DIR__ . '/../..' . '/app/DocumentosPrensa.php',
@@ -354,6 +355,7 @@ class ComposerStaticInit8f524d259efdeab5a5bf051dcd1d1d83
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
         'App\\Http\\Controllers\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisterController.php',
         'App\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
+        'App\\Http\\Controllers\\ConfiguracionController' => __DIR__ . '/../..' . '/app/Http/Controllers/ConfiguracionController.php',
         'App\\Http\\Controllers\\ContentController' => __DIR__ . '/../..' . '/app/Http/Controllers/ContentController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\DocumentosPrensaController' => __DIR__ . '/../..' . '/app/Http/Controllers/DocumentosPrensaController.php',
@@ -391,6 +393,7 @@ class ComposerStaticInit8f524d259efdeab5a5bf051dcd1d1d83
         'App\\TextosIdioma' => __DIR__ . '/../..' . '/app/TextosIdioma.php',
         'App\\TipoContenido' => __DIR__ . '/../..' . '/app/TipoContenido.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
+        'App\\Web' => __DIR__ . '/../..' . '/app/Web.php',
         'App\\Zona' => __DIR__ . '/../..' . '/app/Zona.php',
         'Bican\\Roles\\Contracts\\HasRoleAndPermission' => __DIR__ . '/..' . '/bican/roles/src/Bican/Roles/Contracts/HasRoleAndPermission.php',
         'Bican\\Roles\\Contracts\\PermissionHasRelations' => __DIR__ . '/..' . '/bican/roles/src/Bican/Roles/Contracts/PermissionHasRelations.php',

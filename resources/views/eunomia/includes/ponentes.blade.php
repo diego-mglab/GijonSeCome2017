@@ -1,12 +1,12 @@
-<div class="col-md-6">
+<div class="col-md-12">
 
 
     <div class="box box">
         <div class="box-header" style="background-color:#F2F2F2">
-            <h3 class="box-title">Últimas noticias</h3>
+            <h3 class="box-title">Últimos ponentes</h3>
 
             <div class="box-tools pull-right">
-                <span data-toggle="tooltip" title="" class="badge bg-grey" data-original-title="{{ $noticias->count() }} Tareas">{{ $noticias->count() }}</span>
+                <span data-toggle="tooltip" title="" class="badge bg-grey" data-original-title="{{ $ponentes->count() }} Tareas">{{ $ponentes->count() }}</span>
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                 </button>
                 <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
@@ -23,27 +23,27 @@
                         <thead>
                         <tr>
 
-                            <th>Título</th>
-                            <th>Subtítulo</th>
-                            <th>Fecha</th>
+                            <th>Nombre</th>
+                            <th>Restaurante</th>
+                            <th>Año</th>
                         </tr>
                         </thead>
                         <tbody>
 
 
 
-                        @foreach ($noticias as $noticia)
+                        @foreach ($ponentes as $ponente)
 
 
                             <tr>
 
 
 
-                                <td>{{is_object($noticia->textos_idioma_principal)?link_to_route('contents.edit',$noticia->textos_idioma_principal->titulo, array($noticia->id), array()):''}}</td>
+                                <td>{{is_object($ponente->textos_idioma_principal)?link_to_route('ponentes.edit',$ponente->textos_idioma_principal->titulo, array($ponente->id), array()):''}}</td>
 
-                                <td>{{is_object($noticia->textos_idioma_principal)?link_to_route('contents.edit', $noticia->textos_idioma_principal->subtitulo, array($noticia) ):''}}</td>
+                                <td>{{is_object($ponente->textos_idioma_principal)?link_to_route('ponentes.edit', $ponente->textos_idioma_principal->subtitulo, array($ponente) ):''}}</td>
 
-                                <td>{{$noticia->fecha}}</td>
+                                <td>{{$ponente->anio}}</td>
 
                             </tr>
 
@@ -64,7 +64,7 @@
 
         {{-- pie boton añadir tarea --}}
         <div class="box-footer clearfix">
-            <a href="eunomia/contents/create" class="btn btn-block btn-success btn-xs pull-left">Nueva noticia</a>
+            <a href="eunomia/ponentes/create" class="btn btn-block btn-success btn-xs pull-left">Nuevo ponente</a>
         </div>
 
         <!-- /.box-footer -->

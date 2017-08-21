@@ -1,7 +1,7 @@
 <head>
     <!-- OJO tiene un css único gijonsecome.css-->
     <!-- Basic -->
-    <title>Gijon beta test</title>
+    <title>{{$metas[0]}}</title>
 
     <!-- Define Charset -->
     <meta charset="utf-8">
@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <!-- Page Description and Author -->
-    <meta name="description" content="gijon se come">
+    <meta name="description" content="{{$metas[1]}}">
     <meta name="author" content="www.mglab.es">
 
     <!-- Cabeceras para el Facebook en las páginas de contenido (noticias y entrvistas) y detalle ponentes -->

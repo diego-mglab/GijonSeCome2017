@@ -7,19 +7,21 @@ use Session;
 
 class Content extends Model
 {
+    protected $tipo_contenido = 1;
+
     public function textos_idioma()
     {
-        return $this->belongsTo('App\TextosIdioma', 'id', 'contenido_id')->where('visible', '1')->where('idioma_id', Idioma::fromCodigo(Session::get('idioma')))->where('tipo_contenido_id', '1');
+        return $this->belongsTo('App\TextosIdioma', 'id', 'contenido_id')->where('visible', '1')->where('idioma_id', Idioma::fromCodigo(Session::get('idioma')))->where('tipo_contenido_id', $this->tipo_contenido);
     }
 
     public function textos_idioma_principal()
     {
-        return $this->belongsTo('App\TextosIdioma', 'id', 'contenido_id')->where('visible', '1')->where('idioma_id', Idioma::where('principal', 1)->first()->id)->where('tipo_contenido_id', '1');
+        return $this->belongsTo('App\TextosIdioma', 'id', 'contenido_id')->where('visible', '1')->where('idioma_id', Idioma::where('principal', 1)->first()->id)->where('tipo_contenido_id', $this->tipo_contenido);
     }
 
     public function textos_idioma_todos($idioma_id)
     {
-        return TextosIdioma::where('idioma_id', $idioma_id)->where('contenido_id', $this->id)->where('tipo_contenido_id', 1)->first();
+        return TextosIdioma::where('idioma_id', $idioma_id)->where('contenido_id', $this->id)->where('tipo_contenido_id', $this->tipo_contenido)->first();
     }
 
     public function menu()

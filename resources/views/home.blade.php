@@ -10,6 +10,10 @@
     @include('eunomia.includes.box')
 
     <div class="row">
-
+        @include('eunomia.includes.noticias')
+        @include('eunomia.includes.entrevistas')
+    </div>
+    <div class="row">
+        @include('eunomia.includes.ponentes')
     </div>
 @stop

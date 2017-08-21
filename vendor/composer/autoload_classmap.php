@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'App\\Agenda' => $baseDir . '/app/Agenda.php',
+    'App\\Configuracion' => $baseDir . '/app/Configuracion.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Content' => $baseDir . '/app/Content.php',
     'App\\DocumentosPrensa' => $baseDir . '/app/DocumentosPrensa.php',
@@ -18,6 +19,7 @@ return array(
     'App\\Http\\Controllers\\Auth\\LoginController' => $baseDir . '/app/Http/Controllers/Auth/LoginController.php',
     'App\\Http\\Controllers\\Auth\\RegisterController' => $baseDir . '/app/Http/Controllers/Auth/RegisterController.php',
     'App\\Http\\Controllers\\Auth\\ResetPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ResetPasswordController.php',
+    'App\\Http\\Controllers\\ConfiguracionController' => $baseDir . '/app/Http/Controllers/ConfiguracionController.php',
     'App\\Http\\Controllers\\ContentController' => $baseDir . '/app/Http/Controllers/ContentController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\DocumentosPrensaController' => $baseDir . '/app/Http/Controllers/DocumentosPrensaController.php',
@@ -55,6 +57,7 @@ return array(
     'App\\TextosIdioma' => $baseDir . '/app/TextosIdioma.php',
     'App\\TipoContenido' => $baseDir . '/app/TipoContenido.php',
     'App\\User' => $baseDir . '/app/User.php',
+    'App\\Web' => $baseDir . '/app/Web.php',
     'App\\Zona' => $baseDir . '/app/Zona.php',
     'Bican\\Roles\\Contracts\\HasRoleAndPermission' => $vendorDir . '/bican/roles/src/Bican/Roles/Contracts/HasRoleAndPermission.php',
     'Bican\\Roles\\Contracts\\PermissionHasRelations' => $vendorDir . '/bican/roles/src/Bican/Roles/Contracts/PermissionHasRelations.php',

@@ -28,9 +28,12 @@ class HomeController extends Controller
     public function index()
     {
         $users = User::all();
-        $noticias = Content::where('tipo_contenido','noticia')->get();
-        $entrevistas = Content::where('tipo_contenido','entrevista')->get();
-        $ponentes = Ponente::where('anio',date('Y'))->get();
+        $noticias = Content::where('tipo_contenido','noticia')
+            ->orderBy('fecha','DESC')->take(5)->get();
+        $entrevistas = Content::where('tipo_contenido','entrevista')
+            ->OrderBy('fecha','DESC')->take(5)->get();
+        $ponentes = Ponente::where('anio',date('Y'))
+            ->orderBy('orden','ASC')->take(5)->get();
         return view('home',compact('users','noticias','entrevistas','ponentes'));
     }
 }

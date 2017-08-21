@@ -9,8 +9,10 @@ class Agenda extends Model
 {
     protected $table = 'agenda';
 
+    protected $tipo_contenido = 2;
+
     public function textos_idioma(){
-        return $this->belongsTo('App\TextosIdioma','id','contenido_id')->where('visible','1')->where('idioma_id',Idioma::fromCodigo(Session::get('idioma')))->where('tipo_contenido_id','2');
+        return $this->belongsTo('App\TextosIdioma','id','contenido_id')->where('visible','1')->where('idioma_id',Idioma::fromCodigo(Session::get('idioma')))->where('tipo_contenido_id',$this->tipo_contenido);
     }
 
     public function ponentesAgenda(){

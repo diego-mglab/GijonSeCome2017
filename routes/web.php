@@ -82,7 +82,9 @@ Route::group(['middleware' => ['web']], function () {
         $menus = Menu::orderBy('order')->get();
         $portada = Portada::orderBy('orden')->get();
         $ponentes = Ponente::where('anio',date('Y'))->orderBy('orden')->get();
-        return view('web.home',compact('menus','portada','ponentes'));
+        //Metas
+        $metas = WebController::devuelveMetas('contents','',1);
+        return view('web.home',compact('menus','portada','ponentes','metas'));
     })->where([
         'lang' => 'es|as'
     ]);
@@ -115,6 +117,8 @@ Route::group(['prefix' => 'eunomia' , 'middleware' => 'auth' ], function () {
     Route::resource('/galerias', 'GaleriaController');
 
     Route::resource('/documentos_prensa','DocumentosPrensaController');
+
+    Route::resource('/configuracion','ConfiguracionController');
 
     Route::get('/menu', 'MenuController@getIndex');
 

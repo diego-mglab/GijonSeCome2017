@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Web;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Menu;
@@ -21,6 +22,7 @@ use Carbon\Carbon;
 use Mail;
 use App;
 use App\DocumentosPrensa;
+use App\Configuracion;
 
 class WebController extends Controller
 {
@@ -33,7 +35,9 @@ class WebController extends Controller
         $menus = Menu::orderBy('order')->get();
         $portada = Portada::orderBy('orden')->get();
         $ponentes = Ponente::where('anio',date('Y'))->orderBy('orden')->get();
-        return view('errors.404',compact('menus','portada','ponentes'));
+        //Metas
+        $metas = Web::devuelveMetas('contents','',1);
+        return view('errors.404',compact('menus','portada','ponentes','metas'));
     }
 
     public function ponentes($anio=2017)
@@ -42,11 +46,13 @@ class WebController extends Controller
         //dd(Session::all());
         $menus = Menu::orderBy('order')->get();
         $ponentes = Ponente::where('anio',$anio)->orderBy('orden')->get();
+        //Metas
+        $metas = Web::devuelveMetas('contents','ponentes',1);
         //Breadcrums
         //Definimos el array con los elemento del breadcrum
         $elementos = ['Inicio','El Festival','Ponentes'];
         $breadcrums = $this->devuelveBreadcrums($elementos);
-        return view('web.ponentes', compact('menus','ponentes','breadcrums','anio'));
+        return view('web.ponentes', compact('menus','ponentes','breadcrums','anio','metas'));
     }
 
     public function programa()
@@ -63,11 +69,13 @@ class WebController extends Controller
         $galeria = Galeria::where('anio',$anio)->orderBy('orden')->first();
         if (is_object($galeria))
             $multimedia = Multimedia::where('galeria_id',$galeria->id)->orderBy('orden')->get();
+        //Metas
+        $metas = Web::devuelveMetas('galerias','galeria',5);
         //Breadcrums
         //Definimos el array con los elemento del breadcrum
         $elementos = ['Inicio','El Festival','Galería'];
         $breadcrums = $this->devuelveBreadcrums($elementos);
-        return view('web.galeria', compact('menus','breadcrums','anio','galeria','multimedia'));
+        return view('web.galeria', compact('menus','breadcrums','anio','galeria','multimedia','metas'));
     }
 
     public function contacto(Request $request)
@@ -92,8 +100,10 @@ class WebController extends Controller
             $msj->to('diego@mglab.es');
             });
         }
+        //Metas
+        $metas = Web::devuelveMetas('contents','contacto',1);
         $menus = Menu::orderBy('order')->get();
-        return view('web.contacto',compact('menus'));
+        return view('web.contacto',compact('menus','metas'));
     }
 
     public function zonadeprensa(Request $request)
@@ -108,8 +118,10 @@ class WebController extends Controller
             });
         }
         $documentosPrensa = DocumentosPrensa::all();
+        //Metas
+        $metas = Web::devuelveMetas('contents','zona_prensa',1);
         $menus = Menu::orderBy('order')->get();
-        return view('web.zonadeprensa',compact('menus','documentosPrensa'));
+        return view('web.zonadeprensa',compact('menus','documentosPrensa','metas'));
     }
 
     public function noticias()
@@ -119,10 +131,12 @@ class WebController extends Controller
         $noticias = Content::where('tipo_contenido','noticia')
             ->where('fecha_publicacion','<=',date('Y-m-d'))
             ->orderBy('fecha','DESC')->get();
+        //Metas
+        $metas = Web::devuelveMetas('contents','noticias',1);
         //Definimos el array con los elementos del breadcrum
         $elementos = ['Inicio','El Festival','Noticias'];
         $breadcrums = $this->devuelveBreadcrums($elementos);
-        return view('web.noticias',compact('menus','noticias','breadcrums'));
+        return view('web.noticias',compact('menus','noticias','breadcrums','metas'));
     }
 
     public function entrevistas()
@@ -132,10 +146,12 @@ class WebController extends Controller
         $entrevistas = Content::where('tipo_contenido','entrevista')
             ->where('fecha_publicacion','<=',date('Y-m-d'))
             ->orderBy('fecha','DESC')->get();
+        //Metas
+        $metas = Web::devuelveMetas('contents','entrevistas',1);
         //Definimos el array con los elementos del breadcrum
         $elementos = ['Inicio','El Festival','Entrevistas'];
         $breadcrums = $this->devuelveBreadcrums($elementos);
-        return view('web.entrevistas',compact('menus','entrevistas','breadcrums'));
+        return view('web.entrevistas',compact('menus','entrevistas','breadcrums','metas'));
     }
 
     public function detalle()
@@ -170,8 +186,10 @@ class WebController extends Controller
         if ($now->gte($fecha_publicacion)) {
             //Definimos el array con los elemento del breadcrum
             $elementos = ['Inicio', 'El Festival', $textosidioma->titulo];
+            //Metas
+            $metas = Web::devuelveMetas('contents',$slug,1);
             $breadcrums = $this->devuelveBreadcrums($elementos);
-            return view('web.detalle', compact('menus', 'textosidioma', 'breadcrums', 'content','registros'));
+            return view('web.detalle', compact('menus', 'textosidioma', 'breadcrums', 'content','registros','metas'));
         } else {
             return redirect('/');
         }
@@ -185,8 +203,10 @@ class WebController extends Controller
         //Definimos el array con los elemento del breadcrum
         $elementos = ['Inicio','El Festival','Programa'];
         $dias_evento = ['Sábado','Domingo','Lunes'];
+        //Metas
+        $metas = Web::devuelveMetas('contents','agenda',1);
         $breadcrums = $this->devuelveBreadcrums($elementos);
-        return view('web.agenda',compact('menus','agenda','breadcrums','dias_evento'));
+        return view('web.agenda',compact('menus','agenda','breadcrums','dias_evento','metas'));
     }
 
     public function detalleponentes($slug)
@@ -205,9 +225,11 @@ class WebController extends Controller
                 ->OrderBy('agenda.fecha')->OrderBy('agenda.hora')->get();
             //Definimos el array con los elemento del breadcrum
             $elementos = ['Inicio', 'El Festival', 'Ponentes', $textosidioma->titulo];
+            //Metas
+            $metas = Web::devuelveMetas('ponentes',$slug,3);
             $breadcrums = $this->devuelveBreadcrums($elementos);
 
-            return view('web.detalleponentes', compact('menus', 'ponente', 'textosidioma', 'breadcrums', 'agenda'));
+            return view('web.detalleponentes', compact('menus', 'ponente', 'textosidioma', 'breadcrums', 'agenda','metas'));
         } else{
             return view('errors.404',compact('menus'));
         }

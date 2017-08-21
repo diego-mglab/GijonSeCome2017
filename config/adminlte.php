@@ -85,15 +85,15 @@ return [
     |
     */
 
-    'dashboard_url' => 'eunomia/home',
+    'dashboard_url' => 'home',
 
-    'logout_url' => 'eunomia/logout',
+    'logout_url' => 'logout',
 
     'logout_method' => null,
 
-    'login_url' => 'eunomia/login',
+    'login_url' => 'login',
 
-    'register_url' => 'eunomia/register',
+    'register_url' => 'register',
 
     /*
     |--------------------------------------------------------------------------
