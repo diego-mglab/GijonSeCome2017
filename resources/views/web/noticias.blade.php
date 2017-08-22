@@ -36,6 +36,8 @@
                     $ruta = '';
                     $titulo = '';
                     $subtitulo = '';
+                    $imagen_mord = '';
+                    $imagen_mov = '';
                     if ($noticias[$i]->fecha != ''){
                         $time= strtotime($noticias[$i]->fecha);
                         $fecha = date('d/m/Y',$time);
@@ -44,13 +46,13 @@
                         $titulo = $noticias[$i]->textos_idioma->titulo;
                         $subtitulo = $noticias[$i]->textos_idioma->subtitulo;
                         $ruta = str_replace('-','',$noticias[$i]->textos_idioma->slug).'_web_'.Session::get('idioma');
-                        if ($i==0){
-                            $imagen_mord = 'A_mord.png';
-                            $imagen_mov = 'A_mord_XS.png';
-                        } else {
-                            $imagen_mord = 'destacadonoticiasB.png';
-                            $imagen_mov = 'mordiscodestacadodosxs.png';
-                        }
+                    }
+                    if ($i==0){
+                        $imagen_mord = 'A_mord.png';
+                        $imagen_mov = 'A_mord_XS.png';
+                    } else {
+                        $imagen_mord = 'destacadonoticiasB.png';
+                        $imagen_mov = 'mordiscodestacadodosxs.png';
                     }
                     ?>
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 {{$i==0?'destacadauna':'destacadados'}}">
@@ -134,8 +136,8 @@
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 
 
-                            <time class="black">{{$lugar!=''?$lugar.'.':''}} {{$fecha}}</time>
-                            <h1 class="white">{{$ruta!=''?link_to_route($ruta,$title=$titulo):$titulo}}</h1>
+                            <h1 class="<?=$i%2==0?'white':'black'?>">{{$ruta!=''?link_to_route($ruta,$title=$titulo):$titulo}}</h1>
+                            <time class="<?=$i%2==0?'black':'white'?>">{{$lugar!=''?$lugar.'.':''}} {{$fecha}}</time>
 
 
                         </div>

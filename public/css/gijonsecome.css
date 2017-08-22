@@ -1593,6 +1593,9 @@ form{ margin-right: 2rem;
 	margin-bottom: 2rem
 	}
 
-
+/*solo en zona de prensa*/
+.list-unstyled a:link{color:#19A8A5}
+.list-unstyled a:visited{color:#19A8A5}
+.list-unstyled a:hover{color:#19A8A5;text-decoration:underline;}
 
 

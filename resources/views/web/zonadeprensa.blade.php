@@ -53,7 +53,7 @@
 
                         <div class="form-group">
                             <div class="controls">
-                                {{Form::textarea('mensaje', null, ['rows' => '7', 'placeholder' => __('zonadeprensa.mensaje')])}}
+                                {{Form::textarea('mensaje', null, ['rows' => '7', 'placeholder' => __('zonadeprensa.mensaje'), 'id' => 'mensaje'])}}
                             </div>
                         </div>
                         {{Form::hidden('email_envio',null,['id'  => 'email_envio'])}}
@@ -68,7 +68,7 @@
 
                     <!-- Classic Heading -->
                     <h4 class="classic-title"><span>{{__('zonadeprensa.documentos_para_prensa')}}</span></h4>
-                    <ul>
+                    <ul class="list-unstyled">
                         @foreach($documentosPrensa as $documento)
                             @if (is_object($documento->textos_idioma))
                             <li>
@@ -143,5 +143,34 @@
 @endsection
 
 @section('js')
+    <!-- Jquery Validator -->
+        <script src="{{asset('js/jquery.validate.js')}}"></script>
+        <script language="JavaScript">
+            $().ready(function() {
+                // validate signup form on keyup and submit
+                $("#contact-form").validate({
+                    rules: {
+                        nombre: "required",
+                        medio: "required",
+                        email: {
+                            required: true,
+                            email: true
+                        },
+                        asunto: "required",
+                        mensaje: {
+                            required: true,
+                            maxlength: 2000
+                        },
+                    },
+                    messages: {
+                        nombre: "{{__('zonadeprensa.nombre_req')}}",
+                        medio: "{{__('zonadeprensa.medio_req')}}",
+                        email: "{{__('zonadeprensa.email_req')}}",
+                        asunto: "{{__('zonadeprensa.asunto_req')}}",
+                        mensaje: "{{__('zonadeprensa.mensaje_req')}}"
+                    }
+                });
+            });
 
+        </script>
 @endsection

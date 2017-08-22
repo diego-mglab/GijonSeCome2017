@@ -14,6 +14,7 @@ use App\Agenda;
 use App\Content;
 use App\Galeria;
 use App\Multimedia;
+use Illuminate\View\View;
 use Session;
 use Illuminate\Support\Facades\DB;
 use URL;
@@ -31,6 +32,11 @@ class WebController extends Controller
         //
     }
 
+    /**
+     * Muestra la página de error 404.
+     *
+     * @return View
+     */
     public function pag404(){
         $menus = Menu::orderBy('order')->get();
         $portada = Portada::orderBy('orden')->get();
@@ -40,6 +46,13 @@ class WebController extends Controller
         return view('errors.404',compact('menus','portada','ponentes','metas'));
     }
 
+    /**
+     * Muestra la página de los ponentes
+     * Recibe el parámetro $anio para mostrar los ponentes correspondientes a cada año
+     *
+     * @param  int $anio
+     * @return View
+     */
     public function ponentes($anio=2017)
     {
         $this->estableceIdioma();
@@ -55,6 +68,11 @@ class WebController extends Controller
         return view('web.ponentes', compact('menus','ponentes','breadcrums','anio','metas'));
     }
 
+    /**
+     * Muestra la página del programa de eventos
+     *
+     * @return View
+     */
     public function programa()
     {
         $this->estableceIdioma();
@@ -62,6 +80,13 @@ class WebController extends Controller
         return view('web.agenda', compact('menus'));
     }
 
+    /**
+     * Muestra la página de la galería de imágenes y videos
+     * Recibe el parámetro $anio para mostrar la galería correspondiente a cada año
+     *
+     * @param  int $anio
+     * @return View
+     */
     public function galeria($anio=2017)
     {
         $this->estableceIdioma();
@@ -78,6 +103,13 @@ class WebController extends Controller
         return view('web.galeria', compact('menus','breadcrums','anio','galeria','multimedia','metas'));
     }
 
+    /**
+     * Muestra la página del contacto
+     * Recibe el formulario para enviar el email con los datos del formulario
+     *
+     * @param  Request $request
+     * @return View
+     */
     public function contacto(Request $request)
     {
         $this->estableceIdioma();
@@ -106,6 +138,14 @@ class WebController extends Controller
         return view('web.contacto',compact('menus','metas'));
     }
 
+    /**
+     * Muestra la página de la zona de prensa
+     * Recibe el formulario para enviar el email con los datos del formulario
+     * Muestra tambien los documentos subidos en la gestión
+     *
+     * @param  Request $request
+     * @return View
+     */
     public function zonadeprensa(Request $request)
     {
         $this->estableceIdioma();
@@ -124,6 +164,11 @@ class WebController extends Controller
         return view('web.zonadeprensa',compact('menus','documentosPrensa','metas'));
     }
 
+    /**
+     * Muestra la página de las noticias
+     *
+     * @return View
+     */
     public function noticias()
     {
         $this->estableceIdioma();
@@ -139,6 +184,11 @@ class WebController extends Controller
         return view('web.noticias',compact('menus','noticias','breadcrums','metas'));
     }
 
+    /**
+     * Muestra la página de las entrevistas
+     *
+     * @return View
+     */
     public function entrevistas()
     {
         $this->estableceIdioma();
@@ -154,6 +204,11 @@ class WebController extends Controller
         return view('web.entrevistas',compact('menus','entrevistas','breadcrums','metas'));
     }
 
+    /**
+     * Muestra la página del del detalle tanto de páginas, noticias y entrevistas
+     *
+     * @return View
+     */
     public function detalle()
     {
         $this->estableceIdioma();
@@ -195,6 +250,11 @@ class WebController extends Controller
         }
     }
 
+    /**
+     * Muestra la página del programa de eventos
+     *
+     * @return View
+     */
     public function agenda()
     {
         $this->estableceIdioma();
@@ -209,6 +269,11 @@ class WebController extends Controller
         return view('web.agenda',compact('menus','agenda','breadcrums','dias_evento','metas'));
     }
 
+    /**
+     * Muestra el detalle de cada ponente pasado en el parámetro slug (url-amigable)
+     *
+     * @return View
+     */
     public function detalleponentes($slug)
     {
         $this->estableceIdioma();
@@ -235,6 +300,13 @@ class WebController extends Controller
         }
     }
 
+    /**
+     * Devuelve un array con los elementos del breadcrums y sus url amigables de cada página
+     * Recibe un array con los elementos que formartán el breadcrum
+     *
+     * @param  Array $elementos
+     * @return Array $breadcrums
+     */
     public function devuelveBreadcrums(Array $elementos){
         //Breadcrums
         //Definimos un array para meter los componentes del breadcrum por orden
@@ -257,6 +329,11 @@ class WebController extends Controller
         return $breadcrums;
     }
 
+    /**
+     * Establece el idioma principal dependiendo del codigo de idioma que venga en la url
+     *
+     *
+     */
     public function estableceIdioma(){
         //Si accedemos a una url interna que no sea el index hay que capturar con qué idioma viene para activar la vble de sesión
         //if (Session::get('idioma') == null || Session::get('idioma') == '') {

@@ -8,7 +8,7 @@ use App\Idioma;
 
 class Menu extends Model
 {
-    protected $tipo_contenido = 6; // 1 - Contenido, 2 - Agenda, 3 - Ponente, 4 - Portada, 5 - Galería, 6 - Menú, 7 - Multimedia, 8 - Documentos Prensa
+    protected $tipo_contenido = 6; // 1 - Contenido, 2 - Agenda, 3 - Ponente, 4 - Portada, 5 - Galería, 6 - Menú, 7 - Multimedia, 8 - Documentos Prensa, 9 - Configuracion
 
     // Recursive function that builds the menu from an array or object of items
     // In a perfect world some parts of this function would be in a custom Macro or a View

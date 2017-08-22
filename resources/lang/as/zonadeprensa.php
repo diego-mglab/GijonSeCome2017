@@ -29,5 +29,10 @@ return [
     'gijonsecome' => 'XixónComese',
     'diciembre' => 'avientu',
     'recinto_ferial' => 'Cortil Ferial Luis Adaro',
+    'nombre_req' => 'Por favor introduza\'l so nome',
+    'medio_req' => 'Por favor introduza un mediu o blogue',
+    'email_req' => 'Por favor introduza una dirección de email válida',
+    'asunto_req' => 'Por favor introduza un asuntu',
+    'mensaje_req' => 'Por favor introduza un mensaxe a lo más de 2000 calteres',
 
 ];

@@ -31,5 +31,9 @@ return [
     'gijonsecome' => 'GijónSeCome',
     'diciembre' => 'diciembre',
     'recinto_ferial' => 'Recinto Ferial Luis Adaro',
-
+    'tipo_contacto_req' => 'Por favor elija un tipo de contacto',
+    'nombre_req' => 'Por favor introduzca su nombre',
+    'email_req' => 'Por favor introduzca una dirección de email válida',
+    'asunto_req' => 'Por favor introduzca un asunto',
+    'mensaje_req' => 'Por favor introduzca un mensaje como máximo de 2000 caracteres',
 ];

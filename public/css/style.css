@@ -1098,6 +1098,11 @@ label {
 	font-weight: 300;
 	cursor: pointer;
 }
+Label.error {
+	color: #ED2C3A;
+	margin-left: 2px;
+	font-size: .8rem;
+}
 
 label .required {
 	color: #ED2C3A;
@@ -2873,7 +2878,7 @@ ul.icons-list li i {
 
 
 .classic-title span {
-	padding-bottom: 8px;
+	padding-bottom: 13px;
 	border-bottom: 1px solid;
 	font-weight: 400;
 }

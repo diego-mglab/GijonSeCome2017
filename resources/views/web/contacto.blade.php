@@ -53,9 +53,14 @@
                         <div class="form-group">
 
                             <div class="controls">
-                                {{Form::textarea('mensaje', null, ['rows' => '7', 'placeholder' => __('contacto.mensaje')])}}
+                                {{Form::textarea('mensaje', null, ['rows' => '7', 'placeholder' => __('contacto.mensaje'), 'id' => 'mensaje'])}}
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <div class="g-recaptcha" data-sitekey="6LczvS0UAAAAACwXIJ8R9ulYXci5Z3HVXVkaXbxC"></div>
+                        </div>
+
                         {{Form::hidden('email_envio',null,['id'  => 'email_envio'])}}
                         <button type="submit" id="submit" class="btn-system btn-large">{{__('contacto.enviar')}}</button>
                         <div id="success" style="color:#34495e;"></div>
@@ -75,7 +80,7 @@
 
                     <!-- Info - Icons List -->
                     <ul class="icons-list">
-                        <li><i class="fa fa-globe">  </i> <strong>{{__('contacto.direccion')}}:</strong> {{__('contacto.recinto_ferial_luis_adaro')}}.</li>
+                        <li><i class="fa fa-globe">  </i> <strong>{{__('contacto.direccion')}}:</strong> {{__('contacto.recinto_ferial')}}.</li>
                         <li><i class="fa fa-envelope-o"></i> <strong>{{__('contacto.email')}}:</strong>info@gijonsecome.es</li>
                         <li><i class="fa fa-mobile"></i> <strong>{{__('contacto.telefono')}}:</strong> +34 985 17 15 52 </li>
                     </ul>
@@ -131,6 +136,59 @@
 @endsection
 
 @section('js')
+    <!-- Jquery Validator -->
+    <script src="{{asset('js/jquery.validate.js')}}"></script>
+    <script language="JavaScript">
+        $().ready(function() {
+            // validate signup form on keyup and submit
+            $("#contact-form").validate({
+                reCaptchaSiteKey: '...',
+                reCaptchaTheme: 'light',
+                rules: {
+                    tipo_contacto: "required",
+                    nombre: "required",
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    asunto: "required",
+                    mensaje: {
+                        required: true,
+                        maxlength: 2000
+                    },
+                    hiddenRecaptcha: "required"
+                },
+                messages: {
+                    tipo_contacto: "{{__('contacto.tipo_contacto_req')}}",
+                    nombre: "{{__('contacto.nombre_req')}}",
+                    email: "{{__('contacto.email_req')}}",
+                    asunto: "{{__('contacto.asunto_req')}}",
+                    mensaje: "{{__('contacto.mensaje_req')}}",
+                    hiddenRecaptcha: "Por favor verifique el captcha"
+                }
+            });
+
+            $("#contact-form").submit(function() {
+
+                $.ajax({
+                    url: '{{asset('php/checkCaptcha.php')}}',
+                    type: 'post',
+                    dataType: 'json',
+                    data: {
+                        'foo': foo,
+                        'response': grecaptcha.getResponse()
+                    },
+                    success: function(data) {
+                        // your code here...
+                    }
+                });
+                return false;
+
+            });
+        });
+
+    </script>
+
     <script language="JavaScript">
         $(function() {
             $('#tipo_contacto').change(function (e) {

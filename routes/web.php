@@ -20,6 +20,7 @@ use App\Portada;
 use App\Ponente;
 use App\Content;
 use Illuminate\Support\Facades\Session;
+use App\Web;
 
 //Rutas para web
 
@@ -83,7 +84,7 @@ Route::group(['middleware' => ['web']], function () {
         $portada = Portada::orderBy('orden')->get();
         $ponentes = Ponente::where('anio',date('Y'))->orderBy('orden')->get();
         //Metas
-        $metas = WebController::devuelveMetas('contents','',1);
+        $metas = Web::devuelveMetas('contents','',1);
         return view('web.home',compact('menus','portada','ponentes','metas'));
     })->where([
         'lang' => 'es|as'
