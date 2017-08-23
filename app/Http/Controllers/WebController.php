@@ -24,6 +24,7 @@ use Mail;
 use App;
 use App\DocumentosPrensa;
 use App\Configuracion;
+use ReCaptcha\ReCaptcha;
 
 class WebController extends Controller
 {
@@ -112,26 +113,31 @@ class WebController extends Controller
      */
     public function contacto(Request $request)
     {
-        $this->estableceIdioma();
         if ($request->nombre != ''){
-            $email = '';
-            switch($request->tipo_contacto){
-                case 'Expositores' || 'Patrocinadores':
-                    $email = 'info@gijonsecome.es';
-                    break;
-                case 'Prensa':
-                    $email = 'prensa@gijonsecome.es';
-                    break;
-                case 'Programación del festival':
-                    $email = 'programacion@gijonsecome.es';
-                    break;
+            $secret = env('RE_CAP_SECRET');
+            $gRecaptchaResponse = isset($_POST["g-recaptcha-response"])? $_POST["g-recaptcha-response"] : null;
+            $recaptcha = new ReCaptcha($secret);
+            $resp = $recaptcha->verify($gRecaptchaResponse, $_SERVER['REMOTE_ADDR']);
+            if ($resp->isSuccess()) {
+                $email = '';
+                switch($request->tipo_contacto){
+                    case 'Expositores' || 'Patrocinadores':
+                        $email = 'info@gijonsecome.es';
+                        break;
+                    case 'Programación del festival':
+                        $email = 'programacion@gijonsecome.es';
+                        break;
+                }
+                $email = 'diego@mglab.es';
+                Mail::send('web.includes.contacta', $request->all(), function($msj) use ($email){
+                    $msj->subject('Formulario contacto web GijonSeCome');
+                    $msj->to($email);
+                });
+            } else {
+                dd($request);
             }
-            $email = 'diego@mglab.es';
-            Mail::send('web.includes.contacta', $request->all(), function($msj){
-            $msj->subject('Formulario contacto web GijonSeCome');
-            $msj->to('diego@mglab.es');
-            });
         }
+        $this->estableceIdioma();
         //Metas
         $metas = Web::devuelveMetas('contents','contacto',1);
         $menus = Menu::orderBy('order')->get();
@@ -148,15 +154,15 @@ class WebController extends Controller
      */
     public function zonadeprensa(Request $request)
     {
-        $this->estableceIdioma();
         if ($request->nombre != ''){
             $email = 'prensa@gijonsecome.es';
             $email = 'diego@mglab.es';
-            Mail::send('web.includes.zonadeprensa', $request->all(), function($msj){
+            Mail::send('web.includes.zonadeprensa', $request->all(), function($msj) use ($email){
                 $msj->subject('Formulario prensa web GijonSeCome');
-                $msj->to('diego@mglab.es');
+                $msj->to($email);
             });
         }
+        $this->estableceIdioma();
         $documentosPrensa = DocumentosPrensa::all();
         //Metas
         $metas = Web::devuelveMetas('contents','zona_prensa',1);

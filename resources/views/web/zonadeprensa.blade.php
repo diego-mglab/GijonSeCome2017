@@ -26,7 +26,7 @@
 
                     <!-- Start Contact Form -->
 
-                    {!! Form::open(['action' => 'WebController@zonadeprensa','method' => 'POST', 'name' => 'form_contacto', 'class' =>'contact-form', 'id' => 'contact-form']) !!}
+                    {!! Form::open(['route' => 'zonadeprensa_web_post_'.Session::get('idioma'),'method' => 'POST', 'name' => 'form_contacto', 'class' =>'contact-form', 'id' => 'contact-form']) !!}
 
                         <div class="form-group">
                             <div class="controls">

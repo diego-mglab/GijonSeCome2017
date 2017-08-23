@@ -2,8 +2,6 @@
 
 @section('contenido')
 
-    <!-- comienza contenido de la página-->
-
     <!-- Start Map -->
     <div>
 
@@ -26,7 +24,7 @@
 
                     <!-- Start Contact Form -->
 
-                    {!! Form::open(['action' => 'WebController@contacto','method' => 'POST', 'name' => 'form_contacto', 'class' =>'contact-form', 'id' => 'contact-form']) !!}
+                    {!! Form::open(['route' => 'contacto_web_post_'.Session::get('idioma'),'method' => 'POST', 'name' => 'form_contacto', 'class' =>'contact-form', 'id' => 'contact-form']) !!}
                         <div class="form-group">
                             <div class="controls">
                                 {{Form::select('tipo_contacto', ['Expositores' => __('contacto.expositores'),'Patrocinadores' => __('contacto.patrocinadores'),'Programación del festival' => __('contacto.programacion_festival')],null, ['placeholder' => __('contacto.tipo_contacto'), 'id' => 'tipo_contacto'])}}
@@ -57,12 +55,8 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <div class="g-recaptcha" data-sitekey="6LczvS0UAAAAACwXIJ8R9ulYXci5Z3HVXVkaXbxC"></div>
-                        </div>
-
                         {{Form::hidden('email_envio',null,['id'  => 'email_envio'])}}
-                        <button type="submit" id="submit" class="btn-system btn-large">{{__('contacto.enviar')}}</button>
+                        <button class="btn-system btn-large g-recaptcha" data-sitekey="{{env('RE_CAP_SITE')}}" data-callback="onSubmit">{{__('contacto.enviar')}}</button>
                         <div id="success" style="color:#34495e;"></div>
                 {!! Form::close() !!}
                     <!-- End Contact Form -->
@@ -128,6 +122,8 @@
 
         </div>
         <!-- End Container -->
+    </div>
+    <!-- End Content -->
 
 @endsection
 
@@ -155,35 +151,15 @@
                     mensaje: {
                         required: true,
                         maxlength: 2000
-                    },
-                    hiddenRecaptcha: "required"
+                    }
                 },
                 messages: {
                     tipo_contacto: "{{__('contacto.tipo_contacto_req')}}",
                     nombre: "{{__('contacto.nombre_req')}}",
                     email: "{{__('contacto.email_req')}}",
                     asunto: "{{__('contacto.asunto_req')}}",
-                    mensaje: "{{__('contacto.mensaje_req')}}",
-                    hiddenRecaptcha: "Por favor verifique el captcha"
+                    mensaje: "{{__('contacto.mensaje_req')}}"
                 }
-            });
-
-            $("#contact-form").submit(function() {
-
-                $.ajax({
-                    url: '{{asset('php/checkCaptcha.php')}}',
-                    type: 'post',
-                    dataType: 'json',
-                    data: {
-                        'foo': foo,
-                        'response': grecaptcha.getResponse()
-                    },
-                    success: function(data) {
-                        // your code here...
-                    }
-                });
-                return false;
-
             });
         });
 
@@ -195,5 +171,13 @@
                 $("#email_envio").val(this.value);
             });
         });
+    </script>
+
+    <!-- Google reCaptcha -->
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <script>
+        function onSubmit(token) {
+            document.getElementById("contact-form").submit();
+        }
     </script>
 @endsection
