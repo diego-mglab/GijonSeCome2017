@@ -62,7 +62,7 @@
                                     <div class="form-group">
 
                                         {{Form::label('titulo', 'Nombre')}}
-                                        {{Form::text('titulo[]', null, ['class' => 'form-control' ,'placeholder' => 'Nombre'])}}
+                                        {{Form::text('titulo', null, ['class' => 'form-control' ,'placeholder' => 'Nombre'])}}
 
                                     </div>
 
@@ -127,6 +127,8 @@
                     <button type="submit" class="btn btn-default">Insertar</button>
                 </div>
 
+                    {{Form::hidden('url',$_SERVER['HTTP_REFERER'],[])}}
+
                 {!! Form::close() !!}
 
             </div>
@@ -163,6 +165,7 @@
             ],
             toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media",
             relative_urls: false,
+            language: 'es',
             file_browser_callback : function(field_name, url, type, win) {
                 var x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
                 var y = window.innerHeight|| document.documentElement.clientHeight|| document.getElementsByTagName('body')[0].clientHeight;

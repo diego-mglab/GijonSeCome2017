@@ -53,6 +53,7 @@ class PonenteController extends Controller
      */
     public function store(Request $request)
     {
+        $url = $request->url;
         $idiomas = Idioma::where('activado','1')->orderBy('principal')->get();
 
         foreach ($idiomas as $idioma) {
@@ -147,7 +148,7 @@ class PonenteController extends Controller
 
         }
 
-        return redirect('eunomia/ponentes');
+        return redirect($url);
     }
 
     /**
@@ -189,6 +190,7 @@ class PonenteController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $url = $request->url;
         $idiomas = Idioma::where('activado','1')->orderByDesc('principal')->get();
 
         foreach ($idiomas as $idioma) {
@@ -292,7 +294,7 @@ class PonenteController extends Controller
 
         }
 
-        return redirect('eunomia/ponentes');
+        return redirect($url);
     }
 
     /**

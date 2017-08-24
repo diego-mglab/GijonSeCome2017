@@ -55,6 +55,8 @@ class ContentController extends Controller
      */
     public function store(Request $request)
     {
+        $url = $request->url;
+
         $idiomas = Idioma::where('activado','1')->orderBy('principal')->get();
 
         foreach ($idiomas as $idioma) {
@@ -121,6 +123,8 @@ class ContentController extends Controller
 
         $content->columnas = $request->columnas;
 
+        $content->fb_pixel = $request->fb_pixel;
+
         if ($content->save()) {
             $lastId = $content->id;
 
@@ -149,7 +153,7 @@ class ContentController extends Controller
 
         }
 
-        return redirect('eunomia/contents');
+        return redirect($url);
 
     }
 
@@ -193,6 +197,7 @@ class ContentController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $url = $request->url;
         $idiomas = Idioma::where('activado','1')->orderByDesc('principal')->get();
 
         foreach ($idiomas as $idioma) {
@@ -273,6 +278,8 @@ class ContentController extends Controller
 
         $content->columnas = $request->columnas;
 
+        $content->fb_pixel = $request->fb_pixel;
+
         if ($content->save()) {
 
             //dd($request->visible);
@@ -305,7 +312,7 @@ class ContentController extends Controller
 
         }
 
-        return redirect('eunomia/contents');
+        return redirect($url);
 
     }
 

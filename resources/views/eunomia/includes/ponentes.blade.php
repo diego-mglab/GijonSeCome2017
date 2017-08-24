@@ -1,4 +1,4 @@
-<div class="col-md-12">
+<div class="col-md-12 connectedSortable ui-sortable">
 
 
     <div class="box box">
@@ -64,7 +64,7 @@
 
         {{-- pie boton añadir tarea --}}
         <div class="box-footer clearfix">
-            <a href="eunomia/ponentes/create" class="btn btn-block btn-success btn-xs pull-left">Nuevo ponente</a>
+            {{ link_to_route('ponentes.create', 'Nuevo ponente', null, array('class' => 'btn btn-block btn-success btn-xs')) }}
         </div>
 
         <!-- /.box-footer -->

@@ -114,11 +114,11 @@ class WebController extends Controller
     public function contacto(Request $request)
     {
         if ($request->nombre != ''){
-            $secret = env('RE_CAP_SECRET');
-            $gRecaptchaResponse = isset($_POST["g-recaptcha-response"])? $_POST["g-recaptcha-response"] : null;
-            $recaptcha = new ReCaptcha($secret);
-            $resp = $recaptcha->verify($gRecaptchaResponse, $_SERVER['REMOTE_ADDR']);
-            if ($resp->isSuccess()) {
+            //$secret = env('RE_CAP_SECRET');
+            //$gRecaptchaResponse = isset($_POST["g-recaptcha-response"])? $_POST["g-recaptcha-response"] : null;
+            //$recaptcha = new ReCaptcha($secret);
+            //$resp = $recaptcha->verify($gRecaptchaResponse, $_SERVER['REMOTE_ADDR']);
+            //if ($resp->isSuccess()) {
                 $email = '';
                 switch($request->tipo_contacto){
                     case 'Expositores' || 'Patrocinadores':
@@ -133,9 +133,9 @@ class WebController extends Controller
                     $msj->subject('Formulario contacto web GijonSeCome');
                     $msj->to($email);
                 });
-            } else {
-                dd($request);
-            }
+            //} else {
+                //dd($request);
+            //}
         }
         $this->estableceIdioma();
         //Metas

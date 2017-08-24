@@ -100,6 +100,14 @@
     <!--[if IE 8]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
     <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
+    @if(isset($content))
+        @if ($content->fb_pixel != '')
+            <!-- Facebook Pixel Code -->
+                {{$content->fb_pixel}}
+            <!-- Facebook Pixel Code -->
+        @endif
+    @endif
+
     <!-- mglab -->
     <link href="https://fonts.googleapis.com/css?family=Cormorant:400,600,600i|Source+Sans+Pro:300,400,400i" rel="stylesheet">
 

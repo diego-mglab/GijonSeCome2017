@@ -201,7 +201,8 @@ class ComposerStaticInit8f524d259efdeab5a5bf051dcd1d1d83
         ),
         'ReCaptcha\\' => 
         array (
-            0 => __DIR__ . '/..' . '/google/recaptcha/src/ReCaptcha',
+            0 => __DIR__ . '/../..' . '/src/ReCaptcha',
+            1 => __DIR__ . '/..' . '/google/recaptcha/src/ReCaptcha',
         ),
         'Ramsey\\Uuid\\' => 
         array (

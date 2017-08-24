@@ -120,7 +120,7 @@
                                     <div class="form-group">
 
                                         {{Form::label('titulo', 'Título')}}
-                                        {{Form::text('titulo[]', null, ['class' => 'form-control' ,'placeholder' => 'Título', 'id' => 'titulo'.$idioma->id, 'onkeyup' => '$("#slug'.$idioma->id.'").val(slug($("#titulo'.$idioma->id.'").val()));'])}}
+                                        {{Form::text('titulo', null, ['class' => 'form-control' ,'placeholder' => 'Título', 'id' => 'titulo'.$idioma->id, 'onkeyup' => '$("#slug'.$idioma->id.'titulo'.$idioma->id.'").val()));'])}}
 
                                     </div>
 
@@ -135,7 +135,7 @@
                                     <div class="form-group">
 
                                         {{Form::label('contenido', 'Contenido')}}
-                                        {{Form::textarea('contenido[]', null, ['class' => 'form-control'])}}
+                                        {{Form::textarea('contenido[]', null, ['class' => 'form-control textarea'])}}
 
                                     </div>
 
@@ -180,8 +180,20 @@
 
                     <div class="form-group">
                         {{Form::label('columnas','Columnas')}}<br>
-                        {{Form::radio('columnas',1,true,[])}}<img src="{{asset('images/icono-una-columna.png')}}">
+                        {{Form::radio('columnas',1,true,[])}}<img src="{{asset('icono')}}">
                         {{Form::radio('columnas',2,false,[])}}<img src="{{asset('images/icono-dos-columnas.png')}}">
+                    </div>
+
+                    <div class="form-group">
+
+                        <input type="button" class="btn btn-default" id="fb_pixel_visible" value="Campaña Pixel Facebook">
+
+                    </div>
+
+                    <div class="form-group" id="fb_pixel">
+
+                        {{Form::textarea('fb_pixel', null, ['class' => 'form-control'])}}
+
                     </div>
 
                     <div class="form-group" id="contenedor_pagina_estatica">
@@ -197,6 +209,8 @@
                 <div class="box-footer">
                     <button type="submit" class="btn btn-default">Insertar</button>
                 </div>
+
+                    {{Form::hidden('url',$_SERVER['HTTP_REFERER'],[])}}
 
                 {!! Form::close() !!}
 
@@ -229,7 +243,7 @@
     <script>
         var editor_config = {
             path_absolute : "/",
-            selector: "textarea",
+            selector: "textarea.textarea",
             plugins: [
                 "advlist autolink lists link image charmap print preview hr anchor pagebreak",
                 "searchreplace wordcount visualblocks visualchars code fullscreen",
@@ -238,6 +252,7 @@
             ],
             toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media",
             relative_urls: false,
+            language: 'es',
             file_browser_callback : function(field_name, url, type, win) {
                 var x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
                 var y = window.innerHeight|| document.documentElement.clientHeight|| document.getElementsByTagName('body')[0].clientHeight;
@@ -344,6 +359,11 @@
         $('.slug').keypress(function(tecla) {
             alert(tecla.charCode);
             if(tecla.charCode < 97 || tecla.charCode > 122) return false;
+        });
+
+        $('#fb_pixel').hide();
+        $('#fb_pixel_visible').click(function () {
+            $('#fb_pixel').toggle("slow");
         });
     </script>
 

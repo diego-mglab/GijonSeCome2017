@@ -1,4 +1,4 @@
-<div class="col-md-6">
+<div class="col-md-6 connectedSortable ui-sortable">
 
 
     <div class="box box">
@@ -64,7 +64,7 @@
 
         {{-- pie boton añadir tarea --}}
         <div class="box-footer clearfix">
-            <a href="eunomia/contents/create" class="btn btn-block btn-success btn-xs pull-left">Nueva entrevista</a>
+            {{ link_to_route('contents.create', 'Nueva entrevista', null, array('class' => 'btn btn-block btn-success btn-xs')) }}
         </div>
 
         <!-- /.box-footer -->

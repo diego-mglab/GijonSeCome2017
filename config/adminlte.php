@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'title' => 'GijónSeCome',
+    'title' => 'Eunomia',
 
     'title_prefix' => '',
 
@@ -30,7 +30,7 @@ return [
     |
     */
 
-    'logo' => '<b>Gijón</b>SeCome',
+    'logo' => '<b>Eu</b>nomia',
 
     'logo_mini' => '<b>A</b>LT',
 
@@ -85,9 +85,9 @@ return [
     |
     */
 
-    'dashboard_url' => 'home',
+    'dashboard_url' => 'eunomia/home',
 
-    'logout_url' => 'logout',
+    'logout_url' => 'eunomia/logout',
 
     'logout_method' => null,
 
@@ -109,11 +109,6 @@ return [
 
     'menu' => [
         'MAIN NAVIGATION',
-        [
-            'text' => 'Blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
         [
             'text'        => 'Portada',
             'url'         => '/eunomia/portada',
@@ -163,6 +158,11 @@ return [
             'text'        => 'Documentos Prensa',
             'url'         => '/eunomia/documentos_prensa',
             'icon'        => 'file-pdf-o',
+        ],
+        [
+            'text'        => 'Configuración',
+            'url'         => '/eunomia/configuracion',
+            'icon'        => 'gears',
         ],
         'ACCOUNT SETTINGS',
         [

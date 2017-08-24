@@ -80,7 +80,7 @@
                                     <div class="form-group">
 
                                         {{Form::label('titulo', 'Título')}}
-                                        {{Form::text('titulo[]', $titulo, ['class' => 'form-control' ,'placeholder' => 'Título'])}}
+                                        {{Form::text('titulo', $titulo, ['class' => 'form-control' ,'placeholder' => 'Título'])}}
 
                                     </div>
 
@@ -212,7 +212,7 @@
                                 {{ Form::hidden('galeria_id',$galeria->id) }}
                                 @foreach ($idiomas_imagenes as $idioma)
                                     <div class="form-group">
-                                        {{ Form::text('texto_'.$idioma->codigo,is_object($imagen->textos_idioma_todos($idioma->codigo))?$imagen->textos_idioma_todos($idioma->codigo)->titulo:'',['placeholder' => 'Título en '.$idioma->idioma, 'class' => 'form-control', 'id' => $imagen->id.'_'.$idioma->id]) }}
+                                        {{ Form::text('texto_'.$idioma->codigo,is_object($imagen->textos_idioma_todos($idioma->codigo))?$imagen->textos_idioma_todos($idioma->codigo)->tititulo',['placeholder' => 'Título en '.$idioma->idioma, 'class' => 'form-control', 'id' => $imagen->id.'_'.$idioma->id]) }}
                                     </div>
                                 @endforeach
                             {{ Form::submit('Eliminar', array('class' => 'btn btn-block btn-danger btn-xs')) }}
@@ -269,6 +269,7 @@
             ],
             toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media",
             relative_urls: false,
+            language: 'es',
             file_browser_callback : function(field_name, url, type, win) {
                 var x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
                 var y = window.innerHeight|| document.documentElement.clientHeight|| document.getElementsByTagName('body')[0].clientHeight;
