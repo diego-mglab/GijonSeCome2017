@@ -34,6 +34,9 @@ class HomeController extends Controller
             ->OrderBy('fecha','DESC')->take(5)->get();
         $ponentes = Ponente::where('anio',date('Y'))
             ->orderBy('orden','ASC')->take(5)->get();
-        return view('home',compact('users','noticias','entrevistas','ponentes'));
+        $todas_noticias = Content::where('tipo_contenido','noticia')->get();
+        $todas_entrevistas = Content::where('tipo_contenido','entrevista')->get();
+        $todos_ponentes = Ponente::where('anio',date('Y'))->get();
+        return view('home',compact('users','noticias','entrevistas','ponentes','todas_noticias','todas_entrevistas','todos_ponentes'));
     }
 }

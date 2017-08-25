@@ -133,6 +133,16 @@ Route::group(['prefix' => 'eunomia' , 'middleware' => 'auth' ], function () {
     Route::get('menu/edit/{id}', 'MenuController@getEdit');
     Route::post('menu/edit/{id}', 'MenuController@postEdit');
 
+    //Menú Admin
+    Route::get('/menu_admin', 'MenuAdminController@getIndex');
+    Route::post('/menu_admin', 'MenuAdminController@postIndex');
+
+    Route::post('menu_admin/new', 'MenuAdminController@postNew');
+    Route::post('menu_admin/delete', 'MenuAdminController@postDelete');
+
+    Route::get('menu_admin/edit/{id}', 'MenuAdminController@getEdit');
+    Route::post('menu_admin/edit/{id}', 'MenuAdminController@postEdit');
+
     Route::post('galerias/{galeria}/updateOrder','GaleriaController@updateOrder');
 
     Route::post('galerias/{galeria}/updateTextoImagen','GaleriaController@updateTextoImagen');

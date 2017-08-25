@@ -3,12 +3,10 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Session;
-use App\Idioma;
 
-class Menu extends Model
+class MenuAdmin extends Model
 {
-    protected $tipo_contenido = 6; // 1 - Contenido, 2 - Agenda, 3 - Ponente, 4 - Portada, 5 - Galería, 6 - Menú, 7 - Multimedia, 8 - Documentos Prensa, 9 - Configuracion
+    protected $table = 'menu_admin';
 
     // Recursive function that builds the menu from an array or object of items
     // In a perfect world some parts of this function would be in a custom Macro or a View
@@ -18,16 +16,16 @@ class Menu extends Model
         foreach ($menu as $item)
             if ($item->parent_id == $parentid) {
                 $result .= "<li class='dd-item nested-list-item' data-order='{$item->order}' data-id='{$item->id}'>
-	      <div class='dd-handle nested-list-handle'>
-	        <span class='glyphicon glyphicon-move'></span>
-	      </div>
-	      <div class='nested-list-content'>{$item->label}
+          <div class='dd-handle nested-list-handle'>
+            <span class='glyphicon glyphicon-move'></span>
+          </div>
+          <div class='nested-list-content".($item->separator=='1'?' separator':'')."'>{$item->label}
             <div class='pull-right'>
               <a href='" . url("eunomia/menu_admin/edit/{$item->id}") . "' class='btn btn btn-warning btn-xs'>Editar</a>
               <button class='delete_toggle btn btn btn-danger btn-xs' rel='{$item->id}'>Eliminar</button>
             </div>
-	      </div>" . $this->buildMenu($menu, $item->id) . "</li>";
-            }
+          </div>" . $this->buildMenu($menu, $item->id) . "</li>";
+        }
         return $result ? "\n<ol class=\"dd-list\">\n$result</ol>\n" : null;
     }
 
@@ -37,18 +35,4 @@ class Menu extends Model
         return $this->buildMenu($items);
     }
 
-    public function textos_idioma(){
-        return $this->belongsTo('App\TextosIdioma','id','contenido_id')->where('visible','1')->where('idioma_id',Idioma::fromCodigo(Session::get('idioma')))->where('tipo_contenido_id',$this->tipo_contenido);
-    }
-
-    public function content(){
-        return $this->belongsTo('App\Content','content_id','id');
-    }
-
-    public function submenu()
-    {
-        return $this->hasMany('App\Menu', 'parent_id')->orderBy('order', 'asc');
-    }
-
 }
-

@@ -108,73 +108,13 @@ return [
     */
 
     'menu' => [
-        'MAIN NAVIGATION',
+        'ADMIN',
         [
-            'text'        => 'Portada',
-            'url'         => '/eunomia/portada',
-            'icon'        => 'file',
-        ],
-        [
-            'text'        => 'Idiomas',
-            'url'         => '/eunomia/idiomas',
-            'icon'        => 'language',
-        ],
-        [
-            'text'        => 'Usuarios',
-            'url'         => '/eunomia/usuarios',
-            'icon'        => 'user',
-        ],
-        [
-            'text'        => 'Contenidos',
-            'url'         => '/eunomia/contents',
-            'icon'        => 'newspaper-o',
-        ],
-        [
-            'text'        => 'Zonas',
-            'url'         => '/eunomia/zonas',
-            'icon'        => 'map-o',
-        ],
-        [
-            'text'        => 'Ponentes',
-            'url'         => '/eunomia/ponentes',
-            'icon'        => 'users',
-        ],
-        [
-            'text'        => 'Agenda',
-            'url'         => '/eunomia/agenda',
-            'icon'        => 'calendar-check-o',
-        ],
-        [
-            'text'        => 'Galerías',
-            'url'         => '/eunomia/galerias',
-            'icon'        => 'image',
-        ],
-        [
-            'text'        => 'Menú',
-            'url'         => '/eunomia/menu',
+            'text'        => 'Menú Administración',
+            'url'         => '/eunomia/menu_admin',
             'icon'        => 'navicon',
         ],
-        [
-            'text'        => 'Documentos Prensa',
-            'url'         => '/eunomia/documentos_prensa',
-            'icon'        => 'file-pdf-o',
-        ],
-        [
-            'text'        => 'Configuración',
-            'url'         => '/eunomia/configuracion',
-            'icon'        => 'gears',
-        ],
-        'ACCOUNT SETTINGS',
-        [
-            'text' => 'Profile',
-            'url'  => 'eunomia/settings',
-            'icon' => 'user',
-        ],
-        [
-            'text' => 'Change Password',
-            'url'  => 'eunomia/settings',
-            'icon' => 'lock',
-        ],
+        // Sólamente se crea este nodo estático que permite acceder a la gestión del menú de administración ya así crear el resto de elementos dinámicamente
     ],
 
     /*

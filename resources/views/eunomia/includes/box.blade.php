@@ -19,7 +19,7 @@
         <!-- small box -->
         <div class="small-box bg-purple">
             <div class="inner">
-                <h3>{{ $noticias->count() }}</h3>
+                <h3>{{ $todas_noticias->count() }}</h3>
 
                 <p>Noticias</p>
             </div>
@@ -34,7 +34,7 @@
         <!-- small box -->
         <div class="small-box bg-orange">
             <div class="inner">
-                <h3>{{ $entrevistas->count() }}</h3>
+                <h3>{{ $todas_entrevistas->count() }}</h3>
 
                 <p>Entrevistas
                 </p>
@@ -50,9 +50,9 @@
         <!-- small box -->
         <div class="small-box bg-green">
             <div class="inner">
-                <h3>{{ $ponentes->count() }}</h3>
+                <h3>{{ $todos_ponentes->count() }}</h3>
 
-                <p>Ponentes</p>
+                <p>Ponentes {{date('Y')}}</p>
             </div>
             <div class="icon">
                 <i class="ion ion-clipboard"></i>
