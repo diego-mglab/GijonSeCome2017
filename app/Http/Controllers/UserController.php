@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Hash;
+use App\Rol;
+use App\RolesUsuario;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -26,7 +28,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('eunomia.usuarios.form_ins_usuarios');
+        $roles = Rol::get()->pluck('name','id');
+        return view('eunomia.usuarios.form_ins_usuarios', compact('roles'));
     }
 
     /**
@@ -45,15 +48,25 @@ class UserController extends Controller
 
         $user = new user;
 
-
         $user->name = $request->name;
         $user->email = $request->email;
         $password = Hash::make($request->password);
         $user->password = $password;
 
-        $user->save();
+        if ($user->save()){
+            $lastId = $user->id;
+            //Roles
+            $roles = $request->roles;
+            if (isset($roles)) {
+                foreach ($roles as $rol) {
+                    $rolesUsuario = new RolesUsuario();
+                    $rolesUsuario->role_id = $rol;
+                    $rolesUsuario->user_id = $lastId;
 
-
+                    $ponentesAgenda->save();
+                }
+            }
+        }
 
         return redirect('eunomia/usuarios');
     }
@@ -78,7 +91,9 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        return view('eunomia.usuarios.form_edit_usuarios')->withUser($user);
+        $allroles = Rol::get()->pluck('name','id');
+        $roles = RolesUsuario::where('user_id',$id)->pluck('role_id')->toArray();
+        return view('eunomia.usuarios.form_edit_usuarios', compact('user','allroles','roles'));
     }
 
     /**
@@ -94,7 +109,21 @@ class UserController extends Controller
 
         $user->name=$request->name;
         $user->email=$request->email;
-        $user->save();
+        if($user->save()){
+            // Eliminamos los roles del usuario para volver a insertar los nuevos
+            RolesUsuario::where('user_id',$id)->delete();
+            $roles = $request->roles;
+            if (isset($roles)) {
+                foreach ($roles as $rol) {
+                    $rolesUsuario = new RolesUsuario();
+                    $rolesUsuario->role_id = $rol;
+                    $rolesUsuario->user_id = $id;
+
+                    $rolesUsuario->save();
+                }
+            }
+
+        }
 
         return redirect('eunomia/usuarios');
     }

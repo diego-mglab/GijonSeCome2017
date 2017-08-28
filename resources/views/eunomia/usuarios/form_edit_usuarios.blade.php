@@ -41,6 +41,12 @@
 
                     </div>
 
+                    <div class="form-group">
+
+                        {{Form::label('roles', 'Roles')}}
+                        {{Form::select('roles[]', $allroles, $roles, ['class' => 'form-control select2', 'data-placeholder'=>'selecciona uno o varios roles', 'multiple'=>'multiple'])}}
+
+                    </div>
 
                 </div>
                 <!-- /.box-body -->
@@ -64,5 +70,13 @@
 @stop
 
 @section('js')
+    <!-- Select2 -->
+    <script src="{{asset('vendor/adminlte/plugins/select2/select2.full.min.js')}}"></script>
+    <script language="JavaScript">
+        $(function () {
+            //Initialize Select2 Elements
+            $(".select2").select2();
+        });
+    </script>
 
 @stop

@@ -3,11 +3,11 @@
 @section('content_header')
     <h1>
         Insertar
-        <small>Usuario</small>
+        <small>Rol</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Usuarios</li>
+        <li class="active">Roles</li>
     </ol>
 @stop
 
@@ -27,9 +27,9 @@
                     </div>
                 @endif
 
-                <!-- /.box-header -->
+            <!-- /.box-header -->
                 <!-- form start -->
-                {!! Form::open(['route' => 'usuarios.store','files' => true]) !!}
+                {!! Form::open(['route' => 'roles.store','files' => true]) !!}
 
 
 
@@ -46,22 +46,15 @@
 
                     <div class="form-group">
 
-                        {{Form::label('email', 'E-Mail')}}
-                        {{Form::email('email', null, ['class' => 'form-control' ,'placeholder' => 'tumail@mglab.es'])}}
+                        {{Form::label('slug', 'Slug')}}
+                        {{Form::text('slug', null, ['class' => 'form-control' ,'placeholder' => 'Slug'])}}
 
                     </div>
 
                     <div class="form-group">
 
-                        {{Form::label('password', 'Password')}}
-                        {{Form::password('password', ['class' => 'form-control'])}}
-
-                    </div>
-
-                    <div class="form-group">
-
-                        {{Form::label('roles', 'Roles')}}
-                        {{Form::select('roles[]', $roles, null, ['class' => 'form-control select2', 'data-placeholder'=>'selecciona uno o varios roles', 'multiple'=>'multiple'])}}
+                        {{Form::label('description', 'Descripción')}}
+                        {{Form::text('description',null, ['class' => 'form-control' ,'placeholder' => 'Descripción'])}}
 
                     </div>
 
@@ -87,13 +80,5 @@
 @stop
 
 @section('js')
-    <!-- Select2 -->
-    <script src="{{asset('vendor/adminlte/plugins/select2/select2.full.min.js')}}"></script>
-    <script language="JavaScript">
-        $(function () {
-            //Initialize Select2 Elements
-            $(".select2").select2();
-        });
-    </script>
 
 @stop

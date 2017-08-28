@@ -3,13 +3,13 @@
 @section('content_header')
     <h1>
         Listado
-        <small>Usuarios</small>
+        <small>Roles</small>
     </h1>
-    <h2>{{ link_to_route('usuarios.create', 'Nuevo', null, array('class' => 'btn btn-block btn-success btn-xs')) }}</h2>
+    <h2>{{ link_to_route('roles.create', 'Nuevo', null, array('class' => 'btn btn-block btn-success btn-xs')) }}</h2>
 
     <ol class="breadcrumb">
         <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Usuarios</li>
+        <li class="active">Roles</li>
     </ol>
 @stop
 
@@ -27,21 +27,18 @@
                         <thead>
                         <tr>
                             <th>Nombre</th>
-                            <th>Email</th>
-                            <th>Roles</th>
                             <th>Acciones</th>
                         </tr>
                         </thead>
                         <tbody>
 
-                        @foreach ($users as $user)
+                        @foreach ($roles as $rol)
 
                             <tr>
-                                <td>{{$user->name}}</td>
-                                <td>{{$user->email}}</td>
-                                <td>{{is_object($user->roles_usuario)?$user->roles_usuario->roles->name:''}}</td>
-                                <td>{{ link_to_route('usuarios.edit', 'Editar', $user, array('class' => 'btn btn btn-warning btn-xs')) }}
-                                    {{ Form::open(array('method'=> 'DELETE', 'route' => array('usuarios.destroy', $user->id),'style'=>'display:inline','class'=>'form_eliminar')) }}
+                                <td>{{$rol->name}}</td>
+                                </td>
+                                <td>{{ link_to_route('roles.edit', 'Editar', $rol, array('class' => 'btn btn btn-warning btn-xs')) }}
+                                    {{ Form::open(array('method'=> 'DELETE', 'route' => array('roles.destroy', $rol->id),'style'=>'display:inline','class'=>'form_eliminar')) }}
                                     {{ Form::submit('Eliminar', array('class' => 'btn btn btn-danger btn-xs')) }}
                                     {{ Form::close() }}
 
