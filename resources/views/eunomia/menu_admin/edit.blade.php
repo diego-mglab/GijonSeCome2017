@@ -68,6 +68,13 @@
             </div>
         </div>
 
+          <div class="form-group">
+              {{Form::label('modulo_id', 'Módulo',['class' => 'col-lg-2 control-label'])}}
+              <div class="col-lg-10">
+                  {{Form::select('modulo_id', $modulos, null, ['class' => 'form-control', 'placeholder'=>'selecciona un módulo'])}}
+              </div>
+          </div>
+
         <div class="form-group">
             {{Form::label('table','Contador (tabla)',['class' => 'col-lg-2 control-label'])}}
             <div class="col-lg-10">

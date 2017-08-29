@@ -5,7 +5,9 @@
         Listado
         <small>Portada</small>
     </h1>
-    <h2>{{ link_to_route('galerias.create', 'Nuevo', null, array('class' => 'btn btn-block btn-success btn-xs')) }}</h2>
+    @if( \Auth::user()->compruebaSeguridad('crear-galeria') == true)
+        <h2>{{ link_to_route('galerias.create', 'Nuevo', null, array('class' => 'btn btn-block btn-success btn-xs')) }}</h2>
+    @endif
 
     <ol class="breadcrumb">
         <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -43,11 +45,15 @@
                                     <td>{{$galeria->subtitulo}}</td>
                                     <td>{{$galeria->anio}}</td>
                                     <td>{{$galeria->visible==1?'Si':'No'}}</td>
-                                    <td>{{ link_to_route('galerias.edit', 'Editar', $galeria->id, array('class' => 'btn btn btn-warning btn-xs')) }}
-                                        {{ Form::open(array('method'=> 'DELETE', 'route' => array('galerias.destroy', $galeria->id),'style'=>'display:inline','class'=>'form_eliminar')) }}
-                                        {{ Form::hidden('id',$galeria->id) }}
-                                        {{ Form::submit('Eliminar', array('class' => 'btn btn btn-danger btn-xs')) }}
-                                        {{ Form::close() }}
+                                    <td>@if( \Auth::user()->compruebaSeguridad('editar-galeria') == true)
+                                            {{ link_to_route('galerias.edit', 'Editar', $galeria->id, array('class' => 'btn btn btn-warning btn-xs')) }}
+                                        @endif
+                                        @if( \Auth::user()->compruebaSeguridad('eliminar-galeria') == true)
+                                            {{ Form::open(array('method'=> 'DELETE', 'route' => array('galerias.destroy', $galeria->id),'style'=>'display:inline','class'=>'form_eliminar')) }}
+                                            {{ Form::hidden('id',$galeria->id) }}
+                                            {{ Form::submit('Eliminar', array('class' => 'btn btn btn-danger btn-xs')) }}
+                                            {{ Form::close() }}
+                                        @endif
 
                                     </td>
                                 </tr>

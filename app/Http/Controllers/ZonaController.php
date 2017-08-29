@@ -14,6 +14,8 @@ class ZonaController extends Controller
      */
     public function index()
     {
+        if(\Auth::user()->compruebaSeguridad('mostrar-zonas') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $zonas = Zona::all();
         return view('eunomia.zonas.listado_zonas', compact('zonas'));
     }
@@ -25,6 +27,8 @@ class ZonaController extends Controller
      */
     public function create()
     {
+        if(\Auth::user()->compruebaSeguridad('crear-zona') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         return view('eunomia.zonas.form_ins_zonas');
     }
 
@@ -36,6 +40,8 @@ class ZonaController extends Controller
      */
     public function store(Request $request)
     {
+        if(\Auth::user()->compruebaSeguridad('crear-zona') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $this->validate($request, [
             'nombre' => 'required',
             'color' => 'required'
@@ -71,6 +77,8 @@ class ZonaController extends Controller
      */
     public function edit($id)
     {
+        if(\Auth::user()->compruebaSeguridad('editar-zona') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $zona = Zona::findOrFail($id);
         return view('eunomia.zonas.form_edit_zonas',compact('zona'));
     }
@@ -84,6 +92,8 @@ class ZonaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if(\Auth::user()->compruebaSeguridad('editar-zona') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $zona = Zona::findOrFail($id);
 
         $zona->nombre = $request->nombre;
@@ -102,6 +112,8 @@ class ZonaController extends Controller
      */
     public function destroy($id)
     {
+        if(\Auth::user()->compruebaSeguridad('eliminar-zona') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $zona = Zona::findOrFail($id);
         $zona->delete();
 

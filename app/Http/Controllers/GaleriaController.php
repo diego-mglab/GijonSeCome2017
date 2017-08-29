@@ -24,6 +24,8 @@ class GaleriaController extends Controller
      */
     public function index()
     {
+        if(\Auth::user()->compruebaSeguridad('mostrar-galerias') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $galerias = DB::table('galerias')
             ->join('textos_idiomas', 'galerias.id', '=', 'textos_idiomas.contenido_id')
             ->join('idiomas', 'textos_idiomas.idioma_id', 'idiomas.id')
@@ -41,6 +43,8 @@ class GaleriaController extends Controller
      */
     public function create()
     {
+        if(\Auth::user()->compruebaSeguridad('crear-galeria') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $idiomas = Idioma::where('activado', '1')->orderBy('principal')->get();
         return view('eunomia.galerias.form_ins_galerias', compact('idiomas'));
     }
@@ -53,6 +57,8 @@ class GaleriaController extends Controller
      */
     public function store(Request $request)
     {
+        if(\Auth::user()->compruebaSeguridad('crear-galeria') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         if ($request->galeria_id > 0) { //Si se trata de una imagen de la galería
             $multimedia = new Multimedia();
 
@@ -180,6 +186,8 @@ class GaleriaController extends Controller
      */
     public function edit($id)
     {
+        if(\Auth::user()->compruebaSeguridad('editar-galeria') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $idiomas = Idioma::where('activado', '1')->orderBy('principal')->get();
         $idiomas_imagenes = Idioma::where('activado', '1')->orderBy('principal', 'DESC')->get();
         $textos = DB::table('galerias')
@@ -203,6 +211,8 @@ class GaleriaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if(\Auth::user()->compruebaSeguridad('editar-galeria') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         if (!$ordenar) {
             $idiomas = Idioma::where('activado', '1')->orderByDesc('principal')->get();
 
@@ -262,6 +272,8 @@ class GaleriaController extends Controller
 
     function updateOrder(Request $request)
     {
+        if(\Auth::user()->compruebaSeguridad('editar-galeria') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $list_order = $request->list_order;
         $list = explode(',', $list_order);
         $i = 1;
@@ -275,6 +287,8 @@ class GaleriaController extends Controller
     }
 
     public function updateTextoImagen(Request $request){
+        if(\Auth::user()->compruebaSeguridad('editar-galeria') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $textosIdioma = TextosIdioma::where('contenido_id',$request->id)
             ->where('idioma_id',$request->idioma)
             ->where('tipo_contenido_id','7')->first();
@@ -296,6 +310,8 @@ class GaleriaController extends Controller
      */
     public function destroy(Request $request)
     {
+        if(\Auth::user()->compruebaSeguridad('eliminar-galeria') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         if ($request->galeria_id > 0) {
             $multimedia = Multimedia::findOrfail($request->imagen_id);
             //Sacamos la carpeta de las imágenes de la tabla galerias

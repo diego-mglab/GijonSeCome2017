@@ -17,6 +17,8 @@ class UserController extends Controller
      */
     public function index()
     {
+        if(\Auth::user()->compruebaSeguridad('mostrar-usuarios') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $users = User::all();
         return view('eunomia.usuarios.listado_usuarios', compact('users'));
     }
@@ -28,6 +30,8 @@ class UserController extends Controller
      */
     public function create()
     {
+        if(\Auth::user()->compruebaSeguridad('crear-usuario') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $roles = Rol::get()->pluck('name','id');
         return view('eunomia.usuarios.form_ins_usuarios', compact('roles'));
     }
@@ -40,6 +44,8 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        if(\Auth::user()->compruebaSeguridad('crear-usuario') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email',
@@ -90,6 +96,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+        if(\Auth::user()->compruebaSeguridad('editar-usuario') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $user = User::findOrFail($id);
         $allroles = Rol::get()->pluck('name','id');
         $roles = RolesUsuario::where('user_id',$id)->pluck('role_id')->toArray();
@@ -105,6 +113,8 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if(\Auth::user()->compruebaSeguridad('editar-usuario') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $user = User::findOrFail($id);
 
         $user->name=$request->name;
@@ -136,6 +146,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+        if(\Auth::user()->compruebaSeguridad('eliminar-usuario') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $user = User::findOrFail($id);
         $user->delete();
 

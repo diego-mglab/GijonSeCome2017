@@ -5,7 +5,9 @@
         Listado
         <small>Contenido</small>
     </h1>
+    @if( \Auth::user()->compruebaSeguridad('crear-contenido') == true)
     <h2>{{ link_to_route('contents.create', 'Nuevo', null, array('class' => 'btn btn-block btn-success btn-xs')) }}</h2>
+    @endif
 
     <ol class="breadcrumb">
         <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -50,11 +52,15 @@
                                         <td>{{$content->subtitulo}}</td>
                                         <td>{{$content->tipo_contenido}}</td>
                                         <td>{{$content->visible==1?'Si':'No'}}</td>
-                                        <td>{{ link_to_route('contents.edit', 'Editar', $content->id, array('class' => 'btn btn btn-warning btn-xs')) }}
+                                        <td>@if( \Auth::user()->compruebaSeguridad('editar-contenido') == true)
+                                                {{ link_to_route('contents.edit', 'Editar', $content->id, array('class' => 'btn btn btn-warning btn-xs')) }}
+                                            @endif
                                             @if ($content->pagina_estatica == 0)
-                                                {{ Form::open(array('method'=> 'DELETE', 'route' => array('contents.destroy', $content->id),'style'=>'display:inline','class'=>'form_eliminar')) }}
-                                                {{ Form::submit('Eliminar', array('class' => 'btn btn btn-danger btn-xs')) }}
-                                                {{ Form::close() }}
+                                                @if( \Auth::user()->compruebaSeguridad('eliminar-contenido') == true)
+                                                    {{ Form::open(array('method'=> 'DELETE', 'route' => array('contents.destroy', $content->id),'style'=>'display:inline','class'=>'form_eliminar')) }}
+                                                    {{ Form::submit('Eliminar', array('class' => 'btn btn btn-danger btn-xs')) }}
+                                                    {{ Form::close() }}
+                                                @endif
                                             @endif
                                         </td>
                                     </tr>

@@ -5,7 +5,9 @@
         Listado
         <small>Usuarios</small>
     </h1>
-    <h2>{{ link_to_route('usuarios.create', 'Nuevo', null, array('class' => 'btn btn-block btn-success btn-xs')) }}</h2>
+    @if( \Auth::user()->compruebaSeguridad('crear-usuario') == true)
+        <h2>{{ link_to_route('usuarios.create', 'Nuevo', null, array('class' => 'btn btn-block btn-success btn-xs')) }}</h2>
+    @endif
 
     <ol class="breadcrumb">
         <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -40,11 +42,17 @@
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->email}}</td>
                                 <td>{{is_object($user->roles_usuario)?$user->roles_usuario->roles->name:''}}</td>
-                                <td>{{ link_to_route('usuarios.edit', 'Editar', $user, array('class' => 'btn btn btn-warning btn-xs')) }}
-                                    {{ Form::open(array('method'=> 'DELETE', 'route' => array('usuarios.destroy', $user->id),'style'=>'display:inline','class'=>'form_eliminar')) }}
-                                    {{ Form::submit('Eliminar', array('class' => 'btn btn btn-danger btn-xs')) }}
-                                    {{ Form::close() }}
-
+                                <td>@if( \Auth::user()->compruebaSeguridad('asignar-permisos-usuarios') == true)
+                                        <a href="{{asset('eunomia/permisos/matrix/'.$user->id)}}" class="btn btn btn-warning btn-xs">Permisos</a>
+                                    @endif
+                                    @if( \Auth::user()->compruebaSeguridad('editar-usuario') == true)
+                                        {{ link_to_route('usuarios.edit', 'Editar', $user, array('class' => 'btn btn btn-warning btn-xs')) }}
+                                    @endif
+                                    @if( \Auth::user()->compruebaSeguridad('eliminar-usuario') == true)
+                                        {{ Form::open(array('method'=> 'DELETE', 'route' => array('usuarios.destroy', $user->id),'style'=>'display:inline','class'=>'form_eliminar')) }}
+                                        {{ Form::submit('Eliminar', array('class' => 'btn btn btn-danger btn-xs')) }}
+                                        {{ Form::close() }}
+                                    @endif
                                 </td>
                             </tr>
 

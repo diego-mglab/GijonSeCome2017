@@ -25,6 +25,8 @@ class ContentController extends Controller
      */
     public function index()
     {
+        if(\Auth::user()->compruebaSeguridad('mostrar-contenidos') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $contents = DB::table('contents')
             ->join('textos_idiomas','contents.id','=','textos_idiomas.contenido_id')
             ->join('idiomas','textos_idiomas.idioma_id','idiomas.id')
@@ -42,6 +44,8 @@ class ContentController extends Controller
      */
     public function create()
     {
+        if(\Auth::user()->compruebaSeguridad('crear-contenido') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $tiposContenido = TipoContenido::all()->pluck('tipo_contenido','id');
         $idiomas = Idioma::where('activado','1')->orderBy('principal')->get();
         return view('eunomia.contents.form_ins_contents',compact('tiposContenido','idiomas'));
@@ -55,6 +59,8 @@ class ContentController extends Controller
      */
     public function store(Request $request)
     {
+        if(\Auth::user()->compruebaSeguridad('crear-contenido') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $url = $request->url;
 
         $idiomas = Idioma::where('activado','1')->orderBy('principal')->get();
@@ -176,6 +182,8 @@ class ContentController extends Controller
      */
     public function edit($id)
     {
+        if(\Auth::user()->compruebaSeguridad('editar-contenido') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $idiomas = Idioma::where('activado','1')->orderBy('principal')->get();
         $textos = DB::table('contents')
             ->join('textos_idiomas','contents.id','=','textos_idiomas.contenido_id')
@@ -197,6 +205,8 @@ class ContentController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if(\Auth::user()->compruebaSeguridad('editar-contenido') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $url = $request->url;
         $idiomas = Idioma::where('activado','1')->orderByDesc('principal')->get();
 
@@ -324,6 +334,8 @@ class ContentController extends Controller
      */
     public function destroy($id)
     {
+        if(\Auth::user()->compruebaSeguridad('eliminar-contenido') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         //Eliminamos los textos en los idiomas
         $textosIdioma = TextosIdioma::where('contenido_id',$id)
             ->where('tipo_contenido_id',$this->tipo_contenido);

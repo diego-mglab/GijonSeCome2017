@@ -7,11 +7,16 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yaml;
+use App\Rol;
+use App\Permission;
+use App\Modulo;
 
 class MenuAdminController extends Controller
 {
     public function getIndex()
     {
+        if( \Auth::user()->compruebaSeguridad('mostrar-elementos-menu-admin') == false)
+                return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $items 	= MenuAdmin::orderBy('order')->get();
 
         $menu 	= new MenuAdmin;
@@ -20,26 +25,31 @@ class MenuAdminController extends Controller
         $icons = Yaml::parse(file_get_contents('https://rawgit.com/FortAwesome/Font-Awesome/master/src/icons.yml'));
 
         $tables = DB::select('SHOW TABLES');
-        //dd($tables);
 
-        //dd($icons);
+        $modulos = Modulo::orderBy('nombre')->get()->pluck('nombre','id');
 
-        return view('eunomia.menu_admin.builder', compact('items','menu','icons','tables'));
+        return view('eunomia.menu_admin.builder', compact('items','menu','icons','tables','modulos'));
     }
 
     public function getEdit($id)
     {
+        if( \Auth::user()->compruebaSeguridad('editar-elemento-menu-admin') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $item = MenuAdmin::findOrFail($id);
 
         $icons = Yaml::parse(file_get_contents('https://rawgit.com/FortAwesome/Font-Awesome/master/src/icons.yml'));
 
         $tables = DB::select('SHOW TABLES');
 
-        return view('eunomia.menu_admin.edit', compact('item','icons','tables'));
+        $modulos = Modulo::orderBy('nombre')->get()->pluck('nombre','id');
+
+        return view('eunomia.menu_admin.edit', compact('item','icons','tables','modulos'));
     }
 
     public function postEdit(Request $request)
     {
+        if( \Auth::user()->compruebaSeguridad('editar-elemento-menu-admin') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $item = MenuAdmin::find($request->id);
         $item->title 	    = $request->title;
         $item->label        = $request->title;
@@ -47,6 +57,7 @@ class MenuAdminController extends Controller
         $item->label_color  = $request->label_color;
 
         $item->url = $request->url;
+        $item->modulo_id = $request->modulo_id;
         $item->table = $request->table;
 
         if ($request->separator == 1)
@@ -67,6 +78,8 @@ class MenuAdminController extends Controller
     // AJAX Reordering function
     public function postIndex(Request $request)
     {
+        if( \Auth::user()->compruebaSeguridad('editar-elemento-menu-admin') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         //$source       = e(Input::get('source'));
         //$destination  = e(Input::get('destination',0));
         $source = $request->source;
@@ -103,6 +116,8 @@ class MenuAdminController extends Controller
 
     public function postNew(Request $request)
     {
+        if( \Auth::user()->compruebaSeguridad('crear-elemento-menu-admin') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         // Create a new menu item and save it
         $item = new MenuAdmin;
 
@@ -113,6 +128,7 @@ class MenuAdminController extends Controller
 
         $item->url = $request->url;
         $item->order 	= MenuAdmin::max('order')+1;
+        $item->modulo_id = $request->modulo_id;
         $item->table = $request->table;
 
         if ($request->separator == 1)
@@ -132,6 +148,8 @@ class MenuAdminController extends Controller
 
     public function postDelete(Request $request)
     {
+        if( \Auth::user()->compruebaSeguridad('eliminar-elemento-menu-admin') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $id = $request->delete_id;
         // Find all items with the parent_id of this one and reset the parent_id to zero
         $items = MenuAdmin::where('parent_id', $id)->get()->each(function($item)

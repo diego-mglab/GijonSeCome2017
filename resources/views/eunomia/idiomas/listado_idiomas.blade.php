@@ -5,7 +5,9 @@
         Listado
         <small>Idiomas</small>
     </h1>
-    <h2>{{ link_to_route('idiomas.create', 'Nuevo', null, array('class' => 'btn btn-block btn-success btn-xs')) }}</h2>
+    @if( \Auth::user()->compruebaSeguridad('crear-idioma') == true)
+        <h2>{{ link_to_route('idiomas.create', 'Nuevo', null, array('class' => 'btn btn-block btn-success btn-xs')) }}</h2>
+    @endif
 
     <ol class="breadcrumb">
         <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -48,10 +50,14 @@
                                 </td>
                                 <td>{{$idioma->principal==1?'Si':'No'}}</td>
                                 <td>{{$idioma->activado==1?'Si':'No'}}</td>
-                                <td>{{ link_to_route('idiomas.edit', 'Editar', $idioma, array('class' => 'btn btn btn-warning btn-xs')) }}
-                                    {{ Form::open(array('method'=> 'DELETE', 'route' => array('idiomas.destroy', $idioma->id),'style'=>'display:inline','class'=>'form_eliminar')) }}
-                                    {{ Form::submit('Eliminar', array('class' => 'btn btn btn-danger btn-xs')) }}
-                                    {{ Form::close() }}
+                                <td>@if( \Auth::user()->compruebaSeguridad('editar-idioma') == true)
+                                        {{ link_to_route('idiomas.edit', 'Editar', $idioma, array('class' => 'btn btn btn-warning btn-xs')) }}
+                                    @endif
+                                    @if( \Auth::user()->compruebaSeguridad('eliminar-idioma') == true)
+                                        {{ Form::open(array('method'=> 'DELETE', 'route' => array('idiomas.destroy', $idioma->id),'style'=>'display:inline','class'=>'form_eliminar')) }}
+                                        {{ Form::submit('Eliminar', array('class' => 'btn btn btn-danger btn-xs')) }}
+                                        {{ Form::close() }}
+                                    @endif
 
                                 </td>
                             </tr>

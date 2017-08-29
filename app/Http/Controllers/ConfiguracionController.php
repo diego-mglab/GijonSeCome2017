@@ -20,6 +20,8 @@ class ConfiguracionController extends Controller
      */
     public function index()
     {
+        if(\Auth::user()->compruebaSeguridad('editar-configuracion') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $configuracion = Configuracion::first();
         $idiomas = Idioma::where('activado','1')->orderBy('principal')->get();
         $textos = DB::table('contents')
@@ -72,6 +74,8 @@ class ConfiguracionController extends Controller
      */
     public function edit(Configuracion $configuracion)
     {
+        if(\Auth::user()->compruebaSeguridad('editar-configuracion') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $configuracion = Configuracion::first();
         return view('eunomia.configuracion.form_edit_configuracion',compact('configuracion'));
     }
@@ -85,6 +89,8 @@ class ConfiguracionController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if(\Auth::user()->compruebaSeguridad('editar-configuracion') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $idiomas = Idioma::where('activado','1')->orderByDesc('principal')->get();
 
         foreach ($idiomas as $idioma) {

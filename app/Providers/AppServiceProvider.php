@@ -32,13 +32,13 @@ class AppServiceProvider extends ServiceProvider
                         $label = DB::table($element->table)->count();
                     } else
                         $label='';
-                    $event->menu->add([
-                        'text' => $element->label,
-                        'url' => $this->carpeta_admin . $element->url,
-                        'icon' => $element->icon,
-                        'label_color' => str_replace('#','',$element->label_color),
-                        'label' => $label,
-                    ]);
+                        $event->menu->add([
+                            'text' => $element->label,
+                            'url' => $this->carpeta_admin . $element->url,
+                            'icon' => $element->icon,
+                            'label_color' => str_replace('#','',$element->label_color),
+                            'label' => $label,
+                        ]);
                 }
             }
         });

@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 class MenuAdmin extends Model
 {
     protected $table = 'menu_admin';
@@ -20,10 +21,12 @@ class MenuAdmin extends Model
             <span class='glyphicon glyphicon-move'></span>
           </div>
           <div class='nested-list-content".($item->separator=='1'?' separator':'')."'>{$item->label}
-            <div class='pull-right'>
-              <a href='" . url("eunomia/menu_admin/edit/{$item->id}") . "' class='btn btn btn-warning btn-xs'>Editar</a>
-              <button class='delete_toggle btn btn btn-danger btn-xs' rel='{$item->id}'>Eliminar</button>
-            </div>
+            <div class='pull-right'>";
+                if( \Auth::user()->compruebaSeguridad('editar-elemento-menu-admin') == true)
+                    $result .= "<a href='" . url("eunomia/menu_admin/edit/{$item->id}") . "' class='btn btn btn-warning btn-xs'>Editar</a>";
+                if( \Auth::user()->compruebaSeguridad('eliminar-elemento-menu-admin') == true)
+                    $result .= "<button class='delete_toggle btn btn btn-danger btn-xs' style='margin-left:.5em;' rel='{$item->id}'>Eliminar</button>";
+            $result .= "</div>
           </div>" . $this->buildMenu($menu, $item->id) . "</li>";
         }
         return $result ? "\n<ol class=\"dd-list\">\n$result</ol>\n" : null;

@@ -107,6 +107,10 @@ Route::group(['prefix' => 'eunomia' , 'middleware' => 'auth' ], function () {
 
     Route::resource('/modulos', 'ModuloController');
 
+    Route::post('/permisos/updatePermissionMatrix', 'PermissionController@updatePermissionMatrix')->name('permisos.updatePermissionMatrix');
+
+    Route::get('/permisos/matrix/{id}', 'PermissionController@showPermissionMatrix');
+
     Route::resource('/permisos', 'PermissionController');
 
     Route::post('/roles/updateRoleMatrix', 'RolController@updateRoleMatrix')->name('roles.updateRoleMatrix');

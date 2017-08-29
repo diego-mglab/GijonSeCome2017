@@ -5,8 +5,9 @@
         Listado
         <small>Portada</small>
     </h1>
-    <h2>{{ link_to_route('portada.create', 'Nuevo', null, array('class' => 'btn btn-block btn-success btn-xs')) }}</h2>
-
+    @if( \Auth::user()->compruebaSeguridad('crear-noticia-portada') == true)
+        <h2>{{ link_to_route('portada.create', 'Nuevo', null, array('class' => 'btn btn-block btn-success btn-xs')) }}</h2>
+    @endif
     <ol class="breadcrumb">
         <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active">Portada</li>
@@ -41,10 +42,14 @@
                                     <td>{{$elemento->titulo}}</td>
                                     <td>{{$elemento->subtitulo}}</td>
                                     <td>{{$elemento->visible==1?'Si':'No'}}</td>
-                                    <td>{{ link_to_route('portada.edit', 'Editar', $elemento->id, array('class' => 'btn btn btn-warning btn-xs')) }}
-                                        {{ Form::open(array('method'=> 'DELETE', 'route' => array('portada.destroy', $elemento->id),'style'=>'display:inline','class'=>'form_eliminar')) }}
-                                        {{ Form::submit('Eliminar', array('class' => 'btn btn btn-danger btn-xs')) }}
-                                        {{ Form::close() }}
+                                    <td>@if( \Auth::user()->compruebaSeguridad('editar-noticia-portada') == true)
+                                            {{ link_to_route('portada.edit', 'Editar', $elemento->id, array('class' => 'btn btn btn-warning btn-xs')) }}
+                                        @endif
+                                        @if( \Auth::user()->compruebaSeguridad('eliminar-noticia-portada') == true)
+                                            {{ Form::open(array('method'=> 'DELETE', 'route' => array('portada.destroy', $elemento->id),'style'=>'display:inline','class'=>'form_eliminar')) }}
+                                            {{ Form::submit('Eliminar', array('class' => 'btn btn btn-danger btn-xs')) }}
+                                            {{ Form::close() }}
+                                        @endif
 
                                     </td>
                                 </tr>

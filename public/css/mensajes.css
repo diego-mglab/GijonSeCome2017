@@ -1,0 +1,15 @@
+.aprobado{
+
+    background-color: #E9FCFA;
+    border: 1px dashed #006600;
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+.rechazado{
+
+    background-color: #FFEDED;
+    border: 1px dashed #FA206A;
+    padding: 8px;
+    margin-bottom: 10px;
+}

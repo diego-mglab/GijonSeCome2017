@@ -18,7 +18,9 @@ class MenuController extends Controller {
     protected $tipo_contenido = 6; // 1 - Contenido, 2 - Agenda, 3 - Ponente, 4 - Portada, 5 - Galería, 6 - Menú, 7 - Multimedia, 8 - Documentos Prensa, 9 - Configuracion
 
 	public function getIndex()
-	{	
+	{
+        if( \Auth::user()->compruebaSeguridad('mostrar-elementos-menu') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
 		$items 	= Menu::orderBy('order')->get();
 
 		$menu 	= new Menu;
@@ -41,6 +43,8 @@ class MenuController extends Controller {
 
 	public function getEdit($id)
 	{
+        if( \Auth::user()->compruebaSeguridad('editar-elemento-menu') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $idiomas = Idioma::where('activado','1')->orderBy('principal')->get();
         $textos = DB::table('menus')
             ->join('textos_idiomas','menus.id','textos_idiomas.contenido_id')
@@ -64,6 +68,8 @@ class MenuController extends Controller {
 
 	public function postEdit(Request $request)
 	{
+        if( \Auth::user()->compruebaSeguridad('editar-elemento-menu') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
 		$item = Menu::find($request->id);
         $item->title 	= $request->title;
         $item->label    = $request->title;
@@ -109,7 +115,9 @@ class MenuController extends Controller {
 
 	// AJAX Reordering function
 	public function postIndex(Request $request)
-	{	
+	{
+        if( \Auth::user()->compruebaSeguridad('editar-elemento-menu') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
 	    //$source       = e(Input::get('source'));
 	    //$destination  = e(Input::get('destination',0));
         $source = $request->source;
@@ -146,6 +154,8 @@ class MenuController extends Controller {
 
 	public function postNew(Request $request)
     {
+        if( \Auth::user()->compruebaSeguridad('crear-elemento-menu') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         // Create a new menu item and save it
         $item = new Menu;
 
@@ -193,6 +203,8 @@ class MenuController extends Controller {
 
 	public function postDelete(Request $request)
 	{
+        if( \Auth::user()->compruebaSeguridad('eliminar-elemento-menu') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
 		$id = $request->delete_id;
 		// Find all items with the parent_id of this one and reset the parent_id to zero
 		$items = Menu::where('parent_id', $id)->get()->each(function($item)

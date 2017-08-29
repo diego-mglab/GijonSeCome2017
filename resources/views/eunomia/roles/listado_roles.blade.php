@@ -5,7 +5,9 @@
         Listado
         <small>Roles</small>
     </h1>
-    <h2>{{ link_to_route('roles.create', 'Nuevo', null, array('class' => 'btn btn-block btn-success btn-xs')) }}</h2>
+    @if( \Auth::user()->compruebaSeguridad('crear-rol') == true)
+        <h2>{{ link_to_route('roles.create', 'Nuevo', null, array('class' => 'btn btn-block btn-success btn-xs')) }}</h2>
+    @endif
 
     <ol class="breadcrumb">
         <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -36,19 +38,19 @@
 
                             <tr>
                                 <td>{{$rol->name}}</td>
-                                </td>
-                                <td>{{ link_to_route('roles.edit', 'Editar', $rol, array('class' => 'btn btn btn-warning btn-xs')) }}
-                                    {{ Form::open(array('method'=> 'DELETE', 'route' => array('roles.destroy', $rol->id),'style'=>'display:inline','class'=>'form_eliminar')) }}
-                                    {{ Form::submit('Eliminar', array('class' => 'btn btn btn-danger btn-xs')) }}
-                                    {{ Form::close() }}
+                                <td>@if( \Auth::user()->compruebaSeguridad('editar-rol') == true)
+                                        {{ link_to_route('roles.edit', 'Editar', $rol, array('class' => 'btn btn btn-warning btn-xs')) }}
+                                    @endif
+                                    @if( \Auth::user()->compruebaSeguridad('eliminar-rol') == true)
+                                        {{ Form::open(array('method'=> 'DELETE', 'route' => array('roles.destroy', $rol->id),'style'=>'display:inline','class'=>'form_eliminar')) }}
+                                        {{ Form::submit('Eliminar', array('class' => 'btn btn btn-danger btn-xs')) }}
+                                        {{ Form::close() }}
+                                    @endif
 
                                 </td>
                             </tr>
 
                         @endforeach
-
-
-
 
                         </tbody>
 

@@ -14,6 +14,8 @@ class ModuloController extends Controller
      */
     public function index()
     {
+        if(\Auth::user()->compruebaSeguridad('mostrar-modulos') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $modulos = Modulo::all();
         return view('eunomia.modulos.listado_modulos', compact('modulos'));
     }
@@ -25,6 +27,8 @@ class ModuloController extends Controller
      */
     public function create()
     {
+        if(\Auth::user()->compruebaSeguridad('crear-modulo') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         return view('eunomia.modulos.form_ins_modulos');
     }
 
@@ -36,6 +40,8 @@ class ModuloController extends Controller
      */
     public function store(Request $request)
     {
+        if(\Auth::user()->compruebaSeguridad('crear-modulo') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $this->validate($request, [
             'nombre' => 'required'
         ]);
@@ -69,6 +75,8 @@ class ModuloController extends Controller
      */
     public function edit($id)
     {
+        if(\Auth::user()->compruebaSeguridad('editar-modulo') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $modulo = Modulo::findOrFail($id);
         return view('eunomia.modulos.form_edit_modulos',compact('modulo'));
     }
@@ -82,6 +90,8 @@ class ModuloController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if(\Auth::user()->compruebaSeguridad('editar-modulo') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $modulo = Modulo::findOrFail($id);
 
         $modulo->nombre=$request->nombre;
@@ -97,8 +107,13 @@ class ModuloController extends Controller
      * @param  \App\Modulo  $modulo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Modulo $modulo)
+    public function destroy($id)
     {
-        //
+        if(\Auth::user()->compruebaSeguridad('eliminar-modulo') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
+        $modulo = Modulo::findOrFail($id);
+        $modulo->delete();
+
+        return redirect('eunomia/modulos');
     }
 }

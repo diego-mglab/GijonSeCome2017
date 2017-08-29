@@ -2,8 +2,8 @@
 
 @section('content_header')
     <h1>
-        Role Matrix
-        <small>Permissions that are on each role</small>
+        User Matrix
+        <small>Permissions that are on each user</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -15,10 +15,10 @@
 
     <div class="visible-xs alert alert-danger">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        This page might not be formatted properly for this screen due to the complexity of Role Based Access Control permissioning.
+        This page might not be formatted properly for this screen due to the complexity of User Based Access Control permissioning.
     </div>
 
-    {!! Form::open( [ 'route' => ['roles.updateRoleMatrix' ], 'class' => 'form-horizontal'] ) !!}
+    {!! Form::open( [ 'route' => ['permisos.updatePermissionMatrix' ], 'class' => 'form-horizontal'] ) !!}
     <div class="table" style="overflow:auto; border: 1px dashed;">
         <table class="table table-bordered table-striped table-hover" style=" margin-bottom:0">
             <thead>
@@ -29,13 +29,13 @@
                       <i class="fa fa-key fa-lg"></i>
                     </span>
 
-                    <span class="pull-right"><span class="sr-only">Roles</span>
+                    <span class="pull-right"><span class="sr-only">Users</span>
                     <i class="fa fa-users" title="Roles"></i>
                     <i class="fa fa-arrow-right"></i>
                     </span>
                 </th>
-                @foreach ($roles as $rol)
-                    <th> {{ $rol->name }} <a href="{{ route( 'roles.edit',$rol->id) }}">
+                @foreach ($users as $user)
+                    <th> {{ $user->name }} <a href="{{ route( 'usuarios.edit',$user->id) }}">
                             <button type="button" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-link"></span></button></a>
                     </th>
                 @endforeach
@@ -59,9 +59,9 @@
                             <button type="button" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-link"></span></button></a>
                         {{ $permission->name }}
                     </th>
-                    @for ($i=0; $i < $roles->count(); $i++ )
-                        <td data-container="body" data-trigger="focus" data-toggle="popover" data-placement="left" data-content="Role: {{$roles[$i]->name}}, Permission: {{$permission->slug}}">
-                            {!! Form::checkbox('perm_role[]', $roles[$i]->id.":".$permission->id, ( in_array( ($roles[$i]->id.":".$permission->id), $pivot ) ? true : false ) ) !!}
+                    @for ($i=0; $i < $users->count(); $i++ )
+                        <td data-container="body" data-trigger="focus" data-toggle="popover" data-placement="left" data-content="Role: {{$users[$i]->name}}, Permission: {{$permission->slug}}">
+                            {!! Form::checkbox('perm_user[]', $users[$i]->id.":".$permission->id, ( in_array( ($users[$i]->id.":".$permission->id), $pivot ) ? true : false ) ) !!}
                         </td>
                     @endfor
                 </tr>
@@ -76,9 +76,10 @@
 
         <div class="form-group">
             <div class="col-sm-3">
-                {!! Form::submit('Save Role Permission Changes', ['class' => 'btn btn-primary form-control']) !!}
+                {!! Form::submit('Save User Permission Changes', ['class' => 'btn btn-primary form-control']) !!}
             </div>
         </div>
+        {{Form::hidden('user_id',$user->id)}}
     {!! Form::close() !!}
 
 @endsection

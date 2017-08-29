@@ -5,7 +5,9 @@
         Listado
         <small>Zonas</small>
     </h1>
-    <h2>{{ link_to_route('zonas.create', 'Nuevo', null, array('class' => 'btn btn-block btn-success btn-xs')) }}</h2>
+    @if( \Auth::user()->compruebaSeguridad('crear-zona') == true)
+        <h2>{{ link_to_route('zonas.create', 'Nuevo', null, array('class' => 'btn btn-block btn-success btn-xs')) }}</h2>
+    @endif
 
     <ol class="breadcrumb">
         <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -36,10 +38,14 @@
                             <tr>
                                 <td>{{$zona->nombre}}</td>
                                 <td><span title="{{$zona->color}}" style="background:{{$zona->color}}; width:50px;height: 20px;float: left;"></span></td>
-                                <td>{{ link_to_route('zonas.edit', 'Editar', $zona->id, array('class' => 'btn btn btn-warning btn-xs')) }}
-                                    {{ Form::open(array('method'=> 'DELETE', 'route' => array('zonas.destroy', $zona->id),'style'=>'display:inline','class'=>'form_eliminar')) }}
-                                    {{ Form::submit('Eliminar', array('class' => 'btn btn btn-danger btn-xs')) }}
-                                    {{ Form::close() }}
+                                <td>@if( \Auth::user()->compruebaSeguridad('editar-zona') == true)
+                                        {{ link_to_route('zonas.edit', 'Editar', $zona->id, array('class' => 'btn btn btn-warning btn-xs')) }}
+                                    @endif
+                                    @if( \Auth::user()->compruebaSeguridad('eliminar-zona') == true)
+                                        {{ Form::open(array('method'=> 'DELETE', 'route' => array('zonas.destroy', $zona->id),'style'=>'display:inline','class'=>'form_eliminar')) }}
+                                        {{ Form::submit('Eliminar', array('class' => 'btn btn btn-danger btn-xs')) }}
+                                        {{ Form::close() }}
+                                    @endif
 
                                 </td>
                             </tr>

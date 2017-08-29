@@ -5,7 +5,9 @@
         Listado
         <small>Contenido</small>
     </h1>
-    <h2>{{ link_to_route('agenda.create', 'Nuevo', null, array('class' => 'btn btn-block btn-success btn-xs')) }}</h2>
+    @if( \Auth::user()->compruebaSeguridad('crear-agenda') == true)
+        <h2>{{ link_to_route('agenda.create', 'Nuevo', null, array('class' => 'btn btn-block btn-success btn-xs')) }}</h2>
+    @endif
 
     <ol class="breadcrumb">
         <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -55,10 +57,14 @@
                                     <td>{{$fecha." ".$hora}}</td>
                                     <td>{{$evento->zona}}</td>
                                     <td>{{$evento->visible==1?'Si':'No'}}</td>
-                                    <td>{{ link_to_route('agenda.edit', 'Editar', $evento->id, array('class' => 'btn btn btn-warning btn-xs')) }}
-                                        {{ Form::open(array('method'=> 'DELETE', 'route' => array('agenda.destroy', $evento->id),'style'=>'display:inline','class'=>'form_eliminar')) }}
-                                        {{ Form::submit('Eliminar', array('class' => 'btn btn btn-danger btn-xs')) }}
-                                        {{ Form::close() }}
+                                    <td>@if( \Auth::user()->compruebaSeguridad('editar-agenda') == true)
+                                            {{ link_to_route('agenda.edit', 'Editar', $evento->id, array('class' => 'btn btn btn-warning btn-xs')) }}
+                                        @endif
+                                        @if( \Auth::user()->compruebaSeguridad('eliminar-agenda') == true)
+                                            {{ Form::open(array('method'=> 'DELETE', 'route' => array('agenda.destroy', $evento->id),'style'=>'display:inline','class'=>'form_eliminar')) }}
+                                            {{ Form::submit('Eliminar', array('class' => 'btn btn btn-danger btn-xs')) }}
+                                            {{ Form::close() }}
+                                        @endif
 
                                     </td>
                                 </tr>

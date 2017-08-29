@@ -24,6 +24,8 @@ class PonenteController extends Controller
      */
     public function index()
     {
+        if(\Auth::user()->compruebaSeguridad('mostrar-ponentes') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $ponentes = DB::table('ponentes')
             ->join('textos_idiomas','ponentes.id','=','textos_idiomas.contenido_id')
             ->join('idiomas','textos_idiomas.idioma_id','idiomas.id')
@@ -41,6 +43,8 @@ class PonenteController extends Controller
      */
     public function create()
     {
+        if(\Auth::user()->compruebaSeguridad('crear-ponentes') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $idiomas = Idioma::where('activado','1')->orderBy('principal')->get();
         return view('eunomia.ponentes.form_ins_ponentes',compact('idiomas'));
     }
@@ -53,6 +57,8 @@ class PonenteController extends Controller
      */
     public function store(Request $request)
     {
+        if(\Auth::user()->compruebaSeguridad('crear-ponentes') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $url = $request->url;
         $idiomas = Idioma::where('activado','1')->orderBy('principal')->get();
 
@@ -170,6 +176,8 @@ class PonenteController extends Controller
      */
     public function edit($id)
     {
+        if(\Auth::user()->compruebaSeguridad('editar-ponentes') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $idiomas = Idioma::where('activado','1')->orderBy('principal')->get();
         $textos = DB::table('ponentes')
             ->join('textos_idiomas','ponentes.id','=','textos_idiomas.contenido_id')
@@ -190,6 +198,8 @@ class PonenteController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if(\Auth::user()->compruebaSeguridad('editar-ponentes') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $url = $request->url;
         $idiomas = Idioma::where('activado','1')->orderByDesc('principal')->get();
 
@@ -305,6 +315,8 @@ class PonenteController extends Controller
      */
     public function destroy($id)
     {
+        if(\Auth::user()->compruebaSeguridad('eliminar-ponentes') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $textosIdioma = TextosIdioma::where('contenido_id',$id)
             ->where('tipo_contenido_id',$this->tipo_contenido);
         $textosIdioma->delete();

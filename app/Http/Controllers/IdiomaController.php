@@ -19,6 +19,8 @@ class IdiomaController extends Controller
      */
     public function index()
     {
+        if(\Auth::user()->compruebaSeguridad('mostrar-idiomas') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $idiomas=Idioma::all();
         return view('eunomia.idiomas.listado_idiomas',compact('idiomas'));
     }
@@ -30,6 +32,8 @@ class IdiomaController extends Controller
      */
     public function create()
     {
+        if(\Auth::user()->compruebaSeguridad('crear-idioma') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         return view('eunomia.idiomas.form_ins_idiomas');
 
     }
@@ -42,6 +46,8 @@ class IdiomaController extends Controller
      */
     public function store(Request $request)
     {
+        if(\Auth::user()->compruebaSeguridad('crear-idioma') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $this->validate($request, [
             'idioma' => 'required',
             'codigo' => 'required'
@@ -98,6 +104,8 @@ class IdiomaController extends Controller
      */
     public function edit($id)
     {
+        if(\Auth::user()->compruebaSeguridad('editar-idioma') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $idioma = Idioma::findOrFail($id);
         return view('eunomia.idiomas.form_edit_idiomas',compact('idioma'));
     }
@@ -111,6 +119,8 @@ class IdiomaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if(\Auth::user()->compruebaSeguridad('editar-idioma') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $idioma = Idioma::findOrFail($id);
         $imagenactual = $idioma->imagen;
 
@@ -155,6 +165,8 @@ class IdiomaController extends Controller
      */
     public function destroy($id)
     {
+        if(\Auth::user()->compruebaSeguridad('eliminar-idioma') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $idioma = Idioma::findOrFail($id);
         $imagenactual = $idioma->imagen;
         File::delete('images/idiomas/'.$imagenactual);

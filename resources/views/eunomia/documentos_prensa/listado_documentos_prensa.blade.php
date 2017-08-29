@@ -5,7 +5,9 @@
         Listado
         <small>documentos_prensa</small>
     </h1>
-    <h2>{{ link_to_route('documentos_prensa.create', 'Nuevo', null, array('class' => 'btn btn-block btn-success btn-xs')) }}</h2>
+    @if( \Auth::user()->compruebaSeguridad('crear-documento-prensa') == true)
+        <h2>{{ link_to_route('documentos_prensa.create', 'Nuevo', null, array('class' => 'btn btn-block btn-success btn-xs')) }}</h2>
+    @endif
 
     <ol class="breadcrumb">
         <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -38,10 +40,14 @@
                             <tr>
                                 <td>{{$documento->textos_idioma_principal->titulo}}</td>
                                 <td><a href="{{asset('files/prensa')}}/{{$documento->fichero}}" target="_blank">{{$documento->fichero}}</a></td>
-                                <td>{{ link_to_route('documentos_prensa.edit', 'Editar', $documento, array('class' => 'btn btn btn-warning btn-xs')) }}
-                                    {{ Form::open(array('method'=> 'DELETE', 'route' => array('documentos_prensa.destroy', $documento->id),'style'=>'display:inline','class'=>'form_eliminar')) }}
-                                    {{ Form::submit('Eliminar', array('class' => 'btn btn btn-danger btn-xs')) }}
-                                    {{ Form::close() }}
+                                <td>@if( \Auth::user()->compruebaSeguridad('editar-documento-prensa') == true)
+                                        {{ link_to_route('documentos_prensa.edit', 'Editar', $documento, array('class' => 'btn btn btn-warning btn-xs')) }}
+                                    @endif
+                                    @if( \Auth::user()->compruebaSeguridad('eliminar-documento-prensa') == true)
+                                        {{ Form::open(array('method'=> 'DELETE', 'route' => array('documentos_prensa.destroy', $documento->id),'style'=>'display:inline','class'=>'form_eliminar')) }}
+                                        {{ Form::submit('Eliminar', array('class' => 'btn btn btn-danger btn-xs')) }}
+                                        {{ Form::close() }}
+                                    @endif
 
                                 </td>
                             </tr>

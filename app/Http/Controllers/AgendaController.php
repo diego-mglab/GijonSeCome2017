@@ -28,6 +28,8 @@ class AgendaController extends Controller
      */
     public function index()
     {
+        if(\Auth::user()->compruebaSeguridad('mostrar-agenda') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $eventos = DB::table('agenda')
             ->join('textos_idiomas','agenda.id','=','textos_idiomas.contenido_id')
             ->join('idiomas','textos_idiomas.idioma_id','idiomas.id')
@@ -46,6 +48,8 @@ class AgendaController extends Controller
      */
     public function create()
     {
+        if(\Auth::user()->compruebaSeguridad('crear-agenda') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $ponentes = DB::table('ponentes')
             ->join('textos_idiomas','ponentes.id','=','textos_idiomas.contenido_id')
             ->join('idiomas','textos_idiomas.idioma_id','idiomas.id')
@@ -69,6 +73,8 @@ class AgendaController extends Controller
      */
     public function store(Request $request)
     {
+        if(\Auth::user()->compruebaSeguridad('crear-agenda') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $idiomas = Idioma::where('activado','1')->orderBy('principal')->get();
 
         $this->validate($request, [
@@ -158,6 +164,8 @@ class AgendaController extends Controller
      */
     public function edit($id)
     {
+        if(\Auth::user()->compruebaSeguridad('editar-agenda') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $agenda = Agenda::findOrFail($id);
         $allponentes = DB::table('ponentes')
             ->join('textos_idiomas','ponentes.id','textos_idiomas.contenido_id')
@@ -199,6 +207,8 @@ class AgendaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if(\Auth::user()->compruebaSeguridad('editar-agenda') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $idiomas = Idioma::where('activado','1')->orderByDesc('principal')->get();
 
         $this->validate($request, [
@@ -279,6 +289,8 @@ class AgendaController extends Controller
      */
     public function destroy($id)
     {
+        if(\Auth::user()->compruebaSeguridad('eliminar-agenda') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         //Eliminamos los textos en los idiomas
         $textosIdioma = TextosIdioma::where('contenido_id',$id)
             ->where('tipo_contenido_id',$this->tipo_contenido);

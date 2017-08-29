@@ -59,6 +59,20 @@
                     </div>
 
                     <div class="form-group">
+                        {{Form::label('permission_type','Contador (tabla)',['class' => 'col-lg-2 control-label'])}}
+                        <div class="col-lg-10">
+                            <select name="permission_type" class="form-control" id="permission_type">
+                                <option value="">Seleccione un tipo</option>
+                                <option value="crear">Crear</option>
+                                <option value="editar">Editar</option>
+                                <option value="eliminar">Eliminar</option>
+                                <option value="mostrar">Mostrar</option>
+                                <option value="asignar">Asignar</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
 
                         {{Form::label('description', 'Descripción')}}
                         {{Form::text('description',null, ['class' => 'form-control' ,'placeholder' => 'Descripción'])}}

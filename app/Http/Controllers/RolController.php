@@ -16,6 +16,8 @@ class RolController extends Controller
      */
     public function index()
     {
+        if(\Auth::user()->compruebaSeguridad('mostrar-roles') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $roles = Rol::all();
         return view('eunomia.roles.listado_roles', compact('roles'));
     }
@@ -27,6 +29,8 @@ class RolController extends Controller
      */
     public function create()
     {
+        if(\Auth::user()->compruebaSeguridad('crear-rol') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         return view('eunomia.roles.form_ins_roles');
     }
 
@@ -38,6 +42,8 @@ class RolController extends Controller
      */
     public function store(Request $request)
     {
+        if(\Auth::user()->compruebaSeguridad('crear-rol') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $this->validate($request, [
             'name' => 'required',
             'slug' => 'required'
@@ -73,6 +79,8 @@ class RolController extends Controller
      */
     public function edit($id)
     {
+        if(\Auth::user()->compruebaSeguridad('editar-rol') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $rol = Rol::findOrFail($id);
         return view('eunomia.roles.form_edit_roles',compact('rol'));
     }
@@ -86,6 +94,8 @@ class RolController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if(\Auth::user()->compruebaSeguridad('editar-rol') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $this->validate($request, [
             'name' => 'required',
             'slug' => 'required'
@@ -110,6 +120,8 @@ class RolController extends Controller
      */
     public function destroy($id)
     {
+        if(\Auth::user()->compruebaSeguridad('eliminar-rol') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $rol = Rol::findOrFail($id);
         $rol->delete();
 
@@ -122,8 +134,10 @@ class RolController extends Controller
      */
     public function showRoleMatrix()
     {
+        if(\Auth::user()->compruebaSeguridad('asignar-permisos-roles') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $roles = Rol::all();
-        $permissions = Permission::all();
+        $permissions = Permission::orderBy('model')->get();
         $prs = DB::table('permission_role')->select('role_id as r_id','permission_id as p_id')->get();
 
         $pivot = [];
@@ -140,6 +154,8 @@ class RolController extends Controller
      */
     public function updateRoleMatrix(Request $request)
     {
+        if(\Auth::user()->compruebaSeguridad('asignar-permisos-roles') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $bits = $request->get('perm_role');
         foreach($bits as $v) {
             $p = explode(":", $v);

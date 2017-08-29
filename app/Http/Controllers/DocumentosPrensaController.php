@@ -21,6 +21,8 @@ class DocumentosPrensaController extends Controller
      */
     public function index()
     {
+        if(\Auth::user()->compruebaSeguridad('mostrar-documentos-prensa') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $documentos_prensa=DocumentosPrensa::all();
         return view('eunomia.documentos_prensa.listado_documentos_prensa',compact('documentos_prensa'));
     }
@@ -32,6 +34,8 @@ class DocumentosPrensaController extends Controller
      */
     public function create()
     {
+        if(\Auth::user()->compruebaSeguridad('crear-documento-prensa') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $idiomas = Idioma::where('activado','1')->orderBy('principal')->get();
         return view('eunomia.documentos_prensa.form_ins_documentos_prensa',compact('idiomas'));
     }
@@ -44,6 +48,8 @@ class DocumentosPrensaController extends Controller
      */
     public function store(Request $request)
     {
+        if(\Auth::user()->compruebaSeguridad('crear-documento-prensa') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $idiomas = Idioma::where('activado','1')->orderBy('principal')->get();
 
         foreach ($idiomas as $idioma) {
@@ -114,6 +120,8 @@ class DocumentosPrensaController extends Controller
      */
     public function edit($id)
     {
+        if(\Auth::user()->compruebaSeguridad('editar-documento-prensa') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $idiomas = Idioma::where('activado','1')->orderBy('principal')->get();
         $textos = DB::table('documentos_prensa')
             ->join('textos_idiomas','documentos_prensa.id','=','textos_idiomas.contenido_id')
@@ -135,6 +143,8 @@ class DocumentosPrensaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if(\Auth::user()->compruebaSeguridad('editar-documento-prensa') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $idiomas = Idioma::where('activado','1')->orderBy('principal')->get();
 
         foreach ($idiomas as $idioma) {
@@ -202,6 +212,8 @@ class DocumentosPrensaController extends Controller
      */
     public function destroy($id)
     {
+        if(\Auth::user()->compruebaSeguridad('eliminar-documento-prensa') == false)
+            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $textosIdioma = TextosIdioma::where('contenido_id',$id)
             ->where('tipo_contenido_id',$this->tipo_contenido);
         $textosIdioma->delete();

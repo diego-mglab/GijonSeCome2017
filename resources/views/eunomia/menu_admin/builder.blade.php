@@ -5,7 +5,9 @@
         Gestión
         <small>Menú</small>
     </h1>
-    <h2><a href="#newModal" class="btn btn-block btn-success btn-xs" data-toggle="modal">nuevo</a></h2>
+    @if( \Auth::user()->compruebaSeguridad('crear-elemento-menu-admin') == true)
+        <h2><a href="#newModal" class="btn btn-block btn-success btn-xs" data-toggle="modal">Nuevo</a></h2>
+    @endif
 
     <ol class="breadcrumb">
         <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -95,6 +97,15 @@
               </div>
 
               <div class="form-group">
+
+                  {{Form::label('modulo_id', 'Módulo',['class' => 'col-lg-2 control-label'])}}
+                  <div class="col-lg-10">
+                    {{Form::select('modulo_id', $modulos, null, ['class' => 'form-control', 'placeholder'=>'selecciona un módulo'])}}
+                  </div>
+
+              </div>
+
+              <div class="form-group">
                   {{Form::label('table','Contador (tabla)',['class' => 'col-lg-2 control-label'])}}
                   <div class="col-lg-10">
                       <select name="table" class="form-control" id="table">
@@ -165,6 +176,7 @@
 @stop
 
 @section('js')
+    @if( \Auth::user()->compruebaSeguridad('editar-elemento-menu-admin') == true)
     <!-- Nestable -->
     <script src="{{asset("vendor/nestable/jquery.nestable.js")}}"> </script>
     <script type="text/javascript">
@@ -207,6 +219,7 @@
             });
       });
     </script>
+    @endif
 
     <!-- iCheck -->
     <script src="{{asset('vendor/adminlte/plugins/iCheck/icheck.min.js')}}"></script>

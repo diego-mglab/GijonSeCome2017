@@ -22,10 +22,12 @@ class Menu extends Model
 	        <span class='glyphicon glyphicon-move'></span>
 	      </div>
 	      <div class='nested-list-content'>{$item->label}
-            <div class='pull-right'>
-              <a href='" . url("eunomia/menu_admin/edit/{$item->id}") . "' class='btn btn btn-warning btn-xs'>Editar</a>
-              <button class='delete_toggle btn btn btn-danger btn-xs' rel='{$item->id}'>Eliminar</button>
-            </div>
+            <div class='pull-right'>";
+                if( \Auth::user()->compruebaSeguridad('editar-elemento-menu') == true)
+                    $result .= "<a href='" . url("eunomia/menu_admin/edit/{$item->id}") . "' class='btn btn btn-warning btn-xs'>Editar</a>";
+                if( \Auth::user()->compruebaSeguridad('eliminar-elemento-menu') == true)
+                    $result .= "<button class='delete_toggle btn btn btn-danger btn-xs' rel='{$item->id}'>Eliminar</button>";
+            $result .= "</div>
 	      </div>" . $this->buildMenu($menu, $item->id) . "</li>";
             }
         return $result ? "\n<ol class=\"dd-list\">\n$result</ol>\n" : null;
