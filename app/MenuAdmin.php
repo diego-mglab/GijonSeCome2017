@@ -20,7 +20,12 @@ class MenuAdmin extends Model
           <div class='dd-handle nested-list-handle'>
             <span class='glyphicon glyphicon-move'></span>
           </div>
-          <div class='nested-list-content".($item->separator=='1'?' separator':'')."'>{$item->label}
+          <div class='nested-list-content".($item->separator=='1'?' separator':'')."'>";
+            if ($item->icon != ''){
+                $result .= "<i class=\"fa fa-".$item->icon."\"></i> ";
+            }
+
+          $result .= "{$item->label}
             <div class='pull-right'>";
                 if( \Auth::user()->compruebaSeguridad('editar-elemento-menu-admin') == true)
                     $result .= "<a href='" . url("eunomia/menu_admin/edit/{$item->id}") . "' class='btn btn btn-warning btn-xs'>Editar</a>";

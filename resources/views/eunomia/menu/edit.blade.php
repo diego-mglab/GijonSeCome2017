@@ -4,7 +4,7 @@
   <div class="row">
     <div class="col-md-8">  
       <div class="well">
-        <p class="lead"><a href="{{ url('eunomia/menu')}}" class="btn btn-default pull-right">Volver</a> Menú:</p>
+        <p class="lead"><a href="{{ url('eunomia/menu')}}" class=""btn btn-primary pull-right">Volver</a> Menú:</p>
 
 		{{ Form::model($item, array('url' => "eunomia/menu/edit/{$item->id}", 'class' => 'form-horizontal')) }}
 		<div class="form-group">

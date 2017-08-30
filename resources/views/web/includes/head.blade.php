@@ -1,4 +1,3 @@
-<head>
     <!-- OJO tiene un css único gijonsecome.css-->
     <!-- Basic -->
     <title>{{$metas[0]}}</title>
@@ -113,4 +112,5 @@
 
     <link rel="stylesheet" type="text/css" href="{{asset('css/gijonsecome.css')}}"/>
     @yield('css')
-</head>
+
+    @include('web.includes.ganalytics')

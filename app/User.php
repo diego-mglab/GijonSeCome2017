@@ -79,4 +79,29 @@ class User extends Authenticatable
         }
         return false;
     }
+
+    /**
+     * Comprueba si el usuario tiene permiso de mostrar el módulo asignado al elemento de menú ($modulo).
+     * @param $modulo
+     */
+    public function compruebaSeguridadMenu($modulo){
+        //Buscamos el permiso de tipo mostrar asignado al módulo que nos llega en la función
+        $permiso = Permission::where('model',$modulo)->where('permission_type','mostrar')->first();
+        if (is_object($permiso)){
+            //Comprobamos primero si este permiso está activo en alguno de los roles asignados al usuario
+            $rolesUsuario = RolesUsuario::where('user_id', $this->id)->get();
+            foreach ($rolesUsuario as $rolUsuario) {
+                $permissionRol = PermissionRole::where('permission_id',$permiso->id)->where('role_id',$rolUsuario->role_id)->first();
+                if (isset($permissionRol->id)) {
+                    return true;
+                }
+            }
+            //Comprobamos si el permiso está asignado directamente al usuario
+            $permissionUser = PermissionsUsuario::where('user_id',$this->id)->where('permission_id',$permiso->id)->first();
+            if (isset($permissionUser->id)){
+                return true;
+            }
+        }
+        return false;
+    }
 }

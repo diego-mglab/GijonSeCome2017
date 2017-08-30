@@ -42,7 +42,7 @@ class PortadaController extends Controller
      */
     public function create()
     {
-        if(\Auth::user()->compruebaSeguridad('crear-portada') == false)
+        if(\Auth::user()->compruebaSeguridad('crear-noticia-portada') == false)
             return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $idiomas = Idioma::where('activado','1')->orderBy('principal')->get();
         $paginas = DB::table('contents')
@@ -62,7 +62,7 @@ class PortadaController extends Controller
      */
     public function store(Request $request)
     {
-        if(\Auth::user()->compruebaSeguridad('crear-portada') == false)
+        if(\Auth::user()->compruebaSeguridad('crear-noticia-portada') == false)
             return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $idiomas = Idioma::where('activado','1')->orderBy('principal')->get();
 
@@ -170,7 +170,7 @@ class PortadaController extends Controller
      */
     public function edit($id)
     {
-        if(\Auth::user()->compruebaSeguridad('editar-portada') == false)
+        if(\Auth::user()->compruebaSeguridad('editar-noticia-portada') == false)
             return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $idiomas = Idioma::where('activado','1')->orderBy('principal')->get();
         $textos = DB::table('portada')
@@ -199,7 +199,7 @@ class PortadaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if(\Auth::user()->compruebaSeguridad('editar-portada') == false)
+        if(\Auth::user()->compruebaSeguridad('editar-noticia-portada') == false)
             return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $idiomas = Idioma::where('activado','1')->orderByDesc('principal')->get();
 
@@ -304,7 +304,7 @@ class PortadaController extends Controller
      */
     public function destroy($id)
     {
-        if(\Auth::user()->compruebaSeguridad('eliminar-portada') == false)
+        if(\Auth::user()->compruebaSeguridad('eliminar-noticia-portada') == false)
             return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         //Eliminamos los textos en los idiomas
         $textosIdioma = TextosIdioma::where('contenido_id',$id)

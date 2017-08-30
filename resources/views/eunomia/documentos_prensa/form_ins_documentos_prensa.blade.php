@@ -62,7 +62,7 @@
                                     <div class="form-group">
 
                                         {{Form::label('titulo', 'Título')}}
-                                        {{Form::text('titulo', null, ['class' => 'form-control' ,'placeholder' => 'Título'])}}
+                                        {{Form::text('titulo[]', null, ['class' => 'form-control' ,'placeholder' => 'Título'])}}
 
                                     </div>
                                 </div>
@@ -72,16 +72,17 @@
                     </div>
 
                     <div class="form-group" id="contenedor_imagen">
-
-                        {{Form::label('fichero', 'Fichero')}}
-                        {{Form::file('fichero', null, ['class' => 'form-control'])}}
+                        <span class="btn btn-primary btn-file">
+                            {{Form::label('fichero', 'Elija un fichero')}}
+                            {{Form::file('fichero', null, ['class' => 'form-control'])}}
+                        </span>
                     </div>
 
                 </div>
                 <!-- /.box-body -->
 
                 <div class="box-footer">
-                    <button type="submit" class="btn btn-default">Insertar</button>
+                    <button type="submit" class="btn btn-primary">Insertar</button>
                 </div>
 
                 {!! Form::close() !!}

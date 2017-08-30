@@ -103,6 +103,9 @@ Route::group(['prefix' => 'eunomia' , 'middleware' => 'auth' ], function () {
 
     Route::resource('/idiomas', 'IdiomaController');
 
+    Route::get('usuarios/password', 'UserController@password');
+    Route::post('usuarios/updatepassword', 'UserController@updatePassword');
+
     Route::resource('/usuarios', 'UserController');
 
     Route::resource('/modulos', 'ModuloController');
@@ -160,5 +163,4 @@ Route::group(['prefix' => 'eunomia' , 'middleware' => 'auth' ], function () {
     Route::post('galerias/{galeria}/updateOrder','GaleriaController@updateOrder');
 
     Route::post('galerias/{galeria}/updateTextoImagen','GaleriaController@updateTextoImagen');
-
 });

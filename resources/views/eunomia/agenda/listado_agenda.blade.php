@@ -28,11 +28,9 @@
 
                         <thead>
                         <tr>
-                            <th>Título</th>
-                            <th>Subtítulo</th>
+                            <th>Título/Subtítulo</th>
                             <th>Fecha/Hora</th>
                             <th>Zona</th>
-                            <th>Visible/Oculto</th>
                             <th>Acciones</th>
                         </tr>
                         </thead>
@@ -52,11 +50,18 @@
                                     }
                                 ?>
                                 <tr>
-                                    <td>{{$evento->titulo}}</td>
-                                    <td>{{$evento->subtitulo}}</td>
+                                    <td>
+                                        <table>
+                                            <tr>
+                                                <td><strong>{{$evento->titulo}}</strong></td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{$evento->subtitulo}}</td>
+                                            </tr>
+                                        </table>
+                                    </td>
                                     <td>{{$fecha." ".$hora}}</td>
                                     <td>{{$evento->zona}}</td>
-                                    <td>{{$evento->visible==1?'Si':'No'}}</td>
                                     <td>@if( \Auth::user()->compruebaSeguridad('editar-agenda') == true)
                                             {{ link_to_route('agenda.edit', 'Editar', $evento->id, array('class' => 'btn btn btn-warning btn-xs')) }}
                                         @endif

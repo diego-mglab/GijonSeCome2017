@@ -7,6 +7,7 @@ use Hash;
 use App\Rol;
 use App\RolesUsuario;
 use Illuminate\Http\Request;
+use Validator;
 
 class UserController extends Controller
 {
@@ -69,7 +70,7 @@ class UserController extends Controller
                     $rolesUsuario->role_id = $rol;
                     $rolesUsuario->user_id = $lastId;
 
-                    $ponentesAgenda->save();
+                    $rolesUsuario->save();
                 }
             }
         }
@@ -96,7 +97,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        if(\Auth::user()->compruebaSeguridad('editar-usuario') == false)
+        if(\Auth::user()->compruebaSeguridad('editar-usuario') == false && \Auth::user()->id != $id)
             return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $user = User::findOrFail($id);
         $allroles = Rol::get()->pluck('name','id');
@@ -113,26 +114,27 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if(\Auth::user()->compruebaSeguridad('editar-usuario') == false)
-            return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
         $user = User::findOrFail($id);
 
         $user->name=$request->name;
         $user->email=$request->email;
         if($user->save()){
             // Eliminamos los roles del usuario para volver a insertar los nuevos
-            RolesUsuario::where('user_id',$id)->delete();
-            $roles = $request->roles;
-            if (isset($roles)) {
-                foreach ($roles as $rol) {
-                    $rolesUsuario = new RolesUsuario();
-                    $rolesUsuario->role_id = $rol;
-                    $rolesUsuario->user_id = $id;
+            if(\Auth::user()->compruebaSeguridad('editar-usuario') == true) {
+                RolesUsuario::where('user_id', $id)->delete();
+                $roles = $request->roles;
+                if (isset($roles)) {
+                    foreach ($roles as $rol) {
+                        $rolesUsuario = new RolesUsuario();
+                        $rolesUsuario->role_id = $rol;
+                        $rolesUsuario->user_id = $id;
 
-                    $rolesUsuario->save();
+                        $rolesUsuario->save();
+                    }
                 }
+            } else {
+                return redirect('eunomia');
             }
-
         }
 
         return redirect('eunomia/usuarios');
@@ -152,5 +154,41 @@ class UserController extends Controller
         $user->delete();
 
         return redirect('eunomia/usuarios');
+    }
+
+    public function password(){
+        return View('eunomia.usuarios.change_password');
+    }
+
+    public function updatePassword(Request $request){
+        $rules = [
+            'mypassword' => 'required',
+            'password' => 'required|confirmed|min:6|max:18',
+        ];
+
+        $messages = [
+            'mypassword.required' => 'El campo es requerido',
+            'password.required' => 'El campo es requerido',
+            'password.confirmed' => 'Los passwords no coinciden',
+            'password.min' => 'El mínimo permitido son 6 caracteres',
+            'password.max' => 'El máximo permitido son 18 caracteres',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if ($validator->fails()){
+            return redirect('eunomia/usuarios/password')->withErrors($validator);
+        }
+        else{
+            if (Hash::check($request->mypassword, \Auth::user()->password)){
+                $user = new User;
+                $user->where('email', '=', \Auth::user()->email)
+                    ->update(['password' => bcrypt($request->password)]);
+                return redirect('eunomia')->with('status', 'Contraseña cambiada con éxito');
+            }
+            else
+            {
+                return redirect('eunomia/usuarios/password')->with('message', 'Credenciales incorrectas');
+            }
+        }
     }
 }

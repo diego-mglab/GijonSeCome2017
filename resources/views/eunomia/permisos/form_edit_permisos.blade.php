@@ -59,14 +59,13 @@
                     </div>
 
                     <div class="form-group">
-                        {{Form::label('permission_type','Contador (tabla)')}}
+                        {{Form::label('permission_type','Tipo permiso')}}
                         <select name="permission_type" class="form-control" id="permission_type">
                             <option value="">Seleccione un tipo</option>
                             <option value="crear" <?php if($permission->permission_type=='crear') echo 'selected="selected"'; ?>>Crear</option>
                             <option value="editar" <?php if($permission->permission_type=='editar') echo 'selected="selected"'; ?>>Editar</option>
                             <option value="eliminar" <?php if($permission->permission_type=='eliminar') echo 'selected="selected"'; ?>>Eliminar</option>
                             <option value="mostrar" <?php if($permission->permission_type=='mostrar') echo 'selected="selected"'; ?>>Mostrar</option>
-                            <option value="asignar" <?php if($permission->permission_type=='asignar') echo 'selected="selected"'; ?>>Asignar</option>
                         </select>
                     </div>
 
@@ -81,7 +80,7 @@
                 <!-- /.box-body -->
 
                 <div class="box-footer">
-                    <button type="submit" class="btn btn-default">Editar</button>
+                    <button type="submit" class="btn btn-primary">Editar</button>
                 </div>
 
                 {!! Form::close() !!}

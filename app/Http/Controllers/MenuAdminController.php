@@ -31,6 +31,10 @@ class MenuAdminController extends Controller
         return view('eunomia.menu_admin.builder', compact('items','menu','icons','tables','modulos'));
     }
 
+    static function sort_by_orden($a, $b) {
+        return $a['id'] - $b['id'];
+    }
+
     public function getEdit($id)
     {
         if( \Auth::user()->compruebaSeguridad('editar-elemento-menu-admin') == false)

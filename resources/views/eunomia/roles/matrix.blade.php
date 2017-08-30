@@ -3,7 +3,7 @@
 @section('content_header')
     <h1>
         Role Matrix
-        <small>Permissions that are on each role</small>
+        <small>Asignar permisos a roles</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -22,7 +22,7 @@
     <div class="table" style="overflow:auto; border: 1px dashed;">
         <table class="table table-bordered table-striped table-hover" style=" margin-bottom:0">
             <thead>
-            <tr class="alert-warning">
+            <tr class="alert-dismissable">
                 <th class="text-center">
                     <span class="pull-left"><span class="sr-only">Permissions</span>
                       <i class="fa fa-arrow-down"></i>
@@ -36,7 +36,7 @@
                 </th>
                 @foreach ($roles as $rol)
                     <th> {{ $rol->name }} <a href="{{ route( 'roles.edit',$rol->id) }}">
-                            <button type="button" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-link"></span></button></a>
+                            <button type="button" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-link"></span></button></a>
                     </th>
                 @endforeach
             </tr>
@@ -47,16 +47,16 @@
             @foreach($permissions as $permission)
                 @if($modulo != $permission->model)
                     <tr>
-                        <th class="alert-success">
+                        <th class="alert-info">
                             {{ $permission->modulo->nombre }}
                         </th>
                     </tr>
                     <?php $modulo = $permission->model; ?>
                 @endif
                 <tr>
-                    <th class="alert-warning">
+                    <th class="alert-dismissable">
                         <a href="{{ route('permisos.edit',$permission->id) }}">
-                            <button type="button" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-link"></span></button></a>
+                            <button type="button" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-link"></span></button></a>
                         {{ $permission->name }}
                     </th>
                     @for ($i=0; $i < $roles->count(); $i++ )
@@ -76,7 +76,7 @@
 
         <div class="form-group">
             <div class="col-sm-3">
-                {!! Form::submit('Save Role Permission Changes', ['class' => 'btn btn-primary form-control']) !!}
+                {!! Form::submit('Guardar cambios', ['class' => 'btn btn-primary form-control']) !!}
             </div>
         </div>
     {!! Form::close() !!}

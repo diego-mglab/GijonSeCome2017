@@ -55,7 +55,7 @@
                 <!-- /.box-body -->
 
                 <div class="box-footer">
-                    <button type="submit" class="btn btn-default">Insertar</button>
+                    <button type="submit" class="btn btn-primary">Insertar</button>
                 </div>
 
                 {!! Form::close() !!}

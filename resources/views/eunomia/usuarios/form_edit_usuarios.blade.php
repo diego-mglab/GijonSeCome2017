@@ -41,18 +41,20 @@
 
                     </div>
 
+                    @if (\Auth::user()->compruebaSeguridad('editar-usuario'))
                     <div class="form-group">
 
                         {{Form::label('roles', 'Roles')}}
                         {{Form::select('roles[]', $allroles, $roles, ['class' => 'form-control select2', 'data-placeholder'=>'selecciona uno o varios roles', 'multiple'=>'multiple'])}}
 
                     </div>
+                    @endif
 
                 </div>
                 <!-- /.box-body -->
 
                 <div class="box-footer">
-                    <button type="submit" class="btn btn-default">Editar</button>
+                    <button type="submit" class="btn btn-primary">Editar</button>
                 </div>
 
                 {!! Form::close() !!}

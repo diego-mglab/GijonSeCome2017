@@ -230,7 +230,7 @@
 
                     <div class="form-group">
 
-                        <input type="button" class="btn btn-default" id="fb_pixel_visible" value="Campaña Pixel Facebook">
+                        <input type="button" class="btn btn-primary" id="fb_pixel_visible" value="Campaña Pixel Facebook">
 
                     </div>
 
@@ -253,7 +253,7 @@
                 <!-- /.box-body -->
 
                 <div class="box-footer">
-                    <button type="submit" class="btn btn-default">Editar</button>
+                    <button type="submit" class="btn btn-primary">Editar</button>
                 </div>
 
                     {{Form::hidden('url',$_SERVER['HTTP_REFERER'],[])}}

@@ -122,7 +122,7 @@
                 <!-- /.box-body -->
 
                 <div class="box-footer">
-                    <button type="submit" class="btn btn-default">Editar</button>
+                    <button type="submit" class="btn btn-primary">Editar</button>
                 </div>
 
                 {!! Form::close() !!}
@@ -159,8 +159,8 @@
 
                     <div class="form-group">
 
-                        {{Form::label('url', 'URL video')}}
-                        {{Form::text('url', null, ['class' => 'form-control' ,'placeholder' => 'URL video'])}}
+                        {{Form::label('url', 'Código Youtube')}}
+                        {{Form::text('url', null, ['class' => 'form-control' ,'placeholder' => 'Código Youtube'])}}
 
                     </div>
 
@@ -168,7 +168,7 @@
                     {{Form::hidden('galeria_id',$galeria->id)}}
 
                     <div class="box-footer">
-                        <button type="submit" class="btn btn-default">Insertar</button>
+                        <button type="submit" class="btn btn-primary">Insertar</button>
                     </div>
 
 
@@ -198,10 +198,10 @@
                 <div class="box-body" id="galeria_imagenes">
 
                     @foreach ($imagenes as $imagen)
-                        <div class="col-xs-6 col-md-2 " style="padding-bottom:1em" id="{{$imagen->id}}">
+                        <div class="col-xs-6 col-md-2 " style="padding-bottom:1em;height:400px;" id="{{$imagen->id}}">
                             <?php
                                   if ($imagen->tipo_multimedia == 'video') { ?>
-                                    <a data-lightbox-gallery="gallery1" class="nivo-lightbox" href="{{$imagen->url}}"><img src="{{asset('images/galerias/'.$galeria->carpeta.'/th/')}}/{{$imagen->imagen or 'sinimagen.png'}}" style="width:240px;" ></a>
+                                <iframe width="240" height="240" src="https://www.youtube.com/embed/{{$imagen->url}}" frameborder="0" allowfullscreen></iframe>
                             <?php } else { ?>
                                     <a data-lightbox-gallery="gallery1" class="nivo-lightbox" href="{{asset('images/galerias/'.$galeria->carpeta.'/th/')}}/{{$imagen->imagen or 'sinimagen.png'}}"><img src="{{asset('images/galerias/'.$galeria->carpeta.'/th/')}}/{{$imagen->imagen or 'sinimagen.png'}}" style="width:240px;"></a>
 
@@ -212,7 +212,7 @@
                                 {{ Form::hidden('galeria_id',$galeria->id) }}
                                 @foreach ($idiomas_imagenes as $idioma)
                                     <div class="form-group">
-                                        {{ Form::text('texto_'.$idioma->codigo,is_object($imagen->textos_idioma_todos($idioma->codigo))?$imagen->textos_idioma_todos($idioma->codigo)->tititulo',['placeholder' => 'Título en '.$idioma->idioma, 'class' => 'form-control', 'id' => $imagen->id.'_'.$idioma->id]) }}
+                                        {{ Form::text('texto_'.$idioma->codigo,is_object($imagen->textos_idioma_todos($idioma->codigo))?$imagen->textos_idioma_todos($idioma->codigo)->titulo:'',['placeholder' => 'Título en '.$idioma->idioma, 'class' => 'form-control', 'id' => $imagen->id.'_'.$idioma->id]) }}
                                     </div>
                                 @endforeach
                             {{ Form::submit('Eliminar', array('class' => 'btn btn-block btn-danger btn-xs')) }}

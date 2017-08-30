@@ -87,7 +87,7 @@ return [
 
     'dashboard_url' => 'eunomia/home',
 
-    'logout_url' => 'eunomia/logout',
+    'logout_url' => 'logout',
 
     'logout_method' => null,
 
@@ -108,13 +108,7 @@ return [
     */
 
     'menu' => [
-        'ADMIN',
-        [
-            'text'        => 'Menú Administración',
-            'url'         => '/eunomia/menu_admin',
-            'icon'        => 'navicon',
-        ],
-        // Sólamente se crea este nodo estático que permite acceder a la gestión del menú de administración ya así crear el resto de elementos dinámicamente
+        // El menú se crea dinámicamente en la función boot de App/Providers/AppServiceProviders
     ],
 
     /*

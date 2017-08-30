@@ -151,7 +151,7 @@
                 <!-- /.box-body -->
 
                 <div class="box-footer">
-                    <button type="submit" class="btn btn-default">Editar</button>
+                    <button type="submit" class="btn btn-primary">Editar</button>
                 </div>
 
                 {!! Form::close() !!}

@@ -7,15 +7,26 @@
 @stop
 
 @section('content')
-    @include('eunomia.includes.box')
 
+    @if (Session::has('status'))
+        <hr />
+        <div class='alert alert-success'>
+            {{Session::get('status')}}
+        </div>
+        <hr />
+    @endif
+
+    @if( \Auth::user()->compruebaSeguridad('mostrar-contenidos') == true)
     <div class="row">
         @include('eunomia.includes.noticias')
         @include('eunomia.includes.entrevistas')
     </div>
+    @endif
+    @if( \Auth::user()->compruebaSeguridad('mostrar-ponentes') == true)
     <div class="row">
         @include('eunomia.includes.ponentes')
     </div>
+    @endif
 @stop
 
 @section('js')

@@ -72,7 +72,7 @@
                                     <div class="form-group">
 
                                         {{Form::label('titulo', 'Título')}}
-                                        {{Form::text('titulo', $titulo, ['class' => 'form-control' ,'placeholder' => 'Título'])}}
+                                        {{Form::text('titulo[]', $titulo, ['class' => 'form-control' ,'placeholder' => 'Título'])}}
 
                                     </div>
                                 </div>
@@ -83,11 +83,13 @@
 
                     <div class="form-group" id="contenedor_imagen">
 
-                        {{Form::label('fichero', 'Fichero')}}
-                        {{Form::file('fichero', null, ['class' => 'form-control'])}}
+                        <span class="btn btn-primary btn-file">
+                            {{Form::label('fichero', 'Elija un fichero')}}
+                            {{Form::file('fichero', null, ['class' => 'form-control'])}}
+                        </span>
                         @if ($documentosPrensa->fichero != '')
                             <div class="label_imagen_editar"><strong>Fichero actual:</strong></div>
-                            <div class="contenedor_imagen_editar"><a href="{{asset('files/prensa/'.$documentosPrensa->fichero)}}">{{$documentosPrensa->fichero}}</a></div>
+                            <div class="contenedor_imagen_editar"><a href="{{asset('files/prensa/'.$documentosPrensa->fichero)}}" target="_blank">{{$documentosPrensa->fichero}}</a></div>
                         @endif
                     </div>
 
@@ -95,7 +97,7 @@
                 <!-- /.box-body -->
 
                 <div class="box-footer">
-                    <button type="submit" class="btn btn-default">Editar</button>
+                    <button type="submit" class="btn btn-primary">Editar</button>
                 </div>
 
                 {!! Form::close() !!}

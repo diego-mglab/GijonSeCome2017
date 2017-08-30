@@ -62,10 +62,17 @@
                         <div class="portfolio-item item">
                             <div class="portfolio-border">
                                 <div class="portfolio-thumb">
-                                    <a class="lightbox" title="{{$titulo}}" href="{{asset('images/galerias/'.$galeria->carpeta)}}/{{$elemento->imagen or 'sinimagen.png'}}" data-lightbox-gallery="gallery1">
-                                        <div class="thumb-overlay"><i class="fa fa-arrows-alt"></i></div>
-                                        <img alt="{{$titulo}}" src="{{asset('images/galerias/'.$galeria->carpeta.'/th')}}/{{$elemento->imagen or 'sinimagen.png'}}"/>
-                                    </a>
+                                    @if ($elemento->tipo_multimedia == 'imagen')
+                                        <a class="lightbox" title="{{$titulo}}" href="{{asset('images/galerias/'.$galeria->carpeta)}}/{{$elemento->imagen or 'sinimagen.png'}}" data-lightbox-gallery="gallery1">
+                                            <div class="thumb-overlay"><i class="fa fa-arrows-alt"></i></div>
+                                            <img alt="{{$titulo}}" src="{{asset('images/galerias/'.$galeria->carpeta.'/th')}}/{{$elemento->imagen or 'sinimagen.png'}}"/>
+                                        </a>
+                                    @else
+                                        <a class="lightbox" title="{{$titulo}}" href="https://youtu.be/{{$elemento->url}}" data-lightbox-gallery="gallery1">
+                                            <div class="thumb-overlay"><i class="fa fa-arrows-alt"></i></div>
+                                            <img alt="{{$titulo}}" src="https://img.youtube.com/vi/{{$elemento->url}}/hqdefault.jpg" />
+                                        </a>
+                                    @endif
                                 </div>
                                 <div class="portfolio-details">
 

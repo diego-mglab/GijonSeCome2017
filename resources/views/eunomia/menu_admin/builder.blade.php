@@ -135,7 +135,7 @@
               </div>
          </div>
          <div class="modal-footer">
-           <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+           <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
            <button type="submit" class="btn btn-primary">Crear</button>
          </div>
          {{ Form::close()}}
@@ -156,7 +156,7 @@
             <p>¿Está seguro de que desea eliminar este elemento del menú?</p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
             <input type="hidden" name="delete_id" id="postvalue" value="" />
             <input type="submit" class="btn btn-danger" value="Eliminar elemento" />
           </div>
