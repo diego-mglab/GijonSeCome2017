@@ -23,32 +23,53 @@
             </div>
 
 
-            <div class="col-lg-3 col-lg-offset-1 col-md-3">
+            <div class="col-lg-1 col-lg-offset-1 col-md-1">
                 <!-- Start Clients Carousel -->
                 <div>
 
                     <!-- Classic Heading -->
                     <h4 class="classic-title"><span>{{__('pie.patrocinadores')}}</span></h4>
 
-                    <div class="clients-carousel custom-carousel touch-carousel" data-appeared-items="4">
+                    <div class="clients-carousel custom-carousel touch-carousel" data-appeared-items="1">
 
                         <!-- Client 1 -->
-                        <div class="client-item item">
+                      <!--  <div class="client-item item">
                             <a href="http://www.ikea.com/es/es/" title="va a la web de IKEA España " target="new"><img src="http://gijonsecome.es/images_web/logos/ikea.png" alt="Logo IKEA" /></a>
-                        </div>
+                        </div>-->
                         <div class="client-item item">
                             <a href="http://www.mahou.es/" title="va a la web de cervezas mahou" target="new"><img src="http://gijonsecome.es/images_web/logos/mahou.png" alt="logo cervezas mahou" /></a>
                         </div>
-                        <div class="client-item item">
+                      <!--  <div class="client-item item">
                             <a href="https://www.miele.es/" title="va a la web de electrodomésticos Miele" target="new"><img src="http://gijonsecome.es/images_web/logos/miele.png" alt="logo electrodomésticos miele" /></a>
-                        </div>
+                        </div>-->
 
                     </div>
                 </div>
                 <!--End Clients Carousel-->
             </div>
+  <div class="col-lg-2 col-lg-offset-1 col-md-1">
+                <!-- Start Clients Carousel -->
+                <div>
 
-            <div class="col-lg-5 col-lg-offset-1  col-md-5">
+                    <!-- Classic Heading -->
+                    <h4 class="classic-title"><span>colaboradores institucionales</span></h4>
+
+                    <div class="clients-carousel custom-carousel touch-carousel" data-appeared-items="2">
+
+                        <!-- Client 1 -->
+                        <div class="client-item item">
+                            <a href="http://www.mglab.es" title="va a la web de mglab " target="new"><img src="http://gijonsecome.es/images_web/logos/mglab.png" alt="Logo mglab" /></a>
+                        </div>
+                            <!--   <div class="client-item item">
+                            <a href="https://www.turismoasturias.es/" title="va a la web de turismo de Asturias" target="new"><img src="http://gijonsecome.es/images_web/logos/asturias.png" alt="Logo turismo Asturias" /></a>
+                        </div>-->
+
+
+                    </div>
+                </div>
+                <!--End Clients Carousel-->
+            </div>
+            <div class="col-lg-5 col-lg-offset-1  col-md-10">
                 <!-- Start Clients Carousel -->
                 <div>
 
@@ -61,6 +82,7 @@
                         <div class="client-item item">
                             <a href="http://www.cocinaconbra.com" title="va a la web de cocina con bra" target="new"><img src="http://gijonsecome.es/images_web/logos/bra.png" alt="Logo cocinas bra" /></a>
                         </div>
+                        <!-- 
                         <div class="client-item item">
                             <a href="http://www.masymas.es/" title="va a la web de supermercados mas y mas" target="new"><img src="http://gijonsecome.es/images_web/logos/masy-mas.png" alt="Logo supermercados mas y mas" /></a>
                         </div>
@@ -74,6 +96,7 @@
                         <div class="client-item item">
                             <a href="http://porvasal.es/" title="va a la web de porvasal vajillas" target="new"><img src="http://gijonsecome.es/images_web/logos/porvasal.png" alt="Logo porvasal vajillas" /></a>
                         </div>
+                         -->
 
 
 
@@ -91,11 +114,11 @@
                     <!-- Classic Heading -->
                     <h4 class="classic-title"><span>{{__('pie.colaboradores')}}</span></h4>
 
-                    <div class="clients-carousel custom-carousel touch-carousel" data-appeared-items="12">
+                    <div class="clients-carousel custom-carousel touch-carousel" data-appeared-items="15">
 
                         <!-- Client 1 -->
                         <div class="client-item item">
-                            <a href="http://www.anaya.es/" title="va a la web de grupo Anaya" target="new"><img src="http://gijonsecome.es/images_web/logos/Grupo-Anaya.png" alt="Logo anaya grupo " /></a>
+                            <a href="http://www.anaya.es/" title="va a la web de grupo Anaya" target="new"><img src="{{asset('images/logos/Grupo-Anaya.png')}}" alt="Logo anaya grupo " /></a>
                         </div>
 
                         <div class="client-item item">
@@ -107,18 +130,16 @@
                         <div class="client-item item">
                             <a href="http://cuidadoambiental.gijon.es/" title="va a la web de cuidado ambiental de Gijón"><img src="http://gijonsecome.es/images_web/logos/emulsa.png" alt="Logo EMULSA" /></a>
                         </div>
-                        <div class="client-item item">
+                    <!--    <div class="client-item item">
                             <a href="http://www.sidradeasturias.es/" title="va a la web de sidra de Asturias" target="new"><img src="http://gijonsecome.es/images_web/logos/sidradop.png" alt="Logo Sidra de Asturias" /></a>
                         </div>
                         <div class="client-item item">
                             <a href="http://www.milar.es/" title="va a la web de electrodomesticos milar" target="new"><img src="http://gijonsecome.es/images_web/logos/milar.png" alt="Logo milar" /></a>
-                        </div>
+                        </div>-->
                         <div class="client-item item">
                             <a href="http://www.terneraasturiana.org/" title="va a la web de ternera Asturiana" target="new"><img src="http://gijonsecome.es/images_web/logos/tenera-asturiana.png" alt="Logo ternera Asturiana"/></a>
                         </div>
-                        <div class="client-item item">
-                            <a href="https://www.turismoasturias.es/" title="va a la web de turismo de Asturias" target="new"><img src="http://gijonsecome.es/images_web/logos/asturias.png" alt="Logo turismo Asturias" /></a>
-                        </div>
+                        
                         <div class="client-item item">
                             <a href="http://www.renfe.com/" title="va a la web de RENFE" target="new"><img src="http://gijonsecome.es/images_web/logos/renfe.png" alt="Logo RENFE" /></a>
                         </div>
@@ -128,9 +149,9 @@
                         <div class="client-item item">
                             <a href="http://www.iberia.com/" title="va a la web de IBERIA" target="new"><img src="http://gijonsecome.es/images_web/logos/iberia.png" alt="Logo IBERIA" /></a>
                         </div>
-                        <div class="client-item item">
+                       <!--  <div class="client-item item">
                             <a href="http://www.talpesa.com/" title="va a la web de concesionario TALPESA" target="new"><img src="http://gijonsecome.es/images_web/logos/talpesa.png" alt="Logo talpesa" /></a>
-                        </div>
+                        </div>-->
 
 
 

@@ -62,7 +62,7 @@
                                     <div class="form-group">
 
                                         {{Form::label('titulo', 'Nombre')}}
-                                        {{Form::text('titulo', null, ['class' => 'form-control' ,'placeholder' => 'Nombre'])}}
+                                        {{Form::text('titulo[]', null, ['class' => 'form-control' ,'placeholder' => 'Nombre'])}}
 
                                     </div>
 

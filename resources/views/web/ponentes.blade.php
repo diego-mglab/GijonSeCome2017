@@ -45,43 +45,47 @@
         $elementos = count($ponentes);
         ?>
         @foreach ($ponentes as $ponente)
-            @if ($contador == 1)
-            <?php
-                $idioma_actual = Session::get('idioma');
-                //se muestran los 4 primeros chefs luego en el siguiente div general se muestran todos menos estos cuatro
-            ?>
-            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+            @if (is_object($ponente->textos_idioma))
+                @if ($ponente->textos_idioma->visible == '1')
+                    @if ($contador == 1)
+                    <?php
+                        $idioma_actual = Session::get('idioma');
+                        //se muestran los 4 primeros chefs luego en el siguiente div general se muestran todos menos estos cuatro
+                    ?>
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
 
-                <div class="portfolio-3column">
-                    <ul id="portfolio-list" data-animated="fadeIn">
+                        <div class="portfolio-3column">
+                            <ul id="portfolio-list" data-animated="fadeIn">
+                    @endif
+                                <li>
+                                    <img src="{{asset('images/chefs/m')}}/{{$ponente->imagen or 'sinimagen.png'}}" alt="" />
+                                    <a href="{{route('detalleponentes_web_'.$idioma_actual,[is_object($ponente->textos_idioma)?$ponente->textos_idioma->slug:''])}}">
+                                    <div class="portfolio-item-content">
+                                        <span class="header">{{is_object($ponente->textos_idioma)?$ponente->textos_idioma->titulo:''}}</span>
+                                        <p class="body">{{is_object($ponente->textos_idioma)?$ponente->textos_idioma->subtitulo:''}}</p>
+                                    </div>
+                                    </a>
+
+                                </li>
+                    @if ($contador == 4 && $elementos>4)
+                        </ul>
+
+                    </div>
+
+                </div><!-- fin col lg8 -->
+
+                <?php //se muestran todos los chefs excepto los cuatro primeros
+                ?>
+
+                <div class="col-lg-12">
+                    <div class="portfolio-4column">
+                        <ul id="portfolio-list" data-animated="fadeIn">
+                    @endif
+                    <?php
+                    $contador++;
+                    ?>
+                @endif
             @endif
-                        <li>
-                            <img src="{{asset('images/chefs/m')}}/{{$ponente->imagen or 'sinimagen.png'}}" alt="" />
-                            <a href="{{route('detalleponentes_web_'.$idioma_actual,[is_object($ponente->textos_idioma)?$ponente->textos_idioma->slug:''])}}">
-                            <div class="portfolio-item-content">
-                                <span class="header">{{is_object($ponente->textos_idioma)?$ponente->textos_idioma->titulo:''}}</span>
-                                <p class="body">{{is_object($ponente->textos_idioma)?$ponente->textos_idioma->subtitulo:''}}</p>
-                            </div>
-                            </a>
-
-                        </li>
-            @if ($contador == 4 && $elementos>4)
-                </ul>
-
-            </div>
-
-        </div><!-- fin col lg8 -->
-
-        <?php //se muestran todos los chefs excepto los cuatro primeros
-        ?>
-
-        <div class="col-lg-12">
-            <div class="portfolio-4column">
-                <ul id="portfolio-list" data-animated="fadeIn">
-            @endif
-            <?php
-            $contador++;
-            ?>
         @endforeach
                 </ul>
 

@@ -95,7 +95,7 @@
                     ?>
                     @foreach ($menus as $menu)
 
-                        @if (count($menu->submenu) >=1)
+                        @if (count($menu->submenu) >=1 && $menu->textos_idioma->visible == '1')
 
                             <li>
                                 @if ($menu->url != '')
@@ -109,6 +109,8 @@
                                 <ul class="dropdown">
 
                                     @foreach($menu->submenu as $submenu)
+                                        @if(is_object($submenu->textos_idioma))
+                                            @if($submenu->textos_idioma->visible == '1')
 
                                         <li>
                                             @if ($submenu->url != '')
@@ -127,12 +129,14 @@
 
                                         </li>
 
+                                            @endif
+                                        @endif
 
                                     @endforeach
 
                                 </ul></li>
 
-                        @elseif ($menu->parent_id == 0)
+                        @elseif ($menu->parent_id == 0 && $menu->textos_idioma->visible == '1')
                             <li>
                                 @if ($menu->url != '')
                                     {{link_to(str_contains($menu->url,['http://','https://'])?$menu->url:(Session::get('idioma').'/'.$menu->url), $title = is_object($menu->textos_idioma)?$menu->textos_idioma->titulo:'', $parameters = [])}}

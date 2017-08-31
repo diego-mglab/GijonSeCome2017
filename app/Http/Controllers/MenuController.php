@@ -100,10 +100,11 @@ class MenuController extends Controller {
                     $textosIdioma->tipo_contenido_id = $this->tipo_contenido;
                     $textosIdioma->titulo = $request->label[$i];
                     $textosIdioma->visible = 0;
-                    foreach($request->visible as $visible) {
-                        if ($visible == $request->idioma_id[$i])
-                            $textosIdioma->visible = 1;
-                    }
+                    if (isset($request->visible))
+                        foreach($request->visible as $visible) {
+                            if ($visible == $request->idioma_id[$i])
+                                $textosIdioma->visible = 1;
+                        }
 
                     $textosIdioma->save();
                 }

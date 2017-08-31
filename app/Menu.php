@@ -23,10 +23,14 @@ class Menu extends Model
 	      </div>
 	      <div class='nested-list-content'>{$item->label}
             <div class='pull-right'>";
+                if ($item->textos_idioma_principal->attributes['visible'])
+                    $result .= '<i class="fa fa-eye"></i>';
+                else
+                    $result .= '<i class="fa fa-eye-slash"></i>';
                 if( \Auth::user()->compruebaSeguridad('editar-elemento-menu') == true)
-                    $result .= "<a href='" . url("eunomia/menu_admin/edit/{$item->id}") . "' class='btn btn btn-warning btn-xs'>Editar</a>";
+                    $result .= "<a href='" . url("eunomia/menu/edit/{$item->id}") . "' style='margin-left:.5em;' class='btn btn btn-warning btn-xs'>Editar</a>";
                 if( \Auth::user()->compruebaSeguridad('eliminar-elemento-menu') == true)
-                    $result .= "<button class='delete_toggle btn btn btn-danger btn-xs' rel='{$item->id}'>Eliminar</button>";
+                    $result .= "<button class='delete_toggle btn btn btn-danger btn-xs' style='margin-left:.5em;' rel='{$item->id}'>Eliminar</button>";
             $result .= "</div>
 	      </div>" . $this->buildMenu($menu, $item->id) . "</li>";
             }
@@ -41,6 +45,10 @@ class Menu extends Model
 
     public function textos_idioma(){
         return $this->belongsTo('App\TextosIdioma','id','contenido_id')->where('visible','1')->where('idioma_id',Idioma::fromCodigo(Session::get('idioma')))->where('tipo_contenido_id',$this->tipo_contenido);
+    }
+
+    public function textos_idioma_principal(){
+        return $this->belongsTo('App\TextosIdioma','id','contenido_id')->where('idioma_id',Idioma::where('principal','1')->first()->id)->where('tipo_contenido_id',$this->tipo_contenido);
     }
 
     public function content(){

@@ -213,7 +213,7 @@ class GaleriaController extends Controller
     {
         if(\Auth::user()->compruebaSeguridad('editar-galeria') == false)
             return view('eunomia.mensajes.mensaje_error')->with('msj','..no tiene permisos para acceder a esta sección');
-        if (!$ordenar) {
+        if (!isset($ordenar)) {
             $idiomas = Idioma::where('activado', '1')->orderByDesc('principal')->get();
 
             foreach ($idiomas as $idioma) {
@@ -268,6 +268,7 @@ class GaleriaController extends Controller
                 $i++;
             }
         }
+        return redirect('eunomia/galerias');
     }
 
     function updateOrder(Request $request)
