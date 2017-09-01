@@ -144,10 +144,11 @@ class GaleriaController extends Controller
                         $textosIdioma->metatitulo = $request->metatitulo[$i];
                         $textosIdioma->slug = Str::Slug($request->titulo[$i]);
                         $textosIdioma->visible = 0;
-                        foreach ($request->visible as $visible) {
-                            if ($visible == $request->idioma_id[$i])
-                                $textosIdioma->visible = 1;
-                        }
+                        if (isset($request->visible))
+                            foreach ($request->visible as $visible) {
+                                if ($visible == $request->idioma_id[$i])
+                                    $textosIdioma->visible = 1;
+                            }
 
                         $textosIdioma->save();
                         if ($request->idioma_id[$i] == $idioma_principal_id) {
@@ -244,10 +245,11 @@ class GaleriaController extends Controller
                         $textosIdioma->metatitulo = $request->metatitulo[$i];
                         $textosIdioma->slug = Str::Slug($request->titulo[$i]);
                         $textosIdioma->visible = 0;
-                        foreach ($request->visible as $visible) {
-                            if ($visible == $request->idioma_id[$i])
-                                $textosIdioma->visible = 1;
-                        }
+                        if (isset($request->visible))
+                            foreach ($request->visible as $visible) {
+                                if ($visible == $request->idioma_id[$i])
+                                    $textosIdioma->visible = 1;
+                            }
 
                         $textosIdioma->save();
                     }

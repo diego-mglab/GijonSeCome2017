@@ -34,45 +34,69 @@ $paginas_estaticas = [''];
 foreach ($idiomas as $idioma){
     foreach($contents as $content) {
         if (is_object($content->textos_idioma_todos($idioma->id))) {
-            $parametros = '';
-            if ($content->pagina_estatica != '1')
-                $metodo = str_replace("-", "", $content->textos_idioma_todos($idioma->id)->slug);
-            else
-                $metodo = str_replace("-", "", $content->textos_idioma_todos(Idioma::where('principal',1)->first()->id)->slug);
-            $ruta = $content->textos_idioma_todos($idioma->id)->slug;
-            if ($content->textos_idioma_principal->slug == 'detalle-ponentes')
-                $parametros = '{slug}';
-            if ($content->textos_idioma_principal->slug == 'ponentes' || $content->textos_idioma_principal->slug == 'galeria')
-                $parametros = '{anio?}';
-            if ($content->pagina_estatica == 0) {
-                $metodo = 'detalle';
-            }
-            $codigo = Idioma::where('id', $content->textos_idioma_todos($idioma->id)->idioma_id)->first()->codigo;
-            if ($content->id == 1)
-                Route::get($codigo . '/' . $content->textos_idioma_todos($idioma->id)->slug, function () {
-                    return redirect('/' . (Session::get('idioma') !== null ? Session::get('idioma') : Idioma::where('principal', 1)->first()->codigo));
-                })->name($content->textos_idioma_todos($idioma->id)->slug . '_web_' . $codigo);
-            elseif ($metodo != '') {
-                Route::get($codigo . '/' . $ruta . ($parametros != '' ? '/' . $parametros : ''), 'WebController@' . $metodo, function(){
-                    //Session(['idioma' => $codigo]);
-                    //App::SetLocale(Session::get('idioma'));
-                    abort(404);
-                })->name(str_slug($content->textos_idioma_todos($idioma->id)->slug, "") . '_web_' . $codigo);
-                if ($content->textos_idioma_principal->slug == 'contacto'){
-                    $metodo = 'contacto';
-                    Route::post($codigo . '/' . $ruta . ($parametros != '' ? '/' . $parametros : ''), 'WebController@' . $metodo)
-                        ->name(str_slug($content->textos_idioma_todos($idioma->id)->slug, "") . '_web_post_' . $codigo);
+            //dd($content->textos_idioma_todos($idioma->id));
+            if ($content->textos_idioma_todos($idioma->id)->visible == '1') {
+                //echo $content->textos_idioma_todos($idioma->id)->visible;
+                $parametros = '';
+                if ($content->pagina_estatica != '1')
+                    $metodo = str_replace("-", "", $content->textos_idioma_todos($idioma->id)->slug);
+                else
+                    $metodo = str_replace("-", "", $content->textos_idioma_todos(Idioma::where('principal', 1)->first()->id)->slug);
+                $ruta = $content->textos_idioma_todos($idioma->id)->slug;
+                if ($content->textos_idioma_principal->slug == 'detalle-ponentes')
+                    $parametros = '{slug}';
+                if ($content->textos_idioma_principal->slug == 'ponentes' || $content->textos_idioma_principal->slug == 'galeria')
+                    $parametros = '{anio?}';
+                if ($content->pagina_estatica == 0) {
+                    $metodo = 'detalle';
                 }
-                if ($content->textos_idioma_principal->slug == 'zona-de-prensa'){
-                    $metodo = 'zonadeprensa';
-                    Route::post($codigo . '/' . $ruta . ($parametros != '' ? '/' . $parametros : ''), 'WebController@' . $metodo)
-                        ->name(str_slug($content->textos_idioma_todos($idioma->id)->slug, "") . '_web_post_' . $codigo);
+                $codigo = Idioma::where('id', $content->textos_idioma_todos($idioma->id)->idioma_id)->first()->codigo;
+                if ($content->id == 1)
+                    Route::get($codigo . '/' . $content->textos_idioma_todos($idioma->id)->slug, function () {
+                        return redirect('/' . (Session::get('idioma') !== null ? Session::get('idioma') : Idioma::where('principal', 1)->first()->codigo));
+                    })->name($content->textos_idioma_todos($idioma->id)->slug . '_web_' . $codigo);
+                elseif ($metodo != '') {
+                    Route::get($codigo . '/' . $ruta . ($parametros != '' ? '/' . $parametros : ''), 'WebController@' . $metodo, function () {
+                        //Session(['idioma' => $codigo]);
+                        //App::SetLocale(Session::get('idioma'));
+                        abort(404);
+                    })->name(str_slug($content->textos_idioma_todos($idioma->id)->slug, "") . '_web_' . $codigo);
+                    if ($content->textos_idioma_principal->slug == 'contacto') {
+                        $metodo = 'contacto';
+                        Route::post($codigo . '/' . $ruta . ($parametros != '' ? '/' . $parametros : ''), 'WebController@' . $metodo)
+                            ->name(str_slug($content->textos_idioma_todos($idioma->id)->slug, "") . '_web_post_' . $codigo);
+                    }
+                    if ($content->textos_idioma_principal->slug == 'zona-de-prensa') {
+                        $metodo = 'zonadeprensa';
+                        Route::post($codigo . '/' . $ruta . ($parametros != '' ? '/' . $parametros : ''), 'WebController@' . $metodo)
+                            ->name(str_slug($content->textos_idioma_todos($idioma->id)->slug, "") . '_web_post_' . $codigo);
+                    }
                 }
             }
         }
     }
     Route::get('/404','WebController@pag404')->name('pag404');
 }
+//dd($contents);
+
+//Rutas para la página de la advertencia legal
+Route::get('/es/advertencia-legal',function (){
+    $menus = Menu::orderBy('order')->get();
+    $portada = Portada::orderBy('orden')->get();
+    $ponentes = Ponente::where('anio',date('Y'))->orderBy('orden')->get();
+    //Metas
+    $metas = Web::devuelveMetas('contents','',1);
+    return view('web.advertencialegal',compact('menus','portada','ponentes','metas'));
+});
+
+Route::get('/as/alvertencia-llegal',function (){
+    $menus = Menu::orderBy('order')->get();
+    $portada = Portada::orderBy('orden')->get();
+    $ponentes = Ponente::where('anio',date('Y'))->orderBy('orden')->get();
+    //Metas
+    $metas = Web::devuelveMetas('contents','',1);
+    return view('web.advertencialegal',compact('menus','portada','ponentes','metas'));
+});
 
 
 

@@ -56,6 +56,7 @@
                                 <img src="{{asset('images/contenido/l')}}/{{$content->imagen or 'sinimagen.png'}}" alt="{{$textosidioma->titulo}}" class="img-responsive"><!-- movil -->
                             </picture>
                         @endif
+                        <p><a title="Puedes usar este contenido con atribución a Gijón se come" class="cc"><span data-decimal="169" data-entity="©" data-id="45152">© GSC </span><i class="fa fa-cc"></i></a></p>
                     </div><!-- fin columnas -->
                     <div class="margin-top"></div>
                     <?php

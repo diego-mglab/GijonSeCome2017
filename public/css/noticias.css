@@ -243,8 +243,8 @@ color:#000;
 font-size: 0.8rem;
 line-height: 0.8rem;
 }
-h1{font-size: 1.2rem;
-line-height: 1.2rem;}
+h1{font-size: 0.8rem;
+line-height: 0.8rem;}
 .destacadauno time {
 font-size:0.75rem;
 line-height: 0.75rem;
@@ -308,6 +308,7 @@ float:right;
 @media only screen and (min-width : 1200px){
 .sindestacar .col-sm-6 h1{
 margin:0;
+font-size: 1.3rem
 }
 
 .col-sm-6 article hgroup{

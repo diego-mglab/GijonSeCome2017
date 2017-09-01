@@ -49,6 +49,9 @@
                         <!-- img tag for browsers that do not support picture element -->
                         <img src="{{asset('images/chefs/l')}}/{{$ponente->imagen or 'sinimagen.png'}}" alt="{{$textosidioma->titulo}}" class="img-responsive"><!-- movil -->
                     </picture>
+
+                    @if (is_object(\App\Content::where('id',8)->first()->textos_idioma))
+
                     <!-- agenda en lg md solo esta activo en versiónes de pc -->
                     <section id="agendapc">
                         @if(count($agenda) > 0)
@@ -106,9 +109,10 @@
                                     if ($div_abierto){ ?>
                             </div><!-- FIN {{normaliza($diaSemana)}}-->
                         </div><!-- FIN colmd 12-->
-                                    <?php
+                                     <?php
                                     } ?>
                     </section>
+                    @endif
                 </div>
                 <div class=" col-lg-8 col-md-8 col-sm-9 col-xs-12">
                     <div class="decoracion">
@@ -119,10 +123,11 @@
                     <article>
                         <div class="columnas">
                             {!! $textosidioma->contenido !!}
-                        </div>
+                            <p><a title="Puedes usar este contenido con atribución a Gijón se come" class="cc"><span data-decimal="169" data-entity="©" data-id="45152">© GSC </span><i class="fa fa-cc"></i></a></p>
+                         </div><!-- fin columnas -->
                         <div class="margin-top"></div>
                         <?php
-                        $url_rrss = 'http://'.$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"];
+                        $url_rrss = 'https://'.$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"];
                         ?>
                         <div class="post-share left">
                             <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u={{$url_rrss}}" target="_blank"><i class="fa fa-facebook"></i></a>
@@ -134,6 +139,7 @@
 
                 </div>
 
+                @if (is_object(\App\Content::where('id',8)->first()->textos_idioma))
                 <!-- agenda en sm xs esta parte solo esta activa en versión tablet y móvil-->
                 <div class="col-sm-12 col-sm-offset-0 col-xs-12">
                     <section id="agendamov">
@@ -202,6 +208,7 @@
 
                     </section>
                 </div><!-- FIN agenda particular-->
+                @endif
 
             </div><!-- fin col 12 -->
 

@@ -246,7 +246,7 @@ class WebController extends Controller
         $fecha_publicacion = Carbon::parse($content->fecha_publicacion);
         if ($now->gte($fecha_publicacion)) {
             //Definimos el array con los elemento del breadcrum
-            $elementos = ['Inicio', 'El Festival', $textosidioma->titulo];
+            $elementos = ['Inicio', $textosidioma->titulo];
             //Metas
             $metas = Web::devuelveMetas('contents',$slug,1);
             $breadcrums = $this->devuelveBreadcrums($elementos);

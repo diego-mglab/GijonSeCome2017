@@ -10,7 +10,8 @@ return [
 
     'organiza'                  => 'Entama',
     'patrocinadores'            => 'patrocinadores',
-    'colaboradores'             => 'colaboradores',
+    'colaboradores'             => 'collaboradores',
+	'colaboradores_ins'             => 'collaboradores institucionales',
     'proveedores_oficiales'     => 'provisores oficiales',
     'suscribete_nuestra_news'   => 'Suscríbite a la nuesa newsletter',
     'toda_info_actualizada'     => 'Tola la información actualizada',

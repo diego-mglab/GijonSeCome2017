@@ -1098,7 +1098,7 @@ label {
 	font-weight: 300;
 	cursor: pointer;
 }
-Label.error {
+label.error {
 	color: #ED2C3A;
 	margin-left: 2px;
 	font-size: .8rem;

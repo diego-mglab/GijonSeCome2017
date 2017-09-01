@@ -13,7 +13,7 @@
 
                         <!-- Client 1 -->
                         <div class="client-item item">
-                            <a href="http://www.mglab.es" title="va a la web de mglab " target="new"><img src="http://gijonsecome.es/images_web/logos/mglab.png" alt="Logo mglab" /></a>
+                            <a href="http://www.mglab.es" title="va a la web de mglab " target="new"><img src="{{asset('images/logos/mglab.png')}}" alt="Logo mglab" /></a>
                         </div>
 
 
@@ -34,13 +34,13 @@
 
                         <!-- Client 1 -->
                       <!--  <div class="client-item item">
-                            <a href="http://www.ikea.com/es/es/" title="va a la web de IKEA España " target="new"><img src="http://gijonsecome.es/images_web/logos/ikea.png" alt="Logo IKEA" /></a>
+                            <a href="http://www.ikea.com/es/es/" title="va a la web de IKEA España " target="new"><img src="{{asset('images/logos/ikea.png')}}" alt="Logo IKEA" /></a>
                         </div>-->
                         <div class="client-item item">
-                            <a href="http://www.mahou.es/" title="va a la web de cervezas mahou" target="new"><img src="http://gijonsecome.es/images_web/logos/mahou.png" alt="logo cervezas mahou" /></a>
+                            <a href="http://www.mahou.es/" title="va a la web de cervezas mahou" target="new"><img src="{{asset('images/logos/mahou.png')}}" alt="logo cervezas mahou"/></a>
                         </div>
                       <!--  <div class="client-item item">
-                            <a href="https://www.miele.es/" title="va a la web de electrodomésticos Miele" target="new"><img src="http://gijonsecome.es/images_web/logos/miele.png" alt="logo electrodomésticos miele" /></a>
+                            <a href="https://www.miele.es/" title="va a la web de electrodomésticos Miele" target="new"><img src="{{asset('images/logos/miele.png')}}" alt="logo electrodomésticos miele" /></a>
                         </div>-->
 
                     </div>
@@ -52,16 +52,16 @@
                 <div>
 
                     <!-- Classic Heading -->
-                    <h4 class="classic-title"><span>colaboradores institucionales</span></h4>
+                    <h4 class="classic-title"><span>{{__('pie.colaboradores_ins')}}</span></h4>
 
                     <div class="clients-carousel custom-carousel touch-carousel" data-appeared-items="2">
 
                         <!-- Client 1 -->
                         <div class="client-item item">
-                            <a href="http://www.mglab.es" title="va a la web de mglab " target="new"><img src="http://gijonsecome.es/images_web/logos/mglab.png" alt="Logo mglab" /></a>
+                            <a href="http://www.mglab.es" title="va a la web de mglab " target="new"><img src="{{asset('images/logos/GCB.png')}}" alt="Logo Gijon Convention Bureau" /></a>
                         </div>
                             <!--   <div class="client-item item">
-                            <a href="https://www.turismoasturias.es/" title="va a la web de turismo de Asturias" target="new"><img src="http://gijonsecome.es/images_web/logos/asturias.png" alt="Logo turismo Asturias" /></a>
+                            <a href="https://www.turismoasturias.es/" title="va a la web de turismo de Asturias" target="new"><img src="{{asset('images/logos/asturias.png')}}" alt="Logo turismo Asturias" /></a>
                         </div>-->
 
 
@@ -80,21 +80,21 @@
 
                         <!-- Client 1 -->
                         <div class="client-item item">
-                            <a href="http://www.cocinaconbra.com" title="va a la web de cocina con bra" target="new"><img src="http://gijonsecome.es/images_web/logos/bra.png" alt="Logo cocinas bra" /></a>
+                            <a href="http://www.cocinaconbra.com" title="va a la web de cocina con bra" target="new"><img src="{{asset('images/logos/bra.png')}}" alt="Logo cocinas bra" /></a>
                         </div>
                         <!-- 
                         <div class="client-item item">
-                            <a href="http://www.masymas.es/" title="va a la web de supermercados mas y mas" target="new"><img src="http://gijonsecome.es/images_web/logos/masy-mas.png" alt="Logo supermercados mas y mas" /></a>
+                            <a href="http://www.masymas.es/" title="va a la web de supermercados mas y mas" target="new"><img src="{{asset('images/logos/masy-mas.png')}}" alt="Logo supermercados mas y mas" /></a>
                         </div>
                         <div class="client-item item">
-                            <a href="http://www.cafento.com/" title="va a la web de cafento" target="new"><img src="http://gijonsecome.es/images_web/logos/montecelio.png" alt="Logo tés montecelio"></a>
+                            <a href="http://www.cafento.com/" title="va a la web de cafento" target="new"><img src="{{asset('images/logos/montecelio.png')}}" alt="Logo tés montecelio"></a>
                         </div>
                         <div class="client-item item">
-                            <a href="http://www.oleoestepa.com/" title="va a la web de aceites oleo estepa" target="new"><img src="http://gijonsecome.es/images_web/logos/oleostepa.png" alt="Logo aceite oleoestepa"></a>
+                            <a href="http://www.oleoestepa.com/" title="va a la web de aceites oleo estepa" target="new"><img src="{{asset('images/logos/oleostepa.png')}}" alt="Logo aceite oleoestepa"></a>
                         </div>
 
                         <div class="client-item item">
-                            <a href="http://porvasal.es/" title="va a la web de porvasal vajillas" target="new"><img src="http://gijonsecome.es/images_web/logos/porvasal.png" alt="Logo porvasal vajillas" /></a>
+                            <a href="http://porvasal.es/" title="va a la web de porvasal vajillas" target="new"><img src="{{asset('images/logos/porvasal.png')}}" alt="Logo porvasal vajillas" /></a>
                         </div>
                          -->
 
@@ -122,35 +122,35 @@
                         </div>
 
                         <div class="client-item item">
-                            <a href="https://www.cocacola.es/home/" title="va a la web de cocacola España" target="new"><img src="http://gijonsecome.es/images_web/logos/cocacola.png" alt=" Logo cocacola" /></a>
+                            <a href="https://www.cocacola.es/home/" title="va a la web de cocacola España" target="new"><img src="{{asset('images/logos/cocacola.png')}}" alt=" Logo cocacola" /></a>
                         </div>
                         <div class="client-item item">
-                            <a href="http://www.cogersa.es/" title="va a la web de COGERSA" target="new"><img src="http://gijonsecome.es/images_web/logos/cogersa.png" alt="Logo Cogersa" /></a>
+                            <a href="http://www.cogersa.es/" title="va a la web de COGERSA" target="new"><img src="{{asset('images/logos/cogersa.png')}}" alt="Logo Cogersa" /></a>
                         </div>
                         <div class="client-item item">
-                            <a href="http://cuidadoambiental.gijon.es/" title="va a la web de cuidado ambiental de Gijón"><img src="http://gijonsecome.es/images_web/logos/emulsa.png" alt="Logo EMULSA" /></a>
+                            <a href="http://cuidadoambiental.gijon.es/" title="va a la web de cuidado ambiental de Gijón"><img src="{{asset('images/logos/emulsa.png')}}" alt="Logo EMULSA" /></a>
                         </div>
                     <!--    <div class="client-item item">
-                            <a href="http://www.sidradeasturias.es/" title="va a la web de sidra de Asturias" target="new"><img src="http://gijonsecome.es/images_web/logos/sidradop.png" alt="Logo Sidra de Asturias" /></a>
+                            <a href="http://www.sidradeasturias.es/" title="va a la web de sidra de Asturias" target="new"><img src="{{asset('images/logos/sidradop.png')}}" alt="Logo Sidra de Asturias" /></a>
                         </div>
                         <div class="client-item item">
-                            <a href="http://www.milar.es/" title="va a la web de electrodomesticos milar" target="new"><img src="http://gijonsecome.es/images_web/logos/milar.png" alt="Logo milar" /></a>
+                            <a href="http://www.milar.es/" title="va a la web de electrodomesticos milar" target="new"><img src="{{asset('images/logos/milar.png')}}" alt="Logo milar" /></a>
                         </div>-->
                         <div class="client-item item">
-                            <a href="http://www.terneraasturiana.org/" title="va a la web de ternera Asturiana" target="new"><img src="http://gijonsecome.es/images_web/logos/tenera-asturiana.png" alt="Logo ternera Asturiana"/></a>
+                            <a href="http://www.terneraasturiana.org/" title="va a la web de ternera Asturiana" target="new"><img src="{{asset('images/logos/tenera-asturiana.png')}}" alt="Logo ternera Asturiana"/></a>
                         </div>
                         
                         <div class="client-item item">
-                            <a href="http://www.renfe.com/" title="va a la web de RENFE" target="new"><img src="http://gijonsecome.es/images_web/logos/renfe.png" alt="Logo RENFE" /></a>
+                            <a href="http://www.renfe.com/" title="va a la web de RENFE" target="new"><img src="{{asset('images/logos/renfe.png')}}" alt="Logo RENFE" /></a>
                         </div>
                         <div class="client-item item">
-                            <a href="https://www.alsa.es" title="va a la web de ALSA" target="new"><img src="http://gijonsecome.es/images_web/logos/alsa.png" alt="Logo ALSA" /></a>
+                            <a href="https://www.alsa.es" title="va a la web de ALSA" target="new"><img src="{{asset('images/logos/alsa.png')}}" alt="Logo ALSA" /></a>
                         </div>
                         <div class="client-item item">
-                            <a href="http://www.iberia.com/" title="va a la web de IBERIA" target="new"><img src="http://gijonsecome.es/images_web/logos/iberia.png" alt="Logo IBERIA" /></a>
+                            <a href="http://www.iberia.com/" title="va a la web de IBERIA" target="new"><img src="{{asset('images/logos/iberia.png')}}" alt="Logo IBERIA" /></a>
                         </div>
                        <!--  <div class="client-item item">
-                            <a href="http://www.talpesa.com/" title="va a la web de concesionario TALPESA" target="new"><img src="http://gijonsecome.es/images_web/logos/talpesa.png" alt="Logo talpesa" /></a>
+                            <a href="http://www.talpesa.com/" title="va a la web de concesionario TALPESA" target="new"><img src="{{asset('images/logos/talpesa.png')}}" alt="Logo talpesa" /></a>
                         </div>-->
 
 
@@ -243,7 +243,7 @@
 
                             @if (count($menu->submenu) >=1 && $menu->menu_pie == 1)
 
-                                <li>
+                                <li class="whitedos">
                                     @if ($menu->url != '')
                                     {{link_to(str_contains($menu->url,['http://','https://'])?$menu->url:(Session::get('idioma').'/'.$menu->url), $title = is_object($menu->textos_idioma)?$menu->textos_idioma->titulo:'', $parameters = [])}}
                                     @else
@@ -255,7 +255,7 @@
                                         @foreach($menu->submenu as $submenu)
                                             @if ($submenu->menu_pie == 1)
 
-                                            <li>
+                                            <li class="blackdos">
                                                 @if ($submenu->url != '')
                                                 {{link_to(str_contains($submenu->url,['http://','https://'])?$submenu->url:(Session::get('idioma').'/'.$submenu->url), $title = is_object($submenu->textos_idioma)?$submenu->textos_idioma->titulo:'', $parameters = [])}}
                                                 @else
@@ -277,7 +277,7 @@
                                     </ul></li>
 
                             @elseif ($menu->parent_id == 0 && $menu->menu_pie == 1)
-                                <li>
+                                <li class="whitedos">
                                     @if ($menu->url != '')
                                     {{link_to(str_contains($menu->url,['http://','https://'])?$menu->url:(Session::get('idioma').'/'.$menu->url), $title = is_object($menu->textos_idioma)?$menu->textos_idioma->titulo:'', $parameters = [])}}
                                     @else
@@ -296,7 +296,14 @@
                     <p><strong>{{__('pie.email')}}</strong>: <a href="mailto:info@gijonsecome.es">info@gijonsecome.es</a></p>
                     <p><strong>{{__('pie.web')}}</strong>: <a href="http://www.mglab.es">www.mglab.es</a></p>
                 </div>
-
+			 <div class="footer-widget contacta">
+			     <h4 class="head-line">Advertencia legal</h4>
+              <ul class="social-icons">
+                 <li>
+                  <a class="itl-tooltip" data-placement="bottom" title="Advertencia legal" href="/{{\Session::get('idioma')}}/advertencia-legal">Ver advertencia legal</a>
+                </li>
+				</ul>
+				</div>
             </div>
             <!-- imagen decorativa -->
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 decora">

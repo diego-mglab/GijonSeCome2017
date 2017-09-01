@@ -11,6 +11,7 @@ return [
     'organiza'                  => 'organiza',
     'patrocinadores'            => 'patrocinadores',
     'colaboradores'             => 'colaboradores',
+	'colaboradores_ins'         => 'colaboradores institucionales',
     'proveedores_oficiales'     => 'proveedores oficiales',
     'suscribete_nuestra_news'   => 'Suscríbete a nuestra newsletter',
     'toda_info_actualizada'     => 'Toda la información actualizada',

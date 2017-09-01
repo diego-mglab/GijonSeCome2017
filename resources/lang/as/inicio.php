@@ -8,6 +8,6 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'quien_nos_acompanara' => 'Quien nos va acompañar nesta edición',
+    'quien_nos_acompanara' => '¿Quién nos va acompañar nesta edición?',
 
 ];

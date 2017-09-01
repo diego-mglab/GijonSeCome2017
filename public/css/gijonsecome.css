@@ -413,6 +413,13 @@ footer a:{color:#333332;}
 footer a:visited{color:#333332}	
 footer a:hover{color:#333332;}	
 
+.whitedos a:link{color: #fff}
+.whitedos a:visited{color: #fff}
+.whitedos a:hover{color: #fff}
+
+.blackdos a:link{color: #333332}
+.blackdos a:visited{color: #333332}
+.blackdos a:hover{color: #333332}
 
 footer  .dropdown li a, .sup-dropdown li a {
    color: #fff;
@@ -1450,7 +1457,7 @@ padding: 1.874rem;
 #patrocinadores h4{
 		color:#8E8E8D;
 		text-transform: uppercase;
-		font-size: 0.875rem;		
+		font-size: 0.74rem;		
 	}
 #patrocinadores .classic-title span {
     border-bottom-color: #BFE7E6;

@@ -148,10 +148,11 @@ class ContentController extends Controller
                     $textosIdioma->metatitulo = $request->metatitulo[$i];
                     $textosIdioma->slug = $request->slug[$i];
                     $textosIdioma->visible = 0;
-                    foreach ($request->visible as $visible) {
-                        if ($visible == $request->idioma_id[$i])
-                            $textosIdioma->visible = 1;
-                    }
+                    if (isset($request->visible))
+                        foreach ($request->visible as $visible) {
+                            if ($visible == $request->idioma_id[$i])
+                                $textosIdioma->visible = 1;
+                        }
 
                     $textosIdioma->save();
                 }
@@ -311,10 +312,11 @@ class ContentController extends Controller
                     $textosIdioma->metatitulo = $request->metatitulo[$i];
                     $textosIdioma->slug = $request->slug[$i];
                     $textosIdioma->visible = 0;
-                    foreach($request->visible as $visible) {
-                        if ($visible == $request->idioma_id[$i])
-                            $textosIdioma->visible = 1;
-                    }
+                    if (isset($request->visible))
+                        foreach($request->visible as $visible) {
+                            if ($visible == $request->idioma_id[$i])
+                                $textosIdioma->visible = 1;
+                        }
 
                     $textosIdioma->save();
                 }

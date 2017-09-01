@@ -120,10 +120,11 @@ class AgendaController extends Controller
                     $textosIdioma->metatitulo = $request->metatitulo[$i];
                     //$textosIdioma->slug = Str::Slug($request->titulo[$i]);
                     $textosIdioma->visible = 0;
-                    foreach($request->visible as $visible) {
-                        if ($visible == $request->idioma_id[$i])
-                            $textosIdioma->visible = 1;
-                    }
+                    if (isset($request->visible))
+                        foreach($request->visible as $visible) {
+                            if ($visible == $request->idioma_id[$i])
+                                $textosIdioma->visible = 1;
+                        }
 
                     $textosIdioma->save();
                 }
@@ -255,10 +256,11 @@ class AgendaController extends Controller
                     $textosIdioma->metatitulo = $request->metatitulo[$i];
                     //$textosIdioma->slug = Str::Slug($request->titulo[$i]);
                     $textosIdioma->visible = 0;
-                    foreach($request->visible as $visible) {
-                        if ($visible == $request->idioma_id[$i])
-                            $textosIdioma->visible = 1;
-                    }
+                    if (isset($request->visible))
+                        foreach($request->visible as $visible) {
+                            if ($visible == $request->idioma_id[$i])
+                                $textosIdioma->visible = 1;
+                        }
 
                     $textosIdioma->save();
                 }
