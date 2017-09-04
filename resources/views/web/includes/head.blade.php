@@ -114,3 +114,13 @@
     @yield('css')
 
     @include('web.includes.ganalytics')
+
+    <!-- Begin Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent -->
+
+    <script type="text/javascript">
+        window.cookieconsent_options = {"message":"Este sitio usa cookies propias y de terceros de tipo analítico y de publicidad. Si continúa navegando entendemos que autoriza su uso. Para más información o para cesar su uso, acceda al apartado de Advertencia Legal","dismiss":"acepto","learnMore":"advertencia legal","link":"/{{\Session::get('idioma')}}/{{\Session::get('idioma')=='es'?'advertencia-legal':'alvertencia-llegal'}}#cookies","theme":"light-floating"};
+    </script>
+
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.10/cookieconsent.min.js"></script>
+
+    <!-- End Cookie Consent plugin -->

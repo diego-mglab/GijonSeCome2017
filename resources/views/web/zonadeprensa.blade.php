@@ -9,7 +9,6 @@
 
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2892.303780182304!2d-5.639408984506004!3d43.537709179125464!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd367b83a8497939%3A0xc7d19cb62c3ce240!2sRecinto+Ferial+Luis+Adaro!5e0!3m2!1ses!2ses!4v1477056537105" width="100%" height="350" frameborder="0" style="border:0" allowfullscreen></iframe>
 
-
     </div>
 
     <!-- End Map -->
@@ -56,6 +55,14 @@
                                 {{Form::textarea('mensaje', null, ['rows' => '7', 'placeholder' => __('zonadeprensa.mensaje'), 'id' => 'mensaje'])}}
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <div class="controls">
+                                <span class="checkbox">{{Form::checkbox('acepto', null,false, ['class' => 'flat-green', 'id' => 'acepto'])}} Acepto <a href="/{{\Session::get('idioma')}}/{{\Session::get('idioma')=='es'?'advertencia-legal':'alvertencia-llegal'}}" target="_blank">LOPD</a></span>
+
+                            </div>
+                        </div>
+
                         {{Form::hidden('email_envio',null,['id'  => 'email_envio'])}}
                         <button type="submit" id="submit" class="btn-system btn-large">{{__('zonadeprensa.enviar')}}</button>
                         <div id="success" style="color:#34495e;"></div>
@@ -120,18 +127,9 @@
 
             </div>
 
-
-
-            <!-- Start Services Icons -->
-            <!-- End Services Icons -->
-
-
-
-
             <!-- Divider -->
             <div class="hr1 margin-60"></div>
             <!-- fin contacta -->
-
 
         </div>
         <!-- End Container -->
@@ -139,6 +137,9 @@
 @endsection
 
 @section('css')
+
+    <!-- iCheck -->
+    <link rel="stylesheet" href="{{asset('vendor/adminlte/plugins/iCheck/flat/green.css')}}">
 
 @endsection
 
@@ -161,16 +162,27 @@
                             required: true,
                             maxlength: 2000
                         },
+                        acepto: "required"
                     },
                     messages: {
                         nombre: "{{__('zonadeprensa.nombre_req')}}",
                         medio: "{{__('zonadeprensa.medio_req')}}",
                         email: "{{__('zonadeprensa.email_req')}}",
                         asunto: "{{__('zonadeprensa.asunto_req')}}",
-                        mensaje: "{{__('zonadeprensa.mensaje_req')}}"
+                        mensaje: "{{__('zonadeprensa.mensaje_req')}}",
+                        acepto: "{{__('contacto.acepto_req')}}"
                     }
                 });
             });
 
+        </script>
+
+        <!-- iCheck -->
+        <script src="{{asset('vendor/adminlte/plugins/iCheck/icheck.min.js')}}"></script>
+        <script>
+            //Green color scheme for iCheck
+            $('input[type="checkbox"].flat-green').iCheck({
+                checkboxClass: 'icheckbox_flat-green'
+            });
         </script>
 @endsection

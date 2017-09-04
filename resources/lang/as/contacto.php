@@ -36,5 +36,5 @@ return [
     'email_req' => 'Por favor introduza una dirección de email válida',
     'asunto_req' => 'Por favor introduza un asuntu',
     'mensaje_req' => 'Por favor introduza un mensaxe a lo más de 2000 calteres',
-
+    'acepto_req' => 'Debe aceptar la LOPD',
 ];

@@ -1155,6 +1155,12 @@ color: #666;
     -o-transition: all 0.4s ease-in-out;
 }
 
+span.checkbox {
+	font-size: 13px;
+	font-family: 'Source Sans Pro', sans-serif;
+	color: #666;
+}
+
 .widget-search input[type="search"]:focus,
 #contact-form input[type="text"]:focus,
 #contact-form textarea:focus,

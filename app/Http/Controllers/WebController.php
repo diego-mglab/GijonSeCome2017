@@ -24,7 +24,7 @@ use Mail;
 use App;
 use App\DocumentosPrensa;
 use App\Configuracion;
-use ReCaptcha\ReCaptcha;
+use InvisibleReCaptcha;
 
 class WebController extends Controller
 {
@@ -57,7 +57,6 @@ class WebController extends Controller
     public function ponentes($anio=2017)
     {
         $this->estableceIdioma();
-        //dd(Session::all());
         $menus = Menu::orderBy('order')->get();
         $ponentes = Ponente::where('anio',$anio)->orderBy('orden')->get();
         //Metas
@@ -114,34 +113,26 @@ class WebController extends Controller
     public function contacto(Request $request)
     {
         if ($request->nombre != ''){
-            //$secret = env('RE_CAP_SECRET');
-            //$gRecaptchaResponse = isset($_POST["g-recaptcha-response"])? $_POST["g-recaptcha-response"] : null;
-            //$recaptcha = new ReCaptcha($secret);
-            //$resp = $recaptcha->verify($gRecaptchaResponse, $_SERVER['REMOTE_ADDR']);
-            //if ($resp->isSuccess()) {
-                $email = '';
-                switch($request->tipo_contacto){
-                    case 'Expositores' || 'Patrocinadores':
-                        $email = 'info@gijonsecome.es';
-                        break;
-                    case 'Programación del festival':
-                        $email = 'programacion@gijonsecome.es';
-                        break;
-                }
-                $email = 'diego@mglab.es';
-                Mail::send('web.includes.contacta', $request->all(), function($msj) use ($email){
-                    $msj->subject('Formulario contacto web GijonSeCome');
-                    $msj->to($email);
-                });
-            //} else {
-                //dd($request);
-            //}
+            $email = '';
+            switch($request->tipo_contacto){
+                case 'Expositores' || 'Patrocinadores':
+                    $email = 'info@gijonsecome.es';
+                    break;
+                case 'Programación del festival':
+                    $email = 'programacion@gijonsecome.es';
+                    break;
+            }
+            Mail::send('web.includes.contacta', $request->all(), function($msj) use ($email){
+                $msj->subject('Formulario contacto web GijonSeCome');
+                $msj->to($email);
+            });
         }
         $this->estableceIdioma();
+        $ruta_formulario = Content::where('id',6)->first()->textos_idioma->slug;
         //Metas
         $metas = Web::devuelveMetas('contents','contacto',1);
         $menus = Menu::orderBy('order')->get();
-        return view('web.contacto',compact('menus','metas'));
+        return view('web.contacto',compact('menus','metas','ruta_formulario'));
     }
 
     /**
@@ -156,7 +147,6 @@ class WebController extends Controller
     {
         if ($request->nombre != ''){
             $email = 'prensa@gijonsecome.es';
-            $email = 'diego@mglab.es';
             Mail::send('web.includes.zonadeprensa', $request->all(), function($msj) use ($email){
                 $msj->subject('Formulario prensa web GijonSeCome');
                 $msj->to($email);
@@ -342,7 +332,6 @@ class WebController extends Controller
      */
     public function estableceIdioma(){
         //Si accedemos a una url interna que no sea el index hay que capturar con qué idioma viene para activar la vble de sesión
-        //if (Session::get('idioma') == null || Session::get('idioma') == '') {
         $url = $_SERVER["REQUEST_URI"];
         $codigo = explode('/', $url)[1];
         if ($codigo != 'eunomia' && $codigo != 'login') {
@@ -355,8 +344,5 @@ class WebController extends Controller
                 App::SetLocale(Session::get('idioma'));
             }
         }
-        //}
-
     }
-
 }

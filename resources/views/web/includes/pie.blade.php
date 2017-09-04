@@ -58,7 +58,7 @@
 
                         <!-- Client 1 -->
                         <div class="client-item item">
-                            <a href="http://www.mglab.es" title="va a la web de mglab " target="new"><img src="{{asset('images/logos/GCB.png')}}" alt="Logo Gijon Convention Bureau" /></a>
+                            <a href="http://congresos.gijon.es" title="va a la web de Gijón Convention Bureau " target="new"><img src="{{asset('images/logos/GCB.png')}}" alt="Logo Gijon Convention Bureau" /></a>
                         </div>
                             <!--   <div class="client-item item">
                             <a href="https://www.turismoasturias.es/" title="va a la web de turismo de Asturias" target="new"><img src="{{asset('images/logos/asturias.png')}}" alt="Logo turismo Asturias" /></a>
@@ -300,7 +300,7 @@
 			     <h4 class="head-line">Advertencia legal</h4>
               <ul class="social-icons">
                  <li>
-                  <a class="itl-tooltip" data-placement="bottom" title="Advertencia legal" href="/{{\Session::get('idioma')}}/advertencia-legal">Ver advertencia legal</a>
+                  <a class="itl-tooltip" data-placement="bottom" title="Advertencia legal" href="/{{\Session::get('idioma')}}/{{\Session::get('idioma')=='es'?'advertencia-legal':'alvertencia-llegal'}}">Ver advertencia legal</a>
                 </li>
 				</ul>
 				</div>

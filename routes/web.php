@@ -10,9 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-//Route::get('/', function () {
-//    return view('welcome');
-//});
 
 use App\Menu;
 use App\Idioma;
@@ -22,7 +19,7 @@ use App\Content;
 use Illuminate\Support\Facades\Session;
 use App\Web;
 
-//Rutas para web
+//Rutas para los contenidos de la web
 
 
 Route::get('/', function(){
@@ -77,9 +74,9 @@ foreach ($idiomas as $idioma){
     }
     Route::get('/404','WebController@pag404')->name('pag404');
 }
-//dd($contents);
 
 //Rutas para la página de la advertencia legal
+
 Route::get('/es/advertencia-legal',function (){
     $menus = Menu::orderBy('order')->get();
     $portada = Portada::orderBy('orden')->get();
@@ -99,6 +96,7 @@ Route::get('/as/alvertencia-llegal',function (){
 });
 
 
+//Rutas para los idiomas
 
 Route::group(['middleware' => ['web']], function () {
     Route::get('{lang}', function ($lang) {

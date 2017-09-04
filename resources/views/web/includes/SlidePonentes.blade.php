@@ -14,6 +14,7 @@ $idioma_actual = Session::get('idioma');
                     <div class="projects-carousel touch-carousel owl-carousel owl-theme" data-appeared-items="5">
 
                         @foreach ($ponentes as $ponente)
+                            @if (is_object($ponente->textos_idioma))
                             <div class="client-item item">
                                 <div class="imagenchef">
 
@@ -29,6 +30,7 @@ $idioma_actual = Session::get('idioma');
                                     </div>
                                 </div>
                             </div>
+                            @endif
                         @endforeach
                     </div>
                 </div>

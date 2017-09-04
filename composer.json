@@ -7,6 +7,7 @@
     "require": {
         "php": ">=5.6.4",
         "adzon/laravel-gantt": "1.1",
+        "albertcht/invisible-recaptcha": "^1.7",
         "bican/roles": "2.1.*",
         "caffeinated/shinobi": "^3.0",
         "google/recaptcha": "^1.1",

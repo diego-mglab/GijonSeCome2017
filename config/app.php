@@ -186,6 +186,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         'Lavary\Menu\ServiceProvider',
         Illuminate\Foundation\Providers\ArtisanServiceProvider::class,
+        //AlbertCht\InvisibleReCaptcha\InvisibleReCaptchaServiceProvider::class,
         //Bican\Roles\RolesServiceProvider::class,
     ],
 
@@ -242,6 +243,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Yaml' => Symfony\Component\Yaml\Yaml::class,
+        'InvisibleReCaptcha' => AlbertCht\InvisibleReCaptcha\Facades\InvisibleReCaptcha::class,
     ],
 
 ];

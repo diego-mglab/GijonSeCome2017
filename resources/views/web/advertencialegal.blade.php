@@ -6,7 +6,7 @@
         <div class="col-xs-12">
             <ul>
                 <li>
-                    INICIO // ADVERTENCIA LEGAL
+                    INICIO // {{\Session::get('idioma')=='es'?'ADVERTENCIA LEGAL':'ALVERTENCIA LLEGAL'}}
                 </li>
             </ul>
         </div>
@@ -18,7 +18,7 @@
                 <article>
                     <hgroup>
 
-                        <h1>Advertencia legal</h1>
+                        <h1>{{\Session::get('idioma')=='es'?'Advertencia legal':'Alvertencia llegal'}}</h1>
 
 
                     </hgroup>
@@ -70,6 +70,7 @@
                         <p>mon event SLU únicamente recaba los datos personales que considera   imprescindibles para poder llevar a cabo su objeto social, y para   enviarle informaciones que puedan ser de su interés, por cualquiera de   los medios de comunicación existentes. </p>
                         <p>A su vez, usted autoriza a mg.lab a utilizar su dirección de correo   electrónico como medio habitual de comunicación con usted, y para que le   enviemos información acerca de todos los servicios de nuestra sociedad,   considerando el envío de sus datos como su consentimiento expreso a lo   indicado.</p>
 
+                        <a name="cookies"></a>
                         <p><strong>4.- UTILIZACIÓN DE COOKIES </strong></p>
 
                         <p>POLÍTICA DE COOKIES a. Nuestra Política de cookies.- Esta Política de   cookies será de aplicación en todos nuestros sitios web. Al acceder a   cualquiera de nuestros Sitios web, usted acepta que esta Política de   cookies se aplicará cada vez que acceda desde cualquier dispositivo.</p>
